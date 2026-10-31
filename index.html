@@ -124,6 +124,20 @@ input[type=text]{font:inherit;font-size:17px;width:100%;padding:10px 12px;border
 .tabs button{display:flex;flex-direction:column;align-items:center;font-size:13px;padding:4px;min-height:52px;background:none;color:var(--mute)}
 .tabs button span{font-size:22px;line-height:1.1}
 .tabs button[aria-current="page"]{color:var(--sea);font-weight:700;background:#e3f4f2}
+/* 🤖 פס הרובוט בעולמות: רובוט קטן ובועת דיבור, דבוקים למעלה כדי שתמיד רואים איך הוא מגיב */
+#s-world{gap:12px}
+#s-world .whead h1{font-size:22px}
+#s-world .whead .lead{font-size:13.5px;line-height:1.45}
+#stage-shop{width:min(100%,320px);align-self:center}
+.robobar{position:sticky;top:calc(env(safe-area-inset-top,0px) + var(--toph,56px) + 6px);z-index:4;display:flex;gap:10px;align-items:center;
+  background:var(--paper);border:2px solid #a9d6d3;border-radius:20px;padding:6px;box-shadow:0 6px 14px rgba(15,76,92,.14);overflow:hidden}
+.stage.robo{flex:0 0 104px;width:104px;height:104px;aspect-ratio:auto;border-radius:16px;border:none}
+.robo .mood,.robo .hint{display:none}
+.robo .fallback{font-size:56px}
+.bubble{flex:1;min-width:0;display:flex;flex-direction:column;gap:2px;padding:2px 4px}
+.wmood{font-size:13px;font-weight:700;color:var(--sea2)}
+.bubble p{font-size:15.5px;line-height:1.4;min-height:2.8em}
+.savenote{font-size:13px;color:var(--mute);background:#f1f5f4;border-radius:12px;padding:8px 12px}
 /* 🎨 עיר הפיקסלים */
 .mixrow{display:flex;gap:10px;justify-content:center;align-items:flex-end}
 .mixrow figure,.pair figure,.mem figure{margin:0;display:flex;flex-direction:column;align-items:center;gap:4px;font-size:12.5px;color:var(--mute)}
@@ -140,11 +154,45 @@ input[type=text]{font:inherit;font-size:17px;width:100%;padding:10px 12px;border
 .pair{display:flex;gap:14px;justify-content:center}
 .pair canvas{width:128px;height:128px;border-radius:12px;border:2px solid var(--line);display:block}
 .opts4{display:grid;grid-template-columns:1fr 1fr;gap:8px}
-.grid8{display:grid;grid-template-columns:repeat(8,minmax(0,1fr));gap:3px;width:100%;max-width:340px;margin:0 auto;touch-action:none;user-select:none;-webkit-user-select:none}
+.grid8{display:grid;grid-template-columns:repeat(8,minmax(0,1fr));gap:3px;width:100%;max-width:340px;margin:0 auto;touch-action:none;user-select:none;-webkit-user-select:none;direction:ltr}
 .grid8 b{aspect-ratio:1/1;border-radius:6px;background:#fff;border:1.5px solid var(--line);cursor:pointer}
 .grid8 b.on{background:var(--sea);border-color:var(--sea)}
 .mem{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:8px}
-.mini{display:grid;grid-template-columns:repeat(8,1fr);gap:1px;width:100%;max-width:72px;background:#fff;border:1.5px solid var(--line);border-radius:6px;padding:2px}
+.mini{display:grid;grid-template-columns:repeat(8,1fr);gap:1px;width:100%;max-width:72px;background:#fff;border:1.5px solid var(--line);border-radius:6px;padding:2px;direction:ltr}
+/* 🧠 מגדל השכבות */
+.pg{display:grid;grid-template-columns:repeat(8,1fr);gap:2px;width:100%;max-width:232px;margin:0 auto;direction:ltr}
+.pg i{aspect-ratio:1/1;border-radius:4px;background:#fff;border:1px solid var(--line);transition:background .25s}
+.pg i.on{background:#334155;border-color:#334155}
+.pg i.win{box-shadow:inset 0 0 0 3px var(--sun)}
+.dets{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:6px}
+.det{display:flex;flex-direction:column;align-items:center;gap:3px;padding:6px 2px;background:#fff;border:2px solid var(--line);border-radius:14px;font-size:12.5px;min-height:0;position:relative}
+button.det[aria-pressed="true"]{border-color:var(--dc);background:color-mix(in srgb,var(--dc) 12%,#fff);font-weight:700}
+.det.lit{border-color:var(--dc);box-shadow:0 0 12px var(--dc);background:color-mix(in srgb,var(--dc) 16%,#fff);font-weight:700}
+.det.dim{opacity:.45}
+.det em{position:absolute;top:-8px;inset-inline-end:-4px;font-style:normal;font-size:12px;border-radius:999px;padding:0 6px;color:#fff}
+.det em.y{background:var(--good)} .det em.n{background:var(--bad)}
+.m3{display:inline-grid;grid-template-columns:repeat(3,1fr);gap:2px;width:30px;direction:ltr}
+.m3 b{aspect-ratio:1/1;background:#e5ece9;border-radius:2px}
+.m3 b.on{background:var(--dc)}
+.wires{display:grid;grid-template-columns:64px repeat(4,minmax(0,1fr));gap:6px;align-items:center}
+.wires .hd{display:flex;justify-content:center}
+.wires .sh{display:flex;flex-direction:column;align-items:center;gap:2px;font-size:12.5px;font-weight:700}
+.wires .mini{max-width:38px}
+.w{min-height:46px;padding:0;font-size:19px;font-weight:700;background:#fff;border-color:var(--line);color:var(--mute)}
+.w.g{background:#dcfce7;border-color:var(--good);color:var(--good)}
+.w.r{background:#ffe4e0;border-color:var(--bad);color:var(--bad)}
+.tests{display:flex;flex-direction:column;gap:6px}
+.tests div{display:flex;align-items:center;gap:8px;background:#fff;border-radius:12px;padding:4px 8px;font-size:14.5px}
+.tests .mini{max-width:36px;flex:0 0 36px}
+.tower{display:flex;flex-direction:column;gap:6px}
+.floor{border:2px solid var(--line);border-radius:14px;padding:6px 8px;background:#fff;display:flex;flex-wrap:wrap;align-items:center;gap:6px}
+.floor .fl{flex:0 0 100%;font-size:12px;color:var(--mute)}
+.floor .dets{flex:1}
+.neu{border-radius:999px;padding:3px 10px;border:2px solid var(--line);font-size:14px;background:#f6f6f2;opacity:.55}
+details{background:#fff;border:2px solid var(--line);border-radius:12px;padding:6px 10px}
+summary{cursor:pointer;font-weight:700;min-height:32px}
+details p{display:flex;align-items:center;gap:6px;flex-wrap:wrap;margin-top:4px}
+.neu.on{opacity:1;background:#fff7dc;border-color:var(--sun);box-shadow:0 0 10px var(--sun);font-weight:700}
 .pair .mini{max-width:132px;width:132px}
 .mini i{aspect-ratio:1/1;background:#eef3f1;border-radius:1px}
 .mini i.on{background:var(--sea2)}
@@ -190,6 +238,7 @@ input[type=text]{font:inherit;font-size:17px;width:100%;padding:10px 12px;border
       <p class="small-note" id="shopnote"></p>
       <div class="shop" id="shop"></div>
     </div>
+    <p class="savenote">💾 הכוכבים, הקניות וההתקדמות נשמרים בטלפון הזה בלבד, בדפדפן שבו משחקים. כל טלפון שנכנס לקישור מקבל משחק משלו, ואף אחד לא רואה את המשחק של אחרים.</p>
     <button class="linkish" id="reset" type="button">להתחיל את כל המשחק מחדש</button>
   </section>
 
@@ -201,10 +250,14 @@ input[type=text]{font:inherit;font-size:17px;width:100%;padding:10px 12px;border
 
   <!-- ③ עולם -->
   <section class="screen" id="s-world" hidden>
-    <div><h1 id="w-title"></h1><p class="lead" id="w-sub"></p></div>
+    <div class="whead"><h1 id="w-title"></h1><p class="lead" id="w-sub"></p></div>
     <div class="levels" id="levels"></div>
+    <!-- פס הרובוט: רובוט קטן ובועת דיבור, נשאר למעלה כשגוללים -->
+    <div class="robobar" id="robobar">
+      <div class="stage robo" id="stage-world"></div>
+      <div class="bubble"><span class="wmood" id="wmood"></span><p id="wsay" aria-live="polite"></p></div>
+    </div>
     <div class="steps" id="steps"></div>
-    <div class="stage small" id="stage-world"></div>
     <div class="card" id="panel" aria-live="polite"></div>
     <button class="back" id="back" type="button" hidden>↩ חזרה צעד אחד</button>
   </section>
@@ -263,7 +316,7 @@ var SHOP = [
 var WORLDS = [
   {id:'examples', name:'יער הדוגמאות',   sub:'איך מכונה לומדת',        icon:'🐾', color:'#62c370', ability:'לומד מדוגמאות', ready:true},
   {id:'pixels',   name:'עיר הפיקסלים',   sub:'איך מחשב רואה תמונה',   icon:'🎨', color:'#ff7f61', ability:'רואה תמונות', ready:true},
-  {id:'layers',   name:'מגדל השכבות',    sub:'מוח מלאכותי',           icon:'🧠', color:'#a993f0'},
+  {id:'layers',   name:'מגדל השכבות',    sub:'מוח מלאכותי',           icon:'🧠', color:'#a993f0', ability:'מזהה צורות בעזרת קומות של נוירונים', ready:true},
   {id:'tree',     name:'עץ השאלות',      sub:'עצי החלטה',             icon:'🌳', color:'#3fa36b'},
   {id:'words',    name:'ים המילים',      sub:'איך מחשב מבין שפה',     icon:'🔤', color:'#4aa3df'},
   {id:'recs',     name:'קולנוע ההמלצות', sub:'מערכת המלצות',          icon:'🍿', color:'#ef6f93'},
@@ -281,7 +334,9 @@ var store = {
   get: function(k, d){ try { var v = localStorage.getItem(SAVE_KEY + k); return v == null ? d : JSON.parse(v); } catch(e){ return d; } },
   set: function(k, v){ try { localStorage.setItem(SAVE_KEY + k, JSON.stringify(v)); } catch(e){} }
 };
-var DEF = {stars: START_STARS, owned: [], worn: [], body: '#ffc93c', eyes: '#5ff2d8', name: ROBOT_DEFAULT_NAME, teachers: TEACHER_DEFAULTS.slice(), prog: {}, muted: false};
+var DEF = {stars: START_STARS, owned: [], worn: [], body: '#ffc93c', eyes: '#5ff2d8', name: ROBOT_DEFAULT_NAME, teachers: TEACHER_DEFAULTS.slice(), prog: {}, muted: false,
+  cur: null,      // איפה עצרתם: עולם ושלב, כדי להמשיך משם
+  wires: null};   // המגדל שבניתם בעולם 3
 var G = {};
 Object.keys(DEF).forEach(function(k){ G[k] = store.get(k, JSON.parse(JSON.stringify(DEF[k]))); });
 function save(){ Object.keys(DEF).forEach(function(k){ store.set(k, G[k]); }); }
@@ -478,6 +533,7 @@ function resize(){
 window.addEventListener('resize', resize);
 function showMood(){
   document.querySelectorAll('.stage .mood').forEach(function(el){ el.textContent = G.name + ' ' + MOOD_HE[mood]; });
+  $('#wmood').textContent = G.name + ' ' + MOOD_HE[mood];
   document.querySelectorAll('.stage .fallback').forEach(function(el){ el.textContent = {idle:'🤖', think:'🤔', happy:'😄', sad:'😢', worry:'😟'}[mood]; });
   document.querySelectorAll('#moods button').forEach(function(b){ b.setAttribute('aria-pressed', String(b.dataset.m === mood)); });
 }
@@ -486,15 +542,10 @@ function setMood(m, ms){
   if (ms) moodTimer = setTimeout(function(){ mood = 'idle'; showMood(); }, ms);
   showMood();
 }
-function say(text){
-  var host = $('#stage-world'), b = host.querySelector('.say');
-  if (!text){ if (b) b.remove(); return; }
-  if (!b){ b = document.createElement('div'); b.className = 'say'; host.appendChild(b); }
-  b.textContent = text;
-}
+function say(text){ $('#wsay').textContent = text || ''; }   // הבועה שליד הרובוט, בפס העליון
 function confetti(){
   if (RM) return;
-  var host = $('#stage-world'), cols = ['#ff6f4f','#ffc93c','#43c6c0','#62c370','#a993f0'];
+  var host = $('#robobar'), cols = ['#ff6f4f','#ffc93c','#43c6c0','#62c370','#a993f0'];
   for (var i = 0; i < 34; i++){
     var s = document.createElement('span'); s.className = 'conf';
     s.style.left = (Math.random()*100) + '%'; s.style.background = cols[i % cols.length];
@@ -591,7 +642,7 @@ $('#reset').addEventListener('click', function(){
   if (!resetArmed){ resetArmed = true; $('#reset').textContent = 'בטוח? כל הכוכבים, הקניות וההתקדמות יימחקו. לחצו שוב לאישור'; setTimeout(function(){ resetArmed = false; $('#reset').textContent = 'להתחיל את כל המשחק מחדש'; }, 5000); return; }
   resetArmed = false; $('#reset').textContent = 'להתחיל את כל המשחק מחדש';
   Object.keys(DEF).forEach(function(k){ G[k] = JSON.parse(JSON.stringify(DEF[k])); }); save();
-  W = fresh(0); HIST = []; applyLook(); renderWorkshop(); stars(); brand(); muteIcon(); setMood('idle'); toast('המשחק התחיל מחדש');
+  curWorld = 'examples'; W = fresh(0); HIST = []; applyLook(); renderWorkshop(); stars(); brand(); muteIcon(); setMood('idle'); toast('המשחק התחיל מחדש');
 });
 
 /* ───────── 🗺️ המפה ───────── */
@@ -599,14 +650,15 @@ function worldStars(id){ return prog(id).reduce(function(a, b){ return a + b; },
 function renderMap(){
   var av = $('#mapav');
   if (R){ try { R.renderer.render(R.scene, R.camera); var img = document.createElement('img'); img.id = 'mapav'; img.alt = G.name; img.src = R.renderer.domElement.toDataURL('image/png'); av.replaceWith(img); } catch(e){} }
-  var w1 = worldStars('examples');
-  $('#mapsub').textContent = w1 ? G.name + ' כבר אסף ' + w1 + ' מתוך 9 ⭐ ביער הדוגמאות.' : '9 עולמות. בכל עולם ' + G.name + ' לומד יכולת חדשה.';
+  var all = WORLDS.reduce(function(a, w){ return a + worldStars(w.id); }, 0), open = WORLDS.filter(function(w){ return w.ready; }).length;
+  $('#mapsub').textContent = all ? G.name + ' כבר אסף ' + all + ' ⭐ ב-' + open + ' העולמות הפתוחים.' : '9 עולמות. בכל עולם ' + G.name + ' לומד יכולת חדשה.';
+  var nextUp = WORLDS.filter(function(w){ return w.ready && !worldStars(w.id); })[0];   // רק העולם הבא בתור מקבל ״כאן מתחילים״
   var m = $('#map'); m.innerHTML = '<svg class="path" aria-hidden="true"></svg>';
   WORLDS.forEach(function(w, i){
     var s = worldStars(w.id), st = w.ready ? (s >= 9 ? 'done' : 'open') : 'locked';
     var b = document.createElement('button'); b.type = 'button'; b.className = 'node ' + st;
     b.innerHTML = '<span class="isl" style="background:' + w.color + '">' + w.icon + '</span><span class="tx"><b>' + (i+1) + '. ' + w.name + '</b><small>' + w.sub + '</small></span>' +
-      '<span class="st">' + (w.ready ? (s ? '⭐ ' + s + '/9' : '▶ כאן מתחילים') : '🔒 בקרוב') + '</span>';
+      '<span class="st">' + (w.ready ? (s ? '⭐ ' + s + '/9' : (w === nextUp ? '▶ כאן מתחילים' : '▶ פתוח')) : '🔒 בקרוב') + '</span>';
     b.addEventListener('click', function(){
       if (w.ready) enterWorld(w.id);
       else toast('🔒 ' + w.name + ' עוד בבנייה. נבנה אותו יחד באחד המפגשים הבאים!');
@@ -632,7 +684,8 @@ window.addEventListener('resize', function(){ if (screen === 'map') drawPath(); 
 var curWorld = 'examples', W;
 function fresh(level){ return {level: level, phase: 'intro', brain: [], rule: null, turn: 0, round: 1, ti: 0, right: 0, guess: null, sel: [], tries: 0,
   paid: {}, lab: {kind: 'cat', color: 'white', ears: 'floppy', size: 'small'},
-  lamps: [0, 0, 0], miss: 0, hint: '', res: 0, pts: 0, grid: blank()}; }
+  lamps: [0, 0, 0], miss: 0, hint: '', res: 0, pts: 0, grid: blank(), shown: false,
+  wires: [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0]}; }
 function blank(){ var a = []; for (var i = 0; i < 64; i++) a.push(0); return a; }   // ציור ריק של 8×8 פיקסלים
 W = fresh(0);
 function enterWorld(id){ if (curWorld !== id){ curWorld = id; W = fresh(0); HIST = []; } go('world'); }
@@ -641,7 +694,7 @@ function enterWorld(id){ if (curWorld !== id){ curWorld = id; W = fresh(0); HIST
    paid (על איזו חיה כבר קיבלו כוכב) משותף לכל הצילומים, כדי שחזרה לא תיתן כוכב פעמיים. */
 var HIST = [];
 function snap(){ var o = {}; Object.keys(W).forEach(function(k){ var v = W[k]; o[k] = Array.isArray(v) ? v.slice() : k === 'lab' ? JSON.parse(JSON.stringify(v)) : v; }); return o; }
-function sig(w){ return [w.level, w.phase, w.round, w.ti, w.guess, w.brain.length, w.res, w.grid.join('')].join('|'); }   // מה נחשב ״צעד״
+function sig(w){ return [w.level, w.phase, w.round, w.ti, w.guess, w.brain.length, w.res, w.grid.join(''), w.shown].join('|'); }   // מה נחשב ״צעד״
 function act(fn){ return function(){
   var before = snap(); HIST.push(before);
   fn();
@@ -654,7 +707,7 @@ $('#back').addEventListener('click', function(){ if (!HIST.length) return; W = H
 
 function teacher(){ return G.teachers[W.turn % 2]; }
 function P(html){ $('#panel').innerHTML = html; }
-function on(id, fn){ var el = document.getElementById(id); if (el) el.onclick = act(fn); }
+function on(id, fn){ var el = $('#panel').querySelector('#' + id); if (el) el.onclick = act(fn); }   // מחפשים רק בלוח המשחק, כי גם לחנות ולמפה יש מזהים כמו shop ו-map
 function steps(names, cur){ $('#steps').innerHTML = names.map(function(n, i){ return '<span class="' + (i === cur ? 'on' : '') + '">' + n + '</span>'; }).join(''); }
 function finishLevel(li, st){
   var p = prog(curWorld), first = !p[li];
@@ -665,7 +718,8 @@ function finishLevel(li, st){
 function renderWorld(){
   var w = WORLDS.filter(function(x){ return x.id === curWorld; })[0], mech = MECHANICS[w.id], p = prog(w.id);
   $('#w-title').textContent = w.icon + ' ' + w.name; $('#w-sub').textContent = w.sub + '. יכולת חדשה ל' + G.name + ': ' + w.ability + '.';
-  say('');
+  say(''); paintHook = null; gridMin = 4; animTok++;
+  G.cur = {w: curWorld, l: W.level}; store.set('cur', G.cur);   // 💾 בפעם הבאה ממשיכים מהשלב הזה
   mech.levels[W.level].run();      // קודם השלב עצמו (הוא יכול לעדכן כוכבים), ואחר כך שורת השלבים
   $('#levels').innerHTML = mech.levels.map(function(L, i){
     var open = i === 0 || p[i-1] > 0;
@@ -1215,7 +1269,8 @@ function bindGrid(){
     var c = el && el.closest ? el.closest('#grid8 b') : null; if (!c) return;
     var i = +c.dataset.i; if (W.grid[i] === mode) return;
     W.grid[i] = mode; c.classList.toggle('on', mode === 1);
-    var go = $('#go'); if (go) go.disabled = W.grid.reduce(function(a, b){ return a + b; }, 0) < 4;
+    var go = $('#go'); if (go) go.disabled = W.grid.reduce(function(a, b){ return a + b; }, 0) < gridMin;
+    if (paintHook) paintHook();   // מגדל השכבות: הפנסים נדלקים תוך כדי ציור
   }
   g.addEventListener('pointerdown', function(e){
     var c = e.target.closest('b'); if (!c) return;
@@ -1285,6 +1340,269 @@ function pix3(){
       '<div class="rule">🧠 מחשבים חכמים באמת לא משווים פיקסל אחרי פיקסל. הם מחפשים קודם קווים, אחר כך צורות, ורק בסוף מחליטים מה בתמונה. כל שלב כזה נקרא <b>שכבה</b>, וככה הם מזהים לב גם כשהוא קטן או זז.</div>' +
       '<p>את זה נלמד בעולם 3, <b>מגדל השכבות 🧠</b>.</p>' +
       '<p>⭐⭐⭐ סיימתם את עיר הפיקסלים!' + (W.first ? ' הרווחתם ' + STARS_NEW_LEVEL + ' ⭐ לחנות.' : '') + '</p>' +
+      '<div class="row"><button class="btn" id="next" type="button">🧠 לעולם 3: מגדל השכבות</button><button class="btn alt" id="shop" type="button">🛠️ לחנות התוספות</button></div>');
+    on('shop', function(){ go('shop'); });
+    on('next', function(){ enterWorld('layers'); });
+  }
+}
+
+/* ═══════════ 🧠 מגדל השכבות: איך מוח מלאכותי מזהה ═══════════
+   המוח של הרובוט הוא מגדל של קומות. בכל קומה יש נוירונים: גלאים קטנים שכל אחד מחפש דבר אחד.
+   קומה 1: פנסים שסורקים את כל התמונה ומחפשים קווים. קומה 2: נוירונים שמחברים קווים לצורות. */
+var paintHook = null, animTok = 0, gridMin = 4;   // gridMin = כמה ריבועים צריך לצבוע לפני שאפשר לשאול את הרובוט
+var DET = [   // קומה 1: ארבעה פנסים. cells = אילו ריבועים בחלון של 3 על 3 צריכים להיות צבועים
+  {id: 'v',  name: 'קו עומד', col: '#2f6bff', cells: [[0, 1], [1, 1], [2, 1]]},
+  {id: 'h',  name: 'קו שוכב', col: '#16a34a', cells: [[1, 0], [1, 1], [1, 2]]},
+  {id: 'd1', name: 'אלכסון',  col: '#f97316', cells: [[0, 2], [1, 1], [2, 0]]},
+  {id: 'd2', name: 'אלכסון',  col: '#a855f7', cells: [[0, 0], [1, 1], [2, 2]]}
+];
+function g8(rows){ return rows.join('').split('').map(function(c){ return c === '#' ? 1 : 0; }); }
+function gsum(g){ return g.reduce(function(a, b){ return a + b; }, 0); }
+var SHP = [   // קומה 2: שלושה נוירונים של צורות
+  {id: 'sq',  name: 'ריבוע', g: g8(['........', '.######.', '.#....#.', '.#....#.', '.#....#.', '.######.', '........', '........'])},
+  {id: 'tri', name: 'משולש', g: g8(['........', '...##...', '..#..#..', '.#....#.', '########', '........', '........', '........'])},
+  {id: 'x',   name: 'איקס',  g: g8(['........', '.#....#.', '..#..#..', '...##...', '...##...', '..#..#..', '.#....#.', '........'])}
+];
+var L1 = [SHP[0], SHP[2], SHP[1], {id: 'house', name: 'בית', g: g8(['...##...', '..#..#..', '.#....#.', '########', '.#....#.', '.#....#.', '.######.', '........'])}];
+var NET0 = [1, 0, 0, 0,   0, 1, 1, 0,   0, -1, 1, 0];   // מגדל שעובד (ריבוע · משולש · איקס), למי שעוד לא בנה אחד
+function scan(g, d){   // 🔦 הפנס עובר על כל חלון של 3×3 בתמונה, ורושם איפה מצא את הקו שלו
+  var hits = [];   // החלון יכול לבלוט מעבר לקצה, כדי שגם קו בשורה האחרונה או בעמודה הראשונה יימצא
+  for (var r = -2; r <= 7; r++) for (var c = -2; c <= 7; c++){
+    if (d.cells.every(function(p){ var y = r + p[0], x = c + p[1]; return y >= 0 && y < 8 && x >= 0 && x < 8 && g[y * 8 + x]; })) hits.push([r, c]);
+  }
+  return hits;
+}
+function litOf(g){ var o = {}; DET.forEach(function(d){ o[d.id] = scan(g, d).length > 0; }); return o; }
+/* נוירון נדלק כשכל החוטים הירוקים שלו נדלקים, ואף חוט אדום לא נדלק */
+function fires(net, si, lit){
+  var green = 0, ok = true;
+  DET.forEach(function(d, di){ var w = net[si * 4 + di]; if (w === 1){ green++; if (!lit[d.id]) ok = false; } if (w === -1 && lit[d.id]) ok = false; });
+  return green > 0 && ok;
+}
+function netOut(net, g){ var lit = litOf(g); return SHP.filter(function(s, si){ return fires(net, si, lit); }); }
+function netWorks(net){ return !!net && SHP.every(function(s){ var o = netOut(net, s.g); return o.length === 1 && o[0] === s; }); }
+function myNet(){ return netWorks(G.wires) ? G.wires : NET0; }
+function m3(d){ return '<span class="m3" style="--dc:' + d.col + '">' + [0, 1, 2, 3, 4, 5, 6, 7, 8].map(function(k){ return '<b' + (d.cells.some(function(p){ return p[0] * 3 + p[1] === k; }) ? ' class="on"' : '') + '></b>'; }).join('') + '</span>'; }
+/* שורת הפנסים. mode: show להציג · pick לבחור · res תוצאה עם ✓/✗ · tower בתוך המגדל */
+function detRow(mode, lit, sel){
+  return '<div class="dets">' + DET.map(function(d){
+    var inner = m3(d) + '<span>' + d.name + '</span>', st = ' style="--dc:' + d.col + '"';
+    if (mode === 'pick') return '<button type="button" class="det" data-d="' + d.id + '" aria-pressed="' + (sel.indexOf(d.id) >= 0) + '"' + st + '>' + inner + '</button>';
+    var cl = mode === 'res' || mode === 'tower' ? (lit[d.id] ? ' lit' : ' dim') : '';
+    var mark = mode === 'res' ? ((sel.indexOf(d.id) >= 0) === lit[d.id] ? '<em class="y">✓</em>' : '<em class="n">✗</em>') : '';
+    return '<div class="det' + cl + '"' + st + '>' + inner + mark + '</div>';
+  }).join('') + '</div>';
+}
+/* תמונה של 8×8. hits = לסמן בצבע של כל פנס את המקומות שבהם הוא מצא את הקו שלו */
+function pgrid(g, hits){
+  var col = {};
+  if (hits) DET.forEach(function(d){ scan(g, d).forEach(function(h){ d.cells.forEach(function(p){ col[(h[0] + p[0]) * 8 + h[1] + p[1]] = d.col; }); }); });
+  return '<div class="pg" id="pg">' + g.map(function(v, k){ return '<i' + (v ? ' class="on"' : '') + (col[k] ? ' data-h="' + col[k] + '"' : '') + '></i>'; }).join('') + '</div>';
+}
+function paintHits(){ document.querySelectorAll('#pg [data-h]').forEach(function(el){ el.style.background = el.dataset.h; el.style.borderColor = el.dataset.h; }); }
+function scanAnim(done){   // הפנס עובר על התמונה חלון אחרי חלון, ואז מראים מה נמצא
+  var tok = ++animTok, box = $('#pg'), pos = 0;
+  if (!box || RM){ done(); return; }
+  var cells = box.children;
+  (function step(){
+    if (tok !== animTok || !document.body.contains(box)) return;
+    for (var k = 0; k < 64; k++) cells[k].classList.remove('win');
+    if (pos >= 36){ done(); return; }
+    var r = Math.floor(pos / 6), c = pos % 6;
+    for (var i = 0; i < 3; i++) for (var j = 0; j < 3; j++) cells[(r + i) * 8 + c + j].classList.add('win');
+    if (c === 0) beep('tap');
+    pos++; setTimeout(step, 40);
+  })();
+}
+function towerHtml(g, top){   // המגדל: קומה 2 (צורות) מעל קומה 1 (קווים)
+  var lit = litOf(g), out = top ? netOut(myNet(), g) : [];
+  return '<div class="tower">' +
+    '<div class="floor"><span class="fl">🏠 קומה 2 · נוירוני צורות' + (top ? '' : ' (יידלקו כשתלחצו ״מה זה?״)') + '</span>' + SHP.map(function(s){ return '<span class="neu' + (out.indexOf(s) >= 0 ? ' on' : '') + '">' + s.name + '</span>'; }).join('') + '</div>' +
+    '<div class="floor"><span class="fl">🔦 קומה 1 · פנסי קווים</span>' + detRow('tower', lit) + '</div></div>';
+}
+
+/* ───── שלב 1: הפנס הסורק (מנחשים אילו פנסים יידלקו) ───── */
+function lay1(){
+  var n = G.name, ph = W.phase, ST = ['הסבר','ניחוש וסריקה','סיכום'];
+  if (ph === 'intro'){
+    steps(ST, 0); setMood('idle'); say('ברוכים הבאים למגדל שלי! 🏰');
+    P(comic([['🧠', 'המוח שלי הוא מגדל עם קומות. בכל קומה יש <b>נוירונים</b>: גלאים קטנים, שכל אחד מחפש דבר אחד בלבד.'],
+              ['🔦', 'בקומה הראשונה יש 4 פנסים. כל פנס מחפש קו אחד: עומד, שוכב או אלכסון. הוא סורק את כל התמונה, ונדלק אם מצא את הקו שלו.'],
+              ['🎯', 'לפני כל סריקה תנחשו אילו פנסים יידלקו. ניחוש מדויק שווה כוכב!']]) +
+      '<span class="lbl">הפנסים של קומה 1. כל פנס מחפש את הקו שמצויר עליו:</span>' + detRow('show') +
+      '<button class="btn" id="go" type="button">לסרוק תמונות</button>');
+    on('go', function(){ W.phase = 'scan'; W.ti = 0; W.sel = []; W.shown = false; renderWorld(); });
+  }
+  else if (ph === 'scan'){
+    steps(ST, 1);
+    var pic = L1[W.ti], lit = litOf(pic.g), last = W.ti === L1.length - 1;
+    var head = '<h3>תמונה ' + (W.ti + 1) + ' מתוך ' + L1.length + ': ' + pic.name + '</h3>';
+    if (!W.shown){
+      setMood('think'); say('אילו פנסים יידלקו? 🤔');
+      P(head + '<span class="turn">מנחש/ת: ' + teacher() + '</span>' + pgrid(pic.g) +
+        '<p><b>לחצו על הפנסים שלדעתכם יידלקו.</b> אפשר כמה, ואפשר אף אחד.</p>' + detRow('pick', null, W.sel) +
+        '<button class="btn" id="go" type="button">🔦 לסרוק!</button>');
+      $('#panel').querySelectorAll('.det[data-d]').forEach(function(b){ b.onclick = function(){
+        var i = W.sel.indexOf(b.dataset.d), keep = window.scrollY;
+        if (i >= 0) W.sel.splice(i, 1); else W.sel.push(b.dataset.d);
+        beep('tap'); renderWorld(); window.scrollTo(0, keep);
+      }; });
+      on('go', function(){
+        var ok = DET.every(function(d){ return (W.sel.indexOf(d.id) >= 0) === lit[d.id]; }), key = 'scan' + W.ti, isNew = !W.paid[key];
+        if (isNew) W.paid[key] = ok ? 'ok' : 'no';     // הניחוש הראשון קובע את הכוכב, גם אם חוזרים אחורה
+        if (W.paid[key] === 'ok') W.right++;
+        W.okNow = ok; W.paidNow = isNew && ok;
+        if (W.paidNow) addStars(STARS_GOOD_GUESS);
+        W.turn++; W.shown = true; W.anim = true;
+        var keep = window.scrollY; renderWorld(); window.scrollTo(0, keep);
+      });
+    } else {
+      var cnt = DET.filter(function(d){ return lit[d.id]; }).length;
+      P(head + pgrid(pic.g, true) + detRow(W.anim ? 'show' : 'res', lit, W.sel) +
+        '<div id="later"' + (W.anim ? ' hidden' : '') + '>' +
+        '<p class="res ' + (W.okNow ? 'ok' : 'no') + '">' + (W.okNow ? '✓ ניחשתם בדיוק!' + (W.paidNow ? ' קיבלתם ' + STARS_GOOD_GUESS + ' ⭐' : '') : '✗ כמעט! הסתכלו אילו פנסים נדלקו באמת.') + '</p>' +
+        '<p>' + (cnt ? 'נדלקו ' + cnt + ' פנסים. הצבעים בתמונה מראים איפה כל פנס מצא את הקו שלו.' : 'אף פנס לא נדלק.') + '</p>' +
+        '<button class="btn" id="go" type="button">' + (last ? 'לסיכום' : 'לתמונה הבאה') + '</button></div>');
+      on('go', function(){ W.sel = []; W.shown = false; if (last) W.phase = 'sum'; else W.ti++; renderWorld(); });
+      var reveal = function(){
+        W.anim = false; paintHits();
+        var row = $('#panel .dets'); if (row) row.outerHTML = detRow('res', lit, W.sel);
+        var l = $('#later'); if (l) l.hidden = false;
+        if (W.okNow){ setMood('happy', 1600); beep('good'); confetti(); say('ניחשתם בדיוק! 🎉'); }
+        else { setMood('worry', 1600); beep('bad'); say('הפתעה! הסתכלו מה נדלק 😮'); }
+      };
+      if (W.anim){ setMood('think'); say('סורק… 🔦'); scanAnim(reveal); } else paintHits();
+    }
+  }
+  else if (ph === 'sum'){
+    var st = W.right >= 4 ? 3 : W.right >= 2 ? 2 : 1, first = finishLevel(0, st);
+    steps(ST, 2); setMood('happy'); confetti(); beep('win'); say('הקומה הראשונה עובדת! 🎉');
+    P('<h3>' + W.right + ' ניחושים מדויקים מתוך ' + L1.length + ' · ' + '⭐'.repeat(st) + '</h3>' + (first ? '<p>הרווחתם ' + STARS_NEW_LEVEL + ' ⭐ לחנות.</p>' : '') +
+      '<div class="rule">🧠 מה למדנו: הקומה הראשונה במוח מלאכותי מחפשת דברים פשוטים מאוד, כמו קווים. כל פנס סורק את <b>כל</b> התמונה, ולכן לא משנה איפה הקו נמצא.</div>' +
+      '<div class="rule">🏠 בבית נדלקו כל ארבעת הפנסים, כי יש בו גם ריבוע וגם משולש. אז איך ' + n + ' יידע מה הוא רואה? בשביל זה יש קומה שנייה!</div>' +
+      '<div class="row"><button class="btn alt" id="again" type="button">לשחק שוב</button><button class="btn" id="go" type="button">לשלב 2: חידת החוטים</button></div>');
+    on('again', function(){ W = fresh(0); W.phase = 'scan'; renderWorld(); });
+    on('go', function(){ W = fresh(1); renderWorld(); });
+  }
+}
+
+/* ───── שלב 2: חידת החוטים (בונים את קומה 2) ───── */
+function lay2(){
+  var n = G.name, ph = W.phase, ST = ['הסבר','חיבור חוטים','סיכום'];
+  if (ph === 'intro'){
+    steps(ST, 0); setMood('idle'); say('בואו נבנה את הקומה השנייה! 🏗️');
+    P(comic([['🏗️', 'בקומה 2 יש 3 נוירונים: ריבוע, משולש ואיקס. כל אחד צריך להידלק רק כשרואים את הצורה שלו.'],
+              ['🔌', 'אתם מחברים חוטים מהפנסים של קומה 1. <b>חוט ירוק ✓</b> אומר ״צריך את הפנס הזה״. נוירון נדלק רק כשכל הפנסים הירוקים שלו נדלקים.'],
+              ['🧩', 'יש גם <b>חוט אדום ✗</b>, שאומר ״אם הפנס הזה נדלק, אל תידלק!״. זו חידה של מהנדסים אמיתיים. מוכנים?']]) +
+      '<button class="btn" id="go" type="button">לחבר חוטים</button>');
+    on('go', function(){ W.phase = 'wire'; W.tries = 0; W.last = null; W.hint = ''; renderWorld(); });
+  }
+  else if (ph === 'wire'){
+    steps(ST, 1); if (!W.last){ setMood('think'); say('איך מחברים? 🤔'); }
+    var cells = '<span></span>' + DET.map(function(d){ return '<span class="hd">' + m3(d) + '</span>'; }).join('');
+    SHP.forEach(function(s, si){
+      cells += '<span class="sh">' + mini(s.g) + s.name + '</span>';
+      DET.forEach(function(d, di){
+        var w = W.wires[si * 4 + di];
+        cells += '<button type="button" class="w' + (w === 1 ? ' g' : w === -1 ? ' r' : '') + '" data-k="' + (si * 4 + di) + '" aria-label="' + s.name + ', ' + d.name + ': ' + (w === 1 ? 'חוט ירוק' : w === -1 ? 'חוט אדום' : 'בלי חוט') + '">' + (w === 1 ? '✓' : w === -1 ? '✗' : '·') + '</button>';
+      });
+    });
+    var res = W.last ? '<div class="tests">' + W.last.map(function(t){
+      return '<div>' + mini(t.s.g) + '<span>' + (t.out.length ? 'נדלק: ' + t.out.map(function(o){ return o.name; }).join(' + ') : 'אף נוירון לא נדלק') + ' ' + (t.ok ? '✓' : '✗') + '</span></div>';
+    }).join('') + '</div>' : '';
+    P('<h3>חברו חוטים מהפנסים לנוירונים</h3>' +
+      '<p class="small-note">לחיצה על משבצת מחליפה: · בלי חוט ← ✓ ירוק, צריך ← ✗ אדום, אסור</p>' +
+      '<div class="wires">' + cells + '</div>' + res + (W.hint ? '<p class="res no">' + W.hint + '</p>' : '') +
+      (W.tries >= 1 ? '<details><summary>📋 מה ראינו בשלב 1</summary>' + SHP.map(function(s){ var l = litOf(s.g); return '<p>' + s.name + ' מדליק: ' + DET.filter(function(d){ return l[d.id]; }).map(m3).join(' ') + '</p>'; }).join('') + '</details>' : '') +
+      '<button class="btn" id="go" type="button">⚡ לבדוק את המגדל</button>');
+    $('#panel').querySelectorAll('.w').forEach(function(b){ b.onclick = function(){
+      var k = +b.dataset.k, w = W.wires[k], keep = window.scrollY;
+      W.wires[k] = w === 0 ? 1 : w === 1 ? -1 : 0; W.last = null; W.hint = ''; beep('tap');
+      renderWorld(); window.scrollTo(0, keep);
+    }; });
+    on('go', function(){
+      W.tries++;
+      W.last = SHP.map(function(s){ var o = netOut(W.wires, s.g); return {s: s, out: o, ok: o.length === 1 && o[0] === s}; });
+      if (W.last.every(function(t){ return t.ok; })){ G.wires = W.wires.slice(); save(); W.phase = 'sum'; renderWorld(); return; }
+      var mixXT = W.last[1].out.some(function(o){ return o.id === 'x'; }) || W.last[2].out.some(function(o){ return o.id === 'tri'; });
+      W.hint = mixXT && W.tries >= 2 ? '💡 למשולש ולאיקס יש אלכסונים. מה יש למשולש ואין לאיקס? נסו חוט אדום ✗ אצל אחד מהם.' :
+               W.tries >= 2 ? '💡 פתחו את ״מה ראינו בשלב 1״, ובדקו אילו פנסים כל צורה מדליקה.' : '💡 כמעט! בדקו בטבלה איזו צורה הדליקה נוירון לא נכון.';
+      var keep = window.scrollY; renderWorld(); window.scrollTo(0, keep);
+      setMood('worry', 1600); beep('bad'); say('משהו התבלבל לי במגדל… 😟');
+    });
+  }
+  else if (ph === 'sum'){
+    var st = W.tries <= 1 ? 3 : W.tries <= 3 ? 2 : 1, first = finishLevel(1, st);
+    steps(ST, 2); setMood('happy'); confetti(); beep('win'); say('המגדל שלכם עובד! 🏰');
+    P('<h3>המגדל עובד! ' + '⭐'.repeat(st) + '</h3><p>' + (W.tries <= 1 ? 'הצלחתם בניסיון הראשון!' : 'הצלחתם אחרי ' + W.tries + ' ניסיונות.') + (first ? ' הרווחתם ' + STARS_NEW_LEVEL + ' ⭐ לחנות.' : '') + '</p>' +
+      '<div class="rule">🧠 ככה עובד מוח מלאכותי: נוירון בקומה גבוהה מקבל ״חוטים״ מהנוירונים שבקומה שמתחתיו. חוט ירוק אומר ״זה חשוב לי״, וחוט אדום אומר ״זה מפריע לי״.</div>' +
+      '<div class="rule">🤯 במוח מלאכותי אמיתי אף אחד לא מחבר את החוטים ביד. המחשב מנסה שוב ושוב, ומחזק את החוטים שעזרו לו לצדוק. לזה קוראים <b>אימון</b>.</div>' +
+      '<div class="row"><button class="btn alt" id="again" type="button">לבנות מחדש</button><button class="btn" id="go" type="button">לשלב 3: אתגר אלופים</button></div>');
+    on('again', function(){ W = fresh(1); W.phase = 'wire'; renderWorld(); });
+    on('go', function(){ W = fresh(2); renderWorld(); });
+  }
+}
+
+/* ───── שלב 3: אתגר אלופים: מבלבלים את המגדל ───── */
+function lay3(){
+  var n = G.name, ph = W.phase, ST = ['הסבר','ציור','למה?','סיום'];
+  if (ph === 'intro'){
+    steps(ST, 0); setMood('happy', 1500); say('מתערבים שלא תצליחו לבלבל אותי? 😏');
+    P(comic([['🏰', (netWorks(G.wires) ? 'המגדל שבניתם בשלב 2 עובד!' : 'המגדל שלי עובד!') + ' והנה הסוד שלו: כל פנס סורק את <b>כל</b> התמונה.'],
+              ['📍', 'אז לא משנה איפה מציירים, ולא משנה אם הצורה קטנה. בעיר הפיקסלים בלבלתם אותי עם לב קטן בפינה. נראה אם עכשיו זה עובד!'],
+              ['😈', 'ואחר כך מגיע האתגר האמיתי: לבלבל את המגדל.']]) +
+      '<button class="btn" id="go" type="button">לצייר</button>');
+    on('go', function(){ W.phase = 'show'; W.grid = blank(); W.tries = 0; W.hint = ''; W.checked = false; renderWorld(); });
+  }
+  else if (ph === 'show' || ph === 'trick'){
+    steps(ST, 1);
+    P('<h3>' + (ph === 'show' ? '🔺 ציירו משולש קטן, איפה שתרצו' : '😈 בלבלו את המגדל!') + '</h3>' +
+      '<p>' + (ph === 'show' ? 'אפילו בפינה! כל קו צריך להיות לפחות 3 ריבועים ברצף, כמו בפנסים.' : 'ציירו משהו שהוא <b>לא</b> ריבוע, לא משולש ולא איקס, אבל המגדל יחשוב שכן.') + '</p>' +
+      '<span class="turn">מצייר/ת: ' + teacher() + '</span>' +
+      '<div class="grid8" id="grid8">' + W.grid.map(function(v, i){ return '<b data-i="' + i + '"' + (v ? ' class="on"' : '') + '></b>'; }).join('') + '</div>' +
+      (W.hint ? '<p class="small-note">' + W.hint + '</p>' : '') +
+      '<div class="row"><button class="btn alt" id="clr" type="button">🗑️ לנקות</button><button class="btn" id="go" type="button"' + (gsum(W.grid) >= 3 ? '' : ' disabled') + '>' + n + ', מה זה?</button></div>' +
+      '<div id="towerbox">' + towerHtml(W.grid, W.checked) + '</div>');
+    gridMin = 3; bindGrid();   // במגדל קו אחד של 3 ריבועים כבר נחשב ציור
+    paintHook = function(){ W.checked = false; var t = $('#towerbox'); if (t) t.innerHTML = towerHtml(W.grid, false); };
+    on('clr', function(){ W.grid = blank(); W.checked = false; renderWorld(); });
+    on('go', function(){
+      var out = netOut(myNet(), W.grid), names = out.map(function(o){ return o.name; }).join(' או '), keep = window.scrollY;
+      W.turn++;
+      if (ph === 'show'){
+        if (out.length === 1 && out[0].id === 'tri'){
+          W.phase = 'trick'; W.grid = blank(); W.tries = 0; W.hint = ''; W.checked = false; renderWorld();
+          setMood('happy', 1800); beep('good'); confetti(); say('זיהיתי! משולש 🔺 גם קטן וגם במקום אחר!');
+        } else {
+          W.tries++; W.checked = true;
+          W.hint = W.tries >= 2 ? '💡 רמז: משולש = שני אלכסונים שנפגשים למעלה, וקו שוכב למטה. כל קו לפחות 3 ריבועים.' : '💡 ' + n + ' לא זיהה משולש. בדקו במגדל אילו פנסים נדלקו.';
+          renderWorld(); window.scrollTo(0, keep);
+          setMood('worry', 1600); beep('bad'); say(out.length ? 'אממ… ' + names + '? 🤔' : 'לא מצאתי אף צורה… 😟');
+        }
+      } else if (out.length){ W.made = W.grid.slice(); W.said = out; W.phase = 'why'; renderWorld(); }
+      else {
+        W.tries++; W.checked = true; W.hint = W.tries >= 2 ? '💡 רמז: הסתכלו אילו פנסים כל נוירון צריך. אולי מספיק קו אחד? או פלוס ➕?' : '';
+        renderWorld(); window.scrollTo(0, keep);
+        setMood('happy', 2000); beep('good'); say('זה לא ריבוע, לא משולש ולא איקס. צדקתי! 😄 נסו שוב');
+      }
+    });
+  }
+  else if (ph === 'why'){
+    steps(ST, 2); var names = W.said.map(function(o){ return o.name; }).join(' ו');
+    setMood('worry'); beep('win'); confetti(); say('זה ' + names + '!… רגע, מה? 😟');
+    P('<h3>ניצחתם! בלבלתם את המגדל 🎉</h3>' + pgrid(W.made, true) + towerHtml(W.made, true) +
+      '<div class="rule">🔎 המגדל בודק רק <b>אילו קווים</b> יש בציור, ולא <b>איך הם מחוברים</b>. בציור שלכם יש בדיוק את הקווים שהנוירון של ה' + names + ' מחפש, ולכן הוא נדלק.</div>' +
+      '<div class="rule">🏗️ איך מתקנים? מוסיפים עוד קומה, עם נוירונים שמחפשים פינות וחיבורים. לכן במוח מלאכותי אמיתי יש עשרות ואפילו מאות קומות. לזה קוראים <b>למידה עמוקה</b>.</div>' +
+      '<p><b>' + G.teachers[1] + ', עכשיו תסביר ל' + G.teachers[0] + ' במילים שלך: למה המגדל טעה?</b></p>' +
+      '<button class="btn alt" id="go" type="button">הסברנו ✓</button>');
+    paintHits();
+    on('go', function(){ W.first = finishLevel(2, 3); W.phase = 'end'; renderWorld(); });
+  }
+  else if (ph === 'end'){
+    steps(ST, 3); setMood('happy'); say('עכשיו אני יודע איך אני חושב! 🧠');
+    P('<h3>סיימתם את מגדל השכבות! ⭐⭐⭐</h3>' + (W.first ? '<p>הרווחתם ' + STARS_NEW_LEVEL + ' ⭐ לחנות.</p>' : '') +
+      '<div class="rule">🧠 מה למדנו: מוח מלאכותי בנוי מקומות של נוירונים. הקומה הראשונה מוצאת קווים, הקומה הבאה מחברת אותם לצורות, והקומות העליונות מחליטות מה רואים. ככה טלפון מזהה פנים, ומכונית חכמה מזהה תמרור.</div>' +
+      '<p>בעולם 4, <b>עץ השאלות 🌳</b>, ' + n + ' ילמד לקבל החלטות בעזרת שאלות של כן ולא.</p>' +
       '<div class="row"><button class="btn" id="shop" type="button">🛠️ לחנות התוספות</button><button class="btn alt" id="map" type="button">🗺️ למפה</button></div>');
     on('shop', function(){ go('shop'); });
     on('map', function(){ go('map'); });
@@ -1293,6 +1611,7 @@ function pix3(){
 
 /* 🧩 המכניקות: כל עולם בנוי מ-3 שלבים */
 var MECHANICS = {
+  layers:   {levels: [{name:'הפנס הסורק', run: lay1}, {name:'חידת החוטים', run: lay2}, {name:'אתגר אלופים', run: lay3}]},
   examples: {levels: [{name:'מראים דוגמאות', run: level1}, {name:'בוחרים חכם', run: level2}, {name:'אתגר אלופים', run: level3}]},
   pixels:   {levels: [{name:'פנסי הצבע', run: pix1}, {name:'התמונה המתבהרת', run: pix2}, {name:'אתגר אלופים', run: pix3}]}
 };
@@ -1300,7 +1619,9 @@ var MECHANICS = {
 /* ▶️ הפעלה */
 init3D();
 renderWorkshop(); stars(); brand(); muteIcon();
-go('shop');
+document.documentElement.style.setProperty('--toph', $('.top').offsetHeight + 'px');   // גובה הפס העליון, בשביל פס הרובוט
+if (G.cur && MECHANICS[G.cur.w]){ curWorld = G.cur.w; W = fresh(G.cur.l || 0); }       // ממשיכים מהעולם והשלב האחרונים
+go(Object.keys(G.prog).some(function(k){ return G.prog[k].some(Boolean); }) ? 'map' : 'shop');   // מי שכבר שיחק מתחיל במפה
 })();
 </script>
 </body>
