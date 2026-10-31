@@ -1,0 +1,1307 @@
+<!doctype html>
+<html lang="he" dir="rtl">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<title>מלמדים את הרובוט</title>
+<meta name="claude:viewport-fit-sides" content="cover">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Secular+One&family=Varela+Round&display=swap">
+<style>
+/* Layout: phone-first column (max 460px) · sea-blue top bar · bottom tabs · screens: workshop / map / world */
+:root{
+  --sky:#cdeef2; --sea:#0f4c5c; --sea2:#1b6f7a; --sand:#f6e3b8; --paper:#fffaf0; --ink:#1d2a2e; --mute:#4f6366;
+  --coral:#ff6f4f; --sun:#ffc93c; --line:#e3d7bb; --bad:#c2410c; --good:#15803d;
+  --display:'Secular One','Varela Round',Arial,sans-serif; --body:'Varela Round',Arial,sans-serif;
+  color-scheme:light;
+}
+[hidden]{display:none!important}
+*{box-sizing:border-box}
+html,body{height:100%}
+body{margin:0;background:linear-gradient(180deg,var(--sky) 0,#e9f7f3 45%,var(--sand) 100%) fixed;color:var(--ink);font-family:var(--body);direction:rtl;font-size:16px;line-height:1.55}
+body::before{content:"";position:fixed;inset:0 0 auto;height:env(safe-area-inset-top,0px);z-index:10;background:var(--sea)}
+.in{max-width:460px;margin:0 auto;padding-left:max(16px,env(safe-area-inset-left,0px));padding-right:max(16px,env(safe-area-inset-right,0px))}
+.top{position:sticky;top:env(safe-area-inset-top,0px);z-index:6;background:var(--sea);color:var(--paper)}
+.top .in{display:flex;align-items:center;gap:8px;padding-block:8px}
+.brand{font-family:var(--display);font-size:20px;flex:1;min-width:0;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.pill{background:var(--sun);color:var(--ink);border-radius:999px;padding:3px 12px;font-weight:700;font-variant-numeric:tabular-nums}
+.mute{background:none;color:var(--paper);font-size:20px;min-height:40px;padding:4px 8px;border:none}
+main.in{padding-block:14px 110px}
+h1,h2,h3{font-family:var(--display);font-weight:400;margin:0;text-wrap:balance;line-height:1.25}
+h1{font-size:26px;color:var(--sea)} h2{font-size:21px;color:var(--sea)} h3{font-size:19px}
+p{margin:0}
+.lead{color:var(--mute);font-size:15px}
+.screen{display:flex;flex-direction:column;gap:16px}
+button{font:inherit;cursor:pointer;border-radius:14px;border:2px solid transparent;min-height:44px;padding:8px 16px;color:var(--ink);background:var(--paper)}
+button:focus-visible,input:focus-visible{outline:3px solid var(--coral);outline-offset:2px}
+button:disabled{opacity:.45;cursor:not-allowed}
+.btn{background:var(--coral);color:#fff;font-family:var(--display);font-size:18px;box-shadow:0 4px 0 #c94a2f}
+.btn:active:not(:disabled){transform:translateY(3px);box-shadow:0 1px 0 #c94a2f}
+.btn.alt{background:var(--sea2);box-shadow:0 4px 0 #0c3a44}
+.row{display:flex;gap:10px;flex-wrap:wrap}
+.card{background:var(--paper);border:2px solid var(--line);border-radius:18px;padding:14px;display:flex;flex-direction:column;gap:10px}
+.stage{position:relative;width:100%;aspect-ratio:1/1;max-width:100%;border-radius:24px;overflow:hidden;
+  background:radial-gradient(circle at 50% 35%,#ffffff 0,#dff3f1 45%,#b9e1df 100%);border:2px solid #a9d6d3;touch-action:none}
+.stage.small{aspect-ratio:4/3}
+.stage canvas{width:100%;height:100%;display:block}
+.mood{position:absolute;top:10px;inset-inline-start:10px;background:var(--paper);border-radius:999px;padding:4px 12px;font-weight:700;font-size:14px;box-shadow:0 2px 6px rgba(15,76,92,.18)}
+.hint{position:absolute;bottom:8px;inset-inline:0;text-align:center;font-size:12.5px;color:var(--mute)}
+.say{position:absolute;bottom:10px;inset-inline:12px;background:#fff;border:2px solid var(--sea2);border-radius:16px;padding:8px 12px;font-size:15px;box-shadow:0 3px 8px rgba(15,76,92,.15)}
+.fallback{position:absolute;inset:0;display:grid;place-items:center;font-size:96px}
+.moods{display:grid;grid-template-columns:repeat(4,1fr);gap:8px}
+.moods button{background:#fff;border-color:var(--line);font-size:14px;padding:6px 4px;display:flex;flex-direction:column;align-items:center;gap:2px}
+.moods button span{font-size:24px;line-height:1}
+.moods button[aria-pressed="true"]{border-color:var(--sea2);background:#e3f4f2}
+.lbl{font-weight:700;font-size:15px}
+input[type=text]{font:inherit;font-size:17px;width:100%;padding:10px 12px;border-radius:12px;border:2px solid var(--line);background:#fff;color:var(--ink)}
+.two{display:grid;grid-template-columns:1fr 1fr;gap:8px}
+.sw{display:flex;gap:10px;flex-wrap:wrap}
+.sw button{width:44px;height:44px;min-height:44px;padding:0;border-radius:50%;border:3px solid #fff;box-shadow:0 0 0 2px var(--line)}
+.sw button[aria-pressed="true"]{box-shadow:0 0 0 3px var(--sea)}
+.shop{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:10px}
+.item{background:#fff;border:2px solid var(--line);border-radius:16px;padding:10px;display:flex;flex-direction:column;align-items:center;gap:4px;text-align:center}
+.item .ico{font-size:34px;line-height:1.1}
+.item .nm{font-weight:700}
+.item button{width:100%;font-size:14.5px;padding:6px 8px;min-height:40px;background:var(--sun);font-weight:700}
+.item.own button{background:#e3f4f2}
+.item.worn{border-color:var(--sea2)}
+.item.worn button{background:var(--sea2);color:#fff}
+.small-note{font-size:13px;color:var(--mute)}
+.linkish{background:none;border:none;color:var(--mute);text-decoration:underline;font-size:13px;min-height:32px;padding:4px;align-self:flex-start}
+.map{position:relative;padding-block:8px 20px;display:flex;flex-direction:column;gap:14px}
+.map svg.path{position:absolute;inset:0;width:100%;height:100%;pointer-events:none;z-index:0}
+.node{position:relative;z-index:1;width:66%;display:flex;align-items:center;gap:10px;text-align:start;background:var(--paper);border:2px solid var(--line);border-radius:20px;padding:8px 10px}
+.node:nth-of-type(odd){align-self:flex-start}.node:nth-of-type(even){align-self:flex-end}
+.node .isl{flex:0 0 56px;height:56px;border-radius:50%;display:grid;place-items:center;font-size:28px;box-shadow:inset 0 -6px 0 rgba(0,0,0,.18)}
+.node .tx{display:flex;flex-direction:column;min-width:0}
+.node .tx b{font-family:var(--display);font-weight:400;font-size:17px;line-height:1.2}
+.node .tx small{color:var(--mute);font-size:12.5px}
+.node.locked{filter:grayscale(.85);opacity:.75}
+.node.open{border-color:var(--coral);box-shadow:0 0 0 4px rgba(255,111,79,.25)}
+.node.done{border-color:var(--good)}
+.node .st{position:absolute;top:-10px;inset-inline-end:-6px;background:var(--paper);border-radius:999px;font-size:12.5px;padding:1px 8px;border:2px solid var(--line);white-space:nowrap}
+.year{position:relative;z-index:1;align-self:center;background:var(--sea);color:var(--paper);border-radius:12px;padding:4px 12px;font-size:13px;max-width:85%;text-align:center}
+.year b{font-variant-numeric:tabular-nums;color:var(--sun)}
+.who{display:flex;align-items:center;gap:12px}
+.who img,.who .av{width:64px;height:64px;border-radius:50%;background:#dff3f1;border:2px solid #a9d6d3;object-fit:cover;flex:0 0 64px;display:grid;place-items:center;font-size:34px}
+.levels{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:6px}
+.levels button{display:flex;flex-direction:column;align-items:center;font-size:12.5px;padding:6px 4px;background:#fff;border-color:var(--line);line-height:1.3;min-width:0}
+.levels button b{font-family:var(--display);font-weight:400;font-size:14px}
+.levels button[aria-pressed="true"]{border-color:var(--coral);background:#fff3ee}
+.steps{display:flex;gap:6px;flex-wrap:wrap}
+.steps span{font-size:12.5px;border-radius:999px;padding:2px 10px;background:#fff;border:1.5px solid var(--line);color:var(--mute)}
+.steps span.on{background:var(--sea2);color:#fff;border-color:var(--sea2)}
+.comic{display:flex;flex-direction:column;gap:10px}
+.bub{display:flex;gap:10px;align-items:flex-start}
+.bub .face{flex:0 0 40px;height:40px;border-radius:50%;background:var(--sun);display:grid;place-items:center;font-size:22px}
+.bub p{background:#fff;border:2px solid var(--line);border-radius:4px 16px 16px 16px;padding:8px 12px;font-size:15.5px}
+.turn{align-self:flex-start;background:var(--sun);border-radius:999px;padding:2px 12px;font-weight:700;font-size:14px}
+.tray{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:8px}
+.tray.four{grid-template-columns:repeat(4,minmax(0,1fr))}
+.ani{background:#fff;border:2px solid var(--line);border-radius:16px;padding:4px;display:flex;flex-direction:column;align-items:center;min-height:0}
+.ani svg{width:100%;max-width:110px;height:auto;display:block}
+.ani small{font-size:12px;color:var(--mute);line-height:1.3}
+.ani.used{opacity:.65;border-style:dashed}
+.back{align-self:flex-start;background:#fff;border-color:var(--line);font-weight:700;font-size:15px;padding:6px 14px}
+.item button.ret{background:none;font-weight:400;font-size:13px;min-height:36px;padding:2px 6px;color:var(--mute);text-decoration:underline}
+.ani[aria-pressed="true"]{border-color:var(--coral);background:#fff3ee}
+.brain{display:flex;gap:4px;flex-wrap:wrap;min-height:44px;align-items:center;background:#e9f6f4;border-radius:12px;padding:4px 8px}
+.brain svg{width:38px;height:38px}
+.brain .empty{font-size:13px;color:var(--mute)}
+.feat{display:flex;gap:6px;flex-wrap:wrap}
+.feat span{border-radius:10px;padding:2px 10px;font-size:14px;background:#fff;border:2px solid var(--line)}
+.feat span.yes{border-color:var(--good);color:var(--good);font-weight:700}
+.feat span.no{border-color:var(--bad);color:var(--bad);text-decoration:line-through}
+.rule{background:#fff7dc;border:2px solid var(--sun);border-radius:14px;padding:10px 12px;font-size:16px}
+.big{width:150px;margin:0 auto;background:#fff;border:2px solid var(--line);border-radius:20px;padding:6px}
+.big svg{width:100%;height:auto;display:block}
+.res{font-weight:700;font-size:16px}.res.ok{color:var(--good)}.res.no{color:var(--bad)}
+.opts{display:flex;gap:6px;flex-wrap:wrap}
+.opts button{padding:6px 12px;min-height:40px;background:#fff;border-color:var(--line)}
+.opts button[aria-pressed="true"]{border-color:var(--sea2);background:#e3f4f2;font-weight:700}
+.dot{display:inline-block;width:14px;height:14px;border-radius:50%;vertical-align:-2px;border:1px solid rgba(0,0,0,.25);margin-inline-end:4px}
+.tabs{position:fixed;inset:auto 0 0;z-index:6;background:var(--paper);border-top:2px solid var(--line);padding-bottom:env(safe-area-inset-bottom,0px)}
+.tabs .in{display:grid;grid-template-columns:repeat(3,1fr);gap:6px;padding-block:6px}
+.tabs button{display:flex;flex-direction:column;align-items:center;font-size:13px;padding:4px;min-height:52px;background:none;color:var(--mute)}
+.tabs button span{font-size:22px;line-height:1.1}
+.tabs button[aria-current="page"]{color:var(--sea);font-weight:700;background:#e3f4f2}
+/* 🎨 עיר הפיקסלים */
+.mixrow{display:flex;gap:10px;justify-content:center;align-items:flex-end}
+.mixrow figure,.pair figure,.mem figure{margin:0;display:flex;flex-direction:column;align-items:center;gap:4px;font-size:12.5px;color:var(--mute)}
+.swatch{width:88px;height:88px;border-radius:18px;border:3px solid var(--line)}
+.pix{width:58px;height:88px;display:flex;gap:4px;background:#14181c;border-radius:12px;padding:6px}
+.pix span{flex:1;border-radius:4px}
+.lamps{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:8px}
+.lamp{display:flex;flex-direction:column;align-items:center;gap:2px;background:#fff;border-color:var(--line);padding:8px 4px}
+.lamp i{width:46px;height:46px;border-radius:50%;display:block;border:3px solid #2a2f33}
+.lamp small{color:var(--mute);font-size:12.5px}
+.nums{font-size:14px;background:#f1f5f4;border-radius:10px;padding:6px 10px;font-variant-numeric:tabular-nums}
+.picbox{display:flex;flex-direction:column;align-items:center;gap:4px;font-size:13px;color:var(--mute)}
+.picbox canvas{width:220px;height:220px;border-radius:16px;border:3px solid var(--line);display:block}
+.pair{display:flex;gap:14px;justify-content:center}
+.pair canvas{width:128px;height:128px;border-radius:12px;border:2px solid var(--line);display:block}
+.opts4{display:grid;grid-template-columns:1fr 1fr;gap:8px}
+.grid8{display:grid;grid-template-columns:repeat(8,minmax(0,1fr));gap:3px;width:100%;max-width:340px;margin:0 auto;touch-action:none;user-select:none;-webkit-user-select:none}
+.grid8 b{aspect-ratio:1/1;border-radius:6px;background:#fff;border:1.5px solid var(--line);cursor:pointer}
+.grid8 b.on{background:var(--sea);border-color:var(--sea)}
+.mem{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:8px}
+.mini{display:grid;grid-template-columns:repeat(8,1fr);gap:1px;width:100%;max-width:72px;background:#fff;border:1.5px solid var(--line);border-radius:6px;padding:2px}
+.pair .mini{max-width:132px;width:132px}
+.mini i{aspect-ratio:1/1;background:#eef3f1;border-radius:1px}
+.mini i.on{background:var(--sea2)}
+.mini i.ok{background:var(--good)}
+.mini i.extra{background:var(--bad)}
+.mini i.miss,.key.miss{background:#fff;box-shadow:inset 0 0 0 1.5px var(--sea2)}
+.key{display:inline-block;width:12px;height:12px;border-radius:2px;vertical-align:-1px}
+.key.ok{background:var(--good)} .key.extra{background:var(--bad)}
+.toast{position:fixed;inset-inline:16px;bottom:calc(84px + env(safe-area-inset-bottom,0px));z-index:7;max-width:428px;margin:0 auto;background:var(--ink);color:var(--paper);border-radius:14px;padding:10px 14px;text-align:center}
+.conf{position:absolute;top:-10px;width:10px;height:14px;border-radius:2px;animation:fall 2.2s ease-in forwards;z-index:3}
+@keyframes fall{to{transform:translateY(520px) rotate(540deg);opacity:.2}}
+@media (prefers-reduced-motion:reduce){.conf{display:none}.btn:active:not(:disabled){transform:none}}
+</style>
+</head>
+<body>
+
+<header class="top"><div class="in">
+  <div class="brand" id="brand">מלמדים את רובי</div>
+  <button class="mute" id="mute" type="button" aria-label="צליל">🔊</button>
+  <span class="pill" id="stars" aria-label="כוכבים">⭐ 10</span>
+</div></header>
+
+<main class="in">
+  <!-- ① הסדנה -->
+  <section class="screen" id="s-shop">
+    <div><h1>הסדנה של הרובוט</h1><p class="lead">כאן מעצבים את הרובוט: שם, צבעים ותוספות מהחנות. גררו אותו כדי לסובב.</p></div>
+    <div class="stage" id="stage-shop"></div>
+    <div class="card">
+      <h3>איך הרובוט מרגיש?</h3>
+      <p class="small-note">במשחק הוא מגיב לבד: חושב כשהוא לומד, שמח כשהוא צודק, עצוב כשהוא טועה, ומוטרד כשהוא רואה משהו חדש.</p>
+      <div class="moods" id="moods"></div>
+    </div>
+    <div class="card">
+      <label class="lbl" for="rname">שם הרובוט</label>
+      <input type="text" id="rname" maxlength="12" autocomplete="off">
+      <span class="lbl">שמות המורים</span>
+      <div class="two"><input type="text" id="t1" maxlength="10" autocomplete="off" aria-label="מורה ראשון"><input type="text" id="t2" maxlength="10" autocomplete="off" aria-label="מורה שני"></div>
+      <span class="lbl">צבע הגוף</span><div class="sw" id="sw-body"></div>
+      <span class="lbl">צבע העיניים</span><div class="sw" id="sw-eyes"></div>
+    </div>
+    <div class="card">
+      <h2>חנות התוספות</h2>
+      <p class="small-note" id="shopnote"></p>
+      <div class="shop" id="shop"></div>
+    </div>
+    <button class="linkish" id="reset" type="button">להתחיל את כל המשחק מחדש</button>
+  </section>
+
+  <!-- ② המפה -->
+  <section class="screen" id="s-map" hidden>
+    <div class="who"><div class="av" id="mapav">🤖</div><div><h1>מפת העולמות</h1><p class="lead" id="mapsub"></p></div></div>
+    <div class="map" id="map"></div>
+  </section>
+
+  <!-- ③ עולם -->
+  <section class="screen" id="s-world" hidden>
+    <div><h1 id="w-title"></h1><p class="lead" id="w-sub"></p></div>
+    <div class="levels" id="levels"></div>
+    <div class="steps" id="steps"></div>
+    <div class="stage small" id="stage-world"></div>
+    <div class="card" id="panel" aria-live="polite"></div>
+    <button class="back" id="back" type="button" hidden>↩ חזרה צעד אחד</button>
+  </section>
+</main>
+
+<nav class="tabs" aria-label="מסכים"><div class="in">
+  <button type="button" data-go="shop"><span>🛠️</span>הסדנה</button>
+  <button type="button" data-go="map"><span>🗺️</span>המפה</button>
+  <button type="button" data-go="world"><span>🐾</span>העולם</button>
+</div></nav>
+<div class="toast" id="toast" hidden></div>
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
+<script>
+/* ═══════════════════════════════════════════════════════════
+   🤖 מלמדים את הרובוט — המשחק של עומר וסבא פיני
+   לומדים בינה מלאכותית: אתם המורים, והרובוט לומד מכם.
+   ═══════════════════════════════════════════════════════════ */
+(function(){
+'use strict';
+
+/* ⚙️ הגדרות: כאן הכי קל לשנות דברים */
+var START_STARS = 10;               // מתנת פתיחה לחנות
+var ROBOT_DEFAULT_NAME = 'רובי';
+var TEACHER_DEFAULTS = ['מורה א׳', 'מורה ב׳'];
+var STARS_GOOD_GUESS = 1;           // ניחשתם נכון מה הרובוט יעשה
+var STARS_NEW_LEVEL = 5;            // סיימתם שלב בפעם הראשונה
+var SAVE_KEY = 'mlr1-';             // אם משנים את זה, כל השחקנים מתחילים מחדש
+
+/* 🤖 עיצוב הרובוט: כאן עומר ו-Claude מעצבים את הצורה */
+var ROBOT = {
+  HEAD_WIDTH: 1.18, HEAD_HEIGHT: 0.98,   // ראש רחב ונמוך = חמוד
+  EAR_SIZE: 0.24,                         // ה״אוזניים״ העגולות בצדדים
+  BODY_WIDTH: 0.95, BODY_HEIGHT: 0.82,
+  ARM_LENGTH: 0.62, HAND_SIZE: 0.18,
+  ACCENT: 0x1b6f7a                        // צבע החלקים הכהים (אוזניים, ידיים)
+};
+
+/* 🎨 צבעים שאפשר לבחור */
+var BODY = [['#ffc93c','צהוב שמש'],['#43c6c0','טורקיז'],['#ff7f61','אלמוג'],['#62c370','ירוק עלה'],['#a993f0','לילך'],['#c9d3d8','כסף']];
+var EYES = [['#5ff2d8','טורקיז'],['#8dff7a','ירוק'],['#ff8fd0','ורוד'],['#ffe066','צהוב']];
+
+/* 🛒 החנות: רק קישוטים (פיני, 31.10.2026). slot = מקום על הרובוט; שני דברים באותו מקום לא נלבשים יחד */
+var SHOP = [
+  {id:'party',  name:'כובע מסיבה', ico:'🎉', price:2, slot:'top'},
+  {id:'bow',    name:'פפיון',      ico:'🎀', price:2},
+  {id:'tophat', name:'כובע קוסם',  ico:'🎩', price:3, slot:'top'},
+  {id:'shades', name:'משקפי שמש',  ico:'🕶️', price:3},
+  {id:'phones', name:'אוזניות',    ico:'🎧', price:4},
+  {id:'halo',   name:'הילה זוהרת', ico:'✨', price:4, slot:'top'},
+  {id:'cape',   name:'גלימה',      ico:'🦸', price:5},
+  {id:'jet',    name:'תרמיל סילון', ico:'🚀', price:6}
+];
+
+/* 🗺️ העולמות: כל פרק בחוברת = עולם. ready:true = כבר בנוי */
+var WORLDS = [
+  {id:'examples', name:'יער הדוגמאות',   sub:'איך מכונה לומדת',        icon:'🐾', color:'#62c370', ability:'לומד מדוגמאות', ready:true},
+  {id:'pixels',   name:'עיר הפיקסלים',   sub:'איך מחשב רואה תמונה',   icon:'🎨', color:'#ff7f61', ability:'רואה תמונות', ready:true},
+  {id:'layers',   name:'מגדל השכבות',    sub:'מוח מלאכותי',           icon:'🧠', color:'#a993f0'},
+  {id:'tree',     name:'עץ השאלות',      sub:'עצי החלטה',             icon:'🌳', color:'#3fa36b'},
+  {id:'words',    name:'ים המילים',      sub:'איך מחשב מבין שפה',     icon:'🔤', color:'#4aa3df'},
+  {id:'recs',     name:'קולנוע ההמלצות', sub:'מערכת המלצות',          icon:'🍿', color:'#ef6f93'},
+  {id:'prompt',   name:'סטודיו הפרומפטים', sub:'בינה יוצרת',          icon:'🖌️', color:'#f2a33a'},
+  {id:'sensors',  name:'מבוך החיישנים',  sub:'רובוטים וחיישנים',      icon:'📡', color:'#6c86d9'},
+  {id:'final',    name:'המבחן הגדול',    sub:'משחק החיקוי',           icon:'🎭', color:'#55656b'}
+];
+/* ⏳ ציר הזמן לאורך השביל: אחרי עולם מספר… */
+var YEARS = {1:['1950','טיורינג שואל: האם מכונה יכולה לחשוב?'], 3:['1956','לתחום החדש קוראים ״בינה מלאכותית״'], 5:['1966','אלייזה, הצ׳טבוט הראשון'], 7:['1997','מחשב מנצח אלוף עולם בשחמט']};
+
+/* ───────── שמירה (רק במכשיר הזה) ───────── */
+var $ = function(s){ return document.querySelector(s); };
+var RM = window.matchMedia && matchMedia('(prefers-reduced-motion: reduce)').matches;
+var store = {
+  get: function(k, d){ try { var v = localStorage.getItem(SAVE_KEY + k); return v == null ? d : JSON.parse(v); } catch(e){ return d; } },
+  set: function(k, v){ try { localStorage.setItem(SAVE_KEY + k, JSON.stringify(v)); } catch(e){} }
+};
+var DEF = {stars: START_STARS, owned: [], worn: [], body: '#ffc93c', eyes: '#5ff2d8', name: ROBOT_DEFAULT_NAME, teachers: TEACHER_DEFAULTS.slice(), prog: {}, muted: false};
+var G = {};
+Object.keys(DEF).forEach(function(k){ G[k] = store.get(k, JSON.parse(JSON.stringify(DEF[k]))); });
+function save(){ Object.keys(DEF).forEach(function(k){ store.set(k, G[k]); }); }
+function prog(id){ if (!G.prog[id]) G.prog[id] = [0, 0, 0]; return G.prog[id]; }
+
+/* ───────── צלילים (בלי קבצים) ───────── */
+var AC = null, SND = {good:[523,659,784], bad:[392,311], buy:[880,1175], tap:[660], win:[523,659,784,1047]};
+function beep(name){
+  if (G.muted) return;
+  try {
+    AC = AC || new (window.AudioContext || window.webkitAudioContext)();
+    var t = AC.currentTime;
+    SND[name].forEach(function(f, i){
+      var o = AC.createOscillator(), g = AC.createGain(), s = t + i*.11;
+      o.type = 'triangle'; o.frequency.value = f;
+      g.gain.setValueAtTime(.0001, s); g.gain.exponentialRampToValueAtTime(.16, s + .02); g.gain.exponentialRampToValueAtTime(.0001, s + .2);
+      o.connect(g); g.connect(AC.destination); o.start(s); o.stop(s + .22);
+    });
+  } catch(e){}
+}
+
+/* ═══════════ הרובוט בתלת-ממד (Three.js) ═══════════ */
+var R = null, mood = 'idle', moodTimer = null;
+var MOOD_HE = {idle:'רגוע 🙂', think:'חושב… 🤔', happy:'שמח! 😄', sad:'עצוב 😢', worry:'מוטרד 😟'};
+function init3D(){
+  if (!window.THREE) return;
+  var T = THREE;
+  try {
+    var renderer = new T.WebGLRenderer({antialias:true, alpha:true, preserveDrawingBuffer:true});
+    renderer.setPixelRatio(Math.min(2, window.devicePixelRatio || 1));
+    renderer.outputEncoding = T.sRGBEncoding;
+    var scene = new T.Scene();
+    var camera = new T.PerspectiveCamera(30, 1, 0.1, 50);
+    camera.position.set(0, 0.8, 10.6); camera.lookAt(0, 0.3, 0);
+    scene.add(new T.HemisphereLight(0xffffff, 0x8fbfba, 0.9));
+    var key = new T.DirectionalLight(0xffffff, 0.85); key.position.set(3, 5, 6); scene.add(key);
+    var rim = new T.DirectionalLight(0xa8f4ff, 0.55); rim.position.set(-4, 2, -5); scene.add(rim);
+
+    var robot = new T.Group(); scene.add(robot);
+    var bodyMat = new T.MeshStandardMaterial({color: G.body, roughness: .4, metalness: .12});
+    var accent = new T.MeshStandardMaterial({color: ROBOT.ACCENT, roughness: .45, metalness: .25});
+    var dark = new T.MeshStandardMaterial({color: 0x22313a, roughness: .5, metalness: .3});
+    var glowMat = new T.MeshStandardMaterial({color: G.eyes, emissive: G.eyes, emissiveIntensity: .7});
+    function M(geo, mat, x, y, z, parent){ var m = new T.Mesh(geo, mat); m.position.set(x||0, y||0, z||0); (parent || robot).add(m); return m; }
+
+    // ראש + מסך פנים (הפנים מצוירות על קנבס ונמתחות על החזית)
+    var head = new T.Group(); head.position.y = 0.6; robot.add(head);
+    var hm = M(new T.SphereGeometry(1, 48, 32), bodyMat, 0, 0, 0, head); hm.scale.set(ROBOT.HEAD_WIDTH, ROBOT.HEAD_HEIGHT, 1);
+    var fc = document.createElement('canvas'); fc.width = 512; fc.height = 288;
+    var ftex = new T.CanvasTexture(fc); ftex.encoding = T.sRGBEncoding;
+    var face = M(new T.SphereGeometry(1.012, 48, 32, Math.PI/2 - 0.75, 1.5, Math.PI/2 - 0.5, 1.0), new T.MeshBasicMaterial({map: ftex, transparent: true}), 0, 0, 0, head);
+    face.scale.copy(hm.scale);
+    [-1, 1].forEach(function(s){ var e = M(new T.CylinderGeometry(ROBOT.EAR_SIZE, ROBOT.EAR_SIZE, .24, 28), accent, s*ROBOT.HEAD_WIDTH*.99, .02, 0, head); e.rotation.z = Math.PI/2; });
+    var antenna = new T.Group(); head.add(antenna);
+    M(new T.CylinderGeometry(.04, .04, .5, 12), dark, 0, 1.18, 0, antenna);
+    var bulbMat = new T.MeshStandardMaterial({color: 0xff6f4f, emissive: 0xff6f4f, emissiveIntensity: .35});
+    M(new T.SphereGeometry(.14, 20, 14), bulbMat, 0, 1.48, 0, antenna);
+    // גוף, ידיים ורגליים
+    var bm = M(new T.SphereGeometry(1, 40, 28), bodyMat, 0, -1.25, 0); bm.scale.set(ROBOT.BODY_WIDTH, ROBOT.BODY_HEIGHT, .78);
+    var belly = M(new T.CylinderGeometry(.42, .42, .08, 32), accent, 0, -1.2, .7); belly.rotation.x = Math.PI/2 - .25;
+    M(new T.SphereGeometry(.13, 20, 14), glowMat, 0, -1.18, .77);
+    var arms = [-1, 1].map(function(s){
+      var p = new T.Group(); p.position.set(s*.9, -.95, 0); robot.add(p);
+      M(new T.CylinderGeometry(.11, .11, ROBOT.ARM_LENGTH, 16), bodyMat, 0, -ROBOT.ARM_LENGTH/2, 0, p);
+      M(new T.SphereGeometry(ROBOT.HAND_SIZE, 20, 14), accent, 0, -ROBOT.ARM_LENGTH - .04, 0, p);
+      return p;
+    });
+    [-1, 1].forEach(function(s){ var f = M(new T.SphereGeometry(1, 24, 16), dark, s*.42, -2.02, .1); f.scale.set(.3, .17, .4); });
+    var sc = document.createElement('canvas'); sc.width = sc.height = 128;
+    var sg = sc.getContext('2d'), gr = sg.createRadialGradient(64, 64, 4, 64, 64, 64);
+    gr.addColorStop(0, 'rgba(15,76,92,.35)'); gr.addColorStop(1, 'rgba(15,76,92,0)'); sg.fillStyle = gr; sg.fillRect(0, 0, 128, 128);
+    var sh = new T.Mesh(new T.PlaneGeometry(3.2, 1.6), new T.MeshBasicMaterial({map: new T.CanvasTexture(sc), transparent: true, depthWrite: false}));
+    sh.rotation.x = -Math.PI/2; sh.position.y = -2.2; scene.add(sh);
+
+    // 🛒 התוספות: כל תוספת היא קבוצה שמופיעה רק כשלובשים אותה
+    var add = {}, g;
+    function grp(id, parent){ var x = new T.Group(); x.visible = false; (parent || robot).add(x); add[id] = x; return x; }
+    var black = new T.MeshStandardMaterial({color: 0x1b1f27, roughness: .35, metalness: .3});
+    var coral = new T.MeshStandardMaterial({color: 0xff6f4f, roughness: .45});
+    var sun = new T.MeshStandardMaterial({color: 0xffc93c, roughness: .4, emissive: 0x5a3d00, emissiveIntensity: .2});
+    g = grp('tophat', head); M(new T.CylinderGeometry(.78, .78, .07, 36), black, 0, .92, 0, g); M(new T.CylinderGeometry(.5, .52, .8, 36), black, 0, 1.33, 0, g); M(new T.CylinderGeometry(.53, .53, .14, 36), coral, 0, 1.03, 0, g); g.rotation.z = -.12;
+    g = grp('party', head); M(new T.ConeGeometry(.46, 1.05, 32), coral, 0, 1.42, 0, g); M(new T.SphereGeometry(.15, 16, 12), sun, 0, 1.98, 0, g); g.rotation.z = .15;
+    g = grp('halo', head); var halo = M(new T.TorusGeometry(.62, .07, 14, 48), new T.MeshStandardMaterial({color: 0xffd75e, emissive: 0xffc93c, emissiveIntensity: .9}), 0, 1.62, 0, g); halo.rotation.x = Math.PI/2;
+    g = grp('phones', head); M(new T.TorusGeometry(1.2, .075, 12, 40, Math.PI), dark, 0, .05, 0, g);
+    [-1, 1].forEach(function(s){ var c = M(new T.CylinderGeometry(.33, .33, .26, 28), coral, s*1.22, .02, 0, g); c.rotation.z = Math.PI/2; });
+    g = grp('shades', head); var lens = new T.MeshStandardMaterial({color: 0x101820, roughness: .1, metalness: .7});
+    [-1, 1].forEach(function(s){ var l = M(new T.CylinderGeometry(.31, .31, .06, 32), lens, s*.42, .12, .98, g); l.rotation.x = Math.PI/2; l.rotation.y = s*.38; });
+    M(new T.BoxGeometry(.3, .05, .05), black, 0, .2, 1.05, g);
+    g = grp('bow'); [-1, 1].forEach(function(s){ var c = M(new T.ConeGeometry(.17, .34, 20), coral, s*.18, -.47, .7, g); c.rotation.z = -s*Math.PI/2; }); M(new T.SphereGeometry(.09, 14, 10), coral, 0, -.47, .74, g);
+    g = grp('cape'); M(new T.CylinderGeometry(.98, 1.3, 1.75, 28, 1, true, Math.PI - 1.15, 2.3), new T.MeshStandardMaterial({color: 0xd92f3a, roughness: .7, side: T.DoubleSide}), 0, -1.22, -.05, g);
+    g = grp('jet'); var flames = [];
+    [-1, 1].forEach(function(s){
+      M(new T.CylinderGeometry(.22, .22, .95, 20), new T.MeshStandardMaterial({color: 0xb7c2c8, metalness: .6, roughness: .3}), s*.34, -1.05, -.78, g);
+      var f = M(new T.ConeGeometry(.17, .5, 16), new T.MeshStandardMaterial({color: 0xffa630, emissive: 0xff7a1a, emissiveIntensity: 1}), s*.34, -1.8, -.78, g);
+      f.rotation.x = Math.PI; flames.push(f);
+    });
+
+    R = {renderer: renderer, scene: scene, camera: camera, robot: robot, head: head, arms: arms, antenna: antenna,
+         bodyMat: bodyMat, glowMat: glowMat, bulbMat: bulbMat, fc: fc, ftex: ftex, add: add, flames: flames,
+         yaw: 0, drag: null, faceKey: '', host: null, sway: true};
+    applyLook();
+    requestAnimationFrame(loop);
+  } catch(e){ R = null; }
+}
+
+/* 😀 הפנים: מציירים עיניים ופה לפי הרגש */
+function drawFace(m, blink){
+  var c = R.fc, x = c.getContext('2d'), W = c.width, H = c.height, col = G.eyes;
+  x.clearRect(0, 0, W, H);
+  x.beginPath(); if (x.roundRect) x.roundRect(8, 8, W-16, H-16, 70); else x.rect(8, 8, W-16, H-16);
+  var bg = x.createLinearGradient(0, 0, 0, H); bg.addColorStop(0, '#1b3a42'); bg.addColorStop(1, '#0f2328'); x.fillStyle = bg; x.fill();
+  x.save(); x.shadowColor = col; x.shadowBlur = 22; x.fillStyle = col; x.strokeStyle = col; x.lineCap = 'round'; x.lineWidth = 14;
+  var L = 176, Rr = 336, y = 125;
+  function oval(cx, cy, rx, ry){ x.beginPath(); x.ellipse(cx, cy, rx, ry, 0, 0, Math.PI*2); x.fill(); }
+  function line(a, b, c2, d){ x.beginPath(); x.moveTo(a, b); x.lineTo(c2, d); x.stroke(); }
+  if (blink && (m === 'idle' || m === 'think')){ line(L-34, y, L+34, y); line(Rr-34, y, Rr+34, y); }
+  else if (m === 'happy'){
+    [L, Rr].forEach(function(cx){ x.beginPath(); x.arc(cx, y+22, 38, Math.PI*1.12, Math.PI*1.88); x.stroke(); });
+    x.beginPath(); x.arc(256, 190, 54, 0, Math.PI); x.closePath(); x.fill();
+  } else if (m === 'sad'){
+    [L, Rr].forEach(function(cx){ x.beginPath(); x.ellipse(cx, y+12, 34, 26, 0, 0, Math.PI); x.fill(); });
+    x.lineWidth = 10; line(L-38, y-30, L+30, y-48); line(Rr+38, y-30, Rr-30, y-48);
+    x.lineWidth = 12; x.beginPath(); x.arc(256, 262, 52, Math.PI*1.18, Math.PI*1.82); x.stroke();
+    x.shadowBlur = 0; x.fillStyle = '#9fd8ff'; x.beginPath(); x.moveTo(L+12, y+44); x.quadraticCurveTo(L-6, y+78, L+12, y+84); x.quadraticCurveTo(L+30, y+78, L+12, y+44); x.fill();
+  } else if (m === 'think'){
+    oval(L+18, y-16, 30, 40); oval(Rr+18, y-20, 34, 44);
+    x.lineWidth = 10; line(Rr-14, y-80, Rr+52, y-70);
+    x.lineWidth = 12; line(226, 212, 300, 202);
+  } else if (m === 'worry'){
+    oval(L, y, 42, 46); oval(Rr, y, 42, 46);
+    x.shadowBlur = 0; x.fillStyle = '#0f2328'; oval(L+5, y+6, 14, 14); oval(Rr-5, y+6, 14, 14);
+    x.shadowBlur = 22; x.lineWidth = 10; line(L-40, y-60, L+30, y-72); line(Rr+40, y-60, Rr-30, y-72);
+    x.beginPath(); x.moveTo(206, 218); for (var i = 1; i <= 6; i++) x.lineTo(206 + i*17, i % 2 ? 204 : 222); x.stroke();
+    x.shadowBlur = 0; x.fillStyle = '#9fd8ff'; x.beginPath(); x.moveTo(440, 52); x.quadraticCurveTo(424, 86, 440, 92); x.quadraticCurveTo(456, 86, 440, 52); x.fill();
+  } else {
+    oval(L, y, 32, 42); oval(Rr, y, 32, 42);
+    x.lineWidth = 12; x.beginPath(); x.arc(256, 176, 44, Math.PI*.18, Math.PI*.82); x.stroke();
+  }
+  x.restore();
+  R.ftex.needsUpdate = true;
+}
+function applyLook(){
+  if (!R) return;
+  R.bodyMat.color.set(G.body);
+  R.glowMat.color.set(G.eyes); R.glowMat.emissive.set(G.eyes);
+  Object.keys(R.add).forEach(function(id){ R.add[id].visible = G.worn.indexOf(id) >= 0; });
+  R.antenna.visible = !G.worn.some(function(id){ return id === 'tophat' || id === 'party'; });
+  R.faceKey = '';
+}
+/* 🎬 כל פריים: תנועות הגוף לפי הרגש */
+var lerp = function(a, b, k){ return a + (b - a) * k; };
+var t0 = performance.now(), nextBlink = 2500, blinkUntil = 0;
+function loop(now){
+  requestAnimationFrame(loop);
+  if (!R || !R.host || document.hidden) return;
+  var t = (now - t0) / 1000, k = 0.12, A = RM ? 0.25 : 1;
+  var hRX = 0, hRZ = 0, y = Math.sin(t*2)*.05*A, x = 0, aL = .35, aR = -.35, bulb = .35;
+  if (mood === 'happy'){ y = Math.abs(Math.sin(t*6))*.28*A; aL = 2.3 + Math.sin(t*10)*.2*A; aR = -aL; hRZ = Math.sin(t*5)*.08*A; }
+  else if (mood === 'sad'){ y = -.12; hRX = .38; aL = .08; aR = -.08; }
+  else if (mood === 'think'){ hRZ = .2; hRX = -.12; aR = -2.0; aL = .3; bulb = (Math.sin(t*9) > 0) ? 1.4 : .2; }
+  else if (mood === 'worry'){ x = Math.sin(t*38)*.035*A; hRZ = Math.sin(t*3)*.1*A; aL = .75; aR = -.75; }
+  R.robot.position.y = lerp(R.robot.position.y, y, mood === 'happy' ? .5 : k);
+  R.robot.position.x = x;
+  R.head.rotation.x = lerp(R.head.rotation.x, hRX, k);
+  R.head.rotation.z = lerp(R.head.rotation.z, hRZ, k);
+  R.arms[0].rotation.z = lerp(R.arms[0].rotation.z, -aL, k);
+  R.arms[1].rotation.z = lerp(R.arms[1].rotation.z, -aR, k);
+  R.bulbMat.emissiveIntensity = bulb;
+  if (!R.drag) R.yaw = lerp(R.yaw, R.sway ? Math.sin(t*.6)*.45*A : 0, .03);
+  R.robot.rotation.y = R.yaw;
+  R.flames.forEach(function(f, i){ f.scale.set(1, .8 + Math.abs(Math.sin(t*14 + i))*.5*A, 1); });
+  if (now > nextBlink){ blinkUntil = now + 130; nextBlink = now + 2200 + Math.random()*2500; }
+  var fk = mood + '|' + (now < blinkUntil) + '|' + G.eyes;
+  if (fk !== R.faceKey){ drawFace(mood, now < blinkUntil); R.faceKey = fk; }
+  R.renderer.render(R.scene, R.camera);
+}
+/* הרובוט אחד, והוא עובר בין הבמות (סדנה / עולם) */
+function mount(stageId){
+  var host = document.getElementById(stageId);
+  if (!R){
+    if (!host.querySelector('.fallback')){ var f = document.createElement('div'); f.className = 'fallback'; host.appendChild(f); }
+  } else { host.insertBefore(R.renderer.domElement, host.firstChild); R.host = host; R.sway = stageId === 'stage-shop'; resize(); }
+  if (!host.querySelector('.mood')){ var c = document.createElement('div'); c.className = 'mood'; host.appendChild(c); }
+  if (stageId === 'stage-shop' && R && !host.querySelector('.hint')){ var h = document.createElement('div'); h.className = 'hint'; h.textContent = '↔ גררו כדי לסובב'; host.appendChild(h); }
+  showMood();
+}
+function resize(){
+  if (!R || !R.host) return;
+  var w = R.host.clientWidth, h = R.host.clientHeight; if (!w || !h) return;
+  R.renderer.setSize(w, h, false); R.camera.aspect = w / h;
+  R.camera.position.z = w / h > 1.1 ? 11.6 : 10.6;
+  R.camera.updateProjectionMatrix();
+}
+window.addEventListener('resize', resize);
+function showMood(){
+  document.querySelectorAll('.stage .mood').forEach(function(el){ el.textContent = G.name + ' ' + MOOD_HE[mood]; });
+  document.querySelectorAll('.stage .fallback').forEach(function(el){ el.textContent = {idle:'🤖', think:'🤔', happy:'😄', sad:'😢', worry:'😟'}[mood]; });
+  document.querySelectorAll('#moods button').forEach(function(b){ b.setAttribute('aria-pressed', String(b.dataset.m === mood)); });
+}
+function setMood(m, ms){
+  mood = m; clearTimeout(moodTimer);
+  if (ms) moodTimer = setTimeout(function(){ mood = 'idle'; showMood(); }, ms);
+  showMood();
+}
+function say(text){
+  var host = $('#stage-world'), b = host.querySelector('.say');
+  if (!text){ if (b) b.remove(); return; }
+  if (!b){ b = document.createElement('div'); b.className = 'say'; host.appendChild(b); }
+  b.textContent = text;
+}
+function confetti(){
+  if (RM) return;
+  var host = $('#stage-world'), cols = ['#ff6f4f','#ffc93c','#43c6c0','#62c370','#a993f0'];
+  for (var i = 0; i < 34; i++){
+    var s = document.createElement('span'); s.className = 'conf';
+    s.style.left = (Math.random()*100) + '%'; s.style.background = cols[i % cols.length];
+    s.style.animationDelay = (Math.random()*.5) + 's'; host.appendChild(s);
+    setTimeout(s.remove.bind(s), 3000);
+  }
+}
+(function bindDrag(stage){
+  stage.addEventListener('pointerdown', function(e){ if (!R) return; R.drag = {x: e.clientX, yaw: R.yaw}; stage.setPointerCapture(e.pointerId); });
+  stage.addEventListener('pointermove', function(e){ if (R && R.drag) R.yaw = R.drag.yaw + (e.clientX - R.drag.x) * .012; });
+  ['pointerup','pointercancel'].forEach(function(ev){ stage.addEventListener(ev, function(){ if (R) R.drag = null; }); });
+})($('#stage-shop'));
+
+/* ═══════════ מסכים כלליים ═══════════ */
+var toastT;
+function toast(msg){ var t = $('#toast'); t.textContent = msg; t.hidden = false; clearTimeout(toastT); toastT = setTimeout(function(){ t.hidden = true; }, 2800); }
+function addStars(n){ G.stars += n; save(); stars(); }
+function stars(){ $('#stars').textContent = '⭐ ' + G.stars; $('#shopnote').textContent = 'יש לכם ' + G.stars + ' ⭐. מרוויחים כוכבים בעולמות, וקונים בהם כאן.'; }
+function brand(){ $('#brand').textContent = 'מלמדים את ' + G.name; }
+function muteIcon(){ $('#mute').textContent = G.muted ? '🔇' : '🔊'; $('#mute').setAttribute('aria-pressed', String(G.muted)); }
+$('#mute').addEventListener('click', function(){ G.muted = !G.muted; save(); muteIcon(); beep('tap'); });
+var screen = 'shop';
+function go(s){
+  screen = s;
+  ['shop','map','world'].forEach(function(k){ $('#s-' + k).hidden = k !== s; });
+  document.querySelectorAll('.tabs button').forEach(function(b){ if (b.dataset.go === s) b.setAttribute('aria-current', 'page'); else b.removeAttribute('aria-current'); });
+  if (s === 'shop') mount('stage-shop');
+  if (s === 'world'){ mount('stage-world'); renderWorld(); }
+  if (s === 'map') renderMap();
+  window.scrollTo(0, 0);
+}
+document.querySelectorAll('.tabs button').forEach(function(b){ b.addEventListener('click', function(){ go(b.dataset.go); }); });
+
+/* ───────── 🛠️ הסדנה והחנות ───────── */
+function renderWorkshop(){
+  var mb = $('#moods'); mb.innerHTML = '';
+  [['think','חושב','🤔'],['happy','שמח','😄'],['sad','עצוב','😢'],['worry','מוטרד','😟']].forEach(function(m){
+    var b = document.createElement('button'); b.type = 'button'; b.dataset.m = m[0];
+    b.innerHTML = '<span>' + m[2] + '</span>' + m[1];
+    b.addEventListener('click', function(){ setMood(m[0], 3500); });
+    mb.appendChild(b);
+  });
+  function swatches(el, list, key){
+    el.innerHTML = '';
+    list.forEach(function(c){
+      var b = document.createElement('button'); b.type = 'button'; b.style.background = c[0];
+      b.setAttribute('aria-label', c[1]); b.title = c[1]; b.setAttribute('aria-pressed', String(G[key] === c[0]));
+      b.addEventListener('click', function(){ G[key] = c[0]; save(); applyLook(); swatches(el, list, key); setMood('happy', 1400); beep('tap'); });
+      el.appendChild(b);
+    });
+  }
+  swatches($('#sw-body'), BODY, 'body'); swatches($('#sw-eyes'), EYES, 'eyes');
+  var nm = $('#rname'); nm.value = G.name;
+  nm.oninput = function(){ G.name = nm.value.trim() || ROBOT_DEFAULT_NAME; save(); brand(); showMood(); };
+  ['#t1','#t2'].forEach(function(id, i){
+    var el = $(id); el.value = G.teachers[i]; el.placeholder = TEACHER_DEFAULTS[i];
+    el.oninput = function(){ G.teachers[i] = el.value.trim() || TEACHER_DEFAULTS[i]; save(); };
+  });
+  renderShop();
+}
+function renderShop(){
+  var el = $('#shop'); el.innerHTML = '';
+  SHOP.forEach(function(it){
+    var own = G.owned.indexOf(it.id) >= 0, worn = G.worn.indexOf(it.id) >= 0;
+    var d = document.createElement('div'); d.className = 'item' + (own ? ' own' : '') + (worn ? ' worn' : '');
+    d.innerHTML = '<div class="ico">' + it.ico + '</div><div class="nm">' + it.name + '</div>';
+    if (own){   // ↩ קנו בטעות? מחזירים לחנות ומקבלים את כל הכוכבים בחזרה
+      var r = document.createElement('button'); r.type = 'button'; r.className = 'ret';
+      r.textContent = '↩ להחזיר ולקבל ' + it.price + ' ⭐';
+      r.addEventListener('click', function(){
+        G.owned = G.owned.filter(function(x){ return x !== it.id; }); G.worn = G.worn.filter(function(x){ return x !== it.id; });
+        G.stars += it.price; save(); applyLook(); stars(); renderShop(); beep('tap'); toast(it.ico + ' חזר לחנות. קיבלתם ' + it.price + ' ⭐ בחזרה');
+      });
+    }
+    var b = document.createElement('button'); b.type = 'button';
+    b.textContent = !own ? 'לקנות ב-' + it.price + ' ⭐' : worn ? 'לבוש ✓ · להוריד' : 'להלביש';
+    b.addEventListener('click', function(){
+      if (!own){
+        if (G.stars < it.price){ setMood('worry', 1800); beep('bad'); toast('חסרים ' + (it.price - G.stars) + ' ⭐. מרוויחים עוד בעולמות!'); return; }
+        G.stars -= it.price; G.owned.push(it.id); wear(it); setMood('happy', 1800); beep('buy'); toast(it.ico + ' ' + it.name + ' שלכם!');
+      } else if (worn){ G.worn = G.worn.filter(function(x){ return x !== it.id; }); }
+      else { wear(it); beep('tap'); }
+      save(); applyLook(); stars(); renderShop();
+    });
+    d.appendChild(b); if (r) d.appendChild(r); el.appendChild(d);
+  });
+}
+function wear(it){
+  if (it.slot) G.worn = G.worn.filter(function(x){ var o = SHOP.filter(function(s){ return s.id === x; })[0]; return !o || o.slot !== it.slot; });
+  if (G.worn.indexOf(it.id) < 0) G.worn.push(it.id);
+}
+var resetArmed = false;
+$('#reset').addEventListener('click', function(){
+  if (!resetArmed){ resetArmed = true; $('#reset').textContent = 'בטוח? כל הכוכבים, הקניות וההתקדמות יימחקו. לחצו שוב לאישור'; setTimeout(function(){ resetArmed = false; $('#reset').textContent = 'להתחיל את כל המשחק מחדש'; }, 5000); return; }
+  resetArmed = false; $('#reset').textContent = 'להתחיל את כל המשחק מחדש';
+  Object.keys(DEF).forEach(function(k){ G[k] = JSON.parse(JSON.stringify(DEF[k])); }); save();
+  W = fresh(0); HIST = []; applyLook(); renderWorkshop(); stars(); brand(); muteIcon(); setMood('idle'); toast('המשחק התחיל מחדש');
+});
+
+/* ───────── 🗺️ המפה ───────── */
+function worldStars(id){ return prog(id).reduce(function(a, b){ return a + b; }, 0); }
+function renderMap(){
+  var av = $('#mapav');
+  if (R){ try { R.renderer.render(R.scene, R.camera); var img = document.createElement('img'); img.id = 'mapav'; img.alt = G.name; img.src = R.renderer.domElement.toDataURL('image/png'); av.replaceWith(img); } catch(e){} }
+  var w1 = worldStars('examples');
+  $('#mapsub').textContent = w1 ? G.name + ' כבר אסף ' + w1 + ' מתוך 9 ⭐ ביער הדוגמאות.' : '9 עולמות. בכל עולם ' + G.name + ' לומד יכולת חדשה.';
+  var m = $('#map'); m.innerHTML = '<svg class="path" aria-hidden="true"></svg>';
+  WORLDS.forEach(function(w, i){
+    var s = worldStars(w.id), st = w.ready ? (s >= 9 ? 'done' : 'open') : 'locked';
+    var b = document.createElement('button'); b.type = 'button'; b.className = 'node ' + st;
+    b.innerHTML = '<span class="isl" style="background:' + w.color + '">' + w.icon + '</span><span class="tx"><b>' + (i+1) + '. ' + w.name + '</b><small>' + w.sub + '</small></span>' +
+      '<span class="st">' + (w.ready ? (s ? '⭐ ' + s + '/9' : '▶ כאן מתחילים') : '🔒 בקרוב') + '</span>';
+    b.addEventListener('click', function(){
+      if (w.ready) enterWorld(w.id);
+      else toast('🔒 ' + w.name + ' עוד בבנייה. נבנה אותו יחד באחד המפגשים הבאים!');
+    });
+    m.appendChild(b);
+    if (YEARS[i+1]){ var y = document.createElement('div'); y.className = 'year'; y.innerHTML = '<b>' + YEARS[i+1][0] + '</b> · ' + YEARS[i+1][1]; m.appendChild(y); }
+  });
+  requestAnimationFrame(drawPath);
+}
+function drawPath(){
+  var m = $('#map'), svg = m.querySelector('svg.path'); if (!svg) return;
+  var box = m.getBoundingClientRect(), pts = [];
+  m.querySelectorAll('.node,.year').forEach(function(n){ var r = n.getBoundingClientRect(); pts.push([r.left - box.left + r.width/2, r.top - box.top + r.height/2]); });
+  if (pts.length < 2) return;
+  var d = 'M' + pts[0][0] + ' ' + pts[0][1];
+  for (var i = 1; i < pts.length; i++){ var a = pts[i-1], b = pts[i], my = (a[1] + b[1]) / 2; d += ' C' + a[0] + ' ' + my + ' ' + b[0] + ' ' + my + ' ' + b[0] + ' ' + b[1]; }
+  svg.setAttribute('viewBox', '0 0 ' + box.width + ' ' + box.height);
+  svg.innerHTML = '<path d="' + d + '" fill="none" stroke="#e8c98a" stroke-width="16" stroke-linecap="round"/><path d="' + d + '" fill="none" stroke="#fff4d8" stroke-width="4" stroke-dasharray="2 14" stroke-linecap="round"/>';
+}
+window.addEventListener('resize', function(){ if (screen === 'map') drawPath(); });
+
+/* ═══════════ 🌍 עולם: מסגרת כללית ═══════════ */
+var curWorld = 'examples', W;
+function fresh(level){ return {level: level, phase: 'intro', brain: [], rule: null, turn: 0, round: 1, ti: 0, right: 0, guess: null, sel: [], tries: 0,
+  paid: {}, lab: {kind: 'cat', color: 'white', ears: 'floppy', size: 'small'},
+  lamps: [0, 0, 0], miss: 0, hint: '', res: 0, pts: 0, grid: blank()}; }
+function blank(){ var a = []; for (var i = 0; i < 64; i++) a.push(0); return a; }   // ציור ריק של 8×8 פיקסלים
+W = fresh(0);
+function enterWorld(id){ if (curWorld !== id){ curWorld = id; W = fresh(0); HIST = []; } go('world'); }
+
+/* ↩ חזרה צעד אחד: לפני כל צעד שומרים ״צילום״ של המצב, וכפתור החזרה מחזיר את הצילום האחרון.
+   paid (על איזו חיה כבר קיבלו כוכב) משותף לכל הצילומים, כדי שחזרה לא תיתן כוכב פעמיים. */
+var HIST = [];
+function snap(){ var o = {}; Object.keys(W).forEach(function(k){ var v = W[k]; o[k] = Array.isArray(v) ? v.slice() : k === 'lab' ? JSON.parse(JSON.stringify(v)) : v; }); return o; }
+function sig(w){ return [w.level, w.phase, w.round, w.ti, w.guess, w.brain.length, w.res, w.grid.join('')].join('|'); }   // מה נחשב ״צעד״
+function act(fn){ return function(){
+  var before = snap(); HIST.push(before);
+  fn();
+  if (sig(before) === sig(W)) HIST.splice(HIST.lastIndexOf(before), 1);   // לא זזנו? אין צעד לחזור אליו
+  if (HIST.length > 80) HIST.shift();
+  backVis();
+}; }
+function backVis(){ $('#back').hidden = !HIST.length; }
+$('#back').addEventListener('click', function(){ if (!HIST.length) return; W = HIST.pop(); beep('tap'); renderWorld(); window.scrollTo(0, 0); });
+
+function teacher(){ return G.teachers[W.turn % 2]; }
+function P(html){ $('#panel').innerHTML = html; }
+function on(id, fn){ var el = document.getElementById(id); if (el) el.onclick = act(fn); }
+function steps(names, cur){ $('#steps').innerHTML = names.map(function(n, i){ return '<span class="' + (i === cur ? 'on' : '') + '">' + n + '</span>'; }).join(''); }
+function finishLevel(li, st){
+  var p = prog(curWorld), first = !p[li];
+  p[li] = Math.max(p[li], st); save();
+  if (first){ addStars(STARS_NEW_LEVEL); }
+  return first;
+}
+function renderWorld(){
+  var w = WORLDS.filter(function(x){ return x.id === curWorld; })[0], mech = MECHANICS[w.id], p = prog(w.id);
+  $('#w-title').textContent = w.icon + ' ' + w.name; $('#w-sub').textContent = w.sub + '. יכולת חדשה ל' + G.name + ': ' + w.ability + '.';
+  say('');
+  mech.levels[W.level].run();      // קודם השלב עצמו (הוא יכול לעדכן כוכבים), ואחר כך שורת השלבים
+  $('#levels').innerHTML = mech.levels.map(function(L, i){
+    var open = i === 0 || p[i-1] > 0;
+    return '<button type="button" data-l="' + i + '" aria-pressed="' + (W.level === i) + '"' + (open ? '' : ' disabled') + '><b>' + (i+1) + '. ' + L.name + '</b>' +
+      (open ? (p[i] ? '⭐'.repeat(p[i]) + '☆'.repeat(3 - p[i]) : '☆☆☆') : '🔒') + '</button>';
+  }).join('');
+  $('#levels').querySelectorAll('button').forEach(function(b){ b.onclick = act(function(){ W = fresh(+b.dataset.l); renderWorld(); }); });
+  backVis();
+}
+
+/* ═══════════ 🐾 יער הדוגמאות: הרובוט לומד ״חוק״ מדוגמאות ═══════════
+   איך הרובוט חושב: הוא בודק תכונות לפי הסדר (צבע ← אוזניים ← גודל),
+   ועוצר בתכונה הראשונה שמסבירה את כל הדוגמאות שראה. זה ״החוק״ שלו. */
+var C_HE = {black:'שחור', brown:'חום', white:'לבן', orange:'כתום', grey:'אפור'};
+var C_FEM = {black:'שחורה', brown:'חומה', white:'לבנה', orange:'כתומה', grey:'אפורה'};
+var C_HEX = {black:'#2c2a33', brown:'#95603d', white:'#f8f4ea', orange:'#f08a2c', grey:'#a4aab2'};
+var E_HE = {pointy:'אוזניים זקופות', floppy:'אוזניים מקופלות'};
+var S_HE = {small:'קטן', big:'גדול'};
+var K_HE = {cat:'חתול', dog:'כלב'};
+var FEATS = [['color','צבע'],['ears','אוזניים'],['size','גודל']];
+function A(id, kind, color, size, ears){ return {id: id, kind: kind, color: color, size: size, ears: ears || (kind === 'cat' ? 'pointy' : 'floppy')}; }
+var TRAY1 = [A('a1','cat','black','small'), A('a2','dog','brown','big'), A('a3','cat','black','big'), A('a4','dog','brown','small'), A('a5','cat','black','small'), A('a6','dog','brown','big')];
+var TEST1 = [A('t1','dog','black','big'), A('t2','cat','orange','small'), A('t3','dog','brown','small')];
+var TRAY2 = [A('b1','cat','white','small'), A('b2','dog','black','big'), A('b3','cat','orange','big'), A('b4','dog','white','small')];
+var TEST2 = [A('u1','cat','brown','big'), A('u2','dog','grey','small'), A('u3','cat','grey','small')];
+var POOL  = [A('p1','cat','black','small'), A('p2','dog','black','big'), A('p3','cat','white','big'), A('p4','dog','brown','small'),
+             A('p5','cat','orange','small'), A('p6','dog','white','big'), A('p7','cat','grey','big'), A('p8','dog','orange','small')];
+var TEST3 = [A('v1','dog','grey','big'), A('v2','cat','brown','small'), A('v3','dog','black','small'), A('v4','cat','white','big')];
+
+/* ציור חיה ב-SVG: האוזניים לפי ears, השפם והאף לפי kind */
+function animalSVG(a){
+  var C = C_HEX[a.color], edge = a.color === 'white' ? '#bcae95' : 'rgba(0,0,0,.28)';
+  var r = a.size === 'big' ? 33 : 26, cx = 50, cy = 58, s = '', eyeW = a.color === 'black' ? '#ffe27a' : '#ffffff';
+  if (a.ears === 'pointy'){
+    [-1, 1].forEach(function(k){
+      s += '<polygon points="' + (cx + k*r*.92) + ',' + (cy - r*.25) + ' ' + (cx + k*r*.62) + ',' + (cy - r*1.3) + ' ' + (cx + k*r*.08) + ',' + (cy - r*.82) + '" fill="' + C + '" stroke="' + edge + '" stroke-width="2"/>';
+      s += '<polygon points="' + (cx + k*r*.74) + ',' + (cy - r*.5) + ' ' + (cx + k*r*.6) + ',' + (cy - r*1.05) + ' ' + (cx + k*r*.3) + ',' + (cy - r*.8) + '" fill="#f7a6b5"/>';
+    });
+  } else {
+    [-1, 1].forEach(function(k){
+      var ex = cx + k*r*.96, ey = cy + r*.05;
+      s += '<ellipse cx="' + ex + '" cy="' + ey + '" rx="' + r*.34 + '" ry="' + r*.66 + '" transform="rotate(' + (k*18) + ' ' + ex + ' ' + ey + ')" fill="' + C + '" stroke="' + edge + '" stroke-width="2" style="filter:brightness(.82)"/>';
+    });
+  }
+  s += '<circle cx="' + cx + '" cy="' + cy + '" r="' + r + '" fill="' + C + '" stroke="' + edge + '" stroke-width="2"/>';
+  [-1, 1].forEach(function(k){
+    s += '<ellipse cx="' + (cx + k*r*.38) + '" cy="' + (cy - r*.12) + '" rx="' + r*.17 + '" ry="' + r*.2 + '" fill="' + eyeW + '"/>';
+    s += '<circle cx="' + (cx + k*r*.36) + '" cy="' + (cy - r*.1) + '" r="' + r*.09 + '" fill="#1d2a2e"/>';
+  });
+  if (a.kind === 'cat'){
+    s += '<polygon points="' + (cx - 4) + ',' + (cy + r*.22) + ' ' + (cx + 4) + ',' + (cy + r*.22) + ' ' + cx + ',' + (cy + r*.34) + '" fill="#f28aa0"/>';
+    [-1, 1].forEach(function(k){ for (var j = -1; j <= 1; j++) s += '<line x1="' + (cx + k*r*.28) + '" y1="' + (cy + r*.3) + '" x2="' + (cx + k*r*1.05) + '" y2="' + (cy + r*.22 + j*r*.14) + '" stroke="' + (a.color === 'black' ? '#d9d9d9' : '#555') + '" stroke-width="1.4"/>'; });
+  } else {
+    s += '<ellipse cx="' + cx + '" cy="' + (cy + r*.3) + '" rx="' + r*.2 + '" ry="' + r*.14 + '" fill="#1d2a2e"/>';
+    s += '<path d="M' + (cx - r*.22) + ' ' + (cy + r*.52) + ' Q' + cx + ' ' + (cy + r*.68) + ' ' + (cx + r*.22) + ' ' + (cy + r*.52) + '" stroke="#1d2a2e" stroke-width="2" fill="none"/>';
+  }
+  return '<svg viewBox="0 0 100 100" role="img" aria-label="' + K_HE[a.kind] + ' ' + C_HE[a.color] + '">' + s + '</svg>';
+}
+function learn(brain){
+  for (var i = 0; i < FEATS.length; i++){
+    var f = FEATS[i][0], map = {}, ok = true;
+    for (var j = 0; j < brain.length; j++){ var v = brain[j][f]; if (map[v] && map[v] !== brain[j].kind){ ok = false; break; } map[v] = brain[j].kind; }
+    if (ok) return {f: f, label: FEATS[i][1], map: map, tried: i};
+  }
+  return null;   // אף תכונה אחת לא מספיקה
+}
+function predict(rule, a, brain){
+  if (rule && rule.map[a[rule.f]]) return {kind: rule.map[a[rule.f]], sure: true};
+  var cats = brain.filter(function(b){ return b.kind === 'cat'; }).length;
+  return {kind: cats > brain.length - cats ? 'cat' : 'dog', sure: false};
+}
+function valHe(f, v){ return f === 'color' ? C_HE[v] : f === 'ears' ? E_HE[v] : S_HE[v]; }
+function ruleText(rule){
+  var by = {cat: [], dog: []};
+  Object.keys(rule.map).forEach(function(v){ by[rule.map[v]].push(valHe(rule.f, v)); });
+  return '🐱 חתול = ' + by.cat.join(' או ') + '<br>🐶 כלב = ' + by.dog.join(' או ');
+}
+function featRow(rule){
+  var tried = rule ? rule.tried : 3;
+  return '<div class="feat">' + FEATS.map(function(f, i){ return '<span class="' + (i < tried ? 'no' : i === tried ? 'yes' : '') + '">' + f[1] + (i === tried ? ' ✓' : '') + '</span>'; }).join('') + '</div>';
+}
+function because(rule, a){ return rule.f === 'color' ? 'הוא ' + C_HE[a.color] : rule.f === 'ears' ? 'יש לו ' + E_HE[a.ears] : 'הוא ' + S_HE[a.size]; }
+function card(a, used, pressed){
+  return '<button type="button" class="ani' + (used ? ' used' : '') + '" data-id="' + a.id + '"' + (pressed != null ? ' aria-pressed="' + pressed + '"' : used ? ' aria-pressed="true"' : '') + '>' +
+    animalSVG(a) + '<small>' + K_HE[a.kind] + ' · ' + C_HE[a.color] + '</small></button>';
+}
+function brainBox(){ return '<span class="lbl">מה ' + G.name + ' כבר ראה (' + W.brain.length + '):</span><div class="brain">' + (W.brain.length ? W.brain.map(animalSVG).join('') : '<span class="empty">עדיין כלום. המוח ריק!</span>') + '</div>'; }
+
+/* ───── שלב 1: מראים דוגמאות (ומגלים מה זו הטיה) ───── */
+function level1(){
+  var n = G.name, ph = W.phase;
+  var ST = ['הסבר','לימוד','מבחן','תיקון','מבחן 2'];
+  if (ph === 'intro'){
+    steps(ST, 0); setMood('idle');
+    P('<div class="comic">' +
+      '<div class="bub"><span class="face">🤖</span><p>שלום! אני ' + n + '. אני רובוט חדש, ועוד לא יודע להבדיל בין חתול לכלב.</p></div>' +
+      '<div class="bub"><span class="face">💡</span><p>מחשבים לומדים מדוגמאות. אתם מראים לי הרבה תמונות, ואני מחפש מה דומה ומה שונה.</p></div>' +
+      '<div class="bub"><span class="face">🎯</span><p>אחר כך תבחנו אותי על חיות שלא ראיתי אף פעם. מוכנים?</p></div></div>' +
+      '<button class="btn" id="go" type="button">בואו נתחיל ללמד</button>');
+    on('go', function(){ W.phase = 'teach'; renderWorld(); });
+  }
+  else if (ph === 'teach' || ph === 'fix'){
+    steps(ST, ph === 'teach' ? 1 : 3);
+    var tray = ph === 'teach' ? TRAY1 : TRAY2, need = ph === 'teach' ? 4 : 3;
+    var shown = W.brain.filter(function(b){ return tray.indexOf(b) >= 0; }).length, kinds = {};
+    W.brain.forEach(function(b){ kinds[b.kind] = 1; });
+    var ready = shown >= need && kinds.cat && kinds.dog;
+    P('<h3>' + (ph === 'teach' ? 'מראים דוגמאות' : 'מתקנים: דוגמאות מגוונות') + '</h3>' +
+      '<p>' + (ph === 'teach' ? 'לחצו על חיה כדי להראות אותה ל' + n + '. צריך לפחות 4, וגם חתולים וגם כלבים.' : 'הראו ל' + n + ' לפחות 3 חיות חדשות, שונות ממה שראה.') + ' <span class="small-note">טעיתם? לחצו שוב על החיה, והיא תצא מהמוח.</span></p>' +
+      '<span class="turn">תור של: ' + teacher() + '</span>' +
+      '<div class="tray">' + tray.map(function(a){ return card(a, W.brain.indexOf(a) >= 0); }).join('') + '</div>' + brainBox() +
+      (!ready && shown >= need ? '<p class="res no">' + n + ' ראה רק ' + (kinds.cat ? 'חתולים' : 'כלבים') + '. הראו לו גם ' + (kinds.cat ? 'כלב' : 'חתול') + '!</p>' : '') +
+      '<button class="btn" id="go" type="button"' + (ready ? '' : ' disabled') + '>מה למדת, ' + n + '?</button>');
+    $('#panel').querySelectorAll('.tray .ani').forEach(function(b){ b.onclick = act(function(){
+      var a = tray.filter(function(x){ return x.id === b.dataset.id; })[0], i = W.brain.indexOf(a), keep = window.scrollY;
+      if (i >= 0){   // לחיצה שנייה: מוציאים את החיה מהמוח, והתור חוזר למי שהכניס אותה
+        W.brain.splice(i, 1); W.turn = Math.max(0, W.turn - 1); beep('tap');
+        renderWorld(); window.scrollTo(0, keep);
+        setMood('think', 900); say('אוקיי, שכחתי את ה' + K_HE[a.kind] + ' ה' + C_HE[a.color] + '.');
+        return;
+      }
+      W.brain.push(a); W.turn++; beep('tap');
+      renderWorld(); window.scrollTo(0, keep);
+      setMood('think', 900); say('הממ… ' + K_HE[a.kind] + ' ' + C_HE[a.color] + '. רשמתי!');
+      setTimeout(function(){ if (W.phase === ph) setMood('happy', 900); }, 900);
+    }); });
+    on('go', function(){ W.phase = ph === 'teach' ? 'rule' : 'rule2'; renderWorld(); });
+  }
+  else if (ph === 'rule' || ph === 'rule2'){
+    var rule = learn(W.brain); W.rule = rule;
+    setMood('think'); say(ph === 'rule' ? 'רגע, אני חושב…' : 'הצבע כבר לא עוזר לי… רגע…');
+    P('<h3>מה ' + n + ' למד?</h3><p>' + n + ' בודק את התכונות לפי הסדר, ועוצר בראשונה שמסבירה את כל הדוגמאות.</p>' + featRow(rule) +
+      '<div class="rule">גיליתי חוק! אני מסתכל על ה' + rule.label + ':<br>' + ruleText(rule) + '</div>' +
+      '<button class="btn" id="go" type="button">בואו תבחנו אותי</button>');
+    setTimeout(function(){ if (W.phase === ph){ setMood('happy', 1500); say('גיליתי חוק! 💡'); } }, 1400);
+    on('go', function(){ W.phase = 'test'; W.ti = 0; W.right = 0; W.guess = null; renderWorld(); });
+  }
+  else if (ph === 'test'){
+    steps(ST, W.round === 1 ? 2 : 4);
+    var set = W.round === 1 ? TEST1 : TEST2, a = set[W.ti];
+    var head = '<h3>המבחן · חיה ' + (W.ti + 1) + ' מתוך 3</h3><p>' + n + ' לא ראה אותה אף פעם.</p><div class="big">' + animalSVG(a) + '</div>';
+    if (W.guess === null){
+      setMood('idle'); say('מה זה? מה זה?');
+      P(head + '<p><b>' + teacher() + ', נחש לפני שהוא עונה: ' + n + ' יצדק?</b></p>' +
+        '<div class="row"><button class="btn alt" id="yes" type="button">👍 יצדק</button><button class="btn alt" id="no" type="button">👎 יטעה</button></div>');
+      on('yes', function(){ guess1(true); });
+      on('no', function(){ guess1(false); });
+    } else {
+      var pr = predict(W.rule, a, W.brain), ok = pr.kind === a.kind, hit = ok === W.guess;
+      setMood(pr.sure ? 'think' : 'worry');
+      say(pr.sure ? 'זה ' + K_HE[pr.kind] + '! כי ' + because(W.rule, a) + '.' : 'אף פעם לא ראיתי חיה ' + C_FEM[a.color] + '… אני מנחש: ' + K_HE[pr.kind] + '?');
+      P(head + '<p class="res ' + (ok ? 'ok' : 'no') + '">' + (ok ? '✓ ' + n + ' צדק! זה באמת ' + K_HE[a.kind] + '.' : '✗ ' + n + ' טעה. זה בעצם ' + K_HE[a.kind] + '.') + '</p>' +
+        '<p>' + (hit ? 'ניחשתם נכון מה ' + n + ' יעשה!' + (W.paidNow ? ' קיבלתם ' + STARS_GOOD_GUESS + ' ⭐' : '') : 'הפעם לא ניחשתם מה ' + n + ' יעשה.') + '</p>' +
+        '<button class="btn" id="go" type="button">' + (W.ti < 2 ? 'לחיה הבאה' : 'לתוצאות') + '</button>');
+      setTimeout(function(){ if (W.phase === 'test'){ setMood(ok ? 'happy' : 'sad'); beep(ok ? 'good' : 'bad'); if (ok) confetti(); } }, pr.sure ? 900 : 1600);
+      on('go', function(){
+        W.guess = null;
+        if (W.ti < 2){ W.ti++; renderWorld(); return; }
+        W.phase = W.round === 1 ? 'explain' : 'done'; renderWorld();
+      });
+    }
+  }
+  else if (ph === 'explain'){
+    steps(ST, 2); setMood('sad'); say('צדקתי רק ב-' + W.right + ' מתוך 3…');
+    P('<h3>מה קרה פה?</h3>' +
+      '<p>כל החתולים שהראיתם ל' + n + ' היו שחורים, וכל הכלבים היו חומים. אז הוא למד חוק לא נכון: ״שחור = חתול״.</p>' +
+      '<div class="rule">💡 כשמכונה לומדת מדוגמאות שדומות מדי זו לזו, היא לומדת חוק עקום. לזה קוראים <b>הטיה</b>. הפתרון: דוגמאות מגוונות.</div>' +
+      '<button class="btn" id="go" type="button">נתקן: נראה לו חיות אחרות</button>');
+    setTimeout(function(){ if (W.phase === 'explain'){ setMood('think'); say('אז צריך להראות לי עוד סוגים של חיות?'); } }, 2200);
+    on('go', function(){ W.phase = 'fix'; W.round = 2; renderWorld(); });
+  }
+  else if (ph === 'done'){
+    var first = finishLevel(0, 3);
+    steps(ST, 4); setMood('happy'); confetti(); beep('win'); say('הצלחתי! תודה, מורים! 🎉');
+    P('<h3>' + n + ' צדק ב-' + W.right + ' מתוך 3! 🎉</h3>' +
+      '<p>' + n + ' למד חוק חדש: האוזניים חשובות יותר מהצבע. ' + (first ? 'הרווחתם ' + STARS_NEW_LEVEL + ' ⭐ לחנות.' : '') + '</p>' +
+      '<div class="rule">🧠 מה למדנו: מכונה לומדת רק ממה שמראים לה. דוגמאות מגוונות = חוק טוב יותר.</div>' +
+      '<button class="btn" id="go" type="button">לשלב 2: בוחרים חכם</button>');
+    on('go', function(){ W = fresh(1); renderWorld(); });
+  }
+}
+
+/* הניחוש של המורה: התשובה והכוכב נקבעים ברגע הלחיצה, לא בציור המסך,
+   כך שחזרה למסך (או מעבר לחנות ובחזרה) לא סופרת שוב. כוכב ניתן רק על הניחוש הראשון של כל חיה. */
+function guess1(g){
+  var a = (W.round === 1 ? TEST1 : TEST2)[W.ti], ok = predict(W.rule, a, W.brain).kind === a.kind, key = W.round + '-' + W.ti;
+  W.guess = g; W.turn++;
+  if (ok) W.right++;
+  W.paidNow = ok === g && !W.paid[key];
+  W.paid[key] = true;
+  if (W.paidNow) addStars(STARS_GOOD_GUESS);
+  renderWorld();
+}
+
+/* ───── שלב 2: בוחרים חכם (רק 4 דוגמאות, ומבחן על 4) ───── */
+function level2(){
+  var n = G.name, ph = W.phase, ST = ['הסבר','בחירה','מבחן'];
+  if (ph === 'intro'){
+    steps(ST, 0); setMood('idle');
+    P('<div class="comic">' +
+      '<div class="bub"><span class="face">🤖</span><p>הפעם יש לכם רק 4 כרטיסים להראות לי. לא יותר!</p></div>' +
+      '<div class="bub"><span class="face">🎯</span><p>תבחרו חכם, כדי שאצליח במבחן של 4 חיות חדשות כבר בפעם הראשונה.</p></div>' +
+      '<div class="bub"><span class="face">🤫</span><p>סוד קטן: אני תמיד בודק קודם צבע, אחר כך אוזניים, ורק בסוף גודל.</p></div></div>' +
+      '<button class="btn" id="go" type="button">לבחור דוגמאות</button>');
+    on('go', function(){ W.phase = 'pick'; renderWorld(); });
+  }
+  else if (ph === 'pick'){
+    steps(ST, 1); setMood('idle');
+    var kinds = {}; W.sel.forEach(function(id){ kinds[POOL.filter(function(a){ return a.id === id; })[0].kind] = 1; });
+    var ok = W.sel.length === 4 && kinds.cat && kinds.dog;
+    P('<h3>בחרו בדיוק 4 דוגמאות</h3><p>נבחרו ' + W.sel.length + ' מתוך 4. צריך גם חתולים וגם כלבים.</p>' +
+      '<span class="turn">תור של: ' + teacher() + '</span>' +
+      '<div class="tray four">' + POOL.map(function(a){ return card(a, false, W.sel.indexOf(a.id) >= 0); }).join('') + '</div>' +
+      '<button class="btn" id="go" type="button"' + (ok ? '' : ' disabled') + '>ללמד את ' + n + '</button>');
+    $('#panel').querySelectorAll('.tray .ani').forEach(function(b){ b.onclick = function(){
+      var i = W.sel.indexOf(b.dataset.id);
+      if (i >= 0) W.sel.splice(i, 1); else if (W.sel.length < 4){ W.sel.push(b.dataset.id); W.turn++; } else { toast('אפשר רק 4. לחצו על כרטיס שבחרתם כדי להחליף.'); return; }
+      beep('tap'); var keep = window.scrollY; renderWorld(); window.scrollTo(0, keep);
+    }; });
+    on('go', function(){ W.brain = POOL.filter(function(a){ return W.sel.indexOf(a.id) >= 0; }); W.rule = learn(W.brain); W.phase = 'test'; W.ti = 0; W.right = 0; W.tries++; renderWorld(); });
+  }
+  else if (ph === 'test'){
+    steps(ST, 2);
+    var a = TEST3[W.ti], pr = predict(W.rule, a, W.brain), ok = pr.kind === a.kind;
+    if (!W.shown){ W.shown = true; if (ok) W.right++; }
+    setMood(pr.sure ? 'think' : 'worry');
+    say(pr.sure ? 'זה ' + K_HE[pr.kind] + '! כי ' + because(W.rule, a) + '.' : 'לא ראיתי דבר כזה… אני מנחש: ' + K_HE[pr.kind] + '?');
+    P('<h3>המבחן · חיה ' + (W.ti + 1) + ' מתוך 4</h3>' + (W.ti === 0 ? featRow(W.rule) + '<div class="rule">החוק של ' + n + ': ' + W.rule.label + '<br>' + ruleText(W.rule) + '</div>' : '') +
+      '<div class="big">' + animalSVG(a) + '</div><p class="res ' + (ok ? 'ok' : 'no') + '">' + (ok ? '✓ צדק! זה ' + K_HE[a.kind] + '.' : '✗ טעה. זה ' + K_HE[a.kind] + '.') + '</p>' +
+      '<button class="btn" id="go" type="button">' + (W.ti < 3 ? 'לחיה הבאה' : 'לתוצאה') + '</button>');
+    setTimeout(function(){ if (W.phase === 'test'){ setMood(ok ? 'happy' : 'sad'); beep(ok ? 'good' : 'bad'); } }, pr.sure ? 800 : 1400);
+    on('go', function(){ W.shown = false; if (W.ti < 3){ W.ti++; renderWorld(); } else { W.phase = 'result'; renderWorld(); } });
+  }
+  else if (ph === 'result'){
+    var st = W.right === 4 ? 3 : W.right === 3 ? 2 : 1, first = finishLevel(1, st), colorTrap = W.rule.f === 'color';
+    steps(ST, 2);
+    if (W.right === 4){ setMood('happy'); confetti(); beep('win'); say('ארבע מתוך ארבע! בחרתם מעולה!'); } else { setMood('sad'); say('צדקתי ב-' + W.right + ' מתוך 4…'); }
+    P('<h3>' + n + ' צדק ב-' + W.right + ' מתוך 4 · ' + '⭐'.repeat(st) + '</h3>' +
+      '<p>' + (colorTrap ? 'בדוגמאות שבחרתם הצבע לבד הסביר הכול, אז ' + n + ' נתפס שוב בצבע.' : 'בדוגמאות שבחרתם הצבע לא הסביר הכול, אז ' + n + ' נאלץ לחפש את מה שבאמת חשוב: האוזניים.') + '</p>' +
+      (W.right < 4 ? '<div class="rule">💡 רמז: בחרו חתול וכלב <b>באותו צבע</b>. ככה הצבע כבר לא יעזור לו, והוא יחפש תכונה אחרת.</div>' : '<div class="rule">🧠 ככה עובדים מדעני נתונים: בוחרים דוגמאות שמלמדות את מה שחשוב, ולא את מה שבמקרה.</div>') +
+      (first ? '<p>הרווחתם ' + STARS_NEW_LEVEL + ' ⭐ לחנות.</p>' : '') +
+      '<div class="row"><button class="btn alt" id="again" type="button">לנסות שוב</button><button class="btn" id="go" type="button">לשלב 3: אתגר אלופים</button></div>');
+    on('again', function(){ W = fresh(1); W.phase = 'pick'; renderWorld(); });
+    on('go', function(){ W = fresh(2); renderWorld(); });
+  }
+}
+
+/* ───── שלב 3: אתגר אלופים: ממציאים חיה שתבלבל את הרובוט ───── */
+var KNOWN = TRAY1.concat(TRAY2);   // מה שהרובוט כבר יודע: החוק שלו הוא האוזניים
+function level3(){
+  var n = G.name, ph = W.phase, ST = ['הסבר','מעבדה','למה?','תיקון'];
+  if (ph === 'intro'){
+    steps(ST, 0); setMood('happy', 1500);
+    P('<div class="comic">' +
+      '<div class="bub"><span class="face">🤖</span><p>עכשיו אני כבר מומחה! למדתי מ-10 חיות, והחוק שלי הוא האוזניים.</p></div>' +
+      '<div class="bub"><span class="face">😏</span><p>מתערבים שלא תצליחו לבלבל אותי?</p></div>' +
+      '<div class="bub"><span class="face">🧪</span><p>במעבדה תבנו חיה: חתול או כלב, צבע, אוזניים וגודל. אם טעיתי, ניצחתם!</p></div></div>' +
+      '<button class="btn" id="go" type="button">למעבדת החיות</button>');
+    on('go', function(){ W.phase = 'lab'; W.brain = KNOWN.slice(); W.rule = learn(W.brain); renderWorld(); });
+  }
+  else if (ph === 'lab'){
+    steps(ST, 1); setMood('idle'); say('נו, תבנו כבר! 😄');
+    var L = W.lab;
+    function opts(key, list){ return '<div class="opts">' + list.map(function(o){ return '<button type="button" data-k="' + key + '" data-v="' + o[0] + '" aria-pressed="' + (L[key] === o[0]) + '">' + o[1] + '</button>'; }).join('') + '</div>'; }
+    P('<h3>🧪 מעבדת החיות</h3>' +
+      '<span class="lbl">מה זה באמת?</span>' + opts('kind', [['cat','🐱 חתול'],['dog','🐶 כלב']]) +
+      '<span class="lbl">צבע</span>' + opts('color', Object.keys(C_HE).map(function(c){ return [c, '<span class="dot" style="background:' + C_HEX[c] + '"></span>' + C_HE[c]]; })) +
+      '<span class="lbl">אוזניים</span>' + opts('ears', [['pointy','זקופות'],['floppy','מקופלות']]) +
+      '<span class="lbl">גודל</span>' + opts('size', [['small','קטן'],['big','גדול']]) +
+      '<div class="big">' + animalSVG(A('lab', L.kind, L.color, L.size, L.ears)) + '</div>' +
+      (W.tries >= 2 ? '<p class="small-note">💡 רמז: ' + n + ' מסתכל על האוזניים. מה קורה אם לחתול יש אוזניים של כלב?</p>' : '') +
+      '<button class="btn" id="go" type="button">' + n + ', מה זה?</button>');
+    $('#panel').querySelectorAll('.opts button').forEach(function(b){ b.onclick = function(){ W.lab[b.dataset.k] = b.dataset.v; beep('tap'); var keep = window.scrollY; renderWorld(); window.scrollTo(0, keep); }; });
+    on('go', function(){
+      var a = A('lab', L.kind, L.color, L.size, L.ears), pr = predict(W.rule, a, W.brain);
+      W.tries++;
+      if (pr.kind === a.kind){
+        setMood('happy', 2000); beep('good'); say('קל! זה ' + K_HE[a.kind] + ', כי ' + because(W.rule, a) + '. נסו שוב 😄');
+        toast('לא הצלחתם לבלבל את ' + n + '. חשבו: על מה הוא מסתכל?');
+      } else { W.made = a; W.phase = 'why'; renderWorld(); }
+    });
+  }
+  else if (ph === 'why'){
+    steps(ST, 2); var a = W.made;
+    setMood('worry'); beep('win'); confetti(); say('זה ' + K_HE[a.kind === 'cat' ? 'dog' : 'cat'] + '!… רגע, מה? 😟');
+    var fact = a.kind === 'cat' ? 'גם בעולם האמיתי יש חתולים עם אוזניים מקופלות, ולגזע שלהם קוראים ״סקוטי מקופל״.' : 'גם בעולם האמיתי לכלבים רבים יש אוזניים זקופות, למשל לרועה גרמני.';
+    P('<h3>ניצחתם! בלבלתם את ' + n + ' 🎉</h3><div class="big">' + animalSVG(a) + '</div>' +
+      '<div class="rule">🌍 ' + fact + ' ' + n + ' לא ראה אף פעם חיה כזאת, ולכן החוק שלו נשבר.</div>' +
+      '<p><b>' + G.teachers[0] + ', עכשיו תסביר ל' + G.teachers[1] + ' במילים שלך: למה ' + n + ' טעה?</b></p>' +
+      '<button class="btn alt" id="go" type="button">הסברנו ✓</button>');
+    on('go', function(){ W.phase = 'fix'; renderWorld(); });
+  }
+  else if (ph === 'fix'){
+    steps(ST, 3); var a = W.made;
+    P('<h3>מתקנים: מראים לו את החיה שלכם</h3><p>לחצו כדי להראות ל' + n + ' את החיה שבניתם, ונראה מה הוא לומד עכשיו.</p><div class="big">' + animalSVG(a) + '</div>' +
+      '<button class="btn" id="go" type="button">להראות ל' + n + '</button>');
+    on('go', function(){ W.brain.push(a); W.rule = learn(W.brain); W.first = finishLevel(2, 3); W.phase = 'end'; renderWorld(); });
+  }
+  else if (ph === 'end'){
+    steps(ST, 3);
+    var rule = W.rule, first = W.first;
+    (function(){
+      if (!rule){
+        setMood('worry'); say('עכשיו אף תכונה אחת לא מספיקה לי! 😟');
+        P('<h3>' + n + ' צריך ללמוד לחשוב אחרת</h3>' + featRow(null) +
+          '<div class="rule">🧠 צבע לא עוזר, אוזניים לא עוזרות, וגם גודל לא. כדי להבדיל, ' + n + ' צריך לשאול <b>כמה שאלות ביחד</b>, בזו אחר זו.</div>' +
+          '<p>את זה נלמד בעולם 4, <b>עץ השאלות 🌳</b>.</p>' +
+          '<p>⭐⭐⭐ סיימתם את יער הדוגמאות!' + (first ? ' הרווחתם ' + STARS_NEW_LEVEL + ' ⭐ לחנות.' : '') + '</p>' +
+          '<div class="row"><button class="btn" id="next" type="button">🎨 לעולם 2: עיר הפיקסלים</button><button class="btn alt" id="shop" type="button">🛠️ לחנות התוספות</button></div>');
+      } else {
+        setMood('think'); say('אה! עכשיו אני מסתכל על ה' + rule.label + '.');
+        P('<h3>' + n + ' מצא חוק חדש</h3>' + featRow(rule) + '<div class="rule">' + ruleText(rule) + '</div><p>⭐⭐⭐ סיימתם את יער הדוגמאות!</p>' +
+          '<div class="row"><button class="btn" id="next" type="button">🎨 לעולם 2: עיר הפיקסלים</button><button class="btn alt" id="shop" type="button">🛠️ לחנות התוספות</button></div>');
+      }
+      on('shop', function(){ go('shop'); });
+      on('next', function(){ enterWorld('pixels'); });
+    })();
+  }
+}
+
+/* ═══════════ 🎨 עיר הפיקסלים: איך מחשב רואה תמונה ═══════════
+   תמונה במחשב = רשת של ריבועים קטנים (פיקסלים). בכל פיקסל שלושה פנסים: אדום, ירוק וכחול,
+   והמחשב שומר רק שלושה מספרים: כמה חזק כל פנס. */
+function comic(b){ return '<div class="comic">' + b.map(function(x){ return '<div class="bub"><span class="face">' + x[0] + '</span><p>' + x[1] + '</p></div>'; }).join('') + '</div>'; }
+
+/* ───── שלב 1: פנסי הצבע (מערבבים אור) ───── */
+var LV = [0, 128, 255];                  // שלוש עוצמות לכל פנס: כבוי, חלש, חזק
+var LV_HE = ['כבוי', 'חלש', 'חזק'];
+var CH = [['אדום', '#ff3b30'], ['ירוק', '#34c759'], ['כחול', '#2f6bff']];
+var MIX = [   // השלטים שצריך לצבוע: כמה חזק כל פנס (0 כבוי · 1 חלש · 2 חזק)
+  {name: 'צהוב',      l: [2, 2, 0], hint: 'אין פנס צהוב! נסו להדליק שני פנסים יחד.'},
+  {name: 'ורוד בוהק', l: [2, 0, 2]},
+  {name: 'לבן',       l: [2, 2, 2], hint: 'לבן זה הרבה אור מכל הצבעים.'},
+  {name: 'כתום',      l: [2, 1, 0]},
+  {name: 'אפור',      l: [1, 1, 1], hint: 'אפור זה כמו לבן, רק חלש יותר.'}
+];
+function rgb(l){ return 'rgb(' + LV[l[0]] + ',' + LV[l[1]] + ',' + LV[l[2]] + ')'; }
+function mixHint(L, t, miss){
+  if (t.hint && miss === 1) return '💡 ' + t.hint;
+  for (var i = 0; i < 3; i++){
+    if (L[i] > t.l[i]) return '💡 יותר מדי אור ' + CH[i][0] + '.';
+    if (L[i] < t.l[i]) return '💡 חסר אור ' + CH[i][0] + '.';
+  }
+  return '';
+}
+function pix1(){
+  var n = G.name, ph = W.phase, ST = ['הסבר','ערבוב','סיכום'];
+  if (ph === 'intro'){
+    steps(ST, 0); setMood('idle');
+    P(comic([['🤖', 'ברוכים הבאים לעיר הפיקסלים! כל מסך בעיר בנוי מריבועים קטנטנים שנקראים <b>פיקסלים</b>.'],
+              ['🔦', 'בתוך כל פיקסל יש שלושה פנסים: אדום, ירוק וכחול. מדליקים אותם חזק או חלש, וכך נוצר כל צבע.'],
+              ['🎯', 'אני צריך לצבוע את השלטים של העיר. תעזרו לי לערבב את הצבעים?']]) +
+      '<button class="btn" id="go" type="button">לערבב צבעים</button>');
+    on('go', function(){ W.phase = 'mix'; W.ti = 0; W.lamps = [0, 0, 0]; W.miss = 0; W.hint = ''; renderWorld(); });
+  }
+  else if (ph === 'mix'){
+    steps(ST, 1);
+    var t = MIX[W.ti], L = W.lamps;
+    P('<h3>שלט ' + (W.ti + 1) + ' מתוך ' + MIX.length + ': ' + t.name + '</h3>' +
+      '<span class="turn">תור של: ' + teacher() + '</span>' +
+      '<div class="mixrow"><figure><div class="swatch" style="background:' + rgb(t.l) + '"></div><figcaption>השלט</figcaption></figure>' +
+      '<figure><div class="pix">' + CH.map(function(c, i){ return '<span style="background:' + c[1] + ';opacity:' + [0.08, 0.5, 1][L[i]] + '"></span>'; }).join('') + '</div><figcaption>הפיקסל מקרוב</figcaption></figure>' +
+      '<figure><div class="swatch" style="background:' + rgb(L) + '"></div><figcaption>הפיקסל מרחוק</figcaption></figure></div>' +
+      '<p class="small-note">לחצו על פנס כדי להדליק אותו, להחליש אותו או לכבות אותו.</p>' +
+      '<div class="lamps">' + CH.map(function(c, i){
+        return '<button type="button" class="lamp" data-i="' + i + '"><i style="background:' + c[1] + ';opacity:' + [0.15, 0.55, 1][L[i]] + ';box-shadow:' + (L[i] ? '0 0 ' + (L[i] * 10) + 'px ' + c[1] : 'none') + '"></i><b>' + c[0] + '</b><small>' + LV_HE[L[i]] + '</small></button>';
+      }).join('') + '</div>' +
+      '<p class="nums">המחשב שומר 3 מספרים: ' + CH.map(function(c, i){ return c[0] + ' ' + LV[L[i]]; }).join(' · ') + '</p>' +
+      (W.hint ? '<p class="res no">' + W.hint + '</p>' : '') +
+      '<button class="btn" id="go" type="button">' + n + ', תצבע את השלט!</button>');
+    $('#panel').querySelectorAll('.lamp').forEach(function(b){ b.onclick = function(){
+      var i = +b.dataset.i, keep = window.scrollY;
+      W.lamps[i] = (W.lamps[i] + 1) % 3; W.hint = ''; beep('tap');
+      renderWorld(); window.scrollTo(0, keep); setMood('think', 600);
+    }; });
+    on('go', function(){
+      var keep = window.scrollY, key = 'mix' + W.ti;
+      if (W.lamps.join() !== t.l.join()){
+        W.miss++; W.hint = mixHint(W.lamps, t, W.miss);
+        renderWorld(); window.scrollTo(0, keep);
+        setMood('sad', 1400); beep('bad'); say('אוי, יצא לי צבע אחר… 😢');
+        return;
+      }
+      var isNew = !W.paid[key], first = isNew ? !W.miss : W.paid[key] === 'first';   // כוכב רק על הצלחה בניסיון הראשון, ורק פעם אחת
+      if (isNew){ W.paid[key] = first ? 'first' : 'late'; if (first) addStars(STARS_GOOD_GUESS); }
+      if (first) W.right++;
+      first = first && isNew;
+      W.turn++; W.miss = 0; W.hint = ''; W.lamps = [0, 0, 0];
+      if (W.ti < MIX.length - 1) W.ti++; else W.phase = 'sum';
+      renderWorld();
+      if (W.phase === 'mix'){ setMood('happy', 1600); confetti(); beep('good'); say('זה ' + t.name + '! בדיוק כמו השלט 🎉'); toast('✓ ' + t.name + (first ? '. בניסיון הראשון, קיבלתם ' + STARS_GOOD_GUESS + ' ⭐' : '')); }
+    });
+  }
+  else if (ph === 'sum'){
+    var st = W.right >= 5 ? 3 : W.right >= 3 ? 2 : 1, first = finishLevel(0, st);
+    steps(ST, 2); setMood('happy'); confetti(); beep('win'); say('כל השלטים בעיר צבועים! 🎉');
+    P('<h3>צבעתם ' + MIX.length + ' שלטים · ' + '⭐'.repeat(st) + '</h3>' +
+      '<p>' + W.right + ' מהם הצלחתם בניסיון הראשון.' + (first ? ' הרווחתם ' + STARS_NEW_LEVEL + ' ⭐ לחנות.' : '') + '</p>' +
+      '<div class="rule">🧠 מה למדנו: כל פיקסל במסך הוא שלושה פנסים קטנים. המחשב לא ״רואה״ צבע. הוא שומר שלושה מספרים: כמה אור אדום, כמה ירוק וכמה כחול.</div>' +
+      '<div class="rule">😮 אדום ועוד ירוק = צהוב! כשמערבבים אור זה עובד אחרת מאשר כשמערבבים צבעי גואש.</div>' +
+      '<div class="row"><button class="btn alt" id="again" type="button">לשחק שוב</button><button class="btn" id="go" type="button">לשלב 2: התמונה המתבהרת</button></div>');
+    on('again', function(){ W = fresh(0); W.phase = 'mix'; renderWorld(); });
+    on('go', function(){ W = fresh(1); renderWorld(); });
+  }
+}
+
+/* ───── שלב 2: התמונה המתבהרת (מירוץ מול הרובוט) ───── */
+var RES = [4, 8, 16, 32];   // כמה ריבועים בכל שורה, בכל שלב
+var PICS = [   // R = באיזה שלב הרובוט מזהה. opts = האפשרויות לניחוש
+  {id: 'apple', name: 'תפוח', ico: '🍎', R: 2, opts: ['עגבנייה', 'תפוח', 'כדור אדום', 'דובדבן']},
+  {id: 'fish',  name: 'דג',   ico: '🐟', R: 1, opts: ['ציפור', 'עלה', 'דג', 'סוכרייה']},
+  {id: 'house', name: 'בית',  ico: '🏠', R: 2, opts: ['מתנה', 'אוהל', 'מגדל', 'בית']}
+];
+/* הציורים המקוריים, על לוח של 64×64 */
+function drawPic(id, c){
+  function circ(x, y, r, col){ c.fillStyle = col; c.beginPath(); c.arc(x, y, r, 0, 7); c.fill(); }
+  if (id === 'apple'){
+    c.fillStyle = '#fdf3dc'; c.fillRect(0, 0, 64, 64);
+    c.fillStyle = '#6b4226'; c.fillRect(30, 8, 4, 13);
+    c.fillStyle = '#3fa34d'; c.beginPath(); c.ellipse(41, 13, 9, 4, -0.5, 0, 7); c.fill();
+    circ(25, 38, 16, '#e0302f'); circ(39, 38, 16, '#e0302f'); circ(32, 46, 14, '#e0302f');
+    c.fillStyle = 'rgba(255,255,255,.55)'; c.beginPath(); c.ellipse(21, 32, 4, 6, -0.4, 0, 7); c.fill();
+  } else if (id === 'fish'){
+    c.fillStyle = '#4aa3df'; c.fillRect(0, 0, 64, 64);
+    c.fillStyle = '#e0731a'; c.beginPath(); c.moveTo(20, 23); c.lineTo(32, 12); c.lineTo(36, 24); c.closePath(); c.fill();
+    c.fillStyle = '#f28c28'; c.beginPath(); c.moveTo(40, 32); c.lineTo(59, 17); c.lineTo(59, 47); c.closePath(); c.fill();
+    c.beginPath(); c.ellipse(27, 32, 19, 12, 0, 0, 7); c.fill();
+    circ(16, 29, 4, '#ffffff'); circ(15, 29, 2, '#1d2a2e');
+    c.strokeStyle = '#dff3ff'; c.lineWidth = 1.5; [[8, 14, 3], [12, 6, 2], [5, 4, 1.5]].forEach(function(b){ c.beginPath(); c.arc(b[0], b[1], b[2], 0, 7); c.stroke(); });
+  } else {
+    c.fillStyle = '#bfe6ff'; c.fillRect(0, 0, 64, 64);
+    circ(55, 9, 5, '#ffd23f');
+    c.fillStyle = '#6cc070'; c.fillRect(0, 52, 64, 12);
+    c.fillStyle = '#f2c14e'; c.fillRect(15, 30, 34, 24);
+    c.fillStyle = '#d9483b'; c.beginPath(); c.moveTo(10, 31); c.lineTo(32, 11); c.lineTo(54, 31); c.closePath(); c.fill();
+    c.fillStyle = '#7a4b2a'; c.fillRect(28, 40, 9, 14);
+    c.fillStyle = '#ffffff'; c.fillRect(18, 35, 7, 7); c.fillRect(40, 35, 7, 7);
+  }
+}
+var PIXDATA = {};
+function picData(id){
+  if (!PIXDATA[id]){ var cv = document.createElement('canvas'); cv.width = cv.height = 64; var c = cv.getContext('2d'); drawPic(id, c); PIXDATA[id] = c.getImageData(0, 0, 64, 64).data; }
+  return PIXDATA[id];
+}
+/* מציירים את התמונה ב-N×N ריבועים. כל ריבוע מקבל את הממוצע של כל הצבעים שבתוכו, בדיוק כמו מצלמה עם מעט פיקסלים */
+function paintPic(cv, id, N){
+  if (!cv) return;
+  var d = picData(id), B = 64 / N, c = cv.getContext('2d'), S = cv.width / N;
+  for (var y = 0; y < N; y++) for (var x = 0; x < N; x++){
+    var r = 0, g = 0, b = 0, k = 0;
+    for (var yy = y * B; yy < (y + 1) * B; yy++) for (var xx = x * B; xx < (x + 1) * B; xx++){ var o = (yy * 64 + xx) * 4; r += d[o]; g += d[o + 1]; b += d[o + 2]; k++; }
+    c.fillStyle = 'rgb(' + Math.round(r / k) + ',' + Math.round(g / k) + ',' + Math.round(b / k) + ')';
+    c.fillRect(Math.floor(x * S), Math.floor(y * S), Math.ceil(S), Math.ceil(S));
+  }
+}
+function pix2(){
+  var n = G.name, ph = W.phase, ST = ['הסבר','מנחשים','תוצאה'];
+  if (ph === 'intro'){
+    steps(ST, 0); setMood('idle');
+    P(comic([['🤖', 'אני רואה תמונה כמו פאזל של ריבועים. כשיש מעט ריבועים, הכול מטושטש לי.'],
+              ['🔍', 'בכל פעם שתלחצו ״עוד פיקסלים״, הריבועים יקטנו והתמונה תתבהר.'],
+              ['🏁', 'מירוץ! מי יזהה ראשון מה בתמונה, אתם או אני? ניחוש מוקדם שווה יותר נקודות, אבל יש לכם רק ניחוש אחד לכל תמונה!']]) +
+      '<button class="btn" id="go" type="button">למירוץ</button>');
+    on('go', function(){ W.phase = 'pic'; W.ti = 0; W.res = 0; W.pts = 0; renderWorld(); });
+  }
+  else if (ph === 'pic' || ph === 'pick'){
+    steps(ST, 1);
+    var p = PICS[W.ti], N = RES[W.res], atR = W.res === p.R;
+    var head = '<h3>תמונה ' + (W.ti + 1) + ' מתוך ' + PICS.length + '</h3><span class="turn">מחליט/ה: ' + G.teachers[W.ti % 2] + '</span>' +
+      '<div class="picbox"><canvas id="pic" width="256" height="256" role="img" aria-label="תמונה מטושטשת"></canvas><span>רואים ' + (N * N) + ' פיקסלים (' + N + ' על ' + N + ')</span></div>';
+    if (ph === 'pic'){
+      setMood('think'); say(atR ? 'רגע… אני כמעט יודע! 🤔' : ['אני רואה רק כתמים של צבע… 🤔', 'עדיין מטושטש לי…'][W.res]);
+      P(head + (atR ? '<p class="res no">⚠️ ' + n + ' כמעט זיהה! אם תבקשו עוד פיקסלים, הוא יענה ראשון.</p>' : '') +
+        '<div class="row"><button class="btn alt" id="more" type="button">🔍 עוד פיקסלים</button><button class="btn" id="know" type="button">🙋 אנחנו יודעים!</button></div>');
+      on('more', function(){ if (W.res === p.R) settle({got: 0, won: 'robot'}); else { W.res++; renderWorld(); } });
+      on('know', function(){ W.phase = 'pick'; renderWorld(); });
+    } else {
+      P(head + '<p><b>מה בתמונה? יש רק ניחוש אחד!</b></p><div class="opts4">' +
+        p.opts.map(function(o){ return '<button type="button" class="btn alt" data-o="' + o + '">' + o + '</button>'; }).join('') + '</div>');
+      $('#panel').querySelectorAll('.opts4 button').forEach(function(b){ b.onclick = act(function(){
+        var ok = b.dataset.o === p.name;
+        settle({got: ok ? (W.res < p.R ? 3 - W.res : 1) : 0, won: ok ? 'team' : 'wrong', said: b.dataset.o});
+      }); });
+    }
+    paintPic($('#pic'), p.id, N);
+  }
+  else if (ph === 'reveal'){
+    steps(ST, 1);
+    var p = PICS[W.ti], last = W.ti === PICS.length - 1, N = RES[W.res];
+    var msg = W.won === 'team' ? (W.res < p.R ? 'ניצחתם את ' + n + '! זיהיתם לפניו 🎉' : 'תיקו! זיהיתם יחד עם ' + n) : W.won === 'robot' ? n + ' זיהה ראשון 😄' : 'אוי, זה לא ' + W.said + '…';
+    if (W.won === 'team'){ setMood('sad', 1800); confetti(); beep('win'); say('ניצחתם אותי! 😅'); }
+    else if (W.won === 'robot'){ setMood('happy', 1800); beep('bad'); say('זה ' + p.name + '! זיהיתי ראשון 😄'); }
+    else { setMood('worry', 1800); beep('bad'); say('זה בעצם ' + p.name + '!'); }
+    P('<h3>' + p.ico + ' זה ' + p.name + '!</h3>' +
+      '<div class="pair"><figure><canvas id="pa" width="128" height="128" role="img" aria-label="מטושטש"></canvas><figcaption>' + (N * N) + ' פיקסלים</figcaption></figure>' +
+      '<figure><canvas id="pb" width="128" height="128" role="img" aria-label="' + p.name + '"></canvas><figcaption>4,096 פיקסלים</figcaption></figure></div>' +
+      '<p class="res ' + (W.got ? 'ok' : 'no') + '">' + msg + ' · ' + W.got + ' נקודות</p>' +
+      '<button class="btn" id="go" type="button">' + (last ? 'לתוצאות' : 'לתמונה הבאה') + '</button>');
+    paintPic($('#pa'), p.id, N); paintPic($('#pb'), p.id, 64);
+    on('go', function(){ if (last) W.phase = 'result'; else { W.ti++; W.res = 0; W.phase = 'pic'; } renderWorld(); });
+  }
+  else if (ph === 'result'){
+    var st = W.pts >= 6 ? 3 : W.pts >= 3 ? 2 : 1, first = finishLevel(1, st);
+    steps(ST, 2);
+    if (st === 3){ setMood('sad'); say('אתם מהירים ממני! 😅'); confetti(); beep('win'); } else { setMood('happy'); say('הפעם אני הייתי מהיר יותר 😄'); }
+    P('<h3>' + W.pts + ' נקודות מתוך 9 · ' + '⭐'.repeat(st) + '</h3>' +
+      (first ? '<p>הרווחתם ' + STARS_NEW_LEVEL + ' ⭐ לחנות.</p>' : '') +
+      '<div class="rule">🧠 תמונה במחשב היא רשת של ריבועים, ולכל ריבוע צבע אחד. כשיש מעט פיקסלים התמונה מטושטשת, וכשיש הרבה רואים פרטים. במצלמה של טלפון יש מיליוני פיקסלים!</div>' +
+      (st < 3 ? '<div class="rule">💡 טיפ: הסתכלו על הצבעים ועל הצורה הכללית, ונסו לנחש כבר בתמונה הראשונה.</div>' : '') +
+      '<div class="row"><button class="btn alt" id="again" type="button">לשחק שוב</button><button class="btn" id="go" type="button">לשלב 3: אתגר אלופים</button></div>');
+    on('again', function(){ W = fresh(1); W.phase = 'pic'; renderWorld(); });
+    on('go', function(){ W = fresh(2); renderWorld(); });
+  }
+}
+/* תוצאת התמונה נקבעת פעם אחת. גם אם חוזרים אחורה ומנחשים שוב, התוצאה נשארת כמו בפעם הראשונה */
+function settle(r0){
+  var key = 'pic' + W.ti, r = W.paid[key] || (W.paid[key] = r0);
+  W.got = r.got; W.won = r.won; W.said = r.said; W.pts += r.got; W.phase = 'reveal'; renderWorld();
+}
+
+/* ───── שלב 3: אתגר אלופים: מציירים לב שהרובוט לא יזהה ─────
+   הרובוט ״מזהה״ ציור בהשוואה פיקסל אחרי פיקסל לציורים שבזיכרון שלו. */
+var MEM = [
+  {id: 'heart', name: 'לב', ico: '❤️', rows: ['........', '.##..##.', '########', '########', '.######.', '..####..', '...##...', '........']},
+  {id: 'house', name: 'בית', ico: '🏠', rows: ['...##...', '..####..', '.######.', '########', '.#....#.', '.#.##.#.', '.#.##.#.', '.######.']},
+  {id: 'tree',  name: 'עץ', ico: '🌳', rows: ['..####..', '.######.', '########', '.######.', '..####..', '...##...', '...##...', '..####..']},
+  {id: 'face',  name: 'פרצוף', ico: '🙂', rows: ['..####..', '.#....#.', '#.#..#.#', '#......#', '#.#..#.#', '#..##..#', '.#....#.', '..####..']}
+];
+MEM.forEach(function(m){ m.m = m.rows.join('').split('').map(function(c){ return c === '#' ? 1 : 0; }); });
+function iou(a, b){ var i = 0, u = 0; for (var k = 0; k < 64; k++){ if (a[k] || b[k]) u++; if (a[k] && b[k]) i++; } return u ? i / u : 0; }   // כמה הציורים חופפים
+function look(g){
+  var best = {m: null, s: 0};
+  MEM.forEach(function(m){ var s = iou(g, m.m); if (s > best.s) best = {m: m, s: s}; });
+  return best.s >= 0.35 ? best : {m: null, s: best.s};   // פחות מ-35% דמיון = ״לא מזהה״
+}
+function mini(g, tpl){
+  return '<div class="mini">' + g.map(function(v, k){
+    var cl = !tpl ? (v ? 'on' : '') : v && tpl[k] ? 'ok' : v ? 'extra' : tpl[k] ? 'miss' : '';
+    return '<i' + (cl ? ' class="' + cl + '"' : '') + '></i>';
+  }).join('') + '</div>';
+}
+function memHtml(){ return '<div class="mem">' + MEM.map(function(m){ return '<figure>' + mini(m.m) + '<figcaption>' + m.ico + ' ' + m.name + '</figcaption></figure>'; }).join('') + '</div>'; }
+/* ציור באצבע: הריבוע הראשון שנוגעים בו קובע אם צובעים או מוחקים */
+function bindGrid(){
+  var g = $('#grid8'), mode = -1;
+  function paint(el){
+    var c = el && el.closest ? el.closest('#grid8 b') : null; if (!c) return;
+    var i = +c.dataset.i; if (W.grid[i] === mode) return;
+    W.grid[i] = mode; c.classList.toggle('on', mode === 1);
+    var go = $('#go'); if (go) go.disabled = W.grid.reduce(function(a, b){ return a + b; }, 0) < 4;
+  }
+  g.addEventListener('pointerdown', function(e){
+    var c = e.target.closest('b'); if (!c) return;
+    e.preventDefault(); mode = W.grid[+c.dataset.i] ? 0 : 1;
+    try { g.setPointerCapture(e.pointerId); } catch(err){}
+    paint(c); beep('tap');
+  });
+  g.addEventListener('pointermove', function(e){ if (mode >= 0) paint(document.elementFromPoint(e.clientX, e.clientY)); });
+  ['pointerup', 'pointercancel', 'lostpointercapture'].forEach(function(t){ g.addEventListener(t, function(){ mode = -1; }); });
+}
+function pix3(){
+  var n = G.name, ph = W.phase, ST = ['הסבר','ציור','למה?','סיום'];
+  if (ph === 'intro'){
+    steps(ST, 0); setMood('happy', 1500);
+    P(comic([['🤖', 'בזיכרון שלי יש 4 ציורים קטנים, וכל אחד בנוי מ-64 פיקסלים.'],
+              ['🔎', 'כשאתם מציירים, אני משווה פיקסל אחרי פיקסל ומחפש איזה ציור בזיכרון הכי דומה.'],
+              ['😏', 'קודם ציירו לב, ותראו שאני מזהה. אחר כך… נסו לצייר לב שאני לא אזהה!']]) +
+      '<span class="lbl">הזיכרון של ' + n + ':</span>' + memHtml() +
+      '<button class="btn" id="go" type="button">לצייר</button>');
+    on('go', function(){ W.phase = 'show'; W.grid = blank(); W.tries = 0; W.hint = ''; renderWorld(); });
+  }
+  else if (ph === 'show' || ph === 'trick'){
+    steps(ST, 1);
+    var cnt = W.grid.reduce(function(a, b){ return a + b; }, 0);
+    P('<h3>' + (ph === 'show' ? 'ציירו לב ❤️' : '😈 ציירו לב ש' + n + ' לא יזהה') + '</h3>' +
+      '<p>' + (ph === 'show' ? 'לחצו על ריבועים כדי לצבוע אותם. אפשר גם לגרור את האצבע, ולחיצה על ריבוע צבוע מוחקת אותו.' : 'זה חייב להיות לב אמיתי, שכל אחד יזהה. אבל ' + n + ' צריך לטעות!') + '</p>' +
+      '<span class="turn">מצייר/ת: ' + teacher() + '</span>' +
+      '<div class="grid8" id="grid8">' + W.grid.map(function(v, i){ return '<b data-i="' + i + '"' + (v ? ' class="on"' : '') + '></b>'; }).join('') + '</div>' +
+      (W.hint ? '<p class="small-note">' + W.hint + '</p>' : '') +
+      '<div class="row"><button class="btn alt" id="clr" type="button">🗑️ לנקות</button><button class="btn" id="go" type="button"' + (cnt >= 4 ? '' : ' disabled') + '>' + n + ', מה ציירנו?</button></div>' +
+      '<span class="lbl">הזיכרון של ' + n + ':</span>' + memHtml());
+    bindGrid();
+    on('clr', function(){ W.grid = blank(); renderWorld(); });
+    on('go', function(){
+      var r = look(W.grid), heart = r.m && r.m.id === 'heart', pct = Math.round(r.s * 100), keep = window.scrollY;
+      W.turn++;
+      if (ph === 'show'){
+        if (heart){
+          W.phase = 'trick'; W.grid = blank(); W.tries = 0; W.hint = ''; renderWorld();
+          setMood('happy', 1800); beep('good'); say('זיהיתי! זה לב ❤️ דומה ב-' + pct + ' אחוז');
+        } else {
+          W.tries++; W.hint = W.tries >= 2 ? '💡 רמז: העתיקו את הלב מהזיכרון של ' + n + ', באותם ריבועים בדיוק.' : '💡 ' + n + ' לא זיהה לב. נסו לצייר לב דומה יותר לזה שבזיכרון שלו.';
+          renderWorld(); window.scrollTo(0, keep);
+          setMood('worry', 1600); beep('bad'); say(r.m ? 'אממ… זה ' + r.m.name + '? 🤔' : 'לא זיהיתי כלום… 😟');
+        }
+      } else if (heart){
+        W.tries++; W.hint = W.tries >= 2 ? '💡 רמז: מה קורה אם הלב קטן, או יושב בפינה?' : '';
+        renderWorld(); window.scrollTo(0, keep);
+        setMood('happy', 2000); beep('good'); say('קל! זה לב ❤️ דומה ב-' + pct + ' אחוז. נסו שוב 😄');
+      } else { W.made = W.grid.slice(); W.said = r; W.phase = 'why'; renderWorld(); }
+    });
+  }
+  else if (ph === 'why'){
+    steps(ST, 2); var r = W.said;
+    setMood('worry'); beep('win'); confetti(); say(r.m ? 'זה ' + r.m.name + '!… רגע, מה? 😟' : 'אני לא מזהה כלום… 😟');
+    P('<h3>ניצחתם! בלבלתם את ' + n + ' 🎉</h3>' +
+      '<div class="pair"><figure>' + mini(W.made) + '<figcaption>הלב שלכם</figcaption></figure><figure>' + mini(W.made, MEM[0].m) + '<figcaption>מול הלב שבזיכרון</figcaption></figure></div>' +
+      '<p class="small-note"><span class="key ok"></span> פיקסל במקום הנכון · <span class="key extra"></span> פיקסל שאין בלב של ' + n + ' · <span class="key miss"></span> פיקסל שחסר</p>' +
+      '<div class="rule">🔎 ' + n + ' לא באמת יודע מה זה לב. הוא רק בודק אם הפיקסלים שלכם יושבים <b>בדיוק באותם ריבועים</b> כמו הלב שבזיכרון. לב קטן, או לב שזז הצידה, יושב בריבועים אחרים, ולכן ' + n + ' מתבלבל.</div>' +
+      '<p><b>' + G.teachers[0] + ', עכשיו תסביר ל' + G.teachers[1] + ' במילים שלך: למה ' + n + ' טעה?</b></p>' +
+      '<button class="btn alt" id="go" type="button">הסברנו ✓</button>');
+    on('go', function(){ W.first = finishLevel(2, 3); W.phase = 'end'; renderWorld(); });
+  }
+  else if (ph === 'end'){
+    steps(ST, 3); setMood('think'); say('אז איך מחשבים חכמים כן מזהים? 🤔');
+    P('<h3>' + n + ' צריך ללמוד לראות אחרת</h3>' +
+      '<div class="rule">🧠 מחשבים חכמים באמת לא משווים פיקסל אחרי פיקסל. הם מחפשים קודם קווים, אחר כך צורות, ורק בסוף מחליטים מה בתמונה. כל שלב כזה נקרא <b>שכבה</b>, וככה הם מזהים לב גם כשהוא קטן או זז.</div>' +
+      '<p>את זה נלמד בעולם 3, <b>מגדל השכבות 🧠</b>.</p>' +
+      '<p>⭐⭐⭐ סיימתם את עיר הפיקסלים!' + (W.first ? ' הרווחתם ' + STARS_NEW_LEVEL + ' ⭐ לחנות.' : '') + '</p>' +
+      '<div class="row"><button class="btn" id="shop" type="button">🛠️ לחנות התוספות</button><button class="btn alt" id="map" type="button">🗺️ למפה</button></div>');
+    on('shop', function(){ go('shop'); });
+    on('map', function(){ go('map'); });
+  }
+}
+
+/* 🧩 המכניקות: כל עולם בנוי מ-3 שלבים */
+var MECHANICS = {
+  examples: {levels: [{name:'מראים דוגמאות', run: level1}, {name:'בוחרים חכם', run: level2}, {name:'אתגר אלופים', run: level3}]},
+  pixels:   {levels: [{name:'פנסי הצבע', run: pix1}, {name:'התמונה המתבהרת', run: pix2}, {name:'אתגר אלופים', run: pix3}]}
+};
+
+/* ▶️ הפעלה */
+init3D();
+renderWorkshop(); stars(); brand(); muteIcon();
+go('shop');
+})();
+</script>
+</body>
+</html>
