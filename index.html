@@ -107,6 +107,21 @@ input[type=text]{font:inherit;font-size:17px;width:100%;padding:10px 12px;border
 .brain{display:flex;gap:4px;flex-wrap:wrap;min-height:44px;align-items:center;background:#e9f6f4;border-radius:12px;padding:4px 8px}
 .brain svg{width:38px;height:38px}
 .brain .empty{font-size:13px;color:var(--mute)}
+/* 🧠 המוח של רובי: כל שלב מדליק נקודת אור, וכל עולם מדליק אזור שלם */
+.mind{background:linear-gradient(160deg,#1c2947,#2b3f6b);border-radius:18px;padding:12px;display:flex;flex-direction:column;gap:8px;color:#e9f1ff}
+.mind h3{color:#fff;margin:0}.mind .cap{font-size:14px;color:#cfdcf5;margin:0}
+.mind svg{width:100%;height:auto;display:block}
+.mind .zone{transform-box:fill-box;transform-origin:center}
+.mind .zone.new{animation:mindpop 1.5s ease-out .4s both}
+.mind .ring{transform-box:fill-box;transform-origin:center;animation:mindring 1.6s ease-out .9s 3 both}
+.mind .syn{stroke-dasharray:4 8;animation:mindsyn 1.2s linear infinite}
+@keyframes mindpop{0%{transform:scale(.5);opacity:.2}55%{transform:scale(1.18);opacity:1}100%{transform:scale(1);opacity:1}}
+@keyframes mindring{0%{transform:scale(1);opacity:.9}100%{transform:scale(2.2);opacity:0}}
+@keyframes mindsyn{to{stroke-dashoffset:-24}}
+@media (prefers-reduced-motion:reduce){.mind .zone.new,.mind .ring,.mind .syn{animation:none}}
+.mind .abil{display:flex;flex-wrap:wrap;gap:6px}
+.mind .abil span{border-radius:999px;padding:3px 10px;font-size:13px;background:rgba(255,255,255,.12)}
+.mind .abil span.on{background:#fff;color:#1d2a2e;font-weight:700}
 .feat{display:flex;gap:6px;flex-wrap:wrap}
 .feat span{border-radius:10px;padding:2px 10px;font-size:14px;background:#fff;border:2px solid var(--line)}
 .feat span.yes{border-color:var(--good);color:var(--good);font-weight:700}
@@ -135,6 +150,16 @@ input[type=text]{font:inherit;font-size:17px;width:100%;padding:10px 12px;border
 .robo .mood,.robo .hint{display:none}
 .robo .fallback{font-size:56px}
 .bubble{flex:1;min-width:0;display:flex;flex-direction:column;gap:2px;padding:2px 4px}
+/* 🗣️ רובי מקריא */
+.bubble{position:relative}
+.bubble p{padding-inline-end:46px}
+.rd{position:absolute;inset-inline-end:0;bottom:0;min-height:40px;min-width:42px;padding:2px 6px;font-size:19px;background:#e9f6f4;border:1.5px solid #a9d6d3;border-radius:12px}
+.mute.off{opacity:.4;filter:grayscale(1)}
+.robobar.talking{border-color:var(--sun);box-shadow:0 0 0 3px rgba(255,201,60,.45),0 6px 14px rgba(15,76,92,.14)}
+.reading{background:#fff7dc !important;box-shadow:0 0 0 3px var(--sun);border-radius:12px}
+.comic.seq .bub{opacity:0;transform:translateY(8px);transition:opacity .35s,transform .35s}
+.comic.seq .bub.shown{opacity:1;transform:none}
+@media (prefers-reduced-motion:reduce){.comic.seq .bub{transition:none;transform:none}}
 .wmood{font-size:13px;font-weight:700;color:var(--sea2)}
 .bubble p{font-size:15.5px;line-height:1.4;min-height:2.8em}
 .savenote{font-size:13px;color:var(--mute);background:#f1f5f4;border-radius:12px;padding:8px 12px}
@@ -182,7 +207,7 @@ button.det[aria-pressed="true"]{border-color:var(--dc);background:color-mix(in s
 .w.g{background:#dcfce7;border-color:var(--good);color:var(--good)}
 .w.r{background:#ffe4e0;border-color:var(--bad);color:var(--bad)}
 .tests{display:flex;flex-direction:column;gap:6px}
-.tests div{display:flex;align-items:center;gap:8px;background:#fff;border-radius:12px;padding:4px 8px;font-size:14.5px}
+.tests>div{display:flex;align-items:center;gap:8px;background:#fff;border-radius:12px;padding:4px 8px;font-size:14.5px}
 .tests .mini{max-width:36px;flex:0 0 36px}
 .tower{display:flex;flex-direction:column;gap:6px}
 .floor{border:2px solid var(--line);border-radius:14px;padding:6px 8px;background:#fff;display:flex;flex-wrap:wrap;align-items:center;gap:6px}
@@ -205,6 +230,89 @@ details p{display:flex;align-items:center;gap:6px;flex-wrap:wrap;margin-top:4px}
 .conf{position:absolute;top:-10px;width:10px;height:14px;border-radius:2px;animation:fall 2.2s ease-in forwards;z-index:3}
 @keyframes fall{to{transform:translateY(520px) rotate(540deg);opacity:.2}}
 @media (prefers-reduced-motion:reduce){.conf{display:none}.btn:active:not(:disabled){transform:none}}
+/* 👋 רובי מכיר אתכם: מסך פתיחה עם הרובוט, שמברך את המורים בשמות */
+.hello{position:fixed;inset:0;z-index:20;overflow-y:auto;background:linear-gradient(180deg,var(--sky) 0,#e9f7f3 50%,var(--sand) 100%);
+  padding:max(16px,env(safe-area-inset-top,0px)) 16px max(16px,env(safe-area-inset-bottom,0px))}
+.hcard{max-width:428px;margin:0 auto;min-height:100%;display:flex;flex-direction:column;justify-content:center;gap:12px;text-align:center}
+#stage-hello{width:min(100%,240px);align-self:center}
+#stage-hello .mood,#stage-hello .hint{display:none}
+.hello h1{font-size:30px}
+.hello .lead{font-size:16.5px;color:var(--ink)}
+.hello .row{justify-content:center}
+.hello .row .btn{flex:1 1 150px}
+.skills{display:flex;flex-wrap:wrap;gap:6px;justify-content:center}
+.skills span{background:#fff;border:1.5px solid var(--line);border-radius:999px;padding:2px 10px;font-size:13.5px}
+.hnew{background:var(--paper);border:2px solid var(--sun);border-radius:18px;padding:10px 12px;text-align:start;display:flex;flex-direction:column;gap:3px;font-size:14.5px;line-height:1.45}
+.hnew b{font-family:var(--display);font-weight:400;font-size:17px;color:var(--sea)}
+/* 😜 רובי חי: נמנום עם 💤, ובועת דגדוג */
+.stage.sleeping::after{content:'💤';position:absolute;top:6%;inset-inline-end:8%;font-size:30px;animation:zz 2.4s ease-in-out infinite;pointer-events:none}
+.robo.sleeping::after{font-size:20px}
+@keyframes zz{0%,100%{transform:translateY(0);opacity:.55}50%{transform:translateY(-8px);opacity:1}}
+.stage .say{pointer-events:none;animation:saypop .25s ease-out}
+@keyframes saypop{from{transform:scale(.85);opacity:0}}
+@media (prefers-reduced-motion:reduce){.stage.sleeping::after,.stage .say{animation:none}}
+/* 🎪 תפסו את הטעות */
+.levels .lx{grid-column:1/-1;display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:6px}
+.show{display:flex;flex-direction:column;gap:10px}
+.shead{display:flex;justify-content:space-between;font-weight:700;font-size:14.5px;color:var(--sea2)}
+.sbar{height:9px;background:#e7eeec;border-radius:999px;overflow:hidden}
+.sbar i{display:block;height:100%;background:var(--sun);transform-origin:right;animation:sbar linear forwards}
+.show.paused .sbar i{animation-play-state:paused}
+@keyframes sbar{from{transform:scaleX(1)}to{transform:scaleX(0)}}
+.svis{display:flex;justify-content:center;align-items:center;min-height:168px}
+.svis .pg{max-width:190px}
+.ssay{text-align:center;font-size:21px;font-family:var(--display);background:#fff;border:2px solid var(--line);border-radius:16px;padding:6px 10px}
+.sres{min-height:3.1em;text-align:center;font-weight:700;font-size:15.5px;display:flex;flex-direction:column;align-items:center;gap:4px}
+.sres.ok{color:var(--good)} .sres.no{color:var(--bad)}
+.sres .swatch{width:52px;height:52px;border-radius:14px}
+.btn.oops{font-size:25px;min-height:66px;background:#d63c2f;box-shadow:0 5px 0 #8f241b}
+.btn.oops:disabled{opacity:.4}
+.sscore{display:flex;gap:6px;flex-wrap:wrap;justify-content:center}
+.sscore span{background:#fff;border:1.5px solid var(--line);border-radius:999px;padding:3px 10px;font-size:14px}
+.shl{display:flex;gap:12px;justify-content:center}
+.shl span{display:flex;flex-direction:column;align-items:center;gap:3px;font-size:13px;color:var(--mute);text-align:center}
+.shl i{width:58px;height:58px;border-radius:50%;border:3px solid #2a2f33;display:block}
+.walker{position:absolute;z-index:3;width:62px;height:62px;margin:-31px 0 0 -31px;pointer-events:none}
+.walker img,.walker b{width:100%;height:100%;border-radius:50%;background:#dff3f1;border:3px solid #fff;box-shadow:0 4px 10px rgba(0,0,0,.25);display:grid;place-items:center;font-size:34px;animation:bob .3s ease-in-out infinite alternate}
+@keyframes bob{to{transform:translateY(-7px) rotate(5deg)}}
+@media (prefers-reduced-motion:reduce){.sbar i{animation-timing-function:steps(1,end)}.walker img,.walker b{animation:none}}
+/* 🎁 החוק הסודי */
+.rules{display:flex;flex-direction:column;gap:6px}
+.rrow{display:flex;gap:8px;align-items:flex-start}
+.rrow .lbl{flex:0 0 56px;font-size:13.5px;padding-top:8px}
+.rules .opts button{font-size:14px;padding:4px 10px;min-height:40px}
+.rules button.bad{border-color:var(--bad);color:var(--bad);text-decoration:line-through}
+.rules button.gone{text-decoration:line-through;opacity:.3}
+.rules button.keep{border-color:var(--sea2);background:#e3f4f2;font-weight:700;opacity:1}
+.club .brain{min-height:52px}
+.club .lbl{font-size:14px}
+/* 📷 הפיקסל הקסום */
+label.btn{display:flex;align-items:center;justify-content:center;min-height:44px;border-radius:14px;padding:8px 16px;cursor:pointer;text-align:center}
+.pcam{width:min(100%,256px);aspect-ratio:1/1;height:auto;image-rendering:pixelated;border-radius:16px;border:3px solid var(--line);display:block;margin:0 auto;touch-action:manipulation;cursor:crosshair;background:#fff}
+#pnum{text-align:center}
+.vh{position:absolute;width:1px;height:1px;opacity:0;overflow:hidden;pointer-events:none}
+/* 🔦 ממציאי הגלאים */
+.d9{display:grid;grid-template-columns:repeat(3,64px);gap:6px;justify-content:center;direction:ltr}
+.d9 button{width:64px;height:64px;min-height:0;padding:0;border-radius:12px;background:#fff;border:2px solid var(--line)}
+.d9 button.on{background:#e11d74;border-color:#e11d74}
+.pg.sm{max-width:132px;gap:1.5px}
+.pg.sm i{border-radius:2px}
+.wires5{display:grid;grid-template-columns:repeat(5,minmax(0,1fr));gap:6px;align-items:center}
+.wires5 .hd{display:flex;flex-direction:column;align-items:center;gap:2px;font-size:11.5px;text-align:center;line-height:1.2}
+div.res{text-align:center}
+/* ⚔️ דו-קרב */
+.modes{display:flex;gap:6px;flex-wrap:wrap;margin-top:6px}
+.modes button{font-size:13.5px;min-height:36px;padding:3px 12px;background:#fff;border:1.5px solid var(--line);border-radius:999px}
+.modes button[aria-pressed="true"]{background:var(--sea2);color:#fff;border-color:var(--sea2);font-weight:700}
+.duelbar{display:flex;flex-wrap:wrap;justify-content:center;align-items:center;gap:6px 14px;background:#fff7dc;border:2px solid var(--sun);border-radius:14px;padding:4px 10px;font-size:15px}
+.duelbar .dn{display:flex;align-items:center;gap:6px;font-weight:700}
+.duelbar .dn b{font-family:var(--display);font-weight:400;font-size:22px;color:var(--sea)}
+.duelbar .dn.lead b{color:var(--coral)}
+.duelbar .win{flex-basis:100%;text-align:center;font-weight:700;color:var(--sea)}
+.duelbar.bump{animation:bump .45s ease-out}
+@keyframes bump{40%{transform:scale(1.06)}}
+@media (prefers-reduced-motion:reduce){.duelbar.bump{animation:none}}
+   /* קיים אבל לא נראה: הכפתור שמעליו פותח אותו */
 </style>
 </head>
 <body>
@@ -212,6 +320,7 @@ details p{display:flex;align-items:center;gap:6px;flex-wrap:wrap;margin-top:4px}
 <header class="top"><div class="in">
   <div class="brand" id="brand">מלמדים את רובי</div>
   <button class="mute" id="mute" type="button" aria-label="צליל">🔊</button>
+  <button class="mute" id="readbtn" type="button" aria-label="הקראה בקול" hidden>📖</button>
   <span class="pill" id="stars" aria-label="כוכבים">⭐ 10</span>
 </div></header>
 
@@ -220,6 +329,7 @@ details p{display:flex;align-items:center;gap:6px;flex-wrap:wrap;margin-top:4px}
   <section class="screen" id="s-shop">
     <div><h1>הסדנה של הרובוט</h1><p class="lead">כאן מעצבים את הרובוט: שם, צבעים ותוספות מהחנות. גררו אותו כדי לסובב.</p></div>
     <div class="stage" id="stage-shop"></div>
+    <div id="mindbox"></div>
     <div class="card">
       <h3>איך הרובוט מרגיש?</h3>
       <p class="small-note">במשחק הוא מגיב לבד: חושב כשהוא לומד, שמח כשהוא צודק, עצוב כשהוא טועה, ומוטרד כשהוא רואה משהו חדש.</p>
@@ -250,12 +360,13 @@ details p{display:flex;align-items:center;gap:6px;flex-wrap:wrap;margin-top:4px}
 
   <!-- ③ עולם -->
   <section class="screen" id="s-world" hidden>
-    <div class="whead"><h1 id="w-title"></h1><p class="lead" id="w-sub"></p></div>
+    <div class="whead"><h1 id="w-title"></h1><p class="lead" id="w-sub"></p><div class="modes" id="modes"></div></div>
     <div class="levels" id="levels"></div>
+    <div class="duelbar" id="duelbar" aria-live="polite" hidden></div>
     <!-- פס הרובוט: רובוט קטן ובועת דיבור, נשאר למעלה כשגוללים -->
     <div class="robobar" id="robobar">
       <div class="stage robo" id="stage-world"></div>
-      <div class="bubble"><span class="wmood" id="wmood"></span><p id="wsay" aria-live="polite"></p></div>
+      <div class="bubble"><span class="wmood" id="wmood"></span><p id="wsay" aria-live="polite"></p><button class="rd" id="readagain" type="button" aria-label="להקריא שוב את המסך" hidden>🔊</button></div>
     </div>
     <div class="steps" id="steps"></div>
     <div class="card" id="panel" aria-live="polite"></div>
@@ -269,6 +380,17 @@ details p{display:flex;align-items:center;gap:6px;flex-wrap:wrap;margin-top:4px}
   <button type="button" data-go="world"><span>🐾</span>העולם</button>
 </div></nav>
 <div class="toast" id="toast" hidden></div>
+<!-- 👋 מסך הפתיחה: רובי מברך את המורים בשמות ומספר מה מחכה היום -->
+<div class="hello" id="hello" hidden role="dialog" aria-modal="true" aria-labelledby="hello-h">
+  <div class="hcard">
+    <div class="stage" id="stage-hello"></div>
+    <h1 id="hello-h"></h1>
+    <p class="lead" id="hello-p"></p>
+    <div class="skills" id="hello-sk"></div>
+    <div id="hello-new"></div>
+    <div class="row"><button class="btn" id="hello-say" type="button">👋 שלום רובי!</button><button class="btn alt" id="hello-go" type="button">▶ יוצאים לדרך!</button></div>
+  </div>
+</div>
 
 <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
 <script>
@@ -314,15 +436,15 @@ var SHOP = [
 
 /* 🗺️ העולמות: כל פרק בחוברת = עולם. ready:true = כבר בנוי */
 var WORLDS = [
-  {id:'examples', name:'יער הדוגמאות',   sub:'איך מכונה לומדת',        icon:'🐾', color:'#62c370', ability:'לומד מדוגמאות', ready:true},
-  {id:'pixels',   name:'עיר הפיקסלים',   sub:'איך מחשב רואה תמונה',   icon:'🎨', color:'#ff7f61', ability:'רואה תמונות', ready:true},
-  {id:'layers',   name:'מגדל השכבות',    sub:'מוח מלאכותי',           icon:'🧠', color:'#a993f0', ability:'מזהה צורות בעזרת קומות של נוירונים', ready:true},
-  {id:'tree',     name:'עץ השאלות',      sub:'עצי החלטה',             icon:'🌳', color:'#3fa36b'},
-  {id:'words',    name:'ים המילים',      sub:'איך מחשב מבין שפה',     icon:'🔤', color:'#4aa3df'},
-  {id:'recs',     name:'קולנוע ההמלצות', sub:'מערכת המלצות',          icon:'🍿', color:'#ef6f93'},
-  {id:'prompt',   name:'סטודיו הפרומפטים', sub:'בינה יוצרת',          icon:'🖌️', color:'#f2a33a'},
-  {id:'sensors',  name:'מבוך החיישנים',  sub:'רובוטים וחיישנים',      icon:'📡', color:'#6c86d9'},
-  {id:'final',    name:'המבחן הגדול',    sub:'משחק החיקוי',           icon:'🎭', color:'#55656b'}
+  {id:'examples', name:'יער הדוגמאות',   sub:'איך מכונה לומדת',        icon:'🐾', color:'#62c370', ability:'לומד מדוגמאות', skill:'לומד מדוגמאות', ready:true},
+  {id:'pixels',   name:'עיר הפיקסלים',   sub:'איך מחשב רואה תמונה',   icon:'🎨', color:'#ff7f61', ability:'רואה תמונות', skill:'רואה תמונות', ready:true},
+  {id:'layers',   name:'מגדל השכבות',    sub:'מוח מלאכותי',           icon:'🧠', color:'#a993f0', ability:'מזהה צורות בעזרת קומות של נוירונים', skill:'מזהה צורות', ready:true},
+  {id:'tree',     name:'עץ השאלות',      sub:'עצי החלטה',             icon:'🌳', color:'#3fa36b', skill:'מקבל החלטות'},
+  {id:'words',    name:'ים המילים',      sub:'איך מחשב מבין שפה',     icon:'🔤', color:'#4aa3df', skill:'מבין מילים'},
+  {id:'recs',     name:'קולנוע ההמלצות', sub:'מערכת המלצות',          icon:'🍿', color:'#ef6f93', skill:'ממליץ'},
+  {id:'prompt',   name:'סטודיו הפרומפטים', sub:'בינה יוצרת',          icon:'🖌️', color:'#f2a33a', skill:'יוצר ציורים'},
+  {id:'sensors',  name:'מבוך החיישנים',  sub:'רובוטים וחיישנים',      icon:'📡', color:'#6c86d9', skill:'מרגיש את העולם'},
+  {id:'final',    name:'המבחן הגדול',    sub:'משחק החיקוי',           icon:'🎭', color:'#55656b', skill:'משוחח כמו אדם'}
 ];
 /* ⏳ ציר הזמן לאורך השביל: אחרי עולם מספר… */
 var YEARS = {1:['1950','טיורינג שואל: האם מכונה יכולה לחשוב?'], 3:['1956','לתחום החדש קוראים ״בינה מלאכותית״'], 5:['1966','אלייזה, הצ׳טבוט הראשון'], 7:['1997','מחשב מנצח אלוף עולם בשחמט']};
@@ -336,14 +458,21 @@ var store = {
 };
 var DEF = {stars: START_STARS, owned: [], worn: [], body: '#ffc93c', eyes: '#5ff2d8', name: ROBOT_DEFAULT_NAME, teachers: TEACHER_DEFAULTS.slice(), prog: {}, muted: false,
   cur: null,      // איפה עצרתם: עולם ושלב, כדי להמשיך משם
-  wires: null};   // המגדל שבניתם בעולם 3
+  wires: null,    // המגדל שבניתם בעולם 3
+  read: true,     // 🗣️ רובי מקריא בקול את ההסברים
+  duel: false,    // ⚔️ מצב דו-קרב: מורה נגד מורה
+  hello: 0};      // 👋 איזה ״מה חדש״ כבר ראיתם במסך הפתיחה
 var G = {};
 Object.keys(DEF).forEach(function(k){ G[k] = store.get(k, JSON.parse(JSON.stringify(DEF[k]))); });
 function save(){ Object.keys(DEF).forEach(function(k){ store.set(k, G[k]); }); }
-function prog(id){ if (!G.prog[id]) G.prog[id] = [0, 0, 0]; return G.prog[id]; }
+function prog(id){   // לכל עולם: [שלב 1, שלב 2, שלב 3, בונוס, הופעה]. רק 3 הראשונים נספרים בכוכבי העולם ובמוח
+  if (!G.prog[id]) G.prog[id] = [0, 0, 0];
+  while (G.prog[id].length < 5) G.prog[id].push(0);
+  return G.prog[id];
+}
 
 /* ───────── צלילים (בלי קבצים) ───────── */
-var AC = null, SND = {good:[523,659,784], bad:[392,311], buy:[880,1175], tap:[660], win:[523,659,784,1047]};
+var AC = null, SND = {good:[523,659,784], bad:[392,311], buy:[880,1175], tap:[660], win:[523,659,784,1047], tickle:[784,988,784,1175]};
 function beep(name){
   if (G.muted) return;
   try {
@@ -360,7 +489,7 @@ function beep(name){
 
 /* ═══════════ הרובוט בתלת-ממד (Three.js) ═══════════ */
 var R = null, mood = 'idle', moodTimer = null;
-var MOOD_HE = {idle:'רגוע 🙂', think:'חושב… 🤔', happy:'שמח! 😄', sad:'עצוב 😢', worry:'מוטרד 😟'};
+var MOOD_HE = {idle:'רגוע 🙂', think:'חושב… 🤔', happy:'שמח! 😄', sad:'עצוב 😢', worry:'מוטרד 😟', sleep:'ישן… 💤'};
 function init3D(){
   if (!window.THREE) return;
   var T = THREE;
@@ -452,8 +581,18 @@ function drawFace(m, blink){
   var L = 176, Rr = 336, y = 125;
   function oval(cx, cy, rx, ry){ x.beginPath(); x.ellipse(cx, cy, rx, ry, 0, 0, Math.PI*2); x.fill(); }
   function line(a, b, c2, d){ x.beginPath(); x.moveTo(a, b); x.lineTo(c2, d); x.stroke(); }
+  if (m === 'wave' || m === 'dance') m = 'happy';   // נפנוף וריקוד = פנים שמחות
   if (blink && (m === 'idle' || m === 'think')){ line(L-34, y, L+34, y); line(Rr-34, y, Rr+34, y); }
-  else if (m === 'happy'){
+  else if (m === 'sleep'){   // 💤 עיניים עצומות ופה קטן של נשימה
+    x.lineWidth = 11; [L, Rr].forEach(function(cx){ x.beginPath(); x.arc(cx, y-14, 32, Math.PI*.2, Math.PI*.8); x.stroke(); });
+    x.beginPath(); x.ellipse(256, 210, 13, 16, 0, 0, Math.PI*2); x.fill();
+  } else if (m === 'giggle'){   // 🤭 עיניים > < ופה פתוח מצחוק
+    x.lineWidth = 13;
+    x.beginPath(); x.moveTo(L-26, y-26); x.lineTo(L+20, y); x.lineTo(L-26, y+26); x.stroke();
+    x.beginPath(); x.moveTo(Rr+26, y-26); x.lineTo(Rr-20, y); x.lineTo(Rr+26, y+26); x.stroke();
+    x.beginPath(); x.arc(256, 184, 58, 0, Math.PI); x.closePath(); x.fill();
+    x.shadowBlur = 0; x.fillStyle = 'rgba(255,128,150,.75)'; [L-44, Rr+44].forEach(function(cx){ x.beginPath(); x.ellipse(cx, y+62, 28, 15, 0, 0, Math.PI*2); x.fill(); });
+  } else if (m === 'happy'){
     [L, Rr].forEach(function(cx){ x.beginPath(); x.arc(cx, y+22, 38, Math.PI*1.12, Math.PI*1.88); x.stroke(); });
     x.beginPath(); x.arc(256, 190, 54, 0, Math.PI); x.closePath(); x.fill();
   } else if (m === 'sad'){
@@ -494,23 +633,29 @@ function loop(now){
   if (!R || !R.host || document.hidden) return;
   var t = (now - t0) / 1000, k = 0.12, A = RM ? 0.25 : 1;
   var hRX = 0, hRZ = 0, y = Math.sin(t*2)*.05*A, x = 0, aL = .35, aR = -.35, bulb = .35;
-  if (mood === 'happy'){ y = Math.abs(Math.sin(t*6))*.28*A; aL = 2.3 + Math.sin(t*10)*.2*A; aR = -aL; hRZ = Math.sin(t*5)*.08*A; }
-  else if (mood === 'sad'){ y = -.12; hRX = .38; aL = .08; aR = -.08; }
-  else if (mood === 'think'){ hRZ = .2; hRX = -.12; aR = -2.0; aL = .3; bulb = (Math.sin(t*9) > 0) ? 1.4 : .2; }
-  else if (mood === 'worry'){ x = Math.sin(t*38)*.035*A; hRZ = Math.sin(t*3)*.1*A; aL = .75; aR = -.75; }
-  R.robot.position.y = lerp(R.robot.position.y, y, mood === 'happy' ? .5 : k);
+  var em = now < fxUntil ? fxName : mood;   // 😜 אפקט קצר (דגדוג, נפנוף, ריקוד) גובר לרגע על הרגש
+  if (em === 'happy'){ y = Math.abs(Math.sin(t*6))*.28*A; aL = 2.3 + Math.sin(t*10)*.2*A; aR = -aL; hRZ = Math.sin(t*5)*.08*A; }
+  else if (em === 'sad'){ y = -.12; hRX = .38; aL = .08; aR = -.08; }
+  else if (em === 'think'){ hRZ = .2; hRX = -.12; aR = -2.0; aL = .3; bulb = (Math.sin(t*9) > 0) ? 1.4 : .2; }
+  else if (em === 'worry'){ x = Math.sin(t*38)*.035*A; hRZ = Math.sin(t*3)*.1*A; aL = .75; aR = -.75; }
+  else if (em === 'wave'){ y = Math.abs(Math.sin(t*4))*.08*A; aL = .35; aR = -(2.6 + Math.sin(t*12)*.45*A); hRZ = Math.sin(t*3)*.1*A; }
+  else if (em === 'giggle'){ y = Math.abs(Math.sin(t*18))*.09*A; x = Math.sin(t*30)*.03*A; hRZ = Math.sin(t*9)*.14*A; hRX = -.1; aL = 1.0; aR = -1.0; }
+  else if (em === 'sleep'){ y = -.1 + Math.sin(t*1.3)*.035; hRX = .5; hRZ = .18; aL = .04; aR = -.04; bulb = .06 + (Math.sin(t*1.3) + 1)*.08; }
+  else if (em === 'dance'){ y = Math.abs(Math.sin(t*8))*.24*A; x = Math.sin(t*4)*.28*A; hRZ = Math.sin(t*8)*.16*A; aL = 1.5 + Math.sin(t*8)*.9*A; aR = -(1.5 - Math.sin(t*8)*.9*A); bulb = (Math.sin(t*14) > 0) ? 1.6 : .3; }
+  if (talkOn){ bulb = (Math.sin(t*16) > 0) ? 1.6 : .3; hRX += Math.sin(t*12)*.06*A; }   // 🗣️ כשרובי מדבר, הנורה מהבהבת והראש מהנהן
+  R.robot.position.y = lerp(R.robot.position.y, y, (em === 'happy' || em === 'dance' || em === 'giggle') ? .5 : k);
   R.robot.position.x = x;
   R.head.rotation.x = lerp(R.head.rotation.x, hRX, k);
   R.head.rotation.z = lerp(R.head.rotation.z, hRZ, k);
   R.arms[0].rotation.z = lerp(R.arms[0].rotation.z, -aL, k);
   R.arms[1].rotation.z = lerp(R.arms[1].rotation.z, -aR, k);
   R.bulbMat.emissiveIntensity = bulb;
-  if (!R.drag) R.yaw = lerp(R.yaw, R.sway ? Math.sin(t*.6)*.45*A : 0, .03);
+  if (!R.drag) R.yaw = em === 'dance' ? lerp(R.yaw, Math.sin(t*5)*1.1*A, .2) : lerp(R.yaw, R.sway ? Math.sin(t*.6)*.45*A : 0, .03);
   R.robot.rotation.y = R.yaw;
   R.flames.forEach(function(f, i){ f.scale.set(1, .8 + Math.abs(Math.sin(t*14 + i))*.5*A, 1); });
   if (now > nextBlink){ blinkUntil = now + 130; nextBlink = now + 2200 + Math.random()*2500; }
-  var fk = mood + '|' + (now < blinkUntil) + '|' + G.eyes;
-  if (fk !== R.faceKey){ drawFace(mood, now < blinkUntil); R.faceKey = fk; }
+  var fk = em + '|' + (now < blinkUntil) + '|' + G.eyes;
+  if (fk !== R.faceKey){ drawFace(em, now < blinkUntil); R.faceKey = fk; }
   R.renderer.render(R.scene, R.camera);
 }
 /* הרובוט אחד, והוא עובר בין הבמות (סדנה / עולם) */
@@ -518,7 +663,7 @@ function mount(stageId){
   var host = document.getElementById(stageId);
   if (!R){
     if (!host.querySelector('.fallback')){ var f = document.createElement('div'); f.className = 'fallback'; host.appendChild(f); }
-  } else { host.insertBefore(R.renderer.domElement, host.firstChild); R.host = host; R.sway = stageId === 'stage-shop'; resize(); }
+  } else { host.insertBefore(R.renderer.domElement, host.firstChild); R.host = host; R.sway = stageId !== 'stage-world'; resize(); }
   if (!host.querySelector('.mood')){ var c = document.createElement('div'); c.className = 'mood'; host.appendChild(c); }
   if (stageId === 'stage-shop' && R && !host.querySelector('.hint')){ var h = document.createElement('div'); h.className = 'hint'; h.textContent = '↔ גררו כדי לסובב'; host.appendChild(h); }
   showMood();
@@ -534,7 +679,8 @@ window.addEventListener('resize', resize);
 function showMood(){
   document.querySelectorAll('.stage .mood').forEach(function(el){ el.textContent = G.name + ' ' + MOOD_HE[mood]; });
   $('#wmood').textContent = G.name + ' ' + MOOD_HE[mood];
-  document.querySelectorAll('.stage .fallback').forEach(function(el){ el.textContent = {idle:'🤖', think:'🤔', happy:'😄', sad:'😢', worry:'😟'}[mood]; });
+  document.querySelectorAll('.stage .fallback').forEach(function(el){ el.textContent = {idle:'🤖', think:'🤔', happy:'😄', sad:'😢', worry:'😟', sleep:'😴'}[mood]; });
+  document.querySelectorAll('.stage').forEach(function(el){ el.classList.toggle('sleeping', mood === 'sleep'); });
   document.querySelectorAll('#moods button').forEach(function(b){ b.setAttribute('aria-pressed', String(b.dataset.m === mood)); });
 }
 function setMood(m, ms){
@@ -542,8 +688,9 @@ function setMood(m, ms){
   if (ms) moodTimer = setTimeout(function(){ mood = 'idle'; showMood(); }, ms);
   showMood();
 }
-function say(text){ $('#wsay').textContent = text || ''; }   // הבועה שליד הרובוט, בפס העליון
+function say(text){ $('#wsay').textContent = text || ''; readSoon(); }   // הבועה שליד הרובוט, בפס העליון
 function confetti(){
+  if (mood === 'happy') fxPlay('dance', 2400);   // 💃 הצלחה = רובי רוקד
   if (RM) return;
   var host = $('#robobar'), cols = ['#ff6f4f','#ffc93c','#43c6c0','#62c370','#a993f0'];
   for (var i = 0; i < 34; i++){
@@ -553,11 +700,188 @@ function confetti(){
     setTimeout(s.remove.bind(s), 3000);
   }
 }
-(function bindDrag(stage){
-  stage.addEventListener('pointerdown', function(e){ if (!R) return; R.drag = {x: e.clientX, yaw: R.yaw}; stage.setPointerCapture(e.pointerId); });
-  stage.addEventListener('pointermove', function(e){ if (R && R.drag) R.yaw = R.drag.yaw + (e.clientX - R.drag.x) * .012; });
-  ['pointerup','pointercancel'].forEach(function(ev){ stage.addEventListener(ev, function(){ if (R) R.drag = null; }); });
-})($('#stage-shop'));
+/* ═══════════ 🗣️ רובי מקריא ═══════════
+   משתמשים בקול העברי שכבר יש בטלפון: חינם, ואומר גם את השמות שהמורים כתבו.
+   מה שרובי אומר (הבועה שלידו) = קול רובוטי, קצת גבוה ומהיר. ההסברים בלוח = קול רגיל.
+   כל טקסט מוקרא פעם אחת בכל שלב. הכפתור 🔊 ליד רובי מקריא שוב את כל המסך, ונגיעה ברובי חוזרת על המשפט שלו.
+   בטלפון בלי קול עברי, הכפתורים פשוט לא מופיעים. */
+var SYN = window.speechSynthesis || null, HEV = null, readT = null, readKey = '', readDone = {}, talkOn = false;
+var READ_SEL = 'h3, p, .rule, .turn';    // מה בלוח מוקרא, לפי הסדר במסך
+function pickVoice(){
+  if (!SYN) return;
+  var vs = SYN.getVoices().filter(function(v){ return /^(he|iw)/i.test(v.lang); });
+  HEV = vs.filter(function(v){ return /google/i.test(v.name); })[0] || vs.filter(function(v){ return v.localService; })[0] || vs[0] || null;
+  $('#readbtn').hidden = !HEV; $('#readagain').hidden = !HEV; readIcon();
+}
+function reading(){ return !!(HEV && G.read && !G.muted); }
+function readIcon(){ var b = $('#readbtn'); b.textContent = '📖'; b.classList.toggle('off', !G.read); b.setAttribute('aria-pressed', String(G.read)); b.setAttribute('aria-label', G.read ? 'רובי מקריא בקול. לחצו כדי לכבות' : 'ההקראה כבויה. לחצו כדי להדליק'); }
+// בלי אימוג׳י וחצים (הקול היה מקריא את השם שלהם), ובלי ״/ת״
+function clean(t){ return (t || '').replace(/[\u{1F000}-\u{1FAFF}\u{2190}-\u{21FF}\u{2300}-\u{23FF}\u{2600}-\u{27BF}\u{2B00}-\u{2BFF}\u{FE0F}\u{200D}\u{20E3}]/gu, ' ').replace(/\/ת/g, '').replace(/\s+/g, ' ').trim(); }
+function talking(on){ talkOn = on; $('#robobar').classList.toggle('talking', on); }
+function stopTalk(){ clearTimeout(readT); if (SYN) SYN.cancel(); talking(false); document.querySelectorAll('.reading').forEach(function(e){ e.classList.remove('reading'); }); }
+function revealAll(){ document.querySelectorAll('.comic.seq .bub').forEach(function(b){ b.classList.add('shown'); }); }
+/* תור הקראה: כל פריט = משפט אחד. כשמשפט מתחיל, הבועה שלו מופיעה ומודגשת */
+function speakList(list){
+  stopTalk(); if (!list.length) return;
+  var started = false;
+  list.forEach(function(it, i){
+    var u = new SpeechSynthesisUtterance(it.text);
+    u.voice = HEV; u.lang = HEV.lang;
+    if (it.robot){ u.pitch = 1.5; u.rate = 1.05; } else { u.pitch = 1; u.rate = .95; }
+    u.onstart = function(){
+      started = true; talking(!!it.robot);
+      if (it.el){ it.el.classList.add('reading'); var b = it.el.closest('.bub'); if (b) b.classList.add('shown'); }
+    };
+    u.onend = u.onerror = function(){ if (it.el) it.el.classList.remove('reading'); if (i === list.length - 1){ talking(false); revealAll(); } };
+    SYN.speak(u);
+  });
+  setTimeout(function(){ if (!started) revealAll(); }, 2500);   // הקול לא התחיל? מראים את כל הבועות
+}
+function panelItems(){
+  return Array.prototype.filter.call($('#panel').querySelectorAll(READ_SEL), function(el){
+    return !el.closest('button, .tests, .abil, details, .mem, figure') && !el.querySelector('p, .rule') && clean(el.textContent);
+  });
+}
+function lvlKey(){ return curWorld + '|' + W.level + '|' + W.rid; }
+/* אחרי כל מסך חדש או משפט חדש של רובי: מקריאים רק מה שעוד לא הוקרא בשלב הזה */
+function readSoon(){
+  if (!reading() || screen !== 'world') return;
+  clearTimeout(readT);
+  readT = setTimeout(function(){
+    if (screen !== 'world') return;
+    var k = lvlKey(); if (k !== readKey){ readKey = k; readDone = {}; }
+    var list = [], rt = clean($('#wsay').textContent);
+    if (rt && !readDone['r:' + rt]){ readDone['r:' + rt] = 1; list.push({text: rt, robot: true}); }
+    panelItems().forEach(function(el){
+      var t = clean(el.textContent);
+      if (readDone[t]){ var b = el.closest('.bub'); if (b) b.classList.add('shown'); return; }
+      readDone[t] = 1; list.push({text: t, el: el});
+    });
+    if (list.length) speakList(list);
+  }, 80);
+}
+/* 🔊 להקריא שוב את כל המסך */
+function readAll(){
+  if (!HEV) return;
+  if (G.muted){ toast('🔇 הצליל כבוי. מדליקים אותו בכפתור 🔊 למעלה'); return; }
+  revealAll();
+  var list = [], rt = clean($('#wsay').textContent);
+  if (rt) list.push({text: rt, robot: true});
+  panelItems().forEach(function(el){ list.push({text: clean(el.textContent), el: el}); });
+  speakList(list);
+}
+if (SYN){ pickVoice(); if (SYN.addEventListener) SYN.addEventListener('voiceschanged', pickVoice); else SYN.onvoiceschanged = pickVoice; }
+// באייפון הקול נפתח רק אחרי נגיעה ראשונה במסך
+document.addEventListener('pointerdown', function unlock(){
+  document.removeEventListener('pointerdown', unlock, true);
+  if (SYN){ try { var u = new SpeechSynthesisUtterance(' '); u.volume = 0; SYN.speak(u); } catch(e){} }
+}, true);
+$('#readbtn').addEventListener('click', function(){
+  G.read = !G.read; save(); readIcon();
+  if (!G.read){ stopTalk(); revealAll(); toast('📖 ההקראה כבויה. מדליקים בכפתור 📖 למעלה'); }
+  else { toast('📖 ' + G.name + ' יקריא בקול'); readKey = ''; readSoon(); }
+});
+$('#readagain').addEventListener('click', readAll);
+$('#stage-world').addEventListener('click', function(){   // נגיעה ברובי = גיחוך קטן, והוא חוזר על מה שאמר
+  if (mood !== 'sleep') fxPlay('giggle', 800);
+  var rt = clean($('#wsay').textContent);
+  if (HEV && rt && !G.muted) speakList([{text: rt, robot: true}]);
+});
+$('#panel').addEventListener('click', function(e){ if (e.target.closest('.comic.seq')) revealAll(); });
+
+/* ═══════════ 😜 רובי חי ═══════════
+   רובי מגיב גם כשלא משחקים: נגיעה בו בסדנה מדגדגת אותו, אחרי 45 שניות בלי נגיעה הוא נרדם,
+   וכשמצליחים בשלב הוא רוקד. ״אפקט״ (fx) הוא תנועה קצרה שגוברת לרגע על הרגש, ואחר כך הרגש חוזר. */
+var fxName = '', fxUntil = 0;
+function fxPlay(name, ms){ fxName = name; fxUntil = performance.now() + ms; }
+var TICKLE = ['חחח, זה מדגדג!', 'היי! אני רגיש שם!', 'עוד פעם? חחח!', 'אוי, הבטן שלי! חחח'];
+var tickleN = 0, sayT = null;
+function robotLine(text){   // רובי אומר משפט קצר בקול שלו (רק אם יש קול עברי, הצליל דלוק וההקראה 📖 דלוקה)
+  if (HEV && G.read && !G.muted) speakList([{text: clean(text), robot: true}]);
+}
+function stageSay(host, text){   // בועה קטנה מעל הרובוט, לשנייה וחצי
+  var b = host.querySelector('.say');
+  if (!b){ b = document.createElement('div'); b.className = 'say'; host.appendChild(b); }
+  b.textContent = text; b.hidden = false; b.style.animation = 'none'; void b.offsetWidth; b.style.animation = '';
+  clearTimeout(sayT); sayT = setTimeout(function(){ b.hidden = true; }, 1700);
+}
+function tickle(host){
+  if (mood === 'sleep') return;   // נגיעה ברובי ישן רק מעירה אותו
+  var line = TICKLE[tickleN++ % TICKLE.length];
+  fxPlay('giggle', 1500); beep('tickle'); stageSay(host, line + ' 🤭'); robotLine(line);
+}
+/* 💤 נמנום: אחרי 45 שניות בלי שום נגיעה. נגיעה מעירה אותו, והוא חוזר לרגש שהיה לו */
+var SLEEP_AFTER = 45000, lastAct = performance.now(), sleepPrev = 'idle', noSleep = 0;
+function wakeUp(){
+  var m = sleepPrev; setMood('happy'); moodTimer = setTimeout(function(){ setMood(m); }, 1300);
+  toast('😅 ' + G.name + ' התעורר! ״אה? נרדמתי? בואו נמשיך!״');
+}
+function poke(){ lastAct = performance.now(); if (mood === 'sleep') wakeUp(); }
+['pointerdown', 'keydown', 'wheel'].forEach(function(ev){ document.addEventListener(ev, poke, {capture: true, passive: true}); });
+window.addEventListener('scroll', function(){ lastAct = performance.now(); }, {passive: true});
+setInterval(function(){
+  if (noSleep || talkOn || !$('#hello').hidden){ lastAct = performance.now(); return; }   // בהופעה, בזמן הקראה ובמסך הפתיחה לא נרדמים, והספירה מתחילה רק אחריהם
+  if (mood === 'sleep' || document.hidden || !R || !R.host) return;
+  if (performance.now() - lastAct > SLEEP_AFTER){ sleepPrev = mood; setMood('sleep'); }
+}, 3000);
+
+/* ═══════════ 👋 רובי מכיר אתכם ═══════════
+   בכל פתיחה של המשחק רובי מברך את המורים בשמות שכתבו בסדנה, מספר מה כבר לימדו אותו ומה מחכה היום.
+   ״מה חדש״ מופיע רק בפעם הראשונה אחרי עדכון (G.hello שומר איזה עדכון כבר ראיתם). */
+var HELLO_VER = 2;
+function esc(t){ return String(t).replace(/[&<>"']/g, function(c){ return {'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]; }); }
+function named(){ return G.teachers.every(function(t, i){ return t && t !== TEACHER_DEFAULTS[i]; }); }
+function mainDone(id){ return prog(id).slice(0, 3).every(Boolean); }
+function todayWorld(){
+  var ready = WORLDS.filter(function(w){ return w.ready; });
+  var cur = G.cur && ready.filter(function(w){ return w.id === G.cur.w; })[0];
+  if (cur && !mainDone(cur.id) && prog(cur.id).some(Boolean)) return cur;   // באמצע עולם? ממשיכים בו
+  return ready.filter(function(w){ return !mainDone(w.id); })[0] || null;
+}
+var helloNext = 'shop';
+function openHello(next){
+  helloNext = next;
+  var t = G.teachers, played = Object.keys(G.prog).some(function(k){ return G.prog[k].some(Boolean); });
+  var hi = named() ? 'שלום ' + t[0] + '! שלום ' + t[1] + '!' : 'שלום מורים!';
+  var w = todayWorld(), learned = WORLDS.filter(function(x){ return x.ready && prog(x.id)[2] > 0; });
+  var today = w ? (played && prog(w.id).some(Boolean) ? 'היום נמשיך ב' : 'היום נלמד יחד ב') + w.name + ' ' + w.icon :
+    'סיימתם את כל העולמות הפתוחים! מחכים לכם שלבי בונוס 🎁 והופעות 🎪.';
+  var intro = played ? 'התגעגעתי אליכם! ' : 'אני ' + G.name + ', רובוט שעוד לא יודע כלום. אתם תהיו המורים שלי. ';
+  $('#hello-h').textContent = hi;
+  $('#hello-p').textContent = intro + today + (named() ? '' : ' (את השמות שלכם כותבים בסדנה, ואז אגיד לכם שלום בשם.)');
+  $('#hello-sk').innerHTML = learned.length ? '<span>🧠 כבר לימדתם אותי:</span>' + learned.map(function(x){ return '<span>' + x.icon + ' ' + x.skill + '</span>'; }).join('') : '';
+  var vs = named() ? esc(t[0]) + ' נגד ' + esc(t[1]) : 'מורה נגד מורה';
+  $('#hello-new').innerHTML = (G.hello || 0) < HELLO_VER && played ? '<div class="hnew"><b>✨ מה חדש אצלי?</b>' +
+    '<span>📖 אני מקריא לכם בקול את ההוראות וההסברים.</span>' +
+    '<span>🧠 המוח שלי: כל שלב שתלמדו מדליק בו נקודת אור.</span>' +
+    '<span>🎪 בסוף כל עולם אני עושה הופעה, ואתם תופסים את הטעויות שלי.</span>' +
+    '<span>🎁 שלב בונוס חדש בכל עולם.</span>' +
+    '<span>⚔️ ' + vs + ': מי מנחש טוב יותר מה אעשה?</span>' +
+    '<span>😜 ותגעו בי בסדנה… אני רגיש לדגדוגים!</span></div>' : '';
+  $('#hello-say').className = 'btn'; $('#hello-go').className = 'btn alt';
+  $('#hello').hidden = false; mount('stage-hello'); setMood('idle');
+  $('#hello-say').focus({preventScroll: true});
+}
+$('#hello-say').addEventListener('click', function(){
+  fxPlay('wave', 2800); beep('good');
+  robotLine($('#hello-h').textContent + ' ' + $('#hello-p').textContent.replace(/\(.*\)/, ''));
+  $('#hello-say').className = 'btn alt'; $('#hello-go').className = 'btn';   // אחרי השלום, ״יוצאים לדרך״ הוא הכפתור הראשי
+});
+$('#hello-go').addEventListener('click', function(){
+  G.hello = HELLO_VER; save(); beep('tap');
+  $('#hello').hidden = true; go(helloNext);
+});
+
+function bindDrag(stage){
+  stage.addEventListener('pointerdown', function(e){ if (!R) return; R.drag = {x: e.clientX, yaw: R.yaw, t: performance.now(), moved: 0}; stage.setPointerCapture(e.pointerId); });
+  stage.addEventListener('pointermove', function(e){ if (R && R.drag){ R.drag.moved = Math.max(R.drag.moved, Math.abs(e.clientX - R.drag.x)); R.yaw = R.drag.yaw + (e.clientX - R.drag.x) * .012; } });
+  stage.addEventListener('pointerup', function(){   // נגיעה קצרה בלי גרירה = דגדוג
+    if (R && R.drag && R.drag.moved < 8 && performance.now() - R.drag.t < 450) tickle(stage);
+    if (R) R.drag = null;
+  });
+  stage.addEventListener('pointercancel', function(){ if (R) R.drag = null; });
+}
+bindDrag($('#stage-shop')); bindDrag($('#stage-hello'));
 
 /* ═══════════ מסכים כלליים ═══════════ */
 var toastT;
@@ -566,13 +890,14 @@ function addStars(n){ G.stars += n; save(); stars(); }
 function stars(){ $('#stars').textContent = '⭐ ' + G.stars; $('#shopnote').textContent = 'יש לכם ' + G.stars + ' ⭐. מרוויחים כוכבים בעולמות, וקונים בהם כאן.'; }
 function brand(){ $('#brand').textContent = 'מלמדים את ' + G.name; }
 function muteIcon(){ $('#mute').textContent = G.muted ? '🔇' : '🔊'; $('#mute').setAttribute('aria-pressed', String(G.muted)); }
-$('#mute').addEventListener('click', function(){ G.muted = !G.muted; save(); muteIcon(); beep('tap'); });
+$('#mute').addEventListener('click', function(){ G.muted = !G.muted; save(); muteIcon(); beep('tap'); if (G.muted) stopTalk(); });
 var screen = 'shop';
 function go(s){
-  screen = s;
+  screen = s; stopTalk();
+  if (s !== 'world') camSrc = null;   // 🔒 התמונה מהמצלמה נמחקת כשיוצאים מהעולם
   ['shop','map','world'].forEach(function(k){ $('#s-' + k).hidden = k !== s; });
   document.querySelectorAll('.tabs button').forEach(function(b){ if (b.dataset.go === s) b.setAttribute('aria-current', 'page'); else b.removeAttribute('aria-current'); });
-  if (s === 'shop') mount('stage-shop');
+  if (s === 'shop'){ mount('stage-shop'); renderMind(); }
   if (s === 'world'){ mount('stage-world'); renderWorld(); }
   if (s === 'map') renderMap();
   window.scrollTo(0, 0);
@@ -604,7 +929,7 @@ function renderWorkshop(){
     var el = $(id); el.value = G.teachers[i]; el.placeholder = TEACHER_DEFAULTS[i];
     el.oninput = function(){ G.teachers[i] = el.value.trim() || TEACHER_DEFAULTS[i]; save(); };
   });
-  renderShop();
+  renderShop(); renderMind();
 }
 function renderShop(){
   var el = $('#shop'); el.innerHTML = '';
@@ -637,21 +962,74 @@ function wear(it){
   if (it.slot) G.worn = G.worn.filter(function(x){ var o = SHOP.filter(function(s){ return s.id === x; })[0]; return !o || o.slot !== it.slot; });
   if (G.worn.indexOf(it.id) < 0) G.worn.push(it.id);
 }
+/* ───────── 🧠 המוח של רובי ─────────
+   כל עולם = אזור במוח (עיגול בצבע של העולם). כל שלב שמסיימים = נקודת אור לבנה באזור,
+   ועולם שלם = האזור דולק לגמרי, עם שם היכולת. קווי האור בין אזורים = חיבורים שנוצרו במוח. */
+var MIND = [[85,112],[132,72],[188,62],[238,80],[270,122],[222,156],[178,112],[118,156],[168,166]];   // מרכז האזור של כל עולם, לפי הסדר במפה
+function mindDone(id){ return prog(id).slice(0, 3).filter(Boolean).length; }   // כמה שלבים בעולם כבר הדליקו נקודת אור
+function mindLit(){ return WORLDS.reduce(function(a, w){ return a + mindDone(w.id); }, 0); }
+function mindHtml(newId, uid){
+  var n = G.name, lit = mindLit(), full = WORLDS.filter(function(w){ return mindDone(w.id) === 3; }).length;
+  var nw = newId && WORLDS.filter(function(w){ return w.id === newId; })[0];
+  var cap = nw && mindDone(newId) === 3 ? 'אזור חדש נדלק במוח: <b>' + nw.skill + '</b>! ' + lit + ' מתוך 27 נקודות אור כבר דולקות.'
+          : lit ? 'דולקות ' + lit + ' מתוך 27 נקודות אור' + (full ? (full === 1 ? ', ואזור שלם אחד' : ', ו-' + full + ' אזורים שלמים') : '') + '. כל שלב שתלמדו את ' + n + ' מדליק עוד אחת.'
+          : 'המוח של ' + n + ' עוד כמעט כבוי. כל שלב שתלמדו אותו ידליק בו נקודת אור, וכל עולם שלם ידליק אזור שלם.';
+  var O = 'M58,150 C28,138 24,98 48,80 C50,46 88,26 122,36 C140,14 190,10 212,30 C246,22 288,46 288,86 C306,104 300,146 270,158 C262,184 222,194 196,180 C176,198 130,198 112,182 C86,190 58,178 58,150 Z';
+  var g = '<svg viewBox="0 0 320 210" role="img" aria-label="המוח של ' + n + ': ' + lit + ' מתוך 27 נקודות אור דולקות">' +
+    '<defs><clipPath id="mc-' + uid + '"><path d="' + O + '"/></clipPath>' +
+    '<filter id="mg-' + uid + '" x="-50%" y="-50%" width="200%" height="200%"><feGaussianBlur stdDeviation="5" result="b"/><feMerge><feMergeNode in="b"/><feMergeNode in="SourceGraphic"/></feMerge></filter></defs>' +
+    '<path d="M186,182 C190,196 196,204 206,206" fill="none" stroke="#3d5288" stroke-width="12" stroke-linecap="round"/>' +
+    '<path d="' + O + '" fill="#34497c" stroke="#9fb6e6" stroke-width="3"/>' +
+    '<g clip-path="url(#mc-' + uid + ')" fill="none" stroke="rgba(255,255,255,.13)" stroke-width="3" stroke-linecap="round">' +
+      '<path d="M48,100 C70,90 80,108 104,98"/><path d="M100,50 C110,66 128,52 150,60"/><path d="M160,40 C176,52 196,36 214,48"/>' +
+      '<path d="M226,46 C236,62 258,54 270,70"/><path d="M150,92 C162,102 150,120 162,134"/><path d="M70,150 C88,140 96,160 116,150"/>' +
+      '<path d="M240,110 C252,122 246,138 262,146"/><path d="M196,132 C208,140 200,156 214,166"/><path d="M130,180 C140,170 156,186 168,176"/></g>';
+  WORLDS.forEach(function(w, i){
+    var c = MIND[i], d = mindDone(w.id), x = c[0], y = c[1];
+    if (!w.ready){
+      g += '<circle cx="' + x + '" cy="' + y + '" r="26" fill="rgba(255,255,255,.05)" stroke="rgba(255,255,255,.22)" stroke-width="2" stroke-dasharray="4 5"/>' +
+           '<text x="' + x + '" y="' + (y + 1) + '" text-anchor="middle" dominant-baseline="middle" font-size="18" fill="rgba(255,255,255,.35)">?</text>';
+      return;
+    }
+    var op = [0.2, 0.45, 0.7, 1][d], isNew = w.id === newId;
+    g += '<g class="zone' + (isNew ? ' new' : '') + '"' + (d === 3 ? ' filter="url(#mg-' + uid + ')"' : '') + '>' +
+         '<circle cx="' + x + '" cy="' + y + '" r="27" fill="' + w.color + '" fill-opacity="' + op + '" stroke="' + (d === 3 ? '#fff' : w.color) + '" stroke-width="' + (d === 3 ? 2.5 : 1.5) + '"/>' +
+         '<text x="' + x + '" y="' + (y - 4) + '" text-anchor="middle" dominant-baseline="middle" font-size="19" opacity="' + (d ? 1 : .55) + '">' + w.icon + '</text>';
+    for (var k = 0; k < 3; k++) g += '<circle cx="' + (x + 10 - k * 10) + '" cy="' + (y + 15 + (k === 1 ? 2 : 0)) + '" r="3.4" fill="' + (prog(w.id)[k] ? '#fff' : 'rgba(255,255,255,.25)') + '"/>';   // שלב 1 מימין
+    g += '</g>';
+    if (isNew && d === 3) g += '<circle class="ring" cx="' + x + '" cy="' + y + '" r="27" fill="none" stroke="#fff" stroke-width="3"/>';
+  });
+  // קווי אור בין עולמות שכנים ששניהם כבר למדו משהו: מקצה אזור אחד לקצה השני, מעל העיגולים
+  for (var i = 1; i < WORLDS.length; i++){
+    if (!mindDone(WORLDS[i-1].id) || !mindDone(WORLDS[i].id)) continue;
+    var A = MIND[i-1], B = MIND[i], dx = B[0] - A[0], dy = B[1] - A[1], L = Math.sqrt(dx*dx + dy*dy), ux = dx / L, uy = dy / L;
+    g += '<line class="syn" x1="' + (A[0] + ux*18) + '" y1="' + (A[1] + uy*18) + '" x2="' + (B[0] - ux*18) + '" y2="' + (B[1] - uy*18) + '" stroke="#fff6c8" stroke-width="3" stroke-linecap="round" opacity=".85"/>';
+  }
+  g += '</svg>';
+  var chips = WORLDS.filter(function(w){ return w.ready && mindDone(w.id); }).map(function(w){
+    var d = mindDone(w.id); return '<span class="' + (d === 3 ? 'on' : '') + '">' + w.icon + ' ' + w.skill + (d < 3 ? ' · ' + d + '/3' : ' ✓') + '</span>';
+  });
+  var dark = WORLDS.filter(function(w){ return !w.ready; }).length;
+  chips.push('<span>❔ עוד ' + dark + ' אזורים מחכים לעולמות הבאים</span>');
+  return '<div class="mind"><h3>🧠 המוח של ' + n + '</h3><p class="cap">' + cap + '</p>' + g + '<div class="abil">' + chips.join('') + '</div></div>';
+}
+function renderMind(){ var b = $('#mindbox'); if (b) b.innerHTML = mindHtml(null, 's'); }
+
 var resetArmed = false;
 $('#reset').addEventListener('click', function(){
   if (!resetArmed){ resetArmed = true; $('#reset').textContent = 'בטוח? כל הכוכבים, הקניות וההתקדמות יימחקו. לחצו שוב לאישור'; setTimeout(function(){ resetArmed = false; $('#reset').textContent = 'להתחיל את כל המשחק מחדש'; }, 5000); return; }
   resetArmed = false; $('#reset').textContent = 'להתחיל את כל המשחק מחדש';
   Object.keys(DEF).forEach(function(k){ G[k] = JSON.parse(JSON.stringify(DEF[k])); }); save();
-  curWorld = 'examples'; W = fresh(0); HIST = []; applyLook(); renderWorkshop(); stars(); brand(); muteIcon(); setMood('idle'); toast('המשחק התחיל מחדש');
+  curWorld = 'examples'; W = fresh(0); HIST = []; applyLook(); renderWorkshop(); stars(); brand(); muteIcon(); readIcon(); setMood('idle'); toast('המשחק התחיל מחדש');
 });
 
 /* ───────── 🗺️ המפה ───────── */
-function worldStars(id){ return prog(id).reduce(function(a, b){ return a + b; }, 0); }
+function worldStars(id){ return prog(id).slice(0, 3).reduce(function(a, b){ return a + b; }, 0); }
 function renderMap(){
   var av = $('#mapav');
   if (R){ try { R.renderer.render(R.scene, R.camera); var img = document.createElement('img'); img.id = 'mapav'; img.alt = G.name; img.src = R.renderer.domElement.toDataURL('image/png'); av.replaceWith(img); } catch(e){} }
   var all = WORLDS.reduce(function(a, w){ return a + worldStars(w.id); }, 0), open = WORLDS.filter(function(w){ return w.ready; }).length;
-  $('#mapsub').textContent = all ? G.name + ' כבר אסף ' + all + ' ⭐ ב-' + open + ' העולמות הפתוחים.' : '9 עולמות. בכל עולם ' + G.name + ' לומד יכולת חדשה.';
+  $('#mapsub').textContent = all ? G.name + ' כבר אסף ' + all + ' ⭐ ב-' + open + ' העולמות הפתוחים, ובמוח שלו דולקות ' + mindLit() + ' נקודות אור.' : '9 עולמות. בכל עולם ' + G.name + ' לומד יכולת חדשה.';
   var nextUp = WORLDS.filter(function(w){ return w.ready && !worldStars(w.id); })[0];   // רק העולם הבא בתור מקבל ״כאן מתחילים״
   var m = $('#map'); m.innerHTML = '<svg class="path" aria-hidden="true"></svg>';
   WORLDS.forEach(function(w, i){
@@ -682,7 +1060,7 @@ window.addEventListener('resize', function(){ if (screen === 'map') drawPath(); 
 
 /* ═══════════ 🌍 עולם: מסגרת כללית ═══════════ */
 var curWorld = 'examples', W;
-function fresh(level){ return {level: level, phase: 'intro', brain: [], rule: null, turn: 0, round: 1, ti: 0, right: 0, guess: null, sel: [], tries: 0,
+function fresh(level){ return {level: level, rid: Math.random(), phase: 'intro', brain: [], rule: null, turn: 0, round: 1, ti: 0, right: 0, guess: null, sel: [], tries: 0,
   paid: {}, lab: {kind: 'cat', color: 'white', ears: 'floppy', size: 'small'},
   lamps: [0, 0, 0], miss: 0, hint: '', res: 0, pts: 0, grid: blank(), shown: false,
   wires: [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0]}; }
@@ -705,29 +1083,80 @@ function act(fn){ return function(){
 function backVis(){ $('#back').hidden = !HIST.length; }
 $('#back').addEventListener('click', function(){ if (!HIST.length) return; W = HIST.pop(); beep('tap'); renderWorld(); window.scrollTo(0, 0); });
 
+/* ═══════════ ⚔️ דו-קרב: מורה נגד מורה ═══════════
+   במצב ״צוות״ משחקים יחד. במצב ״דו-קרב״ כל ניחוש נכון בתור שלך = נקודה לך.
+   יש נקודות בשלב 1 של כל עולם (מנחשים מה רובי יעשה) ובהופעה (מי תופס טעות בתור שלו).
+   בסוף השלב רובי מכריז בקול מי ניצח. הניקוד שייך לשלב, ומתחיל מאפס בכל פעם. */
+var DUEL_LEVELS = [0, SHOW_IDX];
+function duelOn(){ return G.duel && DUEL_LEVELS.indexOf(W.level) >= 0; }
+function duelPoint(i){
+  if (!duelOn()) return;
+  W.duel = (W.duel || [0, 0]).slice(); W.duel[i]++;
+  var b = $('#duelbar'); b.classList.remove('bump'); void b.offsetWidth; b.classList.add('bump');
+}
+function duelWinner(){
+  var d = W.duel || [0, 0], t = G.teachers;
+  return d[0] === d[1] ? 'תיקו! ' + d[0] + ' נקודות לכל אחד 🤝' : 'המנצח: ' + t[d[0] > d[1] ? 0 : 1] + '! 🏆 ' + Math.max(d[0], d[1]) + ' מול ' + Math.min(d[0], d[1]);
+}
+function duelEnd(){   // בסוף שלב: רובי מכריז על המנצח
+  if (!duelOn() || !W.duel || !(W.duel[0] + W.duel[1])) return;
+  W.duelWin = duelWinner();
+  setTimeout(function(){ if (screen !== 'world') return; duelBar(); robotLine(W.duelWin); }, 1100);
+}
+function renderModes(){
+  var t = G.teachers, vs = named() ? t[0] + ' נגד ' + t[1] : 'דו-קרב';
+  $('#modes').innerHTML = '<button type="button" data-m="team" aria-pressed="' + !G.duel + '">👥 צוות</button><button type="button" data-m="duel" aria-pressed="' + !!G.duel + '">⚔️ ' + esc(vs) + '</button>';
+  $('#modes').querySelectorAll('button').forEach(function(b){ b.onclick = function(){
+    var d = b.dataset.m === 'duel'; if (d === !!G.duel) return;
+    G.duel = d; save(); beep('tap'); renderModes(); duelBar();
+    toast(d ? '⚔️ דו-קרב! בשלב 1 ובהופעה, כל ניחוש נכון בתור שלך = נקודה' : '👥 משחקים כצוות');
+  }; });
+}
+function duelBar(){
+  var b = $('#duelbar'), t = G.teachers, d = W.duel || [0, 0];
+  b.hidden = !G.duel;
+  if (!G.duel) return;
+  if (!duelOn()){ b.innerHTML = '<span class="win">⚔️ הדו-קרב בשלב 1 ובהופעה. כאן משחקים כצוות 👥</span>'; return; }
+  b.innerHTML = '<span class="dn' + (d[0] > d[1] ? ' lead' : '') + '">' + esc(t[0]) + ' <b>' + d[0] + '</b></span><span>⚔️</span><span class="dn' + (d[1] > d[0] ? ' lead' : '') + '"><b>' + d[1] + '</b> ' + esc(t[1]) + '</span>' +
+    (W.duelWin ? '<span class="win">' + esc(W.duelWin) + '</span>' : '');
+}
 function teacher(){ return G.teachers[W.turn % 2]; }
-function P(html){ $('#panel').innerHTML = html; }
+function P(html){
+  $('#panel').innerHTML = html;
+  // 🗣️ כשרובי מקריא, בועות הקומיקס שעוד לא הוקראו מופיעות אחת אחרי השנייה, בקצב ההקראה
+  if (reading()) $('#panel').querySelectorAll('.comic').forEach(function(c){
+    var f = c.querySelector('.bub p'); if (f && (lvlKey() !== readKey || !readDone[clean(f.textContent)])) c.classList.add('seq');
+  });
+}
 function on(id, fn){ var el = $('#panel').querySelector('#' + id); if (el) el.onclick = act(fn); }   // מחפשים רק בלוח המשחק, כי גם לחנות ולמפה יש מזהים כמו shop ו-map
+function showBtn(){ return '<button class="btn" id="show" type="button">🎪 ' + G.name + ' רוצה להראות מה למד!</button>'; }   // בסוף כל עולם: ההופעה
 function steps(names, cur){ $('#steps').innerHTML = names.map(function(n, i){ return '<span class="' + (i === cur ? 'on' : '') + '">' + n + '</span>'; }).join(''); }
 function finishLevel(li, st){
   var p = prog(curWorld), first = !p[li];
   p[li] = Math.max(p[li], st); save();
-  if (first){ addStars(STARS_NEW_LEVEL); }
+  duelEnd();
+  if (first){ addStars(STARS_NEW_LEVEL); toast(li < 3 ? '✨ נדלקה נקודת אור חדשה במוח של ' + G.name + '!' : '🎁 סיימתם שלב בונוס! הרווחתם ' + STARS_NEW_LEVEL + ' ⭐'); }
   return first;
 }
 function renderWorld(){
   var w = WORLDS.filter(function(x){ return x.id === curWorld; })[0], mech = MECHANICS[w.id], p = prog(w.id);
   $('#w-title').textContent = w.icon + ' ' + w.name; $('#w-sub').textContent = w.sub + '. יכולת חדשה ל' + G.name + ': ' + w.ability + '.';
-  say(''); paintHook = null; gridMin = 4; animTok++;
+  say(''); paintHook = null; gridMin = 4; animTok++; noSleep = 0;
+  if (curWorld !== 'pixels' || W.level !== 3) camSrc = null;   // 🔒 יוצאים מהפיקסל הקסום = התמונה נמחקת
   G.cur = {w: curWorld, l: W.level}; store.set('cur', G.cur);   // 💾 בפעם הבאה ממשיכים מהשלב הזה
   mech.levels[W.level].run();      // קודם השלב עצמו (הוא יכול לעדכן כוכבים), ואחר כך שורת השלבים
-  $('#levels').innerHTML = mech.levels.map(function(L, i){
-    var open = i === 0 || p[i-1] > 0;
-    return '<button type="button" data-l="' + i + '" aria-pressed="' + (W.level === i) + '"' + (open ? '' : ' disabled') + '><b>' + (i+1) + '. ' + L.name + '</b>' +
-      (open ? (p[i] ? '⭐'.repeat(p[i]) + '☆'.repeat(3 - p[i]) : '☆☆☆') : '🔒') + '</button>';
-  }).join('');
+  // שורה ראשונה: 3 השלבים. שורה שנייה: 🎁 בונוס ו-🎪 הופעה, שנפתחים אחרי שלב 3
+  var row1 = '', row2 = '';
+  mech.levels.forEach(function(L, i){
+    if (!L) return;
+    var open = i < 3 ? (i === 0 || p[i-1] > 0) : p[2] > 0;
+    var b = '<button type="button" data-l="' + i + '" aria-pressed="' + (W.level === i) + '"' + (open ? '' : ' disabled') + '><b>' + (i < 3 ? (i+1) + '. ' : L.ico + ' ') + L.name + '</b>' +
+      (open ? (p[i] ? '⭐'.repeat(p[i]) + '☆'.repeat(3 - p[i]) : '☆☆☆') : (i < 3 ? '🔒' : '🔒 אחרי שלב 3')) + '</button>';
+    if (i < 3) row1 += b; else row2 += b;
+  });
+  $('#levels').innerHTML = row1 + (row2 ? '<div class="lx">' + row2 + '</div>' : '');
   $('#levels').querySelectorAll('button').forEach(function(b){ b.onclick = act(function(){ W = fresh(+b.dataset.l); renderWorld(); }); });
-  backVis();
+  renderModes(); duelBar(); backVis();
 }
 
 /* ═══════════ 🐾 יער הדוגמאות: הרובוט לומד ״חוק״ מדוגמאות ═══════════
@@ -910,7 +1339,7 @@ function guess1(g){
   if (ok) W.right++;
   W.paidNow = ok === g && !W.paid[key];
   W.paid[key] = true;
-  if (W.paidNow) addStars(STARS_GOOD_GUESS);
+  if (W.paidNow){ addStars(STARS_GOOD_GUESS); duelPoint((W.turn + 1) % 2); }   // ⚔️ הנקודה למי שניחש (התור כבר עבר הלאה)
   renderWorld();
 }
 
@@ -1027,15 +1456,16 @@ function level3(){
         P('<h3>' + n + ' צריך ללמוד לחשוב אחרת</h3>' + featRow(null) +
           '<div class="rule">🧠 צבע לא עוזר, אוזניים לא עוזרות, וגם גודל לא. כדי להבדיל, ' + n + ' צריך לשאול <b>כמה שאלות ביחד</b>, בזו אחר זו.</div>' +
           '<p>את זה נלמד בעולם 4, <b>עץ השאלות 🌳</b>.</p>' +
-          '<p>⭐⭐⭐ סיימתם את יער הדוגמאות!' + (first ? ' הרווחתם ' + STARS_NEW_LEVEL + ' ⭐ לחנות.' : '') + '</p>' +
-          '<div class="row"><button class="btn" id="next" type="button">🎨 לעולם 2: עיר הפיקסלים</button><button class="btn alt" id="shop" type="button">🛠️ לחנות התוספות</button></div>');
+          '<p>⭐⭐⭐ סיימתם את יער הדוגמאות!' + (first ? ' הרווחתם ' + STARS_NEW_LEVEL + ' ⭐ לחנות.' : '') + '</p>' + mindHtml(curWorld, 'w') +
+          showBtn() + '<div class="row"><button class="btn alt" id="next" type="button">🎨 לעולם 2: עיר הפיקסלים</button><button class="btn alt" id="shop" type="button">🛠️ לחנות התוספות</button></div>');
       } else {
         setMood('think'); say('אה! עכשיו אני מסתכל על ה' + rule.label + '.');
-        P('<h3>' + n + ' מצא חוק חדש</h3>' + featRow(rule) + '<div class="rule">' + ruleText(rule) + '</div><p>⭐⭐⭐ סיימתם את יער הדוגמאות!</p>' +
-          '<div class="row"><button class="btn" id="next" type="button">🎨 לעולם 2: עיר הפיקסלים</button><button class="btn alt" id="shop" type="button">🛠️ לחנות התוספות</button></div>');
+        P('<h3>' + n + ' מצא חוק חדש</h3>' + featRow(rule) + '<div class="rule">' + ruleText(rule) + '</div><p>⭐⭐⭐ סיימתם את יער הדוגמאות!</p>' + mindHtml(curWorld, 'w') +
+          showBtn() + '<div class="row"><button class="btn alt" id="next" type="button">🎨 לעולם 2: עיר הפיקסלים</button><button class="btn alt" id="shop" type="button">🛠️ לחנות התוספות</button></div>');
       }
       on('shop', function(){ go('shop'); });
       on('next', function(){ enterWorld('pixels'); });
+      on('show', function(){ W = fresh(SHOW_IDX); renderWorld(); window.scrollTo(0, 0); });
     })();
   }
 }
@@ -1104,7 +1534,7 @@ function pix1(){
         return;
       }
       var isNew = !W.paid[key], first = isNew ? !W.miss : W.paid[key] === 'first';   // כוכב רק על הצלחה בניסיון הראשון, ורק פעם אחת
-      if (isNew){ W.paid[key] = first ? 'first' : 'late'; if (first) addStars(STARS_GOOD_GUESS); }
+      if (isNew){ W.paid[key] = first ? 'first' : 'late'; if (first){ addStars(STARS_GOOD_GUESS); duelPoint(W.turn % 2); } }
       if (first) W.right++;
       first = first && isNew;
       W.turn++; W.miss = 0; W.hint = ''; W.lamps = [0, 0, 0];
@@ -1339,10 +1769,11 @@ function pix3(){
     P('<h3>' + n + ' צריך ללמוד לראות אחרת</h3>' +
       '<div class="rule">🧠 מחשבים חכמים באמת לא משווים פיקסל אחרי פיקסל. הם מחפשים קודם קווים, אחר כך צורות, ורק בסוף מחליטים מה בתמונה. כל שלב כזה נקרא <b>שכבה</b>, וככה הם מזהים לב גם כשהוא קטן או זז.</div>' +
       '<p>את זה נלמד בעולם 3, <b>מגדל השכבות 🧠</b>.</p>' +
-      '<p>⭐⭐⭐ סיימתם את עיר הפיקסלים!' + (W.first ? ' הרווחתם ' + STARS_NEW_LEVEL + ' ⭐ לחנות.' : '') + '</p>' +
-      '<div class="row"><button class="btn" id="next" type="button">🧠 לעולם 3: מגדל השכבות</button><button class="btn alt" id="shop" type="button">🛠️ לחנות התוספות</button></div>');
+      '<p>⭐⭐⭐ סיימתם את עיר הפיקסלים!' + (W.first ? ' הרווחתם ' + STARS_NEW_LEVEL + ' ⭐ לחנות.' : '') + '</p>' + mindHtml(curWorld, 'w') +
+      showBtn() + '<div class="row"><button class="btn alt" id="next" type="button">🧠 לעולם 3: מגדל השכבות</button><button class="btn alt" id="shop" type="button">🛠️ לחנות התוספות</button></div>');
     on('shop', function(){ go('shop'); });
     on('next', function(){ enterWorld('layers'); });
+    on('show', function(){ W = fresh(SHOW_IDX); renderWorld(); window.scrollTo(0, 0); });
   }
 }
 
@@ -1452,7 +1883,7 @@ function lay1(){
         if (isNew) W.paid[key] = ok ? 'ok' : 'no';     // הניחוש הראשון קובע את הכוכב, גם אם חוזרים אחורה
         if (W.paid[key] === 'ok') W.right++;
         W.okNow = ok; W.paidNow = isNew && ok;
-        if (W.paidNow) addStars(STARS_GOOD_GUESS);
+        if (W.paidNow){ addStars(STARS_GOOD_GUESS); duelPoint(W.turn % 2); }
         W.turn++; W.shown = true; W.anim = true;
         var keep = window.scrollY; renderWorld(); window.scrollTo(0, keep);
       });
@@ -1600,20 +2031,549 @@ function lay3(){
   }
   else if (ph === 'end'){
     steps(ST, 3); setMood('happy'); say('עכשיו אני יודע איך אני חושב! 🧠');
-    P('<h3>סיימתם את מגדל השכבות! ⭐⭐⭐</h3>' + (W.first ? '<p>הרווחתם ' + STARS_NEW_LEVEL + ' ⭐ לחנות.</p>' : '') +
+    P('<h3>סיימתם את מגדל השכבות! ⭐⭐⭐</h3>' + (W.first ? '<p>הרווחתם ' + STARS_NEW_LEVEL + ' ⭐ לחנות.</p>' : '') + mindHtml(curWorld, 'w') +
       '<div class="rule">🧠 מה למדנו: מוח מלאכותי בנוי מקומות של נוירונים. הקומה הראשונה מוצאת קווים, הקומה הבאה מחברת אותם לצורות, והקומות העליונות מחליטות מה רואים. ככה טלפון מזהה פנים, ומכונית חכמה מזהה תמרור.</div>' +
       '<p>בעולם 4, <b>עץ השאלות 🌳</b>, ' + n + ' ילמד לקבל החלטות בעזרת שאלות של כן ולא.</p>' +
-      '<div class="row"><button class="btn" id="shop" type="button">🛠️ לחנות התוספות</button><button class="btn alt" id="map" type="button">🗺️ למפה</button></div>');
+      showBtn() + '<div class="row"><button class="btn alt" id="shop" type="button">🛠️ לחנות התוספות</button><button class="btn alt" id="map" type="button">🗺️ למפה</button></div>');
     on('shop', function(){ go('shop'); });
     on('map', function(){ go('map'); });
+    on('show', function(){ W = fresh(SHOW_IDX); renderWorld(); window.scrollTo(0, 0); });
   }
 }
 
-/* 🧩 המכניקות: כל עולם בנוי מ-3 שלבים */
+
+/* ═══════════ 🎪 תפסו את הטעות ═══════════
+   בסוף כל עולם רובי עולה לבמה ומראה מהר 8 דברים שלמד. לפעמים הוא טועה, בדיוק כמו בינה מלאכותית אמיתית,
+   וגם אז הוא בטוח בעצמו. כשרואים טעות לוחצים ״😮 טעות!״. לחיצה כשהוא צודק = אזעקת שווא.
+   מה לומדים: מכונה חכמה טועה לפעמים, ולכן בן אדם צריך לבדוק אותה. השיא נשמר ב-prog[4]. */
+var SHOW_N = 8, SHOW_IDX = 4;
+function shuffle(a){ a = a.slice(); for (var i = a.length - 1; i > 0; i--){ var j = Math.floor(Math.random() * (i + 1)), t = a[i]; a[i] = a[j]; a[j] = t; } return a; }
+function pick(a){ return a[Math.floor(Math.random() * a.length)]; }
+// 8 פריטים: 3 עם טעות ו-5 בלי. הראשון תמיד נכון, כדי להתחמם
+function showMix(wrongs, rights){
+  var w = shuffle(wrongs).slice(0, 3), r = shuffle(rights).slice(0, SHOW_N - w.length);
+  var first = r.shift(); return [first].concat(shuffle(w.concat(r)));
+}
+function sgrid(g){ return '<div class="pg">' + g.map(function(v){ return '<i' + (v ? ' class="on"' : '') + '></i>'; }).join('') + '</div>'; }
+var SHOW_COLORS = [
+  {name: 'אדום', l: [2, 0, 0]}, {name: 'ירוק', l: [0, 2, 0]}, {name: 'כחול', l: [0, 0, 2]}, {name: 'צהוב', l: [2, 2, 0]},
+  {name: 'ורוד', l: [2, 0, 2]}, {name: 'תכלת', l: [0, 2, 2]}, {name: 'לבן', l: [2, 2, 2]}, {name: 'אפור', l: [1, 1, 1]},
+  {name: 'כתום', l: [2, 1, 0]}, {name: 'שחור', l: [0, 0, 0]}, {name: 'סגול', l: [1, 0, 2]}
+];
+var SHOW_SHAPES = [   // ציורים למגדל. t = מה זה באמת, sh = איזו צורה זו (אם זו צורה שהמגדל מכיר)
+  {t: 'ריבוע', sh: 'sq', g: SHP[0].g}, {t: 'משולש', sh: 'tri', g: SHP[1].g}, {t: 'איקס', sh: 'x', g: SHP[2].g},
+  {t: 'ריבוע קטן', sh: 'sq', g: g8(['........', '........', '........', '....####', '....#..#', '....#..#', '....####', '........'])},
+  {t: 'משולש קטן', sh: 'tri', g: g8(['........', '........', '........', '........', '...#....', '..#.#...', '.#...#..', '#######.'])},
+  {t: 'משולש הפוך', sh: 'tri', g: g8(['........', '#######.', '.#...#..', '..#.#...', '...#....', '........', '........', '........'])},
+  {t: 'איקס קטן', sh: 'x', g: g8(['#...#...', '.#.#....', '..#.....', '.#.#....', '#...#...', '........', '........', '........'])},
+  {t: 'בית', g: L1[3].g},
+  {t: 'פלוס', g: g8(['...#....', '...#....', '...#....', '#######.', '...#....', '...#....', '...#....', '........'])},
+  {t: 'קו', g: g8(['........', '...#....', '...#....', '...#....', '...#....', '...#....', '........', '........'])},
+  {t: 'עיגול', g: g8(['..####..', '.#....#.', '#......#', '#......#', '#......#', '#......#', '.#....#.', '..####..'])},
+  {t: 'האות וי', g: g8(['#.....#.', '.#...#..', '..#.#...', '...#....', '........', '........', '........', '........'])},
+  {t: 'זווית', g: g8(['.#......', '.#......', '.#......', '.#......', '.#####..', '........', '........', '........'])}
+];
+function lampsHtml(l){
+  return '<div class="shl">' + CH.map(function(c, i){
+    var col = l[i] === 2 ? c[1] : l[i] === 1 ? 'color-mix(in srgb,' + c[1] + ' 50%,#2a2f33)' : '#2a2f33';
+    return '<span><i style="background:' + col + (l[i] ? ';box-shadow:0 0 ' + (l[i] * 9) + 'px ' + c[1] : '') + '"></i>' + c[0] + '<br>' + LV_HE[l[i]] + '</span>';
+  }).join('') + '</div>';
+}
+var SHOWS = {
+  examples: {ms: 3800, intro: 'הוא יגיד על כל חיה אם היא חתול או כלב.',
+    lesson: '🐾 ' + 'רובי למד רק מהאוזניים, כי בכל הדוגמאות שראה היו לחתולים אוזניים זקופות. חתול עם אוזניים מקופלות, או כלב עם אוזניים זקופות, מבלבלים אותו.',
+    make: function(){
+      var rule = learn(KNOWN), cols = Object.keys(C_HE), wr = [], rt = [];
+      for (var i = 0; i < 12; i++){
+        var kind = i % 2 ? 'cat' : 'dog', odd = i < 4;   // 4 חיות ״הפוכות״ ו-8 רגילות
+        var a = A('s' + i, kind, pick(cols), pick(['small', 'big']), odd ? (kind === 'cat' ? 'floppy' : 'pointy') : null);
+        var say = predict(rule, a, KNOWN).kind;
+        var it = {vis: '<div class="big">' + animalSVG(a) + '</div>', says: 'זה ' + K_HE[say] + '!', wrong: say !== a.kind,
+          truth: say !== a.kind ? 'בעצם זה ' + K_HE[a.kind] + ', עם ' + E_HE[a.ears] + '.' : 'נכון, זה ' + K_HE[a.kind] + '.'};
+        (it.wrong ? wr : rt).push(it);
+      }
+      return showMix(wr, rt);
+    }},
+  pixels: {ms: 5200, intro: 'הוא יקרא כמה חזק דולק כל פנס, ויגיד איזה צבע יוצא.',
+    lesson: '🎨 ' + 'רובי לא רואה צבעים כמו שאנחנו רואים. הוא רואה רק שלושה מספרים, כמה חזק כל פנס. כשהוא מתבלבל במספר אחד, יוצא לו צבע אחר לגמרי.',
+    make: function(){
+      var wr = [], rt = [];
+      shuffle(SHOW_COLORS).forEach(function(c, i){
+        var near = SHOW_COLORS.filter(function(o){ return o !== c && o.l.filter(function(v, k){ return v !== c.l[k]; }).length === 1; });
+        var bad = i < 4 && near.length ? pick(near) : null;   // טעות = רובי התבלבל בפנס אחד
+        var it = {vis: lampsHtml(c.l), says: 'זה ' + (bad || c).name + '!', wrong: !!bad,
+          truth: (bad ? 'בעצם יוצא ' : 'נכון, יוצא ') + c.name + '.', after: '<span class="swatch" style="background:' + rgb(c.l) + '"></span>'};
+        (it.wrong ? wr : rt).push(it);
+      });
+      return showMix(wr, rt);
+    }},
+  layers: {ms: 4800, intro: 'הוא יראה ציורים, והמגדל שלו יגיד איזו צורה יש בהם.',
+    lesson: '🧠 ' + 'המגדל בודק רק אילו קווים יש בציור, ולא איך הם מחוברים. לכן בית, פלוס או עיגול יכולים לבלבל אותו. כדי לתקן, מוסיפים עוד קומות.',
+    make: function(){
+      var net = myNet(), wr = [], rt = [];
+      SHOW_SHAPES.forEach(function(d){
+        var out = netOut(net, d.g), ok = d.sh ? out.length === 1 && out[0].id === d.sh : !out.length;
+        var it = {vis: sgrid(d.g), says: out.length ? 'זה ' + out.map(function(o){ return o.name; }).join(' וגם ') + '!' : 'זו לא צורה שאני מכיר!', wrong: !ok,
+          truth: ok ? 'נכון, זה ' + d.t + '.' : 'בעצם זה ' + d.t + '.'};
+        (it.wrong ? wr : rt).push(it);
+      });
+      return showMix(wr, rt);
+    }}
+};
+function showLevel(){
+  var S = SHOWS[curWorld], n = G.name, ST = ['הסבר', 'הופעה', 'תוצאה'], p = prog(curWorld);
+  if (W.phase === 'run') W.phase = 'intro';   // חזרתם באמצע ההופעה? מתחילים אותה מחדש
+  if (W.phase === 'intro'){
+    steps(ST, 0); setMood('happy'); say('תראו מה למדתי! 🎪 אבל שימו לב, לפעמים אני טועה…');
+    P(comic([['🎪', n + ' עולה לבמה ומראה לכם ' + SHOW_N + ' דברים, מהר, אחד אחרי השני. ' + S.intro],
+              ['😮', 'כשאתם חושבים ש' + n + ' טועה, לחצו מהר על <b>״טעות!״</b>. כשהוא צודק, לא לוחצים.'],
+              ['🚨', 'זהירות: לחיצה כש' + n + ' צודק היא אזעקת שווא!']]) +
+      (p[SHOW_IDX] ? '<p>השיא שלכם בעולם הזה: ' + '⭐'.repeat(p[SHOW_IDX]) + '☆'.repeat(3 - p[SHOW_IDX]) + '</p>' : '') +
+      '<button class="btn" id="go" type="button">▶ ההופעה מתחילה!</button>');
+    on('go', startShow);
+  }
+  else if (W.phase === 'end'){
+    var mist = W.items.filter(function(i){ return i.wrong; }).length;
+    var st = W.caught === mist && !W.falseA ? 3 : W.caught >= mist - 1 && W.falseA <= 1 ? 2 : W.caught ? 1 : 0;
+    if (!W.scored){ W.scored = true; W.gain = Math.max(0, st - p[SHOW_IDX]); if (W.gain){ p[SHOW_IDX] = st; addStars(W.gain); } save(); }
+    steps(ST, 2);
+    if (st === 3){ setMood('worry'); say('וואו, תפסתם את כל הטעויות שלי! אתם בודקים מעולים 🕵️'); }
+    else { setMood('happy'); say(W.missed ? 'חה! הצלחתי להבריח ' + W.missed + ' טעויות 😜' : 'כמעט! נסו שוב 😄'); }
+    var wi = WORLDS.indexOf(WORLDS.filter(function(x){ return x.id === curWorld; })[0]), nx = WORLDS[wi + 1];
+    P('<h3>' + (st === 3 ? 'מושלם! תפסתם את כל הטעויות 🏆' : 'תפסתם ' + W.caught + ' מתוך ' + mist + ' טעויות') + '</h3>' +
+      '<div class="sscore"><span>😮 תפסתם: ' + W.caught + '</span><span>🙈 פספסתם: ' + W.missed + '</span><span>🚨 אזעקות שווא: ' + W.falseA + '</span></div>' +
+      '<p>' + '⭐'.repeat(st) + '☆'.repeat(3 - st) + (W.gain ? ' · הרווחתם ' + W.gain + ' ⭐ לחנות' : '') + '</p>' +
+      '<div class="rule">' + S.lesson + '</div>' +
+      '<div class="rule">🕵️ מה למדנו: גם בינה מלאכותית טועה, ולפעמים היא טועה בביטחון מלא. לכן תמיד צריך בן אדם שבודק אותה, בדיוק כמו שאתם עשיתם עכשיו.</div>' +
+      '<div class="row"><button class="btn" id="again" type="button">🔁 עוד הופעה</button>' +
+      (nx && nx.ready ? '<button class="btn alt" id="walk" type="button">🚶 ' + n + ' הולך ל' + nx.name + '</button>' : '<button class="btn alt" id="map" type="button">🗺️ למפה</button>') + '</div>');
+    if (st === 3){ confetti(); beep('win'); }
+    on('again', startShow);
+    on('walk', function(){ walkTo(curWorld, nx.id); });
+    on('map', function(){ go('map'); });
+  }
+}
+function startShow(){
+  W.phase = 'run'; W.items = SHOWS[curWorld].make(); W.si = 0; W.caught = 0; W.falseA = 0; W.missed = 0; W.scored = false; W.gain = 0;
+  stopTalk(); noSleep = 1; steps(['הסבר', 'הופעה', 'תוצאה'], 1);
+  showItem(++animTok);
+}
+function showItem(tok){
+  if (tok !== animTok || screen !== 'world'){ noSleep = 0; return; }
+  var it = W.items[W.si], ms = SHOWS[curWorld].ms;
+  W.judged = false; setMood('happy');
+  P('<div class="show" id="show">' +
+      '<div class="shead"><span>🎪 ' + (W.si + 1) + ' מתוך ' + W.items.length + '</span>' + (duelOn() ? '<span>⚔️ תור של: ' + esc(G.teachers[W.si % 2]) + '</span>' : '<span>😮 תפסתם: ' + W.caught + '</span>') + '</div>' +
+      '<div class="sbar"><i style="animation-duration:' + ms + 'ms"></i></div>' +
+      '<div class="svis">' + it.vis + '</div>' +
+      '<div class="ssay">' + G.name + ': ' + it.says + '</div>' +
+      '<div class="sres" id="sres" aria-live="polite"></div>' +
+      '<button class="btn oops" id="oops" type="button">😮 טעות!</button></div>');
+  $('#wsay').textContent = it.says;
+  if (reading()) speakList([{text: clean(it.says), robot: true}]);
+  var t = setTimeout(function(){ judge(tok, false); }, ms);
+  $('#panel').querySelector('#oops').onclick = function(){ clearTimeout(t); judge(tok, true); };
+}
+function judge(tok, pressed){
+  if (tok !== animTok || screen !== 'world' || W.judged) return;
+  W.judged = true;
+  var it = W.items[W.si], n = G.name, res, ok;
+  if (pressed && it.wrong){ W.caught++; ok = true; duelPoint(W.si % 2); duelBar(); res = '✓ תפסתם את ' + n + '! ' + it.truth; beep('good'); setMood('worry', 1400); say('אופס! תפסתם אותי 😳'); }
+  else if (pressed){ W.falseA++; ok = false; res = '🚨 אזעקת שווא! ' + n + ' צדק. ' + it.truth; beep('bad'); setMood('happy', 1400); say('הי! צדקתי 😤'); }
+  else if (it.wrong){ W.missed++; ok = false; res = '🙈 פספסתם! ' + n + ' טעה. ' + it.truth; beep('bad'); setMood('happy', 1400); say('הה, אף אחד לא שם לב 😜'); }
+  else { ok = true; res = '✓ ' + it.truth; }
+  var sh = $('#show'); if (sh) sh.classList.add('paused');
+  var r = $('#sres'); if (r){ r.className = 'sres ' + (ok ? 'ok' : 'no'); r.innerHTML = '<span>' + res + '</span>' + (it.after || ''); }
+  var o = $('#panel').querySelector('#oops'); if (o) o.disabled = true;
+  setTimeout(function(){
+    if (tok !== animTok || screen !== 'world') return;
+    W.si++;
+    if (W.si < W.items.length) showItem(tok);
+    else { noSleep = 0; W.phase = 'end'; duelEnd(); renderWorld(); window.scrollTo(0, 0); }
+  }, pressed || it.wrong ? 2400 : 1500);
+}
+/* 🚶 רובי הולך על השביל במפה לעולם הבא */
+function walkTo(from, to){
+  var name = WORLDS.filter(function(x){ return x.id === to; })[0].name;
+  go('map');
+  var ids = WORLDS.map(function(x){ return x.id; }), nodes = $('#map').querySelectorAll('.node');
+  var a = nodes[ids.indexOf(from)], b = nodes[ids.indexOf(to)];
+  function arrive(){ toast('✨ ' + G.name + ' הגיע ל' + name + '!'); enterWorld(to); }
+  if (!a || !b || RM){ arrive(); return; }
+  window.scrollTo(0, Math.max(0, a.getBoundingClientRect().top + window.scrollY - 150));
+  var box = $('#map').getBoundingClientRect(), ra = a.querySelector('.isl').getBoundingClientRect(), rb = b.querySelector('.isl').getBoundingClientRect();
+  var w = document.createElement('div'), av = $('#mapav');
+  w.className = 'walker'; w.innerHTML = av && av.tagName === 'IMG' ? '<img alt="" src="' + av.src + '">' : '<b>🤖</b>';
+  w.style.left = (ra.left - box.left + ra.width / 2) + 'px'; w.style.top = (ra.top - box.top + ra.height / 2) + 'px';
+  $('#map').appendChild(w); beep('tap');
+  var dx = rb.left - ra.left, dy = rb.top - ra.top;
+  var anim = w.animate([{transform: 'translate(0,0)'}, {transform: 'translate(' + dx * .5 + 'px,' + (dy * .5 - 30) + 'px)'}, {transform: 'translate(' + dx + 'px,' + dy + 'px)'}],
+    {duration: 1800, easing: 'ease-in-out', fill: 'forwards'});
+  anim.onfinish = function(){ beep('good'); setTimeout(function(){ if (screen === 'map') arrive(); }, 350); };
+}
+
+
+/* ═══════════ 🎁 בונוס ביער: החוק הסודי של רובי ═══════════
+   סיבוב 1: לרובי יש מועדון עם חוק סודי (למשל ״רק חיות כתומות״). בונים חיות, בודקים מי נכנס, ומנחשים את החוק.
+   סיבוב 2: מתחלפים. אתם בוחרים חוק, ורובי בודק חיות ופוסל השערות עד שנשארת אחת.
+   ככה בדיוק מכונה לומדת: כל דוגמה פוסלת חוקים שלא מתאימים לה. */
+var SR_PL = {black:'שחורות', brown:'חומות', white:'לבנות', orange:'כתומות', grey:'אפורות'};
+var SRULES = [
+  {f:'kind', v:'cat', he:'רק חתולים', sh:'חתולים'}, {f:'kind', v:'dog', he:'רק כלבים', sh:'כלבים'},
+  {f:'ears', v:'pointy', he:'רק חיות עם אוזניים זקופות', sh:'זקופות'}, {f:'ears', v:'floppy', he:'רק חיות עם אוזניים מקופלות', sh:'מקופלות'},
+  {f:'size', v:'small', he:'רק חיות קטנות', sh:'קטנות'}, {f:'size', v:'big', he:'רק חיות גדולות', sh:'גדולות'}
+].concat(Object.keys(C_HE).map(function(c){ return {f:'color', v:c, he:'רק חיות ' + SR_PL[c], sh:SR_PL[c]}; }));
+SRULES.forEach(function(r, i){ r.i = i; });
+var SR_GROUPS = [['kind', 'סוג'], ['color', 'צבע'], ['ears', 'אוזניים'], ['size', 'גודל']];
+function inClub(r, a){ return a[r.f] === r.v; }
+function akey(a){ return [a.kind, a.color, a.ears, a.size].join('|'); }
+function allAnimals(){
+  var o = [];
+  ['cat', 'dog'].forEach(function(k){ Object.keys(C_HE).forEach(function(c){ ['pointy', 'floppy'].forEach(function(e){ ['small', 'big'].forEach(function(z){ o.push(A('z' + o.length, k, c, z, e)); }); }); }); });
+  return o;
+}
+function rulesHtml(mark, locked){   // mark(r) = '' · 'bad' (ניחוש שגוי) · 'gone' (נפסל) · 'keep' (עוד אפשרי)
+  return '<div class="rules">' + SR_GROUPS.map(function(g){
+    return '<div class="rrow"><span class="lbl">' + g[1] + '</span><div class="opts">' + SRULES.filter(function(r){ return r.f === g[0]; }).map(function(r){
+      var m = mark(r);
+      return '<button type="button" class="' + m + '" data-r="' + r.i + '"' + (locked || m === 'bad' ? ' disabled' : '') + '>' + r.sh + '</button>';
+    }).join('') + '</div></div>';
+  }).join('') + '</div>';
+}
+function clubCols(list){
+  function box(f){ var xs = list.filter(function(t){ return t.in === f; }); return '<div class="brain">' + (xs.length ? xs.map(function(t){ return animalSVG(t.a); }).join('') : '<span class="empty">עוד אין</span>') + '</div>'; }
+  return '<div class="two club"><div><span class="lbl">✅ בפנים</span>' + box(true) + '</div><div><span class="lbl">❌ בחוץ</span>' + box(false) + '</div></div>';
+}
+function robotPick(H, asked){   // רובי בוחר חיה שמחלקת את החוקים שנשארו הכי קרוב לחצי-חצי
+  var best = null, bs = 1e9;
+  shuffle(allAnimals()).forEach(function(a){
+    if (asked.some(function(t){ return akey(t.a) === akey(a); })) return;
+    var inn = H.filter(function(i){ return inClub(SRULES[i], a); }).length, d = Math.abs(2 * inn - H.length);
+    if (d < bs){ bs = d; best = a; }
+  });
+  return best;
+}
+function starsOf(total){ return total <= 4 ? 3 : total <= 7 ? 2 : 1; }
+function secretLevel(){
+  var n = G.name, ph = W.phase, ST = ['הסבר', 'בודקים', 'מתחלפים', n + ' מנחש', 'סיום'];
+  if (ph === 'intro'){
+    steps(ST, 0); setMood('happy', 1500); say('יש לי סוד… 🤫');
+    P(comic([['🤫', n + ' פתח מועדון לחיות, ויש לו חוק סודי: רק חיות מסוג מסוים נכנסות.'],
+              ['🧪', 'בנו חיות במעבדה ובדקו אותן. כל בדיקה מראה אם החיה בפנים או בחוץ.'],
+              ['🏆', 'גלו את החוק בכמה שפחות בדיקות! עד 4 בדיקות זה ⭐⭐⭐. ואחר כך מתחלפים…']]) +
+      '<button class="btn" id="go" type="button">🔍 לגלות את הסוד</button>');
+    on('go', function(){ W.phase = 'probe'; W.sec = Math.floor(Math.random() * SRULES.length); W.brain = []; W.sel = []; W.tries = 0; W.msg = ''; renderWorld(); });
+  }
+  else if (ph === 'probe'){
+    steps(ST, 1); var L = W.lab, a = A('lab', L.kind, L.color, L.size, L.ears);
+    say(W.msg || 'בנו חיה ובדקו אם היא נכנסת למועדון שלי 🤫');
+    function opts(key, list){ return '<div class="opts">' + list.map(function(o){ return '<button type="button" data-k="' + key + '" data-v="' + o[0] + '" aria-pressed="' + (L[key] === o[0]) + '">' + o[1] + '</button>'; }).join('') + '</div>'; }
+    P('<h3>🔍 מי נכנס למועדון של ' + n + '?</h3>' + '<span class="turn">בודק/ת: ' + teacher() + '</span>' +
+      '<div class="labx">' + opts('kind', [['cat', '🐱 חתול'], ['dog', '🐶 כלב']]) +
+      opts('color', Object.keys(C_HE).map(function(c){ return [c, '<span class="dot" style="background:' + C_HEX[c] + '"></span>' + C_HE[c]]; })) +
+      opts('ears', [['pointy', 'אוזניים זקופות'], ['floppy', 'אוזניים מקופלות']]) + opts('size', [['small', 'קטן'], ['big', 'גדול']]) + '</div>' +
+      '<div class="big">' + animalSVG(a) + '</div>' +
+      '<button class="btn" id="test" type="button">🔍 לבדוק את החיה</button>' +
+      '<span class="small-note">בדיקות עד עכשיו: ' + W.brain.length + (W.tries ? ' · ניחושים שגויים: ' + W.tries : '') + '</span>' + clubCols(W.brain) +
+      '<h3>🤔 יודעים מה החוק? ' + n + ' מכניס רק…</h3>' + rulesHtml(function(r){ return W.sel.indexOf(r.i) >= 0 ? 'bad' : ''; }));
+    $('#panel').querySelectorAll('.labx button').forEach(function(b){ b.onclick = function(){ W.lab[b.dataset.k] = b.dataset.v; beep('tap'); var keep = window.scrollY; renderWorld(); window.scrollTo(0, keep); }; });
+    on('test', function(){
+      if (W.brain.some(function(t){ return akey(t.a) === akey(a); })){ toast('את החיה הזאת כבר בדקתם. שנו משהו אחד!'); return; }
+      var inn = inClub(SRULES[W.sec], a), keep = window.scrollY;
+      W.brain = W.brain.concat([{a: a, in: inn}]); W.turn++;
+      W.msg = 'בדיקה ' + W.brain.length + ': ' + (inn ? 'בפנים! ✅ ברוכה הבאה למועדון' : 'בחוץ! ❌ סליחה, לא נכנסים');
+      setMood(inn ? 'happy' : 'sad', 1300); beep(inn ? 'good' : 'bad');
+      renderWorld(); window.scrollTo(0, keep);
+    });
+    $('#panel').querySelectorAll('.rules button').forEach(function(b){ b.onclick = act(function(){
+      var i = +b.dataset.r, keep = window.scrollY;
+      if (i === W.sec){ W.k1 = W.brain.length + W.tries; W.st = starsOf(W.k1); W.phase = 'got'; renderWorld(); window.scrollTo(0, 0); }
+      else { W.sel = W.sel.concat([i]); W.tries++; W.msg = 'לא! 😄 זה לא החוק שלי. בדקו עוד חיות'; setMood('happy', 1300); beep('bad'); renderWorld(); window.scrollTo(0, keep); }
+    }); });
+  }
+  else if (ph === 'got'){
+    steps(ST, 1); setMood('worry'); beep('win'); confetti(); say('גיליתם את הסוד שלי! 😳');
+    P('<h3>גיליתם! החוק הסודי: ' + SRULES[W.sec].he + ' 🎉</h3>' +
+      '<p>' + '⭐'.repeat(W.st) + '☆'.repeat(3 - W.st) + ' · ' + W.brain.length + ' בדיקות' + (W.tries ? ' ו-' + W.tries + ' ניחושים שגויים' : '') + '</p>' + clubCols(W.brain) +
+      '<div class="rule">🧠 מה עשיתם? בדיוק מה שמכונה לומדת עושה: בדקתם דוגמאות, ראיתם מי בפנים ומי בחוץ, ופסלתם חוקים עד שנשאר אחד.</div>' +
+      '<div class="rule">💡 טיפ של מדענים: הבדיקה הכי חכמה משנה רק דבר אחד בכל פעם. ככה יודעים בדיוק מה עשה את ההבדל.</div>' +
+      '<p>עכשיו מתחלפים! אתם ממציאים חוק סודי, ו' + n + ' ינסה לגלות אותו.</p>' +
+      '<button class="btn" id="go" type="button">🔄 עכשיו תורכם להמציא חוק</button>');
+    on('go', function(){ W.phase = 'pick'; W.brain = []; renderWorld(); window.scrollTo(0, 0); });
+  }
+  else if (ph === 'pick'){
+    steps(ST, 2); setMood('idle'); say('אני עוצם עיניים 🙈 בחרו חוק סודי, ואל תגלו לי!');
+    P('<h3>🙈 בחרו חוק סודי</h3><p>' + n + ' לא מציץ! בחרו איזו חיה נכנסת למועדון שלכם. אחר כך תענו על השאלות שלו לפי החוק.</p>' +
+      '<span class="lbl">למועדון שלנו נכנסות רק…</span>' + rulesHtml(function(){ return ''; }));
+    $('#panel').querySelectorAll('.rules button').forEach(function(b){ b.onclick = act(function(){
+      W.mine = +b.dataset.r; W.H = SRULES.map(function(r){ return r.i; }); W.brain = []; W.msg = ''; W.q = robotPick(W.H, []); W.phase = 'ask'; beep('tap'); renderWorld(); window.scrollTo(0, 0);
+    }); });
+  }
+  else if (ph === 'ask'){
+    steps(ST, 3); var a = W.q, H = W.H;
+    setMood('think'); say(W.msg || 'נשארו לי ' + H.length + ' חוקים אפשריים 🤔 מה עם החיה הזאת?');
+    P('<h3>' + n + ' שואל: החיה הזאת נכנסת למועדון שלכם?</h3><div class="big">' + animalSVG(a) + '</div>' +
+      '<div class="row"><button class="btn" id="yes" type="button">✅ בפנים</button><button class="btn alt" id="no" type="button">❌ בחוץ</button></div>' +
+      '<details><summary>🤫 להציץ בחוק שלכם</summary><p>' + SRULES[W.mine].he + '</p></details>' +
+      '<span class="lbl">החוקים ש' + n + ' עוד חושב שאולי נכונים (' + H.length + '):</span>' +
+      rulesHtml(function(r){ return H.indexOf(r.i) >= 0 ? 'keep' : 'gone'; }, true) + clubCols(W.brain));
+    function answer(yes){
+      var truth = inClub(SRULES[W.mine], a);
+      if (yes !== truth){ toast('🧐 רגע! לפי החוק שבחרתם, החיה הזאת ' + (truth ? 'בפנים' : 'בחוץ') + '. נסו שוב'); beep('bad'); return; }
+      var before = W.H.length;
+      W.brain = W.brain.concat([{a: a, in: yes}]);
+      W.H = W.H.filter(function(i){ return inClub(SRULES[i], a) === yes; });
+      W.msg = 'פסלתי ' + (before - W.H.length) + ' חוקים! נשארו לי ' + W.H.length + ' 🤔';
+      beep('tap');
+      if (W.H.length === 1) W.phase = 'found'; else W.q = robotPick(W.H, W.brain);
+      renderWorld(); window.scrollTo(0, 0);
+    }
+    on('yes', function(){ answer(true); });
+    on('no', function(){ answer(false); });
+  }
+  else if (ph === 'found'){
+    steps(ST, 3); var he = SRULES[W.H[0]].he;
+    setMood('happy'); confetti(); beep('win'); say('גיליתי! ' + he + ' 😎');
+    P('<h3>' + n + ' גילה את החוק שלכם אחרי ' + W.brain.length + ' שאלות!</h3><div class="rule">🤫 החוק שלכם: ' + he + '</div>' + clubCols(W.brain) +
+      '<div class="rule">🧠 ככה מכונה לומדת: כל דוגמה פוסלת חוקים שלא מתאימים לה, עד שנשאר רק אחד. ' + n + ' בחר כל פעם חיה שפוסלת כמה שיותר חוקים, ולכן גילה מהר.</div>' +
+      '<p>אתם גיליתם את החוק שלו אחרי ' + W.k1 + ' ניסיונות, ו' + n + ' גילה את שלכם אחרי ' + W.brain.length + '. ' + (W.k1 < W.brain.length ? 'ניצחתם! 🏆' : W.k1 === W.brain.length ? 'תיקו! 🤝' : n + ' היה מהיר יותר. בפעם הבאה נסו לשנות רק דבר אחד בכל בדיקה 😉') + '</p>' +
+      '<button class="btn" id="go" type="button">סיימנו ✓</button>');
+    on('go', function(){ W.first = finishLevel(3, W.st); W.phase = 'end'; renderWorld(); window.scrollTo(0, 0); });
+  }
+  else if (ph === 'end'){
+    steps(ST, 4); setMood('happy'); say('איזה כיף לשחק איתכם! 🎁');
+    P('<h3>סיימתם את שלב הבונוס! ' + '⭐'.repeat(W.st) + '☆'.repeat(3 - W.st) + '</h3>' + (W.first ? '<p>הרווחתם ' + STARS_NEW_LEVEL + ' ⭐ לחנות.</p>' : '') +
+      '<div class="row"><button class="btn" id="again" type="button">🔁 עוד חוק סודי</button><button class="btn alt" id="show" type="button">🎪 תפסו את הטעות</button></div>');
+    on('again', function(){ W = fresh(3); renderWorld(); });
+    on('show', function(){ W = fresh(SHOW_IDX); renderWorld(); });
+  }
+}
+
+
+/* ═══════════ 🎁 בונוס בעיר הפיקסלים: הפיקסל הקסום ═══════════
+   מצלמים משהו (או בוחרים תמונה מוכנה), ורואים אותו כמו שמחשב רואה: קודם 4×4 ריבועים, ואז יותר ויותר.
+   נגיעה בריבוע מראה את 3 המספרים שלו. 🔒 התמונה נשארת רק בזיכרון של הדף: לא נשמרת ולא נשלחת לשום מקום. */
+var camSrc = null, CAM_RES = [4, 8, 16, 32, 64], CAM_EMO = ['🍎', '🐱', '🚗', '🌻', '⚽', '🍌', '🐸', '🌈', '🍉', '🦋'];
+var CN = {red: ['אדום', 'אדומים', 'תות 🍓'], orange: ['כתום', 'כתומים', 'תפוז 🍊'], brown: ['חום', 'חומים', 'שוקולד 🍫'], yellow: ['צהוב', 'צהובים', 'לימון 🍋'],
+  green: ['ירוק', 'ירוקים', 'עץ 🌳'], blue: ['כחול', 'כחולים', 'הים 🌊'], purple: ['סגול', 'סגולים', 'ענב 🍇'], white: ['לבן', 'לבנים', 'ענן ☁️'],
+  grey: ['אפור', 'אפורים', 'רובוט כמוני 🤖'], black: ['שחור', 'שחורים', 'הלילה 🌙']};
+function colorName(p){   // מאיזה צבע הפיקסל? לפי הגוון, הבהירות והרוויה
+  var r = p[0] / 255, g = p[1] / 255, b = p[2] / 255, mx = Math.max(r, g, b), mn = Math.min(r, g, b), l = (mx + mn) / 2, d = mx - mn, h = 0;
+  var sat = d === 0 ? 0 : d / (1 - Math.abs(2 * l - 1));
+  if (d){ h = mx === r ? ((g - b) / d) % 6 : mx === g ? (b - r) / d + 2 : (r - g) / d + 4; h *= 60; if (h < 0) h += 360; }
+  if (l < .16) return 'black';
+  if (sat < .2) return l > .78 ? 'white' : 'grey';
+  if (h < 15 || h >= 335) return 'red';
+  if (h < 42) return l < .42 ? 'brown' : 'orange';
+  if (h < 70) return 'yellow';
+  if (h < 170) return 'green';
+  if (h < 255) return 'blue';
+  return 'purple';
+}
+function camLoad(file, done){   // מקטינים את התמונה לריבוע של 64×64 פיקסלים
+  var url = URL.createObjectURL(file), img = new Image();
+  img.onload = function(){
+    var s = Math.min(img.width, img.height), mid = document.createElement('canvas'), c = document.createElement('canvas');
+    mid.width = mid.height = 256; c.width = c.height = 64;
+    var mx = mid.getContext('2d'); mx.imageSmoothingQuality = 'high'; mx.drawImage(img, (img.width - s) / 2, (img.height - s) / 2, s, s, 0, 0, 256, 256);
+    var cx = c.getContext('2d'); cx.imageSmoothingQuality = 'high'; cx.drawImage(mid, 0, 0, 64, 64);
+    URL.revokeObjectURL(url); done(c);
+  };
+  img.onerror = function(){ URL.revokeObjectURL(url); toast('😕 לא הצלחתי לפתוח את התמונה. נסו תמונה אחרת'); };
+  img.src = url;
+}
+function camEmoji(e){
+  var c = document.createElement('canvas'); c.width = c.height = 64;
+  var x = c.getContext('2d'); x.fillStyle = '#fffaf0'; x.fillRect(0, 0, 64, 64);
+  x.font = '50px "Apple Color Emoji","Segoe UI Emoji","Noto Color Emoji",sans-serif'; x.textAlign = 'center'; x.textBaseline = 'middle'; x.fillText(e, 32, 36);
+  return c;
+}
+function camCells(N){   // ממוצע הצבע בכל ריבוע
+  var d = camSrc.getContext('2d').getImageData(0, 0, 64, 64).data, b = 64 / N, out = [];
+  for (var r = 0; r < N; r++) for (var c = 0; c < N; c++){
+    var R = 0, Gr = 0, B = 0, k = 0;
+    for (var y = r * b; y < (r + 1) * b; y++) for (var x = c * b; x < (c + 1) * b; x++){ var i = (y * 64 + x) * 4; R += d[i]; Gr += d[i + 1]; B += d[i + 2]; k++; }
+    out.push([Math.round(R / k), Math.round(Gr / k), Math.round(B / k)]);
+  }
+  return out;
+}
+function camDraw(cv, cells, N, sel){
+  var x = cv.getContext('2d'), s = cv.width / N;
+  cells.forEach(function(p, i){ x.fillStyle = 'rgb(' + p.join(',') + ')'; x.fillRect((i % N) * s, Math.floor(i / N) * s, s + .5, s + .5); });
+  if (sel != null){ x.lineWidth = 4; x.strokeStyle = '#fff'; x.strokeRect((sel % N) * s + 2, Math.floor(sel / N) * s + 2, s - 4, s - 4); x.lineWidth = 2; x.strokeStyle = '#1d2a2e'; x.strokeRect((sel % N) * s + 1, Math.floor(sel / N) * s + 1, s - 2, s - 2); }
+}
+function camGuess(i, cells){
+  var cnt = {}; cells.forEach(function(p){ var k = colorName(p); cnt[k] = (cnt[k] || 0) + 1; });
+  var t = Object.keys(cnt).sort(function(a, b){ return cnt[b] - cnt[a]; }), a = CN[t[0]], b = t[1] ? CN[t[1]] : null, N = CAM_RES[i];
+  return [
+    'אני רואה רק ' + N * N + ' ריבועים, ורובם ' + a[1] + '. אולי זה ' + a[2] + '?',
+    b ? 'עכשיו יש ' + N * N + ' ריבועים! הרבה ' + a[0] + ' וקצת ' + b[0] + '. אולי זה ' + b[2] + '?' : 'עכשיו יש ' + N * N + ' ריבועים, וכולם ' + a[1] + '!',
+    'אני מתחיל לראות צורה… אבל עוד לא בטוח 🤔',
+    'אני כמעט רואה! אתם כבר יודעים מה זה?',
+    'זה הכי חד שאני יכול. אני רואה צבעים, אבל לא יודע מה זה 😅'][i];
+}
+function camView(N, sel){   // מצייר את התמונה, ונגיעה בריבוע מראה את המספרים שלו
+  var cv = $('#pcam'); if (!cv || !camSrc) return;
+  var cells = camCells(N); camDraw(cv, cells, N, sel);
+  cv.onclick = function(e){
+    var r = cv.getBoundingClientRect(), c = Math.min(N - 1, Math.floor((e.clientX - r.left) / r.width * N)), rr = Math.min(N - 1, Math.floor((e.clientY - r.top) / r.height * N)), k = rr * N + c, p = cells[k];
+    camDraw(cv, cells, N, k); beep('tap');
+    $('#pnum').innerHTML = '<span class="dot" style="background:rgb(' + p.join(',') + ')"></span>הפיקסל הזה = <b>אדום ' + p[0] + ' · ירוק ' + p[1] + ' · כחול ' + p[2] + '</b>';
+  };
+}
+function camLevel(){
+  var n = G.name, ph = W.phase, ST = ['הסבר', 'מצלמים', 'מגלים', 'סיום'];
+  if ((ph === 'look' || ph === 'end') && !camSrc) ph = W.phase = 'intro';   // אין תמונה בזיכרון? מתחילים מחדש
+  if (ph === 'intro'){
+    camSrc = null; steps(ST, 0); setMood('happy', 1500); say('בואו נראה מה המצלמה רואה! 📷');
+    P(comic([['📷', 'צלמו משהו בבית: כוס, צעצוע, פרח, ואפילו את הכלב!'],
+              ['🟦', n + ' יראה את התמונה כמו שמחשב רואה: קודם רק 16 ריבועים, ואחר כך יותר ויותר.'],
+              ['🏁', 'מי יזהה ראשון מה בתמונה, אתם או ' + n + '?']]) +
+      '<label class="btn" for="camin">📷 לצלם או לבחור תמונה</label><input type="file" id="camin" class="vh" accept="image/*">' +
+      '<button class="btn alt" id="emo" type="button">🎲 בלי מצלמה: תמונה מוכנה</button>' +
+      '<p class="small-note">🔒 התמונה לא נשמרת ולא נשלחת לשום מקום. היא נמחקת כשיוצאים מהשלב.</p>');
+    $('#camin').onchange = function(){
+      var f = this.files && this.files[0]; if (!f) return;
+      camLoad(f, function(c){ camSrc = c; W.phase = 'look'; W.res = 0; W.kres = null; renderWorld(); window.scrollTo(0, 0); });
+    };
+    on('emo', function(){ camSrc = camEmoji(pick(CAM_EMO)); W.phase = 'look'; W.res = 0; W.kres = null; renderWorld(); window.scrollTo(0, 0); });
+  }
+  else if (ph === 'look'){
+    var N = CAM_RES[W.res];
+    steps(ST, 1); setMood(W.res < 4 ? 'think' : 'worry'); say(camGuess(W.res, camCells(N)));
+    P('<h3>📷 ככה ' + n + ' רואה את התמונה</h3>' +
+      '<canvas class="pcam" id="pcam" width="256" height="256" aria-label="התמונה בפיקסלים"></canvas>' +
+      '<div class="nums" id="pnum">👆 געו בריבוע כדי לראות את 3 המספרים שלו</div>' +
+      '<span class="small-note">' + N + ' × ' + N + ' = ' + (N * N).toLocaleString('he-IL') + ' פיקסלים</span>' +
+      '<div class="row">' + (W.res < 4 ? '<button class="btn" id="more" type="button">🔍 עוד פיקסלים</button>' : '') + '<button class="btn alt" id="got" type="button">💡 זיהינו מה זה!</button></div>');
+    camView(N);
+    on('more', function(){ W.res++; renderWorld(); });
+    on('got', function(){ W.kres = W.res; W.res = 4; W.phase = 'end'; renderWorld(); window.scrollTo(0, 0); });
+  }
+  else if (ph === 'end'){
+    var K = CAM_RES[W.kres];
+    steps(ST, 2); setMood('worry', 1600); say(W.msg || 'איך זיהיתם כל כך מהר?! 😮 אני רואה רק מספרים');
+    P('<h3>' + (W.kres < 4 ? 'זיהיתם כבר ב-' + K + '×' + K + ' פיקסלים! 🎉' : 'גם ' + n + ' לא הצליח לזהות 😅') + '</h3>' +
+      '<canvas class="pcam" id="pcam" width="256" height="256" aria-label="התמונה בפיקסלים"></canvas><div class="nums" id="pnum">👆 געו בריבוע כדי לראות את 3 המספרים שלו</div>' +
+      '<div class="rule">🔢 בשביל מחשב, תמונה היא טבלה של מספרים. בתמונה הזאת יש 64×64 = 4,096 פיקסלים, ובכל פיקסל 3 מספרים: ביחד 12,288 מספרים! ובמצלמה של טלפון יש בערך 12 מיליון פיקסלים.</div>' +
+      '<div class="rule">🧠 אתם זיהיתם מהר, כי המוח שלכם ראה המון תמונות כל החיים. ' + n + ' רואה רק צבעים. כדי לזהות, הוא צריך ללמוד מהרבה דוגמאות, כמו שראינו במגדל השכבות.</div>' +
+      '<label class="lbl" for="camlbl">מה זה באמת? למדו את ' + n + ':</label>' +
+      '<div class="two"><input type="text" id="camlbl" maxlength="20" autocomplete="off" placeholder="למשל: כוס"><button class="btn alt" id="teach" type="button">ללמד ✓</button></div>' +
+      '<div class="row"><button class="btn" id="fin" type="button">סיימנו ✓</button><button class="btn alt" id="again" type="button">📷 עוד תמונה</button></div>');
+    camView(64);
+    $('#panel').querySelector('#teach').onclick = function(){
+      var v = $('#camlbl').value.trim(); if (!v) { $('#camlbl').focus(); return; }
+      W.msg = 'אה! אז זה ' + v + '! 🤓 למדתי מתמונה אחת. כדי לזהות ' + v + ' בכל תמונה, אצטרך עוד הרבה דוגמאות.';
+      setMood('happy', 1800); beep('good'); say(W.msg);
+    };
+    on('fin', function(){ camSrc = null; W.first = finishLevel(3, 3); W.phase = 'done'; renderWorld(); window.scrollTo(0, 0); });
+    on('again', function(){ camSrc = null; W = fresh(3); renderWorld(); window.scrollTo(0, 0); });
+  }
+  else if (ph === 'done'){
+    steps(ST, 3); setMood('happy'); say('תודה שלימדתם אותי לראות! 📷');
+    P('<h3>סיימתם את שלב הבונוס! ⭐⭐⭐</h3>' + (W.first ? '<p>הרווחתם ' + STARS_NEW_LEVEL + ' ⭐ לחנות.</p>' : '') +
+      '<p>🔒 התמונה נמחקה.</p>' +
+      '<div class="row"><button class="btn" id="again" type="button">📷 עוד תמונה</button><button class="btn alt" id="show" type="button">🎪 תפסו את הטעות</button></div>');
+    on('again', function(){ W = fresh(3); renderWorld(); });
+    on('show', function(){ W = fresh(SHOW_IDX); renderWorld(); });
+  }
+}
+
+
+/* ═══════════ 🎁 בונוס במגדל: ממציאי הגלאים ═══════════
+   פלוס ➕ וריבוע ⬜ מדליקים בדיוק אותם פנסים (קו עומד וקו שוכב), ולכן המגדל מתבלבל ביניהם.
+   הפתרון של מהנדסי בינה מלאכותית: ממציאים גלאי חדש. מציירים פנס של 3×3 שנדלק רק באחד מהם,
+   ואז מחווטים נוירון ➕ עם 5 פנסים. במוח מלאכותי אמיתי המחשב ממציא אלפי גלאים כאלה לבד. */
+var PLUS = SHOW_SHAPES.filter(function(x){ return x.t === 'פלוס'; })[0].g;
+var INV_TESTS = [{name: 'פלוס', g: PLUS, plus: true}, {name: 'ריבוע', g: SHP[0].g}, {name: 'משולש', g: SHP[1].g}, {name: 'איקס', g: SHP[2].g}];
+function newDet(){ return {id: 'nw', name: 'הפנס שלכם', col: '#e11d74', cells: W.det9.map(function(v, k){ return v ? [Math.floor(k / 3), k % 3] : null; }).filter(Boolean)}; }
+function lit5(g, nd){ var l = litOf(g); return DET.map(function(d){ return l[d.id]; }).concat([scan(g, nd).length > 0]); }
+function fires5(w, lit){ var green = 0, ok = true; w.forEach(function(x, i){ if (x === 1){ green++; if (!lit[i]) ok = false; } if (x === -1 && lit[i]) ok = false; }); return green > 0 && ok; }
+function hitGrid(g, nd){   // הציור, ובוורוד המקומות שבהם הפנס החדש מצא את מה שהוא מחפש
+  var col = {}; scan(g, nd).forEach(function(h){ nd.cells.forEach(function(p){ col[(h[0] + p[0]) * 8 + h[1] + p[1]] = 1; }); });
+  return '<div class="pg sm">' + g.map(function(v, k){ return '<i' + (v ? ' class="on"' : '') + (col[k] ? ' style="background:#e11d74;border-color:#e11d74"' : '') + '></i>'; }).join('') + '</div>';
+}
+function invLevel(){
+  var n = G.name, ph = W.phase, ST = ['הסבר', 'ממציאים', 'מחווטים', 'סיום'];
+  if (!W.det9) W.det9 = [0, 0, 0, 0, 0, 0, 0, 0, 0];
+  if (!W.w5) W.w5 = [0, 0, 0, 0, 0];
+  if (ph === 'intro'){
+    steps(ST, 0); setMood('worry'); say('זה ריבוע! וגם זה ריבוע?! 😵');
+    function lights(g){ var l = litOf(g); return DET.filter(function(d){ return l[d.id]; }).map(m3).join(' '); }
+    P(comic([['😵', 'המגדל של ' + n + ' מתבלבל: פלוס וריבוע מדליקים בדיוק אותם פנסים, קו עומד וקו שוכב. אז מבחינתו הם אותו דבר!'],
+              ['🔦', 'אתם תהיו ממציאים: תציירו פנס חדש, שמחפש משהו שיש בפלוס ואין בריבוע.'],
+              ['🔌', 'אחר כך תחברו נוירון חדש, ➕, שיידלק רק כשרואים פלוס.']]) +
+      '<div class="pair"><figure>' + mini(PLUS) + 'פלוס מדליק: ' + lights(PLUS) + '</figure><figure>' + mini(SHP[0].g) + 'ריבוע מדליק: ' + lights(SHP[0].g) + '</figure></div>' +
+      '<button class="btn" id="go" type="button">🔦 להמציא פנס</button>');
+    on('go', function(){ W.phase = 'draw'; renderWorld(); });
+  }
+  else if (ph === 'draw'){
+    steps(ST, 1);
+    var nd = newDet(), cnt = nd.cells.length, inP = cnt >= 2 && scan(PLUS, nd).length > 0, inS = cnt >= 2 && scan(SHP[0].g, nd).length > 0, good = cnt >= 2 && inP !== inS;
+    if (good){ setMood('happy'); say('וואו! הפנס שלכם מבדיל ביניהם! 💡'); } else { setMood('think'); say('מה יש בפלוס, שאין בריבוע? 🤔'); }
+    var st = cnt < 2 ? '✏️ ציירו לפחות 2 ריבועים בפנס' : good ? '✓ מעולה! הפנס שלכם נדלק רק ב' + (inP ? 'פלוס' : 'ריבוע') + '!' :
+      inP ? 'הפנס נדלק בשניהם, אז הוא לא עוזר להבדיל. נסו משהו אחר' : 'הפנס לא מוצא את הציור שלו באף אחד מהם. נסו משהו אחר';
+    P('<h3>✏️ ציירו פנס חדש</h3><p>הפנס מחפש ציור קטן של 3 על 3. ציירו משהו שיש בפלוס ואין בריבוע.</p>' +
+      '<span class="turn">ממציא/ה: ' + teacher() + '</span>' +
+      '<div class="d9">' + W.det9.map(function(v, k){ return '<button type="button" data-k="' + k + '"' + (v ? ' class="on"' : '') + ' aria-label="ריבוע ' + (k + 1) + (v ? ', צבוע' : '') + '"></button>'; }).join('') + '</div>' +
+      '<div class="pair"><figure>' + hitGrid(PLUS, cnt >= 2 ? nd : {cells: [[9, 9]]}) + '➕ פלוס: ' + (inP ? 'נדלק 💡' : 'כבוי') + '</figure>' +
+      '<figure>' + hitGrid(SHP[0].g, cnt >= 2 ? nd : {cells: [[9, 9]]}) + '⬜ ריבוע: ' + (inS ? 'נדלק 💡' : 'כבוי') + '</figure></div>' +
+      '<div class="res ' + (good ? 'ok' : 'no') + '">' + st + '</div>' +
+      (W.round >= 7 && !good ? '<div class="rule">💡 רמז: הסתכלו על האמצע של הפלוס. שם שני קווים חוצים זה את זה. יש דבר כזה בריבוע?</div>' : '') +
+      '<button class="btn" id="go" type="button"' + (good ? '' : ' disabled') + '>זה הפנס שלנו! לחיווט ➡️</button>');
+    $('#panel').querySelectorAll('.d9 button').forEach(function(b){ b.onclick = function(){
+      var keep = window.scrollY; W.det9 = W.det9.slice(); W.det9[+b.dataset.k] ^= 1; W.round++; beep('tap'); renderWorld(); window.scrollTo(0, keep);
+    }; });
+    on('go', function(){ W.turn++; W.phase = 'wire'; W.last = null; renderWorld(); window.scrollTo(0, 0); });
+  }
+  else if (ph === 'wire'){
+    steps(ST, 2); var nd = newDet(), all = DET.concat([nd]);
+    if (!W.last){ setMood('think'); say('עכשיו חברו לי נוירון חדש: ➕'); }
+    var res = W.last ? '<div class="tests">' + W.last.map(function(t){
+      return '<div>' + mini(t.g) + '<span>' + t.name + ': נוירון ➕ ' + (t.on ? 'נדלק 💡' : 'כבוי') + ' ' + (t.ok ? '✓' : '✗') + '</span></div>';
+    }).join('') + '</div>' : '';
+    P('<h3>🔌 חברו את הנוירון ➕</h3>' +
+      '<p class="small-note">לחיצה על משבצת מחליפה: · בלי חוט ← ✓ ירוק, צריך ← ✗ אדום, אסור. הנוירון צריך להידלק רק בפלוס.</p>' +
+      '<span class="turn">מחבר/ת: ' + teacher() + '</span>' +
+      '<div class="wires5">' + all.map(function(d){ return '<span class="hd" style="--dc:' + d.col + '">' + m3(d) + d.name + '</span>'; }).join('') +
+        W.w5.map(function(w, i){ return '<button type="button" class="w' + (w === 1 ? ' g' : w === -1 ? ' r' : '') + '" data-k="' + i + '" aria-label="' + all[i].name + ': ' + (w === 1 ? 'חוט ירוק' : w === -1 ? 'חוט אדום' : 'בלי חוט') + '">' + (w === 1 ? '✓' : w === -1 ? '✗' : '·') + '</button>'; }).join('') + '</div>' +
+      res + (W.hint ? '<div class="res no">' + W.hint + '</div>' : '') +
+      '<button class="btn" id="go" type="button">⚡ לבדוק את הנוירון</button>');
+    $('#panel').querySelectorAll('.wires5 .w').forEach(function(b){ b.onclick = function(){
+      var k = +b.dataset.k, keep = window.scrollY; W.w5 = W.w5.slice(); W.w5[k] = W.w5[k] === 0 ? 1 : W.w5[k] === 1 ? -1 : 0; W.last = null; W.hint = ''; beep('tap'); renderWorld(); window.scrollTo(0, keep);
+    }; });
+    on('go', function(){
+      var keep = window.scrollY; W.tries++; W.turn++;
+      W.last = INV_TESTS.map(function(t){ var on = fires5(W.w5, lit5(t.g, nd)); return {name: t.name, g: t.g, on: on, ok: on === !!t.plus}; });
+      if (W.last.every(function(t){ return t.ok; })){ W.st = W.tries <= 2 ? 3 : W.tries <= 4 ? 2 : 1; W.phase = 'yay'; renderWorld(); window.scrollTo(0, 0); return; }
+      var pl = W.last[0];
+      W.hint = !W.w5.some(function(x){ return x === 1; }) ? 'הנוירון צריך לפחות חוט ירוק אחד.' : !pl.on ? 'הנוירון לא נדלק בפלוס. אולי חוט אדום מפריע לו, או שחסר לו פנס?' : 'הנוירון נדלק גם במשהו שהוא לא פלוס. איזה פנס יש רק בפלוס?';
+      setMood('worry', 1500); beep('bad'); say('אממ… משהו עוד לא מסתדר 🤔'); renderWorld(); window.scrollTo(0, keep);
+    });
+  }
+  else if (ph === 'yay'){
+    steps(ST, 3); setMood('happy'); confetti(); beep('win'); say('עכשיו אני מזהה פלוס! ➕ תודה, ממציאים!');
+    P('<h3>הנוירון ➕ עובד! ' + '⭐'.repeat(W.st) + '☆'.repeat(3 - W.st) + '</h3>' +
+      '<div class="pair"><figure>' + hitGrid(PLUS, newDet()) + 'הפנס שלכם מוצא את הפלוס</figure></div>' +
+      '<div class="rule">🧠 ככה משפרים בינה מלאכותית: כשהיא מתבלבלת בין שני דברים, מוסיפים גלאי חדש שמבדיל ביניהם.</div>' +
+      '<div class="rule">🤖 ובמוח מלאכותי אמיתי? יש בו אלפי גלאים, ואף אחד לא מצייר אותם. המחשב ממציא אותם לבד, מתוך מיליוני דוגמאות. לזה קוראים <b>למידה</b>!</div>' +
+      '<button class="btn" id="go" type="button">סיימנו ✓</button>');
+    on('go', function(){ W.first = finishLevel(3, W.st); W.phase = 'end'; renderWorld(); window.scrollTo(0, 0); });
+  }
+  else if (ph === 'end'){
+    steps(ST, 3); setMood('happy'); say('אתם ממציאים אמיתיים! 🔦');
+    P('<h3>סיימתם את שלב הבונוס! ' + '⭐'.repeat(W.st) + '☆'.repeat(3 - W.st) + '</h3>' + (W.first ? '<p>הרווחתם ' + STARS_NEW_LEVEL + ' ⭐ לחנות.</p>' : '') +
+      '<div class="row"><button class="btn" id="again" type="button">🔁 להמציא שוב</button><button class="btn alt" id="show" type="button">🎪 תפסו את הטעות</button></div>');
+    on('again', function(){ W = fresh(3); renderWorld(); });
+    on('show', function(){ W = fresh(SHOW_IDX); renderWorld(); });
+  }
+}
+
+/* 🧩 המכניקות: כל עולם בנוי מ-3 שלבים, ואחריהם 🎁 בונוס (מקום 3) ו-🎪 הופעה (מקום 4) */
 var MECHANICS = {
-  layers:   {levels: [{name:'הפנס הסורק', run: lay1}, {name:'חידת החוטים', run: lay2}, {name:'אתגר אלופים', run: lay3}]},
-  examples: {levels: [{name:'מראים דוגמאות', run: level1}, {name:'בוחרים חכם', run: level2}, {name:'אתגר אלופים', run: level3}]},
-  pixels:   {levels: [{name:'פנסי הצבע', run: pix1}, {name:'התמונה המתבהרת', run: pix2}, {name:'אתגר אלופים', run: pix3}]}
+  layers:   {levels: [{name:'הפנס הסורק', run: lay1}, {name:'חידת החוטים', run: lay2}, {name:'אתגר אלופים', run: lay3}, {name:'ממציאי הגלאים', ico:'🎁', run: invLevel}, {name:'תפסו את הטעות', ico:'🎪', run: showLevel}]},
+  examples: {levels: [{name:'מראים דוגמאות', run: level1}, {name:'בוחרים חכם', run: level2}, {name:'אתגר אלופים', run: level3}, {name:'החוק הסודי', ico:'🎁', run: secretLevel}, {name:'תפסו את הטעות', ico:'🎪', run: showLevel}]},
+  pixels:   {levels: [{name:'פנסי הצבע', run: pix1}, {name:'התמונה המתבהרת', run: pix2}, {name:'אתגר אלופים', run: pix3}, {name:'הפיקסל הקסום', ico:'🎁', run: camLevel}, {name:'תפסו את הטעות', ico:'🎪', run: showLevel}]}
 };
 
 /* ▶️ הפעלה */
@@ -1621,7 +2581,7 @@ init3D();
 renderWorkshop(); stars(); brand(); muteIcon();
 document.documentElement.style.setProperty('--toph', $('.top').offsetHeight + 'px');   // גובה הפס העליון, בשביל פס הרובוט
 if (G.cur && MECHANICS[G.cur.w]){ curWorld = G.cur.w; W = fresh(G.cur.l || 0); }       // ממשיכים מהעולם והשלב האחרונים
-go(Object.keys(G.prog).some(function(k){ return G.prog[k].some(Boolean); }) ? 'map' : 'shop');   // מי שכבר שיחק מתחיל במפה
+openHello(Object.keys(G.prog).some(function(k){ return G.prog[k].some(Boolean); }) ? 'map' : 'shop');   // 👋 קודם רובי מברך, ואז: מי שכבר שיחק מתחיל במפה
 })();
 </script>
 </body>
