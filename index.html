@@ -16,7 +16,7 @@
 }
 [hidden]{display:none!important}
 *{box-sizing:border-box}
-html,body{height:100%}
+html{height:100%} body{min-height:100%}   /* min-height ולא height: אחרת הפס העליון נעלם אחרי גלילה ארוכה */
 body{margin:0;background:linear-gradient(180deg,var(--sky) 0,#e9f7f3 45%,var(--sand) 100%) fixed;color:var(--ink);font-family:var(--body);direction:rtl;font-size:16px;line-height:1.55}
 body::before{content:"";position:fixed;inset:0 0 auto;height:env(safe-area-inset-top,0px);z-index:10;background:var(--sea)}
 .in{max-width:460px;margin:0 auto;padding-left:max(16px,env(safe-area-inset-left,0px));padding-right:max(16px,env(safe-area-inset-right,0px))}
@@ -26,6 +26,7 @@ body::before{content:"";position:fixed;inset:0 0 auto;height:env(safe-area-inset
 .pill{background:var(--sun);color:var(--ink);border-radius:999px;padding:3px 12px;font-weight:700;font-variant-numeric:tabular-nums}
 .mute{background:none;color:var(--paper);font-size:20px;min-height:40px;padding:4px 8px;border:none}
 main.in{padding-block:14px 110px}
+body.f-fly main.in{padding-bottom:280px}   /* 🚀 מקום לרובי המרחף */
 h1,h2,h3{font-family:var(--display);font-weight:400;margin:0;text-wrap:balance;line-height:1.25}
 h1{font-size:26px;color:var(--sea)} h2{font-size:21px;color:var(--sea)} h3{font-size:19px}
 p{margin:0}
@@ -227,6 +228,7 @@ details p{display:flex;align-items:center;gap:6px;flex-wrap:wrap;margin-top:4px}
 .key{display:inline-block;width:12px;height:12px;border-radius:2px;vertical-align:-1px}
 .key.ok{background:var(--good)} .key.extra{background:var(--bad)}
 .toast{position:fixed;inset-inline:16px;bottom:calc(84px + env(safe-area-inset-bottom,0px));z-index:7;max-width:428px;margin:0 auto;background:var(--ink);color:var(--paper);border-radius:14px;padding:10px 14px;text-align:center}
+.toast.up{bottom:auto;top:calc(70px + env(safe-area-inset-top,0px))} /* כשרובי מרחף למטה, ההודעה עולה למעלה כדי שלא תסתיר אותו */
 .conf{position:absolute;top:-10px;width:10px;height:14px;border-radius:2px;animation:fall 2.2s ease-in forwards;z-index:3}
 @keyframes fall{to{transform:translateY(520px) rotate(540deg);opacity:.2}}
 @media (prefers-reduced-motion:reduce){.conf{display:none}.btn:active:not(:disabled){transform:none}}
@@ -251,6 +253,32 @@ details p{display:flex;align-items:center;gap:6px;flex-wrap:wrap;margin-top:4px}
 .stage .say{pointer-events:none;animation:saypop .25s ease-out}
 @keyframes saypop{from{transform:scale(.85);opacity:0}}
 @media (prefers-reduced-motion:reduce){.stage.sleeping::after,.stage .say{animation:none}}
+/* 🚀 רובי המרחף: כשהמקום הרגיל של רובי יוצא מהמסך, הוא ממריא ומרחף בפינה (מעל סרגל הלשוניות) */
+.stage.fly{position:fixed;z-index:5;width:132px;height:189px;aspect-ratio:auto;max-width:none;
+  bottom:calc(var(--tabh,66px) + 6px);left:max(4px,calc(50% - 226px));
+  background:none;border:none;border-radius:0;overflow:visible;touch-action:manipulation;cursor:pointer;-webkit-tap-highlight-color:transparent}
+body.f-fly .robobar{position:relative;top:auto}   /* כשרובי מרחף, הפס לא צריך להידבק */
+.stage.fly canvas{position:relative;z-index:1}
+.stage.fly::before{content:'';position:absolute;left:24%;right:24%;bottom:0;height:12px;border-radius:50%;
+  background:radial-gradient(closest-side,rgba(15,76,92,.32),rgba(15,76,92,0));animation:flysh 2.73s ease-in-out infinite}
+.stage.fly.talking::before{background:radial-gradient(closest-side,rgba(255,201,60,.85),rgba(255,201,60,0))}
+@keyframes flysh{50%{transform:scaleX(.7);opacity:.55}}
+.stage.fly.in{animation:flyin .55s cubic-bezier(.2,1.5,.4,1)}
+@keyframes flyin{from{transform:translateY(80px) scale(.35) rotate(-16deg);opacity:0}}
+.flysay{position:fixed;z-index:5;bottom:calc(var(--tabh,66px) + 118px);left:calc(max(4px,calc(50% - 226px)) + 122px);
+  max-width:min(250px,calc(100% - 140px));background:#fff;border:2px solid var(--sea2);border-radius:16px 16px 16px 4px;
+  padding:8px 12px;font-size:15px;line-height:1.4;box-shadow:0 4px 12px rgba(15,76,92,.2);pointer-events:none;animation:saypop .25s ease-out}
+.stage.away::before{content:'🚀';position:absolute;inset:0;display:grid;place-items:center;font-size:34px;opacity:.45}
+/* ✋ גרירה של רובי המרחף */
+body.f-move .stage.fly{touch-action:none}
+.stage.fly.drag::before{opacity:.25}
+.flysay.r{border-radius:16px 16px 4px 16px}
+.flysay.t{border-radius:4px 16px 16px 16px}
+.flysay.t.r{border-radius:16px 4px 16px 16px}
+/* 🧠 כשמסובבים את רובי לאחור ורואים את המוח */
+.brainlbl{position:absolute;bottom:32px;inset-inline:0;margin:0 auto;width:max-content;max-width:92%;background:var(--ink);color:#fff;
+  border-radius:999px;padding:4px 12px;font-weight:700;font-size:13.5px;z-index:2;pointer-events:none;animation:saypop .25s ease-out}
+@media (prefers-reduced-motion:reduce){.stage.fly.in,.stage.fly::before,.flysay{animation:none}}
 /* 🎪 תפסו את הטעות */
 .levels .lx{grid-column:1/-1;display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:6px}
 .show{display:flex;flex-direction:column;gap:10px}
@@ -380,6 +408,9 @@ div.res{text-align:center}
   <button type="button" data-go="world"><span>🐾</span>העולם</button>
 </div></nav>
 <div class="toast" id="toast" hidden></div>
+<!-- 🚀 רובי המרחף: מופיע כשהמקום הרגיל של רובי יוצא מהמסך -->
+<div class="stage fly" id="flyer" hidden role="button" tabindex="0" aria-label="רובי המרחף. נגיעה בו: מה הוא אמר"></div>
+<div class="flysay" id="flysay" aria-live="polite" hidden></div>
 <!-- 👋 מסך הפתיחה: רובי מברך את המורים בשמות ומספר מה מחכה היום -->
 <div class="hello" id="hello" hidden role="dialog" aria-modal="true" aria-labelledby="hello-h">
   <div class="hcard">
@@ -408,6 +439,12 @@ var TEACHER_DEFAULTS = ['מורה א׳', 'מורה ב׳'];
 var STARS_GOOD_GUESS = 1;           // ניחשתם נכון מה הרובוט יעשה
 var STARS_NEW_LEVEL = 5;            // סיימתם שלב בפעם הראשונה
 var SAVE_KEY = 'mlr1-';             // אם משנים את זה, כל השחקנים מתחילים מחדש
+/* 🔧 תכונות שמוכנות ובדוקות, אבל עוד כבויות. true = דלוק */
+var FEATURES = {
+  fly: true,       // 🚀 רובי המרחף: כשגוללים למטה, רובי ממריא ומרחף בפינה
+  move: true,      // ✋ גוררים את רובי המרחף באצבע, והוא נשאר איפה שעזבתם (צריך גם fly)
+  brain: false      // 🧠 מסובבים את רובי בסדנה, ורואים בגב הראש את המוח עם האזורים הדלוקים
+};
 
 /* 🤖 עיצוב הרובוט: כאן עומר ו-Claude מעצבים את הצורה */
 var ROBOT = {
@@ -461,7 +498,9 @@ var DEF = {stars: START_STARS, owned: [], worn: [], body: '#ffc93c', eyes: '#5ff
   wires: null,    // המגדל שבניתם בעולם 3
   read: true,     // 🗣️ רובי מקריא בקול את ההסברים
   duel: false,    // ⚔️ מצב דו-קרב: מורה נגד מורה
-  hello: 0};      // 👋 איזה ״מה חדש״ כבר ראיתם במסך הפתיחה
+  hello: 0,       // 👋 איזה ״מה חדש״ כבר ראיתם במסך הפתיחה
+  seen: [],       // ✨ אילו תכונות חדשות כבר הוצגו לכם ב״מה חדש״
+  flypos: null};  // ✋ איפה השארתם את רובי המרחף (בטלפון הזה)
 var G = {};
 Object.keys(DEF).forEach(function(k){ G[k] = store.get(k, JSON.parse(JSON.stringify(DEF[k]))); });
 function save(){ Object.keys(DEF).forEach(function(k){ store.set(k, G[k]); }); }
@@ -563,9 +602,31 @@ function init3D(){
       f.rotation.x = Math.PI; flames.push(f);
     });
 
+    // 🧠 המוח בגב הראש: כיפת זכוכית, ובתוכה אזור לכל עולם (באותו סדר כמו במוח שבסדנה). אזור נדלק כשלומדים בעולם שלו
+    var brain = null;
+    if (FEATURES.brain){
+      brain = new T.Group(); head.add(brain);
+      var BC = [0, .1, -.8], BR = [.66, .44, .42];
+      var base = M(new T.SphereGeometry(1, 32, 24), new T.MeshStandardMaterial({color: 0x26365f, roughness: .6, emissive: 0x0d1838, emissiveIntensity: .5}), BC[0], BC[1], BC[2], brain);
+      base.scale.set(BR[0], BR[1], BR[2]);
+      var lobes = MIND.map(function(c){   // מתרגמים את המפה של המוח השטוח לנקודות על גב הראש
+        var lx = -(c[0] - 178) / 93 * .5, ly = BC[1] - (c[1] - 114) / 52 * .3;
+        var u = lx / BR[0], v = (ly - BC[1]) / BR[1], w = Math.sqrt(Math.max(.08, 1 - u*u - v*v));
+        var l = M(new T.SphereGeometry(.13, 20, 14), new T.MeshStandardMaterial({color: 0x4a5677, emissive: 0x000000, roughness: .35}), lx, ly, BC[2] - BR[2] * w + .02, brain);
+        var h = new T.Mesh(new T.SphereGeometry(.13, 16, 12), new T.MeshBasicMaterial({color: 0xffffff, transparent: true, opacity: 0, depthWrite: false}));
+        h.scale.setScalar(1.8); l.add(h); l.userData.halo = h;   // הילה זוהרת סביב אזור דולק
+        return l;
+      });
+      var glass = M(new T.SphereGeometry(1, 36, 24), new T.MeshStandardMaterial({color: 0xd8f4ff, roughness: .05, metalness: .1, transparent: true, opacity: .1, depthWrite: false}), BC[0], BC[1], BC[2] - .03, brain);
+      glass.scale.set(BR[0] + .1, BR[1] + .09, BR[2] + .12); glass.renderOrder = 2;
+      var ring = M(new T.TorusGeometry(1, .045, 10, 48), accent, BC[0], BC[1], -.8, brain); ring.scale.set(BR[0] + .1, BR[1] + .09, 1);
+      var syn = new T.Group(); brain.add(syn);
+      brain.userData = {lobes: lobes, syn: syn, key: ''};
+    }
+
     R = {renderer: renderer, scene: scene, camera: camera, robot: robot, head: head, arms: arms, antenna: antenna,
          bodyMat: bodyMat, glowMat: glowMat, bulbMat: bulbMat, fc: fc, ftex: ftex, add: add, flames: flames,
-         yaw: 0, drag: null, faceKey: '', host: null, sway: true};
+         yaw: 0, drag: null, faceKey: '', host: null, sway: true, brain: brain, lean: 0, hold: 0};
     applyLook();
     requestAnimationFrame(loop);
   } catch(e){ R = null; }
@@ -643,6 +704,7 @@ function loop(now){
   else if (em === 'sleep'){ y = -.1 + Math.sin(t*1.3)*.035; hRX = .5; hRZ = .18; aL = .04; aR = -.04; bulb = .06 + (Math.sin(t*1.3) + 1)*.08; }
   else if (em === 'dance'){ y = Math.abs(Math.sin(t*8))*.24*A; x = Math.sin(t*4)*.28*A; hRZ = Math.sin(t*8)*.16*A; aL = 1.5 + Math.sin(t*8)*.9*A; aR = -(1.5 - Math.sin(t*8)*.9*A); bulb = (Math.sin(t*14) > 0) ? 1.6 : .3; }
   if (talkOn){ bulb = (Math.sin(t*16) > 0) ? 1.6 : .3; hRX += Math.sin(t*12)*.06*A; }   // 🗣️ כשרובי מדבר, הנורה מהבהבת והראש מהנהן
+  var fl = R.host.id === 'flyer'; if (fl) y += Math.sin(t*2.3)*.16*A;   // 🚀 מרחף: עולה ויורד לאט באוויר
   R.robot.position.y = lerp(R.robot.position.y, y, (em === 'happy' || em === 'dance' || em === 'giggle') ? .5 : k);
   R.robot.position.x = x;
   R.head.rotation.x = lerp(R.head.rotation.x, hRX, k);
@@ -650,9 +712,12 @@ function loop(now){
   R.arms[0].rotation.z = lerp(R.arms[0].rotation.z, -aL, k);
   R.arms[1].rotation.z = lerp(R.arms[1].rotation.z, -aR, k);
   R.bulbMat.emissiveIntensity = bulb;
-  if (!R.drag) R.yaw = em === 'dance' ? lerp(R.yaw, Math.sin(t*5)*1.1*A, .2) : lerp(R.yaw, R.sway ? Math.sin(t*.6)*.45*A : 0, .03);
-  R.robot.rotation.y = R.yaw;
-  R.flames.forEach(function(f, i){ f.scale.set(1, .8 + Math.abs(Math.sin(t*14 + i))*.5*A, 1); });
+  if (R.lean) R.lean *= .92;   // ✋ ההטיה של הגרירה דועכת לאט
+  var yT = R.sway ? Math.sin(t*.6)*.45*A : (fl ? R.lean * 1.1 : 0);
+  if (!R.drag && !(now < R.hold)) R.yaw = em === 'dance' ? lerp(R.yaw, Math.sin(t*5)*1.1*A, .2) : lerp(R.yaw, yT, fl && Math.abs(R.lean) > .02 ? .15 : .03);
+  R.robot.rotation.y = R.yaw; R.robot.rotation.z = fl ? Math.sin(t*1.15)*.07*A - R.lean * .35 : 0;
+  if (R.brain){ brainTick(t); brainLabel(Math.cos(R.yaw) < -.45 && (R.host.id === 'stage-shop' || R.host.id === 'stage-hello')); }
+  R.flames.forEach(function(f, i){ f.scale.set(1, (.8 + Math.abs(Math.sin(t*14 + i))*.5*A) * (fl ? 1.7 : 1), 1); });
   if (now > nextBlink){ blinkUntil = now + 130; nextBlink = now + 2200 + Math.random()*2500; }
   var fk = em + '|' + (now < blinkUntil) + '|' + G.eyes;
   if (fk !== R.faceKey){ drawFace(em, now < blinkUntil); R.faceKey = fk; }
@@ -663,7 +728,7 @@ function mount(stageId){
   var host = document.getElementById(stageId);
   if (!R){
     if (!host.querySelector('.fallback')){ var f = document.createElement('div'); f.className = 'fallback'; host.appendChild(f); }
-  } else { host.insertBefore(R.renderer.domElement, host.firstChild); R.host = host; R.sway = stageId !== 'stage-world'; resize(); }
+  } else { flyLand(); host.insertBefore(R.renderer.domElement, host.firstChild); R.host = host; R.sway = stageId !== 'stage-world'; resize(); }
   if (!host.querySelector('.mood')){ var c = document.createElement('div'); c.className = 'mood'; host.appendChild(c); }
   if (stageId === 'stage-shop' && R && !host.querySelector('.hint')){ var h = document.createElement('div'); h.className = 'hint'; h.textContent = '↔ גררו כדי לסובב'; host.appendChild(h); }
   showMood();
@@ -692,7 +757,7 @@ function say(text){ $('#wsay').textContent = text || ''; readSoon(); }   // הב
 function confetti(){
   if (mood === 'happy') fxPlay('dance', 2400);   // 💃 הצלחה = רובי רוקד
   if (RM) return;
-  var host = $('#robobar'), cols = ['#ff6f4f','#ffc93c','#43c6c0','#62c370','#a993f0'];
+  var host = flying ? $('#flyer') : $('#robobar'), cols = ['#ff6f4f','#ffc93c','#43c6c0','#62c370','#a993f0'];
   for (var i = 0; i < 34; i++){
     var s = document.createElement('span'); s.className = 'conf';
     s.style.left = (Math.random()*100) + '%'; s.style.background = cols[i % cols.length];
@@ -717,7 +782,7 @@ function reading(){ return !!(HEV && G.read && !G.muted); }
 function readIcon(){ var b = $('#readbtn'); b.textContent = '📖'; b.classList.toggle('off', !G.read); b.setAttribute('aria-pressed', String(G.read)); b.setAttribute('aria-label', G.read ? 'רובי מקריא בקול. לחצו כדי לכבות' : 'ההקראה כבויה. לחצו כדי להדליק'); }
 // בלי אימוג׳י וחצים (הקול היה מקריא את השם שלהם), ובלי ״/ת״
 function clean(t){ return (t || '').replace(/[\u{1F000}-\u{1FAFF}\u{2190}-\u{21FF}\u{2300}-\u{23FF}\u{2600}-\u{27BF}\u{2B00}-\u{2BFF}\u{FE0F}\u{200D}\u{20E3}]/gu, ' ').replace(/\/ת/g, '').replace(/\s+/g, ' ').trim(); }
-function talking(on){ talkOn = on; $('#robobar').classList.toggle('talking', on); }
+function talking(on){ talkOn = on; $('#robobar').classList.toggle('talking', on); $('#flyer').classList.toggle('talking', on); }
 function stopTalk(){ clearTimeout(readT); if (SYN) SYN.cancel(); talking(false); document.querySelectorAll('.reading').forEach(function(e){ e.classList.remove('reading'); }); }
 function revealAll(){ document.querySelectorAll('.comic.seq .bub').forEach(function(b){ b.classList.add('shown'); }); }
 /* תור הקראה: כל פריט = משפט אחד. כשמשפט מתחיל, הבועה שלו מופיעה ומודגשת */
@@ -828,7 +893,7 @@ setInterval(function(){
 /* ═══════════ 👋 רובי מכיר אתכם ═══════════
    בכל פתיחה של המשחק רובי מברך את המורים בשמות שכתבו בסדנה, מספר מה כבר לימדו אותו ומה מחכה היום.
    ״מה חדש״ מופיע רק בפעם הראשונה אחרי עדכון (G.hello שומר איזה עדכון כבר ראיתם). */
-var HELLO_VER = 2;
+var HELLO_VER = 2;   // גרסת ״מה חדש״ הבסיסית. תכונה שנדלקת מופיעה ב״מה חדש״ פעם אחת (G.seen)
 function esc(t){ return String(t).replace(/[&<>"']/g, function(c){ return {'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]; }); }
 function named(){ return G.teachers.every(function(t, i){ return t && t !== TEACHER_DEFAULTS[i]; }); }
 function mainDone(id){ return prog(id).slice(0, 3).every(Boolean); }
@@ -851,13 +916,19 @@ function openHello(next){
   $('#hello-p').textContent = intro + today + (named() ? '' : ' (את השמות שלכם כותבים בסדנה, ואז אגיד לכם שלום בשם.)');
   $('#hello-sk').innerHTML = learned.length ? '<span>🧠 כבר לימדתם אותי:</span>' + learned.map(function(x){ return '<span>' + x.icon + ' ' + x.skill + '</span>'; }).join('') : '';
   var vs = named() ? esc(t[0]) + ' נגד ' + esc(t[1]) : 'מורה נגד מורה';
-  $('#hello-new').innerHTML = (G.hello || 0) < HELLO_VER && played ? '<div class="hnew"><b>✨ מה חדש אצלי?</b>' +
-    '<span>📖 אני מקריא לכם בקול את ההוראות וההסברים.</span>' +
-    '<span>🧠 המוח שלי: כל שלב שתלמדו מדליק בו נקודת אור.</span>' +
-    '<span>🎪 בסוף כל עולם אני עושה הופעה, ואתם תופסים את הטעויות שלי.</span>' +
-    '<span>🎁 שלב בונוס חדש בכל עולם.</span>' +
-    '<span>⚔️ ' + vs + ': מי מנחש טוב יותר מה אעשה?</span>' +
-    '<span>😜 ותגעו בי בסדנה… אני רגיש לדגדוגים!</span></div>' : '';
+  var news = [   // [גרסה, תכונה, שורה]
+    [3, 'fly', '💡 הרעיון שלכם התגשם! גללו למטה, ואני ממריא ומרחף איתכם על המסך 🚀'],
+    [3, 'move', '✋ רעיון שלכם: גררו אותי באצבע לאן שתרצו, ואני אשאר שם.'],
+    [3, 'brain', '🧠 רעיון שלכם: סובבו אותי בסדנה, ותראו את המוח שלי מאחור!'],
+    [2, '', '📖 אני מקריא לכם בקול את ההוראות וההסברים.'],
+    [2, '', '🧠 המוח שלי: כל שלב שתלמדו מדליק בו נקודת אור.'],
+    [2, '', '🎪 בסוף כל עולם אני עושה הופעה, ואתם תופסים את הטעויות שלי.'],
+    [2, '', '🎁 שלב בונוס חדש בכל עולם.'],
+    [2, '', '⚔️ ' + vs + ': מי מנחש טוב יותר מה אעשה?'],
+    [2, '', '😜 ותגעו בי בסדנה… אני רגיש לדגדוגים!']
+  ].filter(function(n){ return n[1] ? FEATURES[n[1]] && (G.seen || []).indexOf(n[1]) < 0 : n[0] > (G.hello || 0); });
+  $('#hello-new').innerHTML = news.length && played ? '<div class="hnew"><b>✨ מה חדש אצלי?</b>' +
+    news.map(function(n){ return '<span>' + n[2] + '</span>'; }).join('') + '</div>' : '';
   $('#hello-say').className = 'btn'; $('#hello-go').className = 'btn alt';
   $('#hello').hidden = false; mount('stage-hello'); setMood('idle');
   $('#hello-say').focus({preventScroll: true});
@@ -868,7 +939,8 @@ $('#hello-say').addEventListener('click', function(){
   $('#hello-say').className = 'btn alt'; $('#hello-go').className = 'btn';   // אחרי השלום, ״יוצאים לדרך״ הוא הכפתור הראשי
 });
 $('#hello-go').addEventListener('click', function(){
-  G.hello = HELLO_VER; save(); beep('tap');
+  G.hello = HELLO_VER; G.seen = (G.seen || []).concat(Object.keys(FEATURES).filter(function(k){ return FEATURES[k] && (G.seen || []).indexOf(k) < 0; }));
+  save(); beep('tap');
   $('#hello').hidden = true; go(helloNext);
 });
 
@@ -877,15 +949,163 @@ function bindDrag(stage){
   stage.addEventListener('pointermove', function(e){ if (R && R.drag){ R.drag.moved = Math.max(R.drag.moved, Math.abs(e.clientX - R.drag.x)); R.yaw = R.drag.yaw + (e.clientX - R.drag.x) * .012; } });
   stage.addEventListener('pointerup', function(){   // נגיעה קצרה בלי גרירה = דגדוג
     if (R && R.drag && R.drag.moved < 8 && performance.now() - R.drag.t < 450) tickle(stage);
+    if (R && R.drag && R.drag.moved >= 8 && FEATURES.brain){ R.yaw = Math.atan2(Math.sin(R.yaw), Math.cos(R.yaw)); R.hold = performance.now() + 2600; }   // 🧠 אחרי סיבוב רובי נשאר רגע כך, כדי שתספיקו להסתכל
     if (R) R.drag = null;
   });
   stage.addEventListener('pointercancel', function(){ if (R) R.drag = null; });
 }
 bindDrag($('#stage-shop')); bindDrag($('#stage-hello'));
 
+/* ═══════════ 🚀 רובי המרחף ═══════════
+   לכל מסך יש לרובי ״בית״: הבמה בסדנה, או הפס בעולם. כשגוללים למטה והבית יוצא מהמסך, רובי ממריא
+   ומרחף בפינה, וכשחוזרים למעלה הוא נוחת בבית. במפה אין לו בית, ולכן שם הוא תמיד מרחף.
+   כל משפט חדש שהוא אומר בפס העליון קופץ גם בבועה שלידו, כדי שלא תפספסו מה הוא אמר. */
+var flying = false, flyHold = false, flyLast = '', flyT = null, flyHi = false, flyRaf = 0;
+function flyHome(){
+  if (!$('#hello').hidden) return 'hello';
+  return screen === 'shop' ? 'stage-shop' : screen === 'world' ? 'stage-world' : '';
+}
+function flyHide(){ clearTimeout(flyT); $('#flysay').hidden = true; }
+function flyAuto(ms){   // הבועה נעלמת לבד, אבל לא באמצע שרובי מדבר
+  clearTimeout(flyT); flyT = setTimeout(function(){ if (talkOn) flyAuto(1200); else flyHide(); }, ms);
+}
+function flySay(text, ms){   // בועה ליד רובי המרחף. כמה זמן היא נשארת? לפי אורך המשפט
+  if (!flying || !text) return;
+  var b = $('#flysay'); b.textContent = text; b.hidden = false; flyPlace();
+  b.style.animation = 'none'; void b.offsetWidth; b.style.animation = '';
+  flyAuto(ms || Math.min(9000, 2600 + text.length * 70));
+}
+function flyLand(){   // רובי נוחת: הבועה והרובוט המרחף נעלמים
+  if (flying){ flying = false; flyHide(); $('#flyer').hidden = true; }
+  document.querySelectorAll('.stage.away').forEach(function(e){ e.classList.remove('away'); });
+}
+function flyCheck(){
+  if (!R || !FEATURES.fly) return;
+  var home = flyHome(), want;
+  if (home === 'hello' || flyHold) want = false;
+  else if (!home) want = true;   // 🗺️ במפה רובי תמיד מרחף
+  else {
+    var r = $('#' + home).getBoundingClientRect(), top = $('.top').getBoundingClientRect().bottom, bot = $('.tabs').getBoundingClientRect().top;
+    var vis = Math.max(0, Math.min(r.bottom, bot) - Math.max(r.top, top)) / (r.height || 1);   // כמה מהבית שלו עוד רואים (0 עד 1)
+    want = flying ? vis < .55 : vis < .3;   // מרווח קטן, כדי שלא יקפוץ הלוך ושוב בדיוק על הגבול
+  }
+  if (want === flying) return;
+  if (want){
+    var f = $('#flyer');
+    flying = true; flyLast = clean($('#wsay').textContent);
+    if (home) $('#' + home).classList.add('away');
+    f.hidden = false; f.insertBefore(R.renderer.domElement, f.firstChild); R.host = f; R.sway = false; resize();
+    f.classList.toggle('talking', talkOn);
+    f.classList.remove('in'); void f.offsetWidth; f.classList.add('in');
+    flyPlace();
+    if (!flyHi){ flyHi = true; flySay('אני עף איתכם! 🚀' + (FEATURES.move ? ' אפשר גם לגרור אותי ✋' : ''), 3400); }
+  } else if (home && home !== 'hello') mount(home);
+  else flyLand();
+}
+function flySoon(){ if (!flyRaf) flyRaf = setTimeout(function(){ flyRaf = 0; flyCheck(); }, 60); }   // בודקים לכל היותר פעם ב-60 אלפיות שנייה בזמן גלילה
+window.addEventListener('scroll', flySoon, {passive: true});
+window.addEventListener('resize', function(){ document.documentElement.style.setProperty('--tabh', $('.tabs').offsetHeight + 'px'); flySoon(); if (flying) flyPlace(); });
+new MutationObserver(function(){   // משפט חדש בפס העליון ⇐ קופץ גם בבועה של רובי המרחף
+  var t = clean($('#wsay').textContent);
+  if (flying && screen === 'world' && t && t !== flyLast) flySay($('#wsay').textContent.trim());
+  flyLast = t;
+}).observe($('#wsay'), {childList: true, characterData: true, subtree: true});
+function flyTap(){   // נגיעה ברובי המרחף: בעולם הוא חוזר על מה שאמר, ובשאר המסכים מצחקק מדגדוג
+  if (screen === 'world'){
+    fxPlay('giggle', 800);
+    var rt = $('#wsay').textContent.trim();
+    if (rt){ flySay(rt); if (HEV && !G.muted) speakList([{text: clean(rt), robot: true}]); }
+  } else {
+    var line = TICKLE[tickleN++ % TICKLE.length];
+    fxPlay('giggle', 1500); beep('tickle'); flySay(line + ' 🤭', 2400); robotLine(line);
+  }
+}
+$('#flyer').addEventListener('click', function(){ if (flyMoved){ flyMoved = false; return; } flyTap(); });   // אחרי גרירה זו לא נגיעה
+$('#flyer').addEventListener('keydown', function(e){ if (e.key === 'Enter' || e.key === ' '){ e.preventDefault(); flyTap(); } });
+
+/* ═══════════ 🧠 המוח בגב הראש ═══════════
+   מסובבים את רובי בסדנה, ומבעד לכיפת הזכוכית בגב הראש רואים את המוח שלו.
+   כל אזור בוהק לפי כמה שלבים כבר למדתם בעולם שלו, ואזור שלם פועם. */
+function brainTick(t){
+  var B = R.brain.userData, key = WORLDS.map(function(w){ return w.ready ? mindDone(w.id) : 'x'; }).join('');
+  if (key !== B.key){
+    B.key = key;
+    WORLDS.forEach(function(w, i){
+      var l = B.lobes[i], m = l.material, hm = l.userData.halo.material, d = w.ready ? mindDone(w.id) : 0;
+      if (!d){ m.color.set(w.ready ? 0x4a5677 : 0x3a4462); m.emissive.set(0x000000); l.scale.setScalar(w.ready ? .85 : .7); hm.opacity = 0; return; }   // עוד לא למדו כאן: אפור
+      m.color.set(w.color).multiplyScalar(.75); m.emissive.set(w.color); m.emissiveIntensity = [0, .3, .45, .6][d]; l.scale.setScalar(1);
+      hm.color.set(w.color); hm.opacity = [0, .16, .24, .32][d];
+    });
+    while (B.syn.children.length) B.syn.remove(B.syn.children[0]);   // קווי אור בין אזורים שכנים ששניהם כבר למדו משהו
+    for (var i = 1; i < WORLDS.length; i++){
+      if (!mindDone(WORLDS[i-1].id) || !mindDone(WORLDS[i].id)) continue;
+      var a = B.lobes[i-1].position, b = B.lobes[i].position;
+      B.syn.add(new THREE.Line(new THREE.BufferGeometry().setFromPoints([a.clone().setZ(a.z - .08), b.clone().setZ(b.z - .08)]), new THREE.LineBasicMaterial({color: 0xfff6c8})));
+    }
+  }
+  WORLDS.forEach(function(w, i){   // אזור שלם (3 שלבים) פועם
+    if (!w.ready || mindDone(w.id) !== 3) return;
+    var h = B.lobes[i].userData.halo, k = Math.sin(t*3 + i);
+    h.material.opacity = .3 + k*.12; h.scale.setScalar(1.75 + k*.3);
+  });
+}
+function brainLabel(on){   // כשרואים את הגב של רובי: כמה נקודות אור כבר דולקות
+  if (on === !!R.brainOn && R.host === R.brainHost) return;
+  R.brainOn = on; R.brainHost = R.host;
+  document.querySelectorAll('.brainlbl').forEach(function(e){ e.hidden = true; });
+  if (!on) return;
+  var el = R.host.querySelector('.brainlbl');
+  if (!el){ el = document.createElement('div'); el.className = 'brainlbl'; R.host.appendChild(el); }
+  el.textContent = '🧠 ' + mindLit() + ' מתוך 27 נקודות אור דולקות'; el.hidden = false;
+}
+
+/* ═══════════ ✋ גוררים את רובי המרחף ═══════════
+   גוררים באצבע, ורובי נוטה ומסתובב לכיוון התנועה. איפה שעוזבים, שם הוא נשאר (נשמר בטלפון הזה). */
+var flyDrag = null, flyMoved = false;
+function flyBox(){
+  var f = $('#flyer'), top = $('.top').getBoundingClientRect().bottom + 4, bot = $('.tabs').getBoundingClientRect().top - 4;
+  return {x0: 4, x1: innerWidth - f.offsetWidth - 4, y0: top, y1: bot - f.offsetHeight};
+}
+function flyPlace(){   // מציבים את רובי ואת הבועה שלו לפי המקום ששמרתם
+  var f = $('#flyer'), b = $('#flysay');
+  if (!FEATURES.move || !G.flypos || f.hidden){
+    f.style.left = f.style.top = f.style.bottom = ''; b.style.left = b.style.right = b.style.top = b.style.bottom = '';
+    b.classList.remove('r', 't'); return;
+  }
+  var k = flyBox(), x = Math.min(k.x1, Math.max(k.x0, G.flypos[0] * innerWidth)), y = Math.min(k.y1, Math.max(k.y0, G.flypos[1] * innerHeight));
+  f.style.left = x + 'px'; f.style.top = y + 'px'; f.style.bottom = 'auto';
+  var right = x + f.offsetWidth / 2 > innerWidth / 2, up = y > innerHeight / 2;   // רובי מימין ⇐ הבועה משמאלו · רובי למטה ⇐ הבועה גדלה למעלה
+  b.classList.toggle('r', right); b.classList.toggle('t', !up);
+  if (right){ b.style.right = (innerWidth - x - 12) + 'px'; b.style.left = 'auto'; } else { b.style.left = (x + f.offsetWidth - 12) + 'px'; b.style.right = 'auto'; }
+  if (up){ b.style.bottom = (innerHeight - y - 78) + 'px'; b.style.top = 'auto'; } else { b.style.top = (y + 30) + 'px'; b.style.bottom = 'auto'; }
+}
+$('#flyer').addEventListener('pointerdown', function(e){
+  if (!FEATURES.move) return;
+  var r = $('#flyer').getBoundingClientRect();
+  flyDrag = {id: e.pointerId, dx: e.clientX - r.left, dy: e.clientY - r.top, x: e.clientX, y: e.clientY, lx: e.clientX, moved: 0};
+  $('#flyer').setPointerCapture(e.pointerId);
+});
+$('#flyer').addEventListener('pointermove', function(e){
+  if (!flyDrag || e.pointerId !== flyDrag.id) return;
+  flyDrag.moved = Math.max(flyDrag.moved, Math.abs(e.clientX - flyDrag.x) + Math.abs(e.clientY - flyDrag.y));
+  if (flyDrag.moved < 8) return;   // תזוזה קטנה = עדיין נגיעה, לא גרירה
+  var k = flyBox(), x = Math.min(k.x1, Math.max(k.x0, e.clientX - flyDrag.dx)), y = Math.min(k.y1, Math.max(k.y0, e.clientY - flyDrag.dy));
+  var vx = e.clientX - flyDrag.lx; flyDrag.lx = e.clientX;
+  G.flypos = [x / innerWidth, y / innerHeight]; flyPlace();
+  if (R) R.lean = Math.max(-1, Math.min(1, R.lean * .5 + vx / 14));   // נוטה ומסתובב לכיוון התנועה
+  $('#flyer').classList.add('drag');
+});
+function flyDrop(){
+  if (!flyDrag) return;
+  if (flyDrag.moved >= 8){ flyMoved = true; save(); beep('tap'); }
+  flyDrag = null; $('#flyer').classList.remove('drag');
+}
+$('#flyer').addEventListener('pointerup', flyDrop);
+$('#flyer').addEventListener('pointercancel', flyDrop);
+
 /* ═══════════ מסכים כלליים ═══════════ */
 var toastT;
-function toast(msg){ var t = $('#toast'); t.textContent = msg; t.hidden = false; clearTimeout(toastT); toastT = setTimeout(function(){ t.hidden = true; }, 2800); }
+function toast(msg){ var t = $('#toast'); t.textContent = msg; t.hidden = false; t.classList.toggle('up', !!flying && !(FEATURES.move && G.flypos && G.flypos[1] < .4)); clearTimeout(toastT); toastT = setTimeout(function(){ t.hidden = true; }, 2800); }
 function addStars(n){ G.stars += n; save(); stars(); }
 function stars(){ $('#stars').textContent = '⭐ ' + G.stars; $('#shopnote').textContent = 'יש לכם ' + G.stars + ' ⭐. מרוויחים כוכבים בעולמות, וקונים בהם כאן.'; }
 function brand(){ $('#brand').textContent = 'מלמדים את ' + G.name; }
@@ -893,14 +1113,14 @@ function muteIcon(){ $('#mute').textContent = G.muted ? '🔇' : '🔊'; $('#mut
 $('#mute').addEventListener('click', function(){ G.muted = !G.muted; save(); muteIcon(); beep('tap'); if (G.muted) stopTalk(); });
 var screen = 'shop';
 function go(s){
-  screen = s; stopTalk();
+  screen = s; stopTalk(); if (s !== 'map') flyHold = false;
   if (s !== 'world') camSrc = null;   // 🔒 התמונה מהמצלמה נמחקת כשיוצאים מהעולם
   ['shop','map','world'].forEach(function(k){ $('#s-' + k).hidden = k !== s; });
   document.querySelectorAll('.tabs button').forEach(function(b){ if (b.dataset.go === s) b.setAttribute('aria-current', 'page'); else b.removeAttribute('aria-current'); });
   if (s === 'shop'){ mount('stage-shop'); renderMind(); }
   if (s === 'world'){ mount('stage-world'); renderWorld(); }
   if (s === 'map') renderMap();
-  window.scrollTo(0, 0);
+  window.scrollTo(0, 0); flySoon();
 }
 document.querySelectorAll('.tabs button').forEach(function(b){ b.addEventListener('click', function(){ go(b.dataset.go); }); });
 
@@ -961,6 +1181,7 @@ function renderShop(){
 function wear(it){
   if (it.slot) G.worn = G.worn.filter(function(x){ var o = SHOP.filter(function(s){ return s.id === x; })[0]; return !o || o.slot !== it.slot; });
   if (G.worn.indexOf(it.id) < 0) G.worn.push(it.id);
+  if (flying) flySay('איך אני נראה? 😎', 2400);   // רובי המרחף שואל איך התלבושת החדשה
 }
 /* ───────── 🧠 המוח של רובי ─────────
    כל עולם = אזור במוח (עיגול בצבע של העולם). כל שלב שמסיימים = נקודת אור לבנה באזור,
@@ -1156,7 +1377,7 @@ function renderWorld(){
   });
   $('#levels').innerHTML = row1 + (row2 ? '<div class="lx">' + row2 + '</div>' : '');
   $('#levels').querySelectorAll('button').forEach(function(b){ b.onclick = act(function(){ W = fresh(+b.dataset.l); renderWorld(); }); });
-  renderModes(); duelBar(); backVis();
+  renderModes(); duelBar(); backVis(); flySoon();
 }
 
 /* ═══════════ 🐾 יער הדוגמאות: הרובוט לומד ״חוק״ מדוגמאות ═══════════
@@ -2195,10 +2416,10 @@ function judge(tok, pressed){
 /* 🚶 רובי הולך על השביל במפה לעולם הבא */
 function walkTo(from, to){
   var name = WORLDS.filter(function(x){ return x.id === to; })[0].name;
-  go('map');
+  flyHold = true; go('map');
   var ids = WORLDS.map(function(x){ return x.id; }), nodes = $('#map').querySelectorAll('.node');
   var a = nodes[ids.indexOf(from)], b = nodes[ids.indexOf(to)];
-  function arrive(){ toast('✨ ' + G.name + ' הגיע ל' + name + '!'); enterWorld(to); }
+  function arrive(){ flyHold = false; toast('✨ ' + G.name + ' הגיע ל' + name + '!'); enterWorld(to); }
   if (!a || !b || RM){ arrive(); return; }
   window.scrollTo(0, Math.max(0, a.getBoundingClientRect().top + window.scrollY - 150));
   var box = $('#map').getBoundingClientRect(), ra = a.querySelector('.isl').getBoundingClientRect(), rb = b.querySelector('.isl').getBoundingClientRect();
@@ -2579,7 +2800,10 @@ var MECHANICS = {
 /* ▶️ הפעלה */
 init3D();
 renderWorkshop(); stars(); brand(); muteIcon();
-document.documentElement.style.setProperty('--toph', $('.top').offsetHeight + 'px');   // גובה הפס העליון, בשביל פס הרובוט
+document.documentElement.style.setProperty('--toph', $('.top').offsetHeight + 'px');
+document.documentElement.style.setProperty('--tabh', $('.tabs').offsetHeight + 'px');   // גובה סרגל הלשוניות, בשביל רובי המרחף
+document.body.classList.toggle('f-fly', FEATURES.fly);
+document.body.classList.toggle('f-move', FEATURES.move);   // גובה הפס העליון, בשביל פס הרובוט
 if (G.cur && MECHANICS[G.cur.w]){ curWorld = G.cur.w; W = fresh(G.cur.l || 0); }       // ממשיכים מהעולם והשלב האחרונים
 openHello(Object.keys(G.prog).some(function(k){ return G.prog[k].some(Boolean); }) ? 'map' : 'shop');   // 👋 קודם רובי מברך, ואז: מי שכבר שיחק מתחיל במפה
 })();
