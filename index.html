@@ -389,6 +389,86 @@ div.res{text-align:center}
 @keyframes bump{40%{transform:scale(1.06)}}
 @media (prefers-reduced-motion:reduce){.duelbar.bump{animation:none}}
    /* קיים אבל לא נראה: הכפתור שמעליו פותח אותו */
+/* 🌳 עולם 4: עץ השאלות. שאלה = ריבוע חום, ענף = קו, עלה = עיגול ירוק */
+.twbox{background:#fff;border:2px solid var(--line);border-radius:16px;padding:6px}
+svg.twtree{display:block;width:100%;height:auto}
+.twtree text{font-family:var(--body);direction:rtl;unicode-bidi:embed}
+html[dir="ltr"] .twtree text{direction:ltr}
+.twtree .edge{stroke:#b9c7b1;stroke-width:4;fill:none;stroke-linecap:round}
+.twtree .edge.on{stroke:#3fa36b;stroke-width:6}
+.twtree .lab rect{fill:#fff;stroke:#cfd9c9;stroke-width:1.5}
+.twtree .lab text{font-size:13px;fill:var(--mute);font-weight:700}
+.twtree .lab.on rect{fill:#e4f5ea;stroke:#3fa36b}.twtree .lab.on text{fill:var(--good)}
+.twtree .q rect{fill:#8a5a32;stroke:#6b4423;stroke-width:2}
+.twtree .q text{font-size:15px;fill:#fff;font-weight:700}
+.twtree .q.on rect{fill:#3fa36b;stroke:#2a7a4f}
+.twtree .q.cur rect{stroke:var(--sun);stroke-width:4}
+.twtree .q.empty rect{fill:#fff;stroke:#8a5a32;stroke-dasharray:6 4}.twtree .q.empty text{fill:#8a5a32}
+.twtree .lf circle{fill:#e4f5ea;stroke:#3fa36b;stroke-width:2}
+.twtree .lf.on circle{fill:#fff3c4;stroke:var(--sun);stroke-width:4}
+.twtree .lf.empty circle{fill:#fff;stroke-dasharray:5 4}
+.twtree .lf.growable circle{stroke:var(--coral);stroke-width:3;stroke-dasharray:5 3}
+.twtree .lf text.e{font-size:22px}
+.twtree .lf text.n{font-size:14px;fill:var(--mute);font-weight:700}
+.twtree .tap{cursor:pointer}
+.twtree .q rect.hit,.twtree .lf circle.hit{fill:transparent;stroke:none}   /* אזור לחיצה גדול יותר לאצבע של ילד, שקוף */
+.twtree g[role="button"]:focus{outline:none}
+.twtree g[role="button"]:focus-visible rect:not(.hit),.twtree g[role="button"]:focus-visible circle:not(.hit){stroke:var(--coral);stroke-width:4}
+.twtree .grow{transform-box:fill-box;transform-origin:center;animation:twgrow .7s cubic-bezier(.3,1.6,.5,1) both}
+@keyframes twgrow{from{transform:scale(0);opacity:0}to{transform:scale(1);opacity:1}}
+@media (prefers-reduced-motion:reduce){.twtree .grow{animation:none}}
+.twlegend{display:flex;flex-wrap:wrap;gap:4px 14px;font-size:14px;color:var(--mute);margin:0;padding:0;list-style:none}
+.twlegend b{color:var(--ink)}
+.twcnt{font-size:13.5px;color:var(--mute);font-weight:700;margin-top:-6px}
+/* 🌤️ כרטיס היום */
+.twday{display:grid;grid-template-columns:1fr 1fr;gap:8px}
+.twsky{grid-row:span 2;border-radius:14px;min-height:122px;display:grid;place-items:center;font-size:44px;letter-spacing:-6px;background:linear-gradient(180deg,#7cc7f2,#c9ecff);position:relative;overflow:hidden}
+.twsky.cloudy{background:linear-gradient(180deg,#8c9db0,#cfd8e2)}
+.twsky.part{background:linear-gradient(180deg,#9ccbe8,#dbe9f2)}
+.twsky.fog{background:linear-gradient(180deg,#aab5bf,#dfe5ea);letter-spacing:0}
+.twsky .gr{position:absolute;inset:auto 0 0;height:36%;background:#7fae6a;display:flex;align-items:flex-end;justify-content:space-around;font-size:28px;padding-bottom:2px}
+.twsky .mist{position:absolute;inset:18% 0 0;background:linear-gradient(180deg,rgba(255,255,255,0),rgba(250,252,253,.88) 38%,rgba(250,252,253,.82))}
+.twmeas{border-radius:14px;background:#fff;border:2px solid var(--line);display:flex;align-items:center;justify-content:center;gap:6px;font-size:16px;font-weight:700;padding:6px;text-align:center}
+/* 🔮 ניחוש וכרטיסים */
+.twpicks{display:grid;grid-template-columns:repeat(5,minmax(0,1fr));gap:6px}
+.twpicks button,.twcards span{min-height:64px;border-radius:14px;border:2px solid var(--line);background:#fff;font-size:26px;display:flex;flex-direction:column;align-items:center;justify-content:center;line-height:1.1;padding:2px}
+.twpicks button span,.twcards span small{font-size:12.5px;color:var(--mute);font-weight:700}
+.twcards{display:grid;grid-template-columns:repeat(auto-fit,minmax(62px,1fr));gap:6px}
+.twguess{display:flex;align-items:center;justify-content:center;gap:10px;font-size:46px;background:#fff7dc;border:2px solid var(--sun);border-radius:16px;padding:6px}
+.twguess b{font-family:var(--display);font-weight:400;font-size:24px;color:var(--sea)}
+/* 🎤 שאלה של רובי */
+.twask{background:#e4f5ea;border:2px solid #3fa36b;border-radius:14px;padding:10px;display:flex;flex-direction:column;gap:8px}
+.twask .twq{font-family:var(--display);font-weight:400;font-size:20px;color:var(--sea);text-align:center}
+.twask .row button{flex:1 1 28%;background:#3fa36b;color:#fff;font-family:var(--display);font-size:17px;box-shadow:0 4px 0 #2a7a4f;padding:8px 6px}
+.twask .row button:active{transform:translateY(3px);box-shadow:0 1px 0 #2a7a4f}
+.twmic{background:#fff;border-color:var(--sea2);color:var(--sea2);font-weight:700;align-self:center}
+.twmic[aria-pressed="true"]{background:#e3f4f2;animation:twpulse 1s ease-in-out infinite}
+@keyframes twpulse{50%{box-shadow:0 0 0 6px rgba(27,111,122,.18)}}
+@media (prefers-reduced-motion:reduce){.twmic[aria-pressed="true"]{animation:none}}
+.twask .small-note{text-align:center;min-height:0}
+.twask .small-note:empty{display:none}
+/* 🧪 היומן, הבדיקה ומד הדיוק */
+.twdays{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:6px}
+.twdays div{background:#fff;border:2px solid var(--line);border-radius:12px;padding:6px 4px;text-align:center;font-size:13.5px;line-height:1.4}
+.twdays div b{display:block;font-size:22px}
+.twdays div.ok{border-color:var(--good);background:#eaf7ee}.twdays div.no{border-color:var(--bad);background:#fdeee6}.twdays div.run{border-color:var(--sun);background:#fff8dc}
+.twqcount{font-size:14.5px;font-weight:700;color:#8a5a32}
+.twgrow{background:#fff;border-color:#3fa36b;color:#2a7a4f;font-weight:700;flex:1 1 120px}
+.twgrow.on{background:#e4f5ea}
+.twclear{background:#fff;border-color:var(--line);color:var(--sea2);font-weight:700}
+.twmeter{background:#fff;border:2px solid #3fa36b;border-radius:14px;padding:10px;display:flex;flex-direction:column;gap:6px}
+.twmeter>b{font-family:var(--display);font-weight:400;font-size:17px;color:var(--sea)}
+.twmeter .mrow{display:grid;grid-template-columns:86px 1fr 40px;gap:8px;align-items:center;font-size:14px;font-weight:700}
+.twmeter .mrow i{height:14px;background:#e7eeec;border-radius:999px;overflow:hidden}
+.twmeter .mrow s{display:block;height:100%;background:#3fa36b;border-radius:999px}
+.twmeter .mrow em{font-style:normal;font-variant-numeric:tabular-nums;text-align:end}
+.twnote{background:#fff7dc;border:2px solid var(--sun);border-radius:12px;padding:8px 10px;font-size:15px}
+.twopts{display:flex;flex-direction:column;gap:8px}
+.btn[aria-disabled="true"]{opacity:.55}
+.twopts button{text-align:start;background:#fff;border-color:var(--sea2);color:var(--sea2);font-weight:700}
+/* 🎪 בהופעה: כרטיס יום קטן */
+.svis .twday{width:100%;max-width:300px}
+.svis .twsky{min-height:96px;font-size:38px}
 </style>
 </head>
 <body>
@@ -550,7 +630,7 @@ var WORLDS = [
   {id:'examples', name:t('יער הדוגמאות', 'Example Forest'),   sub:t('איך מכונה לומדת', 'How a machine learns'),        icon:'🐾', color:'#62c370', ability:t('לומד מדוגמאות', 'learns from examples'), skill:t('לומד מדוגמאות', 'learns from examples'), ready:true},
   {id:'pixels',   name:t('עיר הפיקסלים', 'Pixel City'),   sub:t('איך מחשב רואה תמונה', 'How a computer sees a picture'),   icon:'🎨', color:'#ff7f61', ability:t('רואה תמונות', 'sees pictures'), skill:t('רואה תמונות', 'sees pictures'), ready:true},
   {id:'layers',   name:t('מגדל השכבות', 'Tower of Layers'),    sub:t('מוח מלאכותי', 'An artificial brain'),           icon:'🧠', color:'#a993f0', ability:t('מזהה צורות בעזרת קומות של נוירונים', 'recognizes shapes using floors of neurons'), skill:t('מזהה צורות', 'recognizes shapes'), ready:true},
-  {id:'tree',     name:t('עץ השאלות', 'Question Tree'),      sub:t('עצי החלטה', 'Decision trees'),             icon:'🌳', color:'#3fa36b', skill:t('מקבל החלטות', 'makes decisions')},
+  {id:'tree',     name:t('עץ השאלות', 'Question Tree'),      sub:t('עצי החלטה', 'Decision trees'),             icon:'🌳', color:'#3fa36b', ability:t('מקבל החלטות בעזרת עץ של שאלות', 'makes decisions with a tree of questions'), skill:t('מקבל החלטות', 'makes decisions'), ready:true},
   {id:'words',    name:t('ים המילים', 'Word Sea'),      sub:t('איך מחשב מבין שפה', 'How a computer understands language'),     icon:'🔤', color:'#4aa3df', skill:t('מבין מילים', 'understands words')},
   {id:'recs',     name:t('קולנוע ההמלצות', 'Recommendation Cinema'), sub:t('מערכת המלצות', 'Recommendation systems'),          icon:'🍿', color:'#ef6f93', skill:t('ממליץ', 'recommends things')},
   {id:'prompt',   name:t('סטודיו הפרומפטים', 'Prompt Studio'), sub:t('בינה יוצרת', 'Creative AI'),          icon:'🖌️', color:'#f2a33a', skill:t('יוצר ציורים', 'creates pictures')},
@@ -570,6 +650,7 @@ var store = {
 var DEF = {stars: START_STARS, owned: [], worn: [], body: '#ffc93c', eyes: '#5ff2d8', name: ROBOT_DEFAULT_NAME, teachers: TEACHER_DEFAULTS.slice(), prog: {}, muted: false,
   cur: null,      // איפה עצרת: עולם ושלב, כדי להמשיך משם
   wires: null,    // המגדל שבנית בעולם 3
+  wtree: null,    // 🌳 העץ שבנית בעולם 4 (נשמר רק אם צדק בכל 6 הימים)
   read: true,     // 🗣️ רובי מקריא בקול את ההסברים
   duel: false,    // ⚔️ מצב דו-קרב: מורה נגד מורה
   words: {},      // 🎤 מילים ש״לימדת״ את רובי: מילה ⇐ פעולה
@@ -974,7 +1055,7 @@ setInterval(function(){
 /* ═══════════ 👋 רובי מכיר אותך ═══════════
    בכל פתיחה של המשחק רובי מברך את המורים בשמות שכתבו בסדנה, מספר מה כבר לימדו אותו ומה מחכה היום.
    ״מה חדש״ מופיע רק בפעם הראשונה אחרי עדכון (G.hello שומר איזה עדכון כבר ראית). */
-var HELLO_VER = 2;   // גרסת ״מה חדש״ הבסיסית. תכונה שנדלקת מופיעה ב״מה חדש״ פעם אחת (G.seen)
+var HELLO_VER = 3;   // גרסת ״מה חדש״ הבסיסית. תכונה שנדלקת מופיעה ב״מה חדש״ פעם אחת (G.seen)
 function esc(t){ return String(t).replace(/[&<>"']/g, function(c){ return {'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]; }); }
 function named(){ var t = G.teachers[0]; return !!t && t !== TEACHER_DEFAULTS[0] && t !== 'מורה א׳'; }   // 'מורה א׳' = ברירת המחדל הישנה בשמורים קיימים
 function who(){ return named() ? G.teachers[0] : TEACHER_DEFAULTS[0]; }
@@ -1001,6 +1082,7 @@ function openHello(next){
   $('#hello-sk').innerHTML = learned.length ? t('<span>🧠 כבר לימדת אותי:</span>', '<span>🧠 You have already taught me:</span>') + learned.map(function(x){ return '<span>' + x.icon + ' ' + x.skill + '</span>'; }).join('') : '';
   var vs = named() ? esc(tch[0]) + t(' נגד ', ' vs ') + esc(DUEL_OTHER) : t('אתה נגד ', 'You vs ') + esc(DUEL_OTHER);
   var news = [   // [גרסה, תכונה, שורה]
+    [3, '', t('🌳 עולם חדש נפתח במפה: עץ השאלות! שם אלמד לקבל החלטות.', '🌳 A new world opened on the map: the Question Tree! There I’ll learn to make decisions.')],
     [3, 'fly', t('💡 הרעיון שלך התגשם! גלול למטה, ואני ממריא ומרחף איתך על המסך 🚀', '💡 Your idea came true! Scroll down, and I take off and fly with you on the screen 🚀')],
     [3, 'move', t('✋ רעיון שלך: גרור אותי באצבע לאן שתרצה, ואני אשאר שם.', '✋ Your idea: drag me with your finger wherever you like, and I’ll stay there.')],
     [3, 'brain', t('🧠 רעיון שלך: סובב אותי בסדנה, ותראה את המוח שלי מאחור!', '🧠 Your idea: rotate me in the Workshop and see my brain from behind!')],
@@ -1198,6 +1280,7 @@ $('#mute').addEventListener('click', function(){ G.muted = !G.muted; save(); mut
 var screen = 'shop';
 function go(s){
   screen = s; stopTalk(); if (s !== 'map') flyHold = false;
+  twMicStop(); if (vWx){ vWx = null; vOffer([]); }   // 🌳 לא משאירים מיקרופון פתוח או שאלה של העץ באוויר
   if (FEATURES.voice) vLeave(s);
   if (s !== 'world') camSrc = null;   // 🔒 התמונה מהמצלמה נמחקת כשיוצאים מהעולם
   ['shop','map','world'].forEach(function(k){ $('#s-' + k).hidden = k !== s; });
@@ -1359,7 +1442,7 @@ function vOffer(btns){   // כפתורים קטנים מתחת לתשובה של
   box.hidden = !btns.length;
 }
 function vBackBtn(){
-  if (!vIsV(G.body)) return;
+  if (!vIsV(G.body) || vWx) return;   // באמצע ״מה מזג האוויר?״ כפתורי התשובות נשארים
   vOffer([[t('🎨 חזור לצבע שלי', '🎨 Back to my color'), function(){ var m = G.mine || BODY[0][0]; G.body = m; save(); applyLook(); vSwatches(); beep('tap'); vReply(t('חזרתי לצבע שלי 😊', 'I’m back to my color 😊')); }]]);
 }
 function vSwatches(){   // מסמנים את הצבע החדש בבחירת הצבעים של הסדנה
@@ -1367,6 +1450,19 @@ function vSwatches(){   // מסמנים את הצבע החדש בבחירת הצ
   document.querySelectorAll('#sw-body button').forEach(function(b, k){ b.setAttribute('aria-pressed', String(k === i)); });
 }
 function vMood(m, line){ return function(){ setMood(m, 3500); beep(m === 'sad' || m === 'worry' ? 'bad' : 'good'); return line; }; }
+/* 🌳 ״מה מזג האוויר?״: רובי שואל את השאלות של העץ (העץ שבנית, אם צדק בכל הימים), ומגיע לתחזית */
+var vWx = null;
+function vWxTree(){ return tscore(G.wtree) === 6 ? G.wtree : robiTree(); }
+function vWxN(){ var nd = vWx && tat(vWx.tree, vWx.path); return nd && nd.kids ? TQ[nd.k].a.length : 2; }
+function vWxStart(){ vWx = {tree: tclone(vWxTree()), path: []}; return vWxAsk(); }
+function vWxAsk(){
+  var nd = tat(vWx.tree, vWx.path);
+  if (!nd.kids){ vWx = null; vOffer([]); var w = WX[nd.leaf]; fxPlay('dance', 1600); beep('good'); return tf('לפי העץ: {w} {e}! {g}.', 'According to the tree: {w} {e}! {g}.', {w: w[1], e: w[0], g: GEAR[nd.leaf]}); }
+  var Qn = TQ[nd.k];
+  vOffer(Qn.a.map(function(a, i){ return [a.replace(/\u200e/g, ''), function(){ vWxAnswer(i); }]; }));
+  return '🌳 ' + Qn.q + (vWx.path.length ? '' : t(' (אפשר לענות בקול או ללחוץ)', ' (you can answer out loud or tap)'));
+}
+function vWxAnswer(i){ if (!vWx) return; vWx.path = vWx.path.concat(i); vReply(vWxAsk()); }
 var ACTS = {
   dance: {w: 'examples', lbl: t('לרקוד 💃', 'Dance 💃'), run: function(){ setMood('happy', 3200); fxPlay('dance', 3200); beep('good'); return t('אני רוקד! 💃', 'I’m dancing! 💃'); }},
   happy: {w: 'examples', lbl: t('לשמוח 😄', 'Be happy 😄'), run: vMood('happy', t('איזה כיף! אני שמח! 😄', 'How fun! I’m happy! 😄'))},
@@ -1376,12 +1472,14 @@ var ACTS = {
   red:   {w: 'pixels', lbl: t('להיות אדום 🔴', 'Be red 🔴'), run: function(){ vSetBody(VCOL.red); return VONE.red; }},
   green: {w: 'pixels', lbl: t('להיות ירוק 🟢', 'Be green 🟢'), run: function(){ vSetBody(VCOL.green); return VONE.green; }},
   blue:  {w: 'pixels', lbl: t('להיות כחול 🔵', 'Be blue 🔵'), run: function(){ vSetBody(VCOL.blue); return VONE.blue; }},
-  learned: {w: 'layers', lbl: t('לספר מה למדתי 🧠', 'Tell what I learned 🧠'), run: function(){ vLearnShow(); return t('בוא אראה לך מה למדתי! 🧠', 'Let me show you what I learned! 🧠'); }}
+  learned: {w: 'layers', lbl: t('לספר מה למדתי 🧠', 'Tell what I learned 🧠'), run: function(){ vLearnShow(); return t('בוא אראה לך מה למדתי! 🧠', 'Let me show you what I learned! 🧠'); }},
+  weather: {w: 'tree', lbl: t('לחזות מזג אוויר 🌤️', 'Forecast the weather 🌤️'), run: function(){ return vWxStart(); }}
 };
 var VROWS = [   // מה מוצג ברשימה: [עולם, [טקסטים לדוגמה]]
   ['examples', [t('תרקוד', 'dance'), t('תשמח', 'be happy'), t('תהיה עצוב', 'be sad'), t('תחשוב', 'think'), t('תדאג', 'worry')]],
   ['pixels', [t('תהיה אדום', 'be red'), t('תהיה ירוק', 'be green'), t('תהיה כחול', 'be blue'), t('אדום וירוק', 'red and green'), t('אדום וכחול', 'red and blue'), t('ירוק וכחול', 'green and blue'), t('אדום וירוק וכחול', 'red and green and blue')]],
-  ['layers', [t('מה למדת?', 'what did you learn?')]]
+  ['layers', [t('מה למדת?', 'what did you learn?')]],
+  ['tree', [t('מה מזג האוויר?', 'what’s the weather?')]]
 ];
 function vOpen(id){ return FEATURES.voice && mindDone(id) === 3; }
 function vWorld(id){ return WORLDS.filter(function(w){ return w.id === id; })[0]; }
@@ -1390,6 +1488,7 @@ function vNorm(s){   // אותיות קטנות, בלי ניקוד, בלי סי�
   return String(s).toLowerCase().replace(/[֑-ׇ]/g, '').replace(/[^א-תa-z0-9\s]/g, ' ').replace(/\s+/g, ' ').trim();
 }
 function vParse(n){
+  if (/מזג|אוויר|תחזית|\bweather|\bforecast/.test(n)) return {id: 'weather'};
   if (/למדת|\blearn/.test(n)) return {id: 'learned'};
   if (/רקוד|ריקוד|רקד|\bdanc/.test(n)) return {id: 'dance'};
   var c = [];
@@ -1443,6 +1542,11 @@ function vHandle(raw){
   vLearnBox(null);
   var n = vNorm(raw), p = null, pre = '';
   if (!n){ vReply(t('לא שמעתי כלום. נסה שוב 😊', 'I didn’t hear anything. Try again 😊')); return; }
+  if (vWx){   // 🌳 באמצע ״מה מזג האוויר?״: ״כן״ או ״לא״ הם תשובה לשאלה של העץ
+    var wa = twHeard(raw, vWxN());
+    if (wa >= 0){ vWxAnswer(wa); return; }
+    vWx = null; vOffer([]);
+  }
   p = vParse(n);
   if (!p){
     var k = vWords(n); if (!k) n.split(' ').some(function(x){ k = vWords(x); return !!k; });
@@ -1546,7 +1650,8 @@ function vTourTexts(){
   if (vOpen('examples')) a.push(t('בעולם יער הדוגמאות נפתחו לך פקודות. תגיד ״תרקוד״, והוא ירקוד. תגיד ״תשמח״, ״תהיה עצוב״, ״תחשוב״ או ״תדאג״, והוא יראה לך איך הוא מרגיש.', 'In Example Forest you unlocked commands. Say “dance”, and it dances. Say “be happy”, “be sad”, “think” or “worry”, and it shows you how it feels.'));
   if (vOpen('pixels')) a.push(t('בעולם עיר הפיקסלים תגיד ״תהיה אדום״, ״תהיה ירוק״ או ״תהיה כחול״, והוא ישנה את הצבע שלו. אפשר גם לערבב אור: תגיד ״אדום וירוק״ ותראה איזה צבע יוצא!', 'In Pixel City, say “be red”, “be green” or “be blue”, and it changes its color. You can also mix light: say “red and green” and see what color comes out!'));
   if (vOpen('layers')) a.push(t('בעולם מגדל השכבות תשאל ״מה למדת?״, והוא יסתובב ויראה לך את המוח שלו, עם כל מה שלמד.', 'In the Tower of Layers, ask “what did you learn?”, and it turns around and shows you its brain, with everything it learned.'));
-  if (!(vOpen('examples') && vOpen('pixels') && vOpen('layers'))) a.push(t('ויש עוד פקודות שמחכות! כשתסיים את שלושת השלבים הראשונים בעוד עולם, הן ייפתחו.', 'And more commands are waiting! When you finish the first three levels of another world, they unlock.'));
+  if (vOpen('tree')) a.push(t('בעולם עץ השאלות תשאל ״מה מזג האוויר?״, והוא ישאל אותך שאלות מהעץ, עד שיגיע לתחזית.', 'In the Question Tree, ask “what’s the weather?”, and it will ask you questions from the tree, until it reaches a forecast.'));
+  if (!(vOpen('examples') && vOpen('pixels') && vOpen('layers') && vOpen('tree'))) a.push(t('ויש עוד פקודות שמחכות! כשתסיים את שלושת השלבים הראשונים בעוד עולם, הן ייפתחו.', 'And more commands are waiting! When you finish the first three levels of another world, they unlock.'));
   a.push(t('ואם תגיד מילה שאני לא מכיר, אשאל אותך מה לעשות בה, ואלמד אותה. אפשר ללחוץ על דלג בכל רגע.', 'And if you say a word I don’t know, I’ll ask you what to do with it, and I’ll learn it. You can tap Skip at any time.'));
   return a;
 }
@@ -1686,7 +1791,7 @@ function enterWorld(id){ if (curWorld !== id){ curWorld = id; W = fresh(0); HIST
    paid (על איזו חיה כבר קיבלו כוכב) משותף לכל הצילומים, כדי שחזרה לא תיתן כוכב פעמיים. */
 var HIST = [];
 function snap(){ var o = {}; Object.keys(W).forEach(function(k){ var v = W[k]; o[k] = Array.isArray(v) ? v.slice() : k === 'lab' ? JSON.parse(JSON.stringify(v)) : v; }); return o; }
-function sig(w){ return [w.level, w.phase, w.round, w.ti, w.guess, w.brain.length, w.res, w.grid.join(''), w.shown].join('|'); }   // מה נחשב ״צעד״
+function sig(w){ return [w.level, w.phase, w.round, w.ti, w.guess, w.brain.length, w.res, w.grid.join(''), w.shown, w.tree ? JSON.stringify(w.tree) : '', w.t3 ? JSON.stringify(w.t3) : '', (w.path || []).join('')].join('|'); }   // 🌳 גם העץ והדרך בו   // מה נחשב ״צעד״
 function act(fn){ return function(){
   var before = snap(); HIST.push(before);
   fn();
@@ -2659,6 +2764,601 @@ function lay3(){
 }
 
 
+/* ═══════════ 🌳 עץ השאלות: רובי לומד לקבל החלטות בעזרת עץ של שאלות ═══════════
+   עץ החלטה: בכל נקודת פיצול יש שאלה, מכל שאלה יוצא ענף לכל תשובה, ובקצה כל ענף יש עלה, שהוא ההחלטה.
+   עץ שמור ככה: שאלה = {k, kids}, עלה = {leaf}. ״דרך״ בעץ = רשימת מספרי התשובות מהשורש, למשל [0, 1].
+   כל שינוי בעץ יוצר עותק חדש, כדי שכפתור החזרה ↩ יחזיר בדיוק את העץ הקודם. */
+var TW_LRM = '‎';
+function twD(n){ return TW_LRM + n + '°' + TW_LRM; }   // מעלות בתוך עברית: סימני כיוון סביב המספר, כדי שיופיע 20° ולא °20
+var TW_YN = [t('כן', 'yes'), t('לא', 'no')];
+/* העלים: מזג אוויר, ומה רובי לוקח איתו */
+var WX = {sun: ['☀️', t('בהיר', 'sunny')], partly: ['⛅', t('מעונן חלקית', 'partly cloudy')], rain: ['🌧️', t('גשם', 'rain')], snow: ['❄️', t('שלג', 'snow')], storm: ['⛈️', t('סופה', 'storm')], fog: ['🌫️', t('ערפל', 'fog')]};
+var GEAR = {sun: t('🕶️ לוקח משקפי שמש', '🕶️ I’ll take sunglasses'), partly: t('🧢 לוקח כובע, ליתר ביטחון', '🧢 I’ll take a cap, just in case'), rain: t('☂️ לוקח מטרייה', '☂️ I’ll take an umbrella'),
+  snow: t('🧣 לוקח צעיף וכפפות', '🧣 I’ll take a scarf and gloves'), storm: t('🏠 נשאר בבית', '🏠 I’ll stay at home'), fog: t('🔦 לוקח פנס, כי לא רואים רחוק', '🔦 I’ll take a flashlight, because you can’t see far')};
+/* השאלות: כל שאלה יודעת לאיזה ענף ללכת לפי היום (f), ועל מה להסתכל בתמונה (look) */
+var TQ = {
+  clouds: {q: t('יש עננים?', 'Are there clouds?'), a: TW_YN, f: function(d){ return d.c ? 0 : 1; }, look: t('השמיים', 'the sky')},
+  wind:   {q: t('נושבת רוח חזקה?', 'Is there a strong wind?'), a: TW_YN, f: function(d){ return d.w ? 0 : 1; }, look: t('הדגל והרוח', 'the flag and the wind')},
+  temp:   {q: t('כמה קר?', 'How cold is it?'), a: [t('מתחת ל-', 'below ') + twD(0), twD(0) + t(' עד ', ' to ') + twD(20), t('מעל ', 'above ') + twD(20)], f: function(d){ return d.t < 0 ? 0 : (d.t <= 20 ? 1 : 2); }, look: t('המדחום', 'the thermometer')},
+  cold:   {q: t('קר מתחת ל-', 'Is it below ') + twD(0) + '?', a: TW_YN, f: function(d){ return d.t < 0 ? 0 : 1; }, look: t('המדחום', 'the thermometer')},
+  ground: {q: t('הענן נוגע בקרקע?', 'Cloud on the ground?'), a: TW_YN, f: function(d){ return d.g ? 0 : 1; }, look: t('התמונה', 'the picture')}
+};
+function TN(k, kids){ return {k: k, kids: kids}; }
+function TL(w){ return {leaf: w}; }
+function robiTree(){ return TN('clouds', [TN('wind', [TL('storm'), TN('temp', [TL('snow'), TL('rain'), TL('partly')])]), TL('sun')]); }
+function tclone(n){ return n.kids ? TN(n.k, n.kids.map(tclone)) : TL(n.leaf); }
+function tcount(n){ return n.kids ? 1 + n.kids.reduce(function(s, c){ return s + tcount(c); }, 0) : 0; }   // כמה שאלות יש בעץ
+function tat(tree, path){ var n = tree; path.forEach(function(i){ n = n.kids[i]; }); return n; }      // הצומת שמגיעים אליו בדרך הזאת
+function tfull(n){ return n.kids ? !!n.k && n.kids.every(tfull) : !!n.leaf; }                          // אין שאלה ריקה ואין עלה ריק
+function trun(tree, d, QS){ QS = QS || TQ; var n = tree, path = []; while (n.kids){ var i = n.k ? QS[n.k].f(d) : 0; path.push(i); n = n.kids[i]; } return {leaf: n.leaf, path: path}; }
+function tleaves(tree){ var a = {}; (function w(n){ if (n.kids) n.kids.forEach(w); else a[n.leaf] = 1; })(tree); return Object.keys(WX).filter(function(k){ return a[k]; }); }
+function pkey(path){ return 'p' + path.join(''); }
+function tdup(n, seen){ seen = seen || {}; if (!n.kids || !n.k) return !!(n.kids && n.kids.some(function(c){ return tdup(c, seen); })); if (seen[n.k]) return true; var s2 = Object.assign({}, seen); s2[n.k] = 1; return n.kids.some(function(c){ return tdup(c, s2); }); }   // אותה שאלה פעמיים באותו ענף?
+var TW_DUP = t('💡 אותה שאלה מופיעה פעמיים באותו ענף. בפעם השנייה התשובה כבר ידועה, אז היא לא מפרידה כלום.', '💡 The same question appears twice on one branch. The second time, the answer is already known, so it doesn’t split anything.');
+
+/* 🌳 ציור העץ ב-SVG. השורש למעלה. בעברית העלה הראשון בצד ימין, ובאנגלית בצד שמאל.
+   בין עלים של אותה שאלה יש רווח קטן, ובין עלים של שאלות שונות רווח גדול יותר, כדי שהתוויות לא ייגעו זו בזו */
+var TWC = null;
+function twW(text, px){   // רוחב טקסט בפיקסלים, בגופן של המשחק (מודדים בקנבס שלא רואים)
+  text = String(text).replace(/‎/g, '');
+  try { TWC = TWC || document.createElement('canvas').getContext('2d'); TWC.font = '700 ' + px + 'px "Varela Round", Arial, sans-serif'; return TWC.measureText(text).width; } catch(e){ return text.length * px * .6; }
+}
+function tlay(tree, QS, WS){
+  QS = QS || TQ; WS = WS || WX;
+  var nodes = [], leaves = [], dir = LANG === 'en' ? 1 : -1;
+  (function walk(n, path, par){
+    var ai = path[path.length - 1], o = {n: n, p: path, par: par, kids: []}; nodes.push(o); if (par) par.kids.push(o);
+    o.lab = par ? (par.n.k ? QS[par.n.k].a[ai] : (TW_YN[ai] || '?')) : '';
+    o.text = n.kids ? (n.k ? QS[n.k].q : t('בחר שאלה ⟲', 'Pick a question ⟲')) : (n.leaf ? WS[n.leaf][1] : t('בחר', 'pick'));
+    o.bw = n.kids ? Math.max(88, twW(o.text, 15) + 26) : 0;
+    o.hw = Math.max(n.kids ? o.bw / 2 : Math.max(30, twW(o.text, 14) / 2 + 4), par ? (twW(o.lab, 13) + 14) / 2 + 4 : 0);   // חצי הרוחב שהצומת צריך: התיבה, שם העלה, או התווית של הענף שמעליו
+    if (n.kids) n.kids.forEach(function(c, i){ walk(c, path.concat(i), o); }); else { o.li = leaves.length; leaves.push(o); }
+    o.first = n.kids ? o.kids[0].first : o.li;
+  })(tree, [], null);
+  /* 1. פורשים את העלים על כל הרוחב: בין עלים של אותה שאלה רווח קטן, ובין עלים של שאלות שונות רווח גדול יותר. אבל אף פעם לא פחות ממה שהם צריכים */
+  var IN = 348, wts = [0], sum = 0;
+  for (var i = 1; i < leaves.length; i++){ var w = leaves[i].par === leaves[i - 1].par ? (leaves[i].par.kids.length > 2 ? 1.5 : 1.15) : 1.7; wts.push(w); sum += w; }
+  var unit = sum ? IN / sum : 0, gaps = wts.map(function(w, i){ return i ? Math.max(w * unit, leaves[i - 1].hw + leaves[i].hw + 6) : 0; });
+  function placeAll(){
+    var x = 0; leaves.forEach(function(o, i){ x += gaps[i]; o.x = x; });
+    (function place(o){ if (o.kids.length){ o.kids.forEach(place); o.x = o.kids.reduce(function(s, c){ return s + c.x; }, 0) / o.kids.length; } })(nodes[0]);
+  }
+  /* 2. בכל שורה (אותו עומק), צמתים שכנים לא נוגעים זה בזה. נוגעים? מרחיבים את הרווח בין שני העצים שלהם */
+  var rows = {}; nodes.forEach(function(o){ (rows[o.p.length] = rows[o.p.length] || []).push(o); });
+  Object.keys(rows).forEach(function(d){ rows[d].sort(function(a, b){ return a.first - b.first; }); });
+  placeAll();
+  for (var it = 0, moved = true; moved && it < 40; it++){
+    moved = false;
+    Object.keys(rows).forEach(function(d){
+      var r = rows[d];
+      for (var j = 1; j < r.length; j++){ var need = r[j - 1].hw + r[j].hw + 8 - (r[j].x - r[j - 1].x); if (need > .5){ gaps[r[j].first] += need; placeAll(); moved = true; } }
+    });
+  }
+  /* 3. ממרכזים. עץ רחב מדי? התמונה גדלה, והטלפון מקטין אותה כדי שתיכנס */
+  var mn = Infinity, mx = -Infinity; nodes.forEach(function(o){ mn = Math.min(mn, o.x - o.hw); mx = Math.max(mx, o.x + o.hw); });
+  var WD = Math.max(440, Math.ceil(mx - mn + 20)), off = (WD - (mx - mn)) / 2 - mn, maxD = 0;
+  nodes.forEach(function(o){ o.x += off; if (dir < 0) o.x = WD - o.x; o.y = 36 + o.p.length * 80; maxD = Math.max(maxD, o.p.length); });
+  return {nodes: nodes, W: WD, H: 36 + maxD * 80 + 56};
+}
+/* o.on = הדרך המודגשת · o.cur = הדרך לשאלה הנוכחית · o.tap = אפשר ללחוץ · o.grow = צמתים שגדלו עכשיו · o.growable = עלים שאפשר להפוך לשאלה
+   o.QS / o.WS = השאלות והעלים (בשלב הבונוס יש אחרים) */
+function tdraw(tree, o){
+  o = o || {}; var QS = o.QS || TQ, WS = o.WS || WX, lay = tlay(tree, QS, WS), on = {}, grow = {}, s = '';
+  if (o.on){ on.p = 1; o.on.forEach(function(v, i){ on[pkey(o.on.slice(0, i + 1))] = 1; }); }
+  if (o.grow){ grow[pkey(o.grow)] = 1; var gn = tat(tree, o.grow); if (gn.kids) gn.kids.forEach(function(c, i){ grow[pkey(o.grow.concat(i))] = 1; }); }
+  var cur = o.cur ? pkey(o.cur) : null;
+  lay.nodes.forEach(function(d){   // ענפים, ותווית לכל ענף ממש מעל הצומת שהוא מוביל אליו
+    if (!d.par) return;
+    var p = d.par, k = pkey(d.p), isLeaf = !d.n.kids, y1 = p.y + 17, y2 = isLeaf ? d.y - 22 : d.y - 17, hot = on[pkey(p.p)] && on[k];
+    s += '<path class="edge' + (hot ? ' on' : '') + (grow[k] ? ' grow' : '') + '" d="M' + p.x + ' ' + y1 + ' C' + p.x + ' ' + (y1 + 30) + ' ' + d.x + ' ' + (y2 - 30) + ' ' + d.x + ' ' + y2 + '"/>';
+    var lw = twW(d.lab, 13) + 14, ly = d.y - 37;
+    s += '<g class="lab' + (hot ? ' on' : '') + '"><rect x="' + (d.x - lw / 2) + '" y="' + (ly - 10.5) + '" width="' + lw + '" height="21" rx="10.5"/><text x="' + d.x + '" y="' + (ly + 4.5) + '" text-anchor="middle">' + esc(d.lab) + '</text></g>';
+  });
+  lay.nodes.forEach(function(d){   // שאלות ועלים
+    var k = pkey(d.p), cls = (on[k] ? ' on' : '') + (cur === k ? ' cur' : '') + (o.tap ? ' tap' : '') + (grow[k] ? ' grow' : ''), a11y = o.tap ? ' role="button" tabindex="0"' : '';
+    if (!d.n.kids){
+      var w = d.n.leaf ? WS[d.n.leaf] : ['?', d.text];
+      s += '<g class="lf' + cls + (d.n.leaf ? '' : ' empty') + (o.growable ? ' growable' : '') + '" data-p="' + d.p.join('') + '"' + a11y + (o.tap ? ' aria-label="' + esc(t('עלה: ', 'Leaf: ') + w[1]) + '"' : '') + '>' +
+        (o.tap ? '<circle class="hit" cx="' + d.x + '" cy="' + d.y + '" r="30"/>' : '') + '<circle cx="' + d.x + '" cy="' + d.y + '" r="22"/>' +
+        '<text class="e" x="' + d.x + '" y="' + (d.y + 8) + '" text-anchor="middle">' + w[0] + '</text><text class="n" x="' + d.x + '" y="' + (d.y + 38) + '" text-anchor="middle">' + esc(w[1]) + '</text></g>';
+    } else {
+      var bw = d.bw;
+      s += '<g class="q' + cls + (d.n.k ? '' : ' empty') + '" data-p="' + d.p.join('') + '"' + a11y + (o.tap ? ' aria-label="' + esc(t('שאלה: ', 'Question: ') + d.text.replace(/‎/g, '')) + '"' : '') + '>' +
+        (o.tap ? '<rect class="hit" x="' + (d.x - bw / 2 - 4) + '" y="' + (d.y - 25) + '" width="' + (bw + 8) + '" height="50"/>' : '') +
+        '<rect x="' + (d.x - bw / 2) + '" y="' + (d.y - 17) + '" width="' + bw + '" height="34" rx="10"/><text x="' + d.x + '" y="' + (d.y + 5.5) + '" text-anchor="middle">' + esc(d.text) + '</text></g>';
+    }
+  });
+  return '<svg class="twtree" viewBox="0 0 ' + lay.W + ' ' + lay.H + '"' + (o.tap ? ' role="group"' : ' role="img"') + ' aria-label="' + esc(o.label || t('עץ השאלות', 'The question tree')) + '">' + s + '</svg>';
+}
+function twFit(root){   // רוחב כל תיבה לפי הטקסט האמיתי (אחרי שהגופן נטען), כדי שלא תיגע בעלים ובתוויות שלידה
+  (root || $('#panel')).querySelectorAll('.twtree .q, .twtree .lab').forEach(function(g){
+    var tx = g.querySelector('text'), rc = g.querySelector('rect:not(.hit)'), len = 0, isQ = g.classList.contains('q');
+    try { len = tx.getComputedTextLength(); } catch(e){}
+    if (len > 0){ var w = isQ ? Math.max(88, len + 26) : len + 14, cx = +tx.getAttribute('x'); rc.setAttribute('x', cx - w / 2); rc.setAttribute('width', w); }
+  });
+}
+if (document.fonts && document.fonts.ready) document.fonts.ready.then(function(){ if (screen === 'world') twFit(); });
+function twLegend(){ return '<ul class="twlegend">' + t('<li>🟫 <b>שאלה</b>, נקודת פיצול</li><li>〰️ <b>ענף</b>, תשובה</li><li>🟢 <b>עלה</b>, החלטה</li>', '<li>🟫 <b>question</b>, a split</li><li>〰️ <b>branch</b>, an answer</li><li>🟢 <b>leaf</b>, a decision</li>') + '</ul>'; }
+
+/* 🌤️ כרטיס של יום: שמיים, רוח ומדחום */
+function twScene(d){
+  var sky = d.fog ? '<div class="twsky fog" role="img" aria-label="' + t('ערפל: ענן נמוך שיורד עד הקרקע', 'Fog: a low cloud that comes down to the ground') + '"><span class="gr">🏠🌳🏠🌳</span><span class="mist"></span></div>' :
+    !d.c ? '<div class="twsky" role="img" aria-label="' + t('שמיים בלי עננים', 'A sky with no clouds') + '">☀️</div>' :
+    d.t > 20 ? '<div class="twsky part" role="img" aria-label="' + t('שמש ועננים', 'Sun and clouds') + '">⛅☁️</div>' :
+    '<div class="twsky cloudy" role="img" aria-label="' + t('שמיים מלאים עננים', 'A sky full of clouds') + '">☁️☁️☁️</div>';
+  return '<div class="twday">' + sky + '<div class="twmeas">' + (d.w ? t('💨🚩 רוח חזקה', '💨🚩 Strong wind') : t('🍃 רוח חלשה', '🍃 Light wind')) + '</div><div class="twmeas">🌡️ ' + twD(d.t) + '</div></div>';
+}
+function twAsk(q, answers){   // תיבת שאלה של רובי. data-a = מספר התשובה (גם המיקרופון לוחץ עליהם)
+  return '<div class="twask"><b class="twq">' + esc(q) + '</b><div class="row">' + answers.map(function(a, i){ return '<button type="button" data-a="' + i + '">' + esc(a) + '</button>'; }).join('') + '</div>' + twMicBtn() + '</div>';
+}
+function twTapAns(fn){ $('#panel').querySelectorAll('[data-a]').forEach(function(b){ b.onclick = act(function(){ fn(+b.dataset.a); }); }); }   // act = אפשר לחזור צעד ↩
+function sayAgain(text){ delete readDone['r:' + clean(text)]; say(text); }   // רובי שואל שוב בקול, גם אם כבר שאל את זה בשלב הזה
+function twKeep(fn){ var y = window.scrollY; fn(); window.scrollTo(0, y); }
+
+/* 🎤 לענות לרובי בקול: ״כן״ או ״לא״ (ובשאלת הקור: מתחת לאפס, בין, מעל). המיקרופון נפתח רק בלחיצה, ושום הקלטה לא נשמרת */
+function twMicBtn(){
+  if (!(FEATURES.voice && SR)) return '';
+  return '<button type="button" class="twmic" id="twmic" aria-pressed="false">' + t('🎤 לענות בקול', '🎤 Answer out loud') + '</button><p class="small-note noread" id="twheard" aria-live="polite"></p>';
+}
+function twHeard(raw, n){   // מה ששמענו ⇐ מספר התשובה, או -1 אם לא הבנו
+  var s = ' ' + vNorm(raw) + ' ';
+  if (n === 3){
+    if (/ בין | עד |נעים| between | mild | to /.test(s)) return 1;   // קודם ״בין״: ״בין אפס לעשרים״ הוא לא ״מתחת לאפס״
+    if (/מעל|חם| above | hot | warm | over /.test(s)) return 2;
+    if (/מתחת|קפוא|אפס|קר מאוד| below | freez| under | zero /.test(s)) return 0;
+    return -1;
+  }
+  if (/ (לא|אין|טעית|no|nope|nah|wrong) /.test(s)) return 1;   // קודם ״לא״, כדי ש״לא נכון״ לא ייחשב ״כן״
+  if (/ (כן|נכון|בטח|ברור|יש|צדקת|yes|yeah|yep|right|correct|sure) /.test(s)) return 0;
+  return -1;
+}
+var twRec = null;
+function twMicWire(){
+  var b = $('#panel').querySelector('#twmic'); if (!b) return;
+  b.onclick = function(){
+    if (twRec){ try { twRec.stop(); } catch(e){} return; }
+    var btns = $('#panel').querySelectorAll('[data-a]'), out = $('#panel').querySelector('#twheard');
+    if (!btns.length) return;
+    stopTalk();
+    try {
+      var r = new SR(); r.lang = LANG === 'en' ? 'en-US' : 'he-IL'; r.interimResults = false; r.maxAlternatives = 3; r.continuous = false;
+      twRec = r; b.setAttribute('aria-pressed', 'true'); out.textContent = t('מקשיב… 👂', 'Listening… 👂');
+      r.onresult = function(e){
+        var alts = e.results[0], i = -1, heard = alts[0].transcript;
+        for (var k = 0; k < alts.length && i < 0; k++) i = twHeard(alts[k].transcript, btns.length);
+        if (i >= 0 && btns[i] && document.body.contains(btns[i])){ out.textContent = t('שמעתי: ', 'I heard: ') + heard; btns[i].click(); }
+        else out.textContent = tf('שמעתי ״{w}״, ולא הבנתי. נסה שוב, או לחץ על תשובה 🙂', 'I heard “{w}”, and didn’t understand. Try again, or tap an answer 🙂', {w: heard});
+      };
+      r.onerror = function(e){ if (twRec !== r) return; twRec = null; b.setAttribute('aria-pressed', 'false'); out.textContent = e && e.error === 'no-speech' ? t('לא שמעתי כלום. נסה שוב, או לחץ על תשובה 🙂', 'I didn’t hear anything. Try again, or tap an answer 🙂') : t('המיקרופון לא עבד. אפשר ללחוץ על תשובה 🙂', 'The microphone didn’t work. You can tap an answer 🙂'); };
+      r.onend = function(){ if (twRec === r){ twRec = null; var bb = $('#panel').querySelector('#twmic'); if (bb) bb.setAttribute('aria-pressed', 'false'); } };
+      r.start();
+    } catch(e){ twRec = null; b.setAttribute('aria-pressed', 'false'); out.textContent = t('המיקרופון לא עבד. אפשר ללחוץ על תשובה 🙂', 'The microphone didn’t work. You can tap an answer 🙂'); }
+  };
+}
+function twMicStop(){ if (twRec){ var r = twRec; twRec = null; try { r.abort(); } catch(e){} } }
+
+/* ───── שלב 1: החזאי הצעיר (עוברים בעץ של רובי) ───── */
+var DAYS1 = [
+  {n: t('יום ראשון', 'Sunday'), c: 0, w: 1, t: 24}, {n: t('יום שני', 'Monday'), c: 1, w: 0, t: -3}, {n: t('יום שלישי', 'Tuesday'), c: 1, w: 1, t: 12},
+  {n: t('יום רביעי', 'Wednesday'), c: 1, w: 0, t: 14}, {n: t('יום חמישי', 'Thursday'), c: 1, w: 0, t: 27}
+];
+function twRight(){ return Object.keys(W.paid).filter(function(k){ return /^d\d$/.test(k) && W.paid[k] === 'ok'; }).length; }   // כמה ימים ניחשת נכון (הניחוש הראשון בכל יום)
+function tree1(){
+  var n = G.name, ph = W.phase, ST = [t('הסבר', 'Intro'), t('חזאי', 'Forecaster'), t('סיכום', 'Summary')], tree = robiTree();
+  twMicStop();
+  if (ph === 'intro'){
+    steps(ST, 0); setMood('think'); say(t('מחר יש טיול! מה לקחת? 🤔', 'There’s a trip tomorrow! What should I take? 🤔'));
+    P(comic([['🤔', t('לקחת <b>מטרייה</b>, <b>צעיף</b> או <b>משקפי שמש</b>? אני חייב לדעת איך יהיה מחר בחוץ.', 'Should I take an <b>umbrella</b>, a <b>scarf</b> or <b>sunglasses</b>? I have to know what it will be like outside tomorrow.')],
+              ['💡', t('לנחש אני לא יודע. אבל אני יודע <b>לשאול</b>! אני שואל שאלה, והתשובה אומרת לי לאן להמשיך, עד שאני מגיע להחלטה.', 'I can’t guess. But I can <b>ask</b>! I ask a question, and the answer tells me where to go next, until I reach a decision.')],
+              ['🌳', t('ככה נראה <b>עץ החלטה</b>: בכל <b>נקודת פיצול</b> יש שאלה, לכל תשובה יש <b>ענף</b>, ובקצה כל ענף יש <b>עלה</b>, שהוא ההחלטה.', 'This is a <b>decision tree</b>: at every <b>split</b> there is a question, every answer has a <b>branch</b>, and at the end of each branch there is a <b>leaf</b>, which is the decision.')]]) +
+      '<div class="twbox">' + tdraw(tree, {label: tf('העץ של {n}', '{n}’s tree', {n: n})}) + '</div>' + twLegend() +
+      t('<p class="small-note">זה עץ פשוט. חזאים אמיתיים מודדים הרבה יותר דברים, והמחשבים שלהם משתמשים בעצים ענקיים.</p>', '<p class="small-note">This is a simple tree. Real forecasters measure many more things, and their computers use huge trees.</p>') +
+      t('<button class="btn" id="go" type="button">להיות חזאים</button>', '<button class="btn" id="go" type="button">Be forecasters</button>'));
+    twFit();
+    on('go', function(){ W.phase = 'play'; W.ti = 0; W.guess = null; W.path = []; W.msg = ''; renderWorld(); });
+  }
+  else if (ph === 'play'){
+    steps(ST, 1);
+    var d = DAYS1[W.ti], last = W.ti === DAYS1.length - 1, path = W.path || [], node = tat(tree, path);
+    var head = '<h3>🗓️ ' + d.n + '</h3><div class="twcnt">' + tf('יום {i} מתוך {n}', 'Day {i} of {n}', {i: W.ti + 1, n: DAYS1.length}) + ' · ⭐ ' + twRight() + '</div>' + twScene(d);
+    if (!W.guess){
+      setMood('think'); say(t('תסתכל על השמיים, על הרוח ועל המדחום. מה תהיה התחזית?', 'Look at the sky, the wind and the thermometer. What will the forecast be?'));
+      P(head + turnTag(t('מנחש', 'Guessing')) + t('<p class="lbl">1️⃣ לפני שעוברים בעץ: מה תהיה התחזית? נחש!</p>', '<p class="lbl">1️⃣ Before we walk through the tree: what will the forecast be? Guess!</p>') +
+        '<div class="twpicks">' + ['sun', 'partly', 'rain', 'snow', 'storm'].map(function(k){ return '<button type="button" data-w="' + k + '">' + WX[k][0] + '<span>' + esc(WX[k][1]) + '</span></button>'; }).join('') + '</div>' +
+        '<div class="twbox">' + tdraw(tree) + '</div>');
+      twFit();
+      $('#panel').querySelectorAll('.twpicks button').forEach(function(b){ b.onclick = act(function(){ W.guess = b.dataset.w; W.path = []; W.msg = ''; beep('tap'); twKeep(renderWorld); }); });
+    }
+    else if (node.kids){
+      var Qn = TQ[node.k];
+      setMood(W.msg && !W.msgOk ? 'worry' : 'think'); if (W.msg && !W.msgOk) say(W.msg); else sayAgain(Qn.q);
+      P(head + '<p class="lbl">2️⃣ ' + tf('ניחשת {g}. עכשיו עונים ל{n} לפי התמונה:', 'You guessed {g}. Now answer {n} by looking at the picture:', {g: WX[W.guess][0], n: n}) + '</p>' +
+        (W.msg ? '<p class="res noread ' + (W.msgOk ? 'ok' : 'no') + '">' + W.msg + '</p>' : '') + twAsk(Qn.q, Qn.a) +
+        '<div class="twbox">' + tdraw(tree, {on: path, cur: path}) + '</div>');
+      twFit(); twMicWire();
+      twTapAns(function(i){
+        if (i !== Qn.f(d)){ W.msg = tf('הממ… תסתכל שוב על {x} 🔍', 'Hmm… look again at {x} 🔍', {x: Qn.look}); W.msgOk = false; beep('bad'); twKeep(renderWorld); return; }
+        W.path = path.concat(i); W.msg = tf('✓ נכון! הולכים בענף ״{a}״.', '✓ Right! We go down the “{a}” branch.', {a: Qn.a[i].replace(/‎/g, '')}); W.msgOk = true; beep('tap');
+        var lf = tat(tree, W.path);
+        if (!lf.kids){   // הגענו לעלה: הניחוש הראשון ביום הזה קובע את הכוכב
+          var key = 'd' + W.ti, ok = lf.leaf === W.guess;
+          if (!W.paid[key]){ W.paid[key] = ok ? 'ok' : 'no'; if (ok){ addStars(STARS_GOOD_GUESS); duelPoint(W.turn % 2); } }
+          W.okNow = ok; W.turn++;
+        }
+        twKeep(renderWorld);
+      });
+    }
+    else {
+      var ok = W.okNow, txt = tf('הגעתי לעלה: {w} {e}! {g}.', 'I reached a leaf: {w} {e}! {g}.', {w: WX[node.leaf][1], e: WX[node.leaf][0], g: GEAR[node.leaf]});
+      setMood(ok ? 'happy' : 'think', 1600); if (ok){ beep('good'); confetti(); }
+      say(txt);
+      P(head + '<p class="res ' + (ok ? 'ok' : 'no') + '">' + (ok ? t('✓ ניחשת נכון!', '✓ You guessed right!') + (W.paid['d' + W.ti] === 'ok' ? ' ⭐' : '') :
+          tf('ניחשת {g}, אבל העץ הגיע ל{w}. ראית באיזו שאלה זה התחלף?', 'You guessed {g}, but the tree reached {w}. Did you see which question changed it?', {g: WX[W.guess][1], w: WX[node.leaf][1]})) + '</p>' +
+        (W.ti === 0 ? t('<p>👀 שמת לב? בלי עננים, העץ בכלל לא שאל על הרוח. עץ שואל רק את מה שצריך.</p>', '<p>👀 Did you notice? With no clouds, the tree didn’t even ask about the wind. A tree only asks what it needs to.</p>') : '') +
+        '<div class="twbox">' + tdraw(tree, {on: path}) + '</div>' +
+        '<button class="btn" id="go" type="button">' + (last ? t('לסיכום', 'To the summary') : t('ליום הבא', 'Next day')) + '</button>');
+      twFit();
+      on('go', function(){ if (last) W.phase = 'sum'; else { W.ti++; W.guess = null; W.path = []; W.msg = ''; } renderWorld(); window.scrollTo(0, 0); });
+    }
+  }
+  else if (ph === 'sum'){
+    var rr = twRight(), st = rr >= 5 ? 3 : rr >= 3 ? 2 : 1, first = finishLevel(0, st);
+    steps(ST, 2); setMood('happy'); confetti(); beep('win'); say(t('עכשיו אני יודע לעבור בעץ! 🌳', 'Now I know how to walk through a tree! 🌳'));
+    P('<h3>' + tf('ניחשת {r} מתוך {n} · ', 'You guessed {r} of {n} · ', {r: rr, n: DAYS1.length}) + '⭐'.repeat(st) + '</h3>' + (first ? t('<p>הרווחת ', '<p>You earned ') + STARS_NEW_LEVEL + t(' ⭐ לחנות.</p>', ' ⭐ for the shop.</p>') : '') +
+      t('<div class="rule">🌳 מה למדנו: בעץ החלטה בכל <b>נקודת פיצול</b> יש שאלה, כל תשובה היא <b>ענף</b>, ובסוף מגיעים ל<b>עלה</b>, שהוא ההחלטה. ככה מכונה מחליטה: שאלה, ועוד שאלה, עד התשובה.</div>', '<div class="rule">🌳 What we learned: in a decision tree, every <b>split</b> has a question, every answer is a <b>branch</b>, and at the end you reach a <b>leaf</b>, which is the decision. That’s how a machine decides: a question, and another question, until the answer.</div>') +
+      t('<div class="rule">🔎 העץ לא שואל את כל השאלות בכל פעם, רק את אלה שבדרך. לכן הוא מהיר.</div>', '<div class="rule">🔎 The tree doesn’t ask every question every time, only the ones on the way. That’s why it’s fast.</div>') +
+      t('<div class="row"><button class="btn alt" id="again" type="button">לשחק שוב</button><button class="btn" id="go" type="button">לשלב 2: בונים עץ</button></div>', '<div class="row"><button class="btn alt" id="again" type="button">Play again</button><button class="btn" id="go" type="button">To level 2: Build a Tree</button></div>'));
+    on('again', function(){ W = fresh(0); W.phase = 'play'; W.ti = 0; W.guess = null; W.path = []; renderWorld(); });
+    on('go', function(){ W = fresh(1); renderWorld(); });
+  }
+}
+
+/* ───── שלב 2: בונים עץ, והוא גדל (מתחילים משאלה אחת, בודקים על 6 ימים, ומוסיפים עד 3 שאלות) ───── */
+var DAYS2 = [
+  {n: t('א׳', 'A'), c: 0, w: 0, t: 28, ans: 'sun'}, {n: t('ב׳', 'B'), c: 0, w: 1, t: 22, ans: 'sun'}, {n: t('ג׳', 'C'), c: 1, w: 1, t: 15, ans: 'storm'},
+  {n: t('ד׳', 'D'), c: 1, w: 0, t: -2, ans: 'snow'}, {n: t('ה׳', 'E'), c: 1, w: 0, t: 11, ans: 'rain'}, {n: t('ו׳', 'F'), c: 1, w: 0, t: 25, ans: 'partly'}
+];
+var MAXQ = 3, QCYC = ['clouds', 'wind', 'temp', 'cold'], LCYC = ['sun', 'partly', 'rain', 'snow', 'storm'];
+function tscore(tree){ return tree && tfull(tree) ? DAYS2.filter(function(d){ return trun(tree, d).leaf === d.ans; }).length : 0; }
+/* מחליפים שאלה. לשאלת ״כמה קר?״ יש 3 ענפים: הענף שמתווסף מתחיל ריק, וענף שיורד נשמר בצד (spare), כדי שלא ילך לאיבוד */
+function setQ(tree, n, k, QS){
+  QS = QS || TQ; n.k = k; var want = QS[k].a.length;
+  while (n.kids.length < want){ var sp = n.spare; n.spare = null; n.kids.push(sp && tcount(tree) + tcount(sp) <= MAXQ ? sp : TL(null)); }
+  if (n.kids.length > want){ n.spare = n.kids[want]; n.kids.length = want; }
+}
+function twDays(res, run){
+  return DAYS2.map(function(d, i){
+    var r = res && res[i], cl = run === i ? 'run' : r ? (r.ok ? 'ok' : 'no') : '';
+    return '<div class="' + cl + '"><b>' + WX[d.ans][0] + '</b>' + t('יום ', 'Day ') + d.n + '<br>' + (d.c ? '☁️' : '☀️') + ' ' + (d.w ? '💨' : '🍃') + ' ' + twD(d.t) +
+      (r ? '<br>' + t('העץ: ', 'Tree: ') + (r.leaf ? WX[r.leaf][0] : '?') + (r.ok ? ' ✓' : ' ✗') : '') + '</div>';
+  }).join('');
+}
+/* 🧩 עורך העץ: משותף לשלב 2 ולבונוס. לחיצה על שאלה מחליפה שאלה, לחיצה על עלה מחליפה עלה, ובמצב 🌱 עלה הופך לשאלה חדשה */
+function twEdit(path, QC, LC, QS){
+  if (W.busy) return;
+  var tree = tclone(W.tree), n = tat(tree, path);
+  if (n.kids) setQ(tree, n, QC[(QC.indexOf(n.k) + 1) % QC.length], QS);
+  else if (W.grow){
+    if (tcount(tree) >= MAXQ){ W.grow = false; }
+    else { delete n.leaf; n.k = null; n.kids = [TL(null), TL(null)]; W.grow = false; W.newp = path; W.robi = QS === MYQ ? t('העץ גדל! 🌱 עכשיו בחר שאלה לנקודת הפיצול החדשה, ומשחקים לעלים שלה.', 'The tree grew! 🌱 Now pick a question for the new split, and games for its leaves.') : t('העץ גדל! 🌱 עכשיו בחר שאלה לנקודת הפיצול החדשה, ותחזיות לעלים שלה.', 'The tree grew! 🌱 Now pick a question for the new split, and forecasts for its leaves.'); }
+  }
+  else n.leaf = LC[(LC.indexOf(n.leaf) + 1) % LC.length];
+  W.tree = tree; W.last = null; W.hint = ''; W.round++; beep('tap');
+  twKeep(renderWorld);
+}
+function twTreeTaps(fn){
+  var box = $('#panel').querySelector('#twed'); if (!box) return;
+  var tap = function(g){ act(function(){ fn(g.dataset.p === '' ? [] : g.dataset.p.split('').map(Number)); })(); };   // act = אפשר לחזור צעד ↩
+  box.addEventListener('click', function(e){ var g = e.target.closest('[data-p]'); if (g) tap(g); });
+  box.addEventListener('keydown', function(e){ if (e.key === 'Enter' || e.key === ' '){ var g = e.target.closest('[data-p]'); if (g){ e.preventDefault(); tap(g); } } });
+}
+function tree2(){
+  var n = G.name, ph = W.phase, ST = [t('הסבר', 'Intro'), t('בונים', 'Building'), t('סיכום', 'Summary')];
+  twMicStop();
+  if (ph === 'intro'){
+    steps(ST, 0); setMood('idle'); say(t('עכשיו אתה בונה את העץ! 🌱', 'Now you build the tree! 🌱'));
+    P(comic([['🗓️', t('יש לי יומן של 6 ימים: איך היה בחוץ, ומה הייתה התחזית הנכונה. העץ שלך צריך להגיע לאותן תחזיות.', 'I have a diary of 6 days: what it was like outside, and what the right forecast was. Your tree needs to reach the same forecasts.')],
+              ['🌱', t('מתחילים מ<b>שאלה אחת</b>. בודקים את העץ על היומן, ורואים כמה ימים הוא צדק. אחר כך מוסיפים שאלה, ובודקים שוב. אפשר עד 3 שאלות.', 'You start with <b>one question</b>. You test the tree on the diary, and see how many days it got right. Then you add a question, and test again. Up to 3 questions.')],
+              ['📈', t('המד יראה לך מה כל שאלה הוסיפה. יש יותר מעץ נכון אחד!', 'The meter will show you what each question added. There is more than one right tree!')]]) +
+      t('<button class="btn" id="go" type="button">לבנות עץ</button>', '<button class="btn" id="go" type="button">Build a tree</button>'));
+    on('go', function(){ W.phase = 'build'; W.tree = TN(null, [TL(null), TL(null)]); W.hist = [null, null, null, null]; W.tries = 0; W.fails = 0; W.last = null; W.hint = ''; W.grow = false; renderWorld(); });
+  }
+  else if (ph === 'build'){
+    steps(ST, 1);
+    if (!W.tree){ W.tree = TN(null, [TL(null), TL(null)]); W.hist = [null, null, null, null]; W.tries = 0; W.fails = 0; }
+    var q = tcount(W.tree), tested = W.hist[q] != null, canGrow = q < MAXQ && tested && !W.perfect, nw = W.newp; W.newp = null;
+    if (W.robi){ setMood('happy'); say(W.robi); W.robi = ''; }
+    else if (!W.last && !W.hint){ setMood('think'); say(q === 1 && !tested ? t('איזו שאלה תפריד הכי טוב בין הימים ביומן? 🤔', 'Which question will best split the days in the diary? 🤔') : t('בחר שאלות ותחזיות, ובדוק את העץ 🧪', 'Pick questions and forecasts, and test the tree 🧪')); }
+    var meter = W.hist.some(function(v){ return v != null; }) ? '<div class="twmeter"><b>' + t('📈 כמה העץ צודק', '📈 How right the tree is') + '</b>' + [1, 2, 3].filter(function(k){ return W.hist[k] != null; }).map(function(k){
+      return '<div class="mrow"><span>' + (k === 1 ? t('שאלה אחת', 'one question') : k + t(' שאלות', ' questions')) + '</span><i><s style="width:' + Math.round(W.hist[k] / 6 * 100) + '%"></s></i><em>' + W.hist[k] + '/6</em></div>'; }).join('') + '</div>' : '';
+    P(t('<h3>🌱 בונים עץ של שאלות</h3>', '<h3>🌱 Building a question tree</h3>') +
+      t('<p>לחץ על השאלה 🟫 או על עלה 🟢 כדי לבחור. כל לחיצה מחליפה.</p>', '<p>Tap the question 🟫 or a leaf 🟢 to choose. Each tap changes it.</p>') +
+      '<div class="noread">' + turnTag(t('בונה', 'Building')) +
+      t('<p class="small-note">🗓️ היומן של רובי: מה היה באמת ב-6 ימים.</p>', '<p class="small-note">🗓️ Robi’s diary: what really happened on 6 days.</p>') +
+      '<div class="twdays" id="twdays">' + twDays(W.last) + '</div>' +
+      '<div class="twbox" id="twed">' + tdraw(W.tree, {tap: !W.perfect, growable: W.grow, grow: nw, label: t('העץ שאתה בונה', 'The tree you are building')}) + '</div>' +
+      '<p class="twqcount">' + tf('🟫 שאלות בעץ: {q} מתוך {m}', '🟫 Questions in the tree: {q} of {m}', {q: q, m: MAXQ}) + '</p>' +
+      (W.perfect ? '' : '<div class="row"><button class="btn" id="test" type="button">' + t('🧪 בודקים את העץ', '🧪 Test the tree') + '</button>' +
+        '<button type="button" class="twgrow' + (W.grow ? ' on' : '') + '" id="grow"' + (canGrow ? '' : ' disabled') + '>' + (W.grow ? t('🌱 עכשיו לחץ על עלה', '🌱 Now tap a leaf') : t('🌱 מוסיפים שאלה', '🌱 Add a question')) + '</button></div>' +
+        (q < MAXQ && !tested ? t('<p class="small-note">🌱 אפשר להוסיף שאלה אחרי שבודקים את העץ.</p>', '<p class="small-note">🌱 You can add a question after you test the tree.</p>') : '')) +
+      meter + (W.hint ? '<div class="twnote">' + W.hint + '</div>' : '') + (tdup(W.tree) ? '<div class="twnote">' + TW_DUP + '</div>' : '') +
+      (W.perfect ? '<button class="btn" id="done" type="button">' + t('לסיכום', 'To the summary') + '</button>' : '<button type="button" class="twclear" id="clear">' + t('↺ מתחילים מחדש', '↺ Start over') + '</button>') + '</div>');
+    twFit();
+    twTreeTaps(function(p){ if (!W.perfect) twEdit(p, QCYC, LCYC); });
+    var gb = $('#panel').querySelector('#grow'); if (gb) gb.onclick = function(){ if (W.busy || !canGrow) return; W.grow = !W.grow; beep('tap'); if (W.grow) W.robi = t('לחץ על אחד העלים, והוא יהפוך לשאלה חדשה עם שני ענפים.', 'Tap one of the leaves, and it will turn into a new question with two branches.'); twKeep(renderWorld); };
+    var cb = $('#panel').querySelector('#clear'); if (cb) cb.onclick = act(function(){ if (W.busy) return; W.tree = TN(null, [TL(null), TL(null)]); W.hist = [null, null, null, null]; W.tries = 0; W.fails = 0; W.last = null; W.hint = ''; W.grow = false; W.round++; beep('tap'); renderWorld(); });
+    on('done', function(){ W.phase = 'sum'; renderWorld(); window.scrollTo(0, 0); });
+    on('test', function(){
+      if (W.busy) return;
+      if (!tfull(W.tree)){ W.hint = t('יש עוד שאלה או עלה ריק. לחץ עליהם כדי לבחור 🙂', 'There’s still an empty question or leaf. Tap them to choose 🙂'); setMood('worry', 1400); beep('bad'); twKeep(renderWorld); return; }
+      W.busy = true; W.grow = false; W.hint = ''; var res = [], i = 0, tok = ++animTok, tree = W.tree;
+      (function next(){
+        if (tok !== animTok || screen !== 'world'){ W.busy = false; return; }
+        var box = $('#panel').querySelector('#twed'), days = $('#panel').querySelector('#twdays');
+        if (i >= DAYS2.length){ W.busy = false; twResult(res); return; }
+        var d = DAYS2[i], r = trun(tree, d);
+        if (days) days.innerHTML = twDays(res, i);
+        if (box){ box.innerHTML = tdraw(tree, {on: r.path}); twFit(box); }
+        beep('tap');
+        setTimeout(function(){ res[i] = {leaf: r.leaf, ok: r.leaf === d.ans}; i++; next(); }, RM ? 150 : 650);
+      })();
+    });
+  }
+  else if (ph === 'sum'){
+    var st = W.tries <= 4 ? 3 : W.tries <= 7 ? 2 : 1, first = finishLevel(1, st);
+    steps(ST, 2); setMood('happy'); confetti(); beep('win'); say(t('וואו, עכשיו אני חזאי! 🌈', 'Wow, now I’m a forecaster! 🌈'));
+    P(t('<h3>העץ שלך צודק בכל 6 הימים! ', '<h3>Your tree is right on all 6 days! ') + '⭐'.repeat(st) + '</h3><p>' + tf('בדקת את העץ {n} פעמים.', 'You tested the tree {n} times.', {n: W.tries}) + (first ? t(' הרווחת ', ' You earned ') + STARS_NEW_LEVEL + t(' ⭐ לחנות.', ' ⭐ for the shop.') : '') + '</p>' +
+      t('<div class="rule">🌳 מה למדנו: כל שאלה טובה מפרידה בין ימים שונים, ולכן העץ טועה פחות. שאלה שלא מפרידה כלום רק מאריכה את העץ.</div>', '<div class="rule">🌳 What we learned: every good question splits different days apart, so the tree makes fewer mistakes. A question that doesn’t split anything just makes the tree longer.</div>') +
+      t('<div class="rule">🤖 במחשב אמיתי אף אחד לא בוחר את השאלות ביד. המחשב בודק אלפי ימים, ובוחר לבד את השאלה שמפרידה הכי טוב. ככה מכונה <b>לומדת</b> עץ מדוגמאות.</div>', '<div class="rule">🤖 In a real computer, nobody picks the questions by hand. The computer checks thousands of days, and picks by itself the question that splits them best. That’s how a machine <b>learns</b> a tree from examples.</div>') +
+      t('<div class="rule">🌦️ ובכל זאת, גם עץ טוב טועה לפעמים. יש ימים מעוננים שלא יורד בהם גשם, ולכן חזאים מוסיפים עוד הרבה שאלות.</div>', '<div class="rule">🌦️ Still, even a good tree is sometimes wrong. Some cloudy days have no rain, so forecasters add many more questions.</div>') +
+      t('<div class="row"><button class="btn alt" id="again" type="button">לבנות מחדש</button><button class="btn" id="go" type="button">לשלב 3: אתגר אלופים</button></div>', '<div class="row"><button class="btn alt" id="again" type="button">Build again</button><button class="btn" id="go" type="button">To level 3: Champions Challenge</button></div>'));
+    on('again', function(){ W = fresh(1); W.phase = 'build'; renderWorld(); });
+    on('go', function(){ W = fresh(2); renderWorld(); });
+  }
+}
+function twResult(res){
+  var ok = res.filter(function(r){ return r.ok; }).length, q = tcount(W.tree);
+  W.last = res; W.tries++; W.hist = W.hist.slice(); W.hist[q] = ok;
+  if (ok === 6){
+    W.perfect = true; G.wtree = tclone(W.tree); save();
+    W.hint = '🏆 ' + t('עץ מושלם! ', 'A perfect tree! ') + ([1, 2, 3].filter(function(k){ return W.hist[k] != null; }).length > 1 ? t('תסתכל על המד: כל שאלה טובה שהוספת הורידה טעויות.', 'Look at the meter: every good question you added took away mistakes.') : t('כל שאלה בעץ שלך עושה עבודה.', 'Every question in your tree does a job.')) +
+      t(' בשלב 3 ', ' In level 3 ') + G.name + t(' ישתמש בעץ שלך.', ' will use your tree.');
+    setMood('happy', 1800); confetti(); beep('win'); say(t('וואו, עכשיו אני חזאי! 🌈', 'Wow, now I’m a forecaster! 🌈'));
+  } else {
+    W.fails++;
+    var bad = DAYS2.map(function(d, i){ return res[i].ok ? null : tf('יום {d} (העץ אמר {a}, והיה {b})', 'day {d} (the tree said {a}, and it was {b})', {d: d.n, a: WX[res[i].leaf][0], b: WX[d.ans][0]}); }).filter(Boolean);
+    var more = q < MAXQ ? t('אולי צריך עוד שאלה? לחץ על ״🌱 מוסיפים שאלה״, ואז על העלה שבו הימים מתערבבים.', 'Maybe it needs another question? Tap “🌱 Add a question”, and then the leaf where the days get mixed up.') :
+      W.fails >= 3 ? t('💡 רמז: נסה לשנות את השאלה שבראש העץ, או להחליף בין השאלות.', '💡 Hint: try changing the question at the top of the tree, or swapping the questions.') : t('נסה לשנות שאלה או תחזית בענף שבו העץ טעה.', 'Try changing a question or a forecast on the branch where the tree was wrong.');
+    W.hint = t('🔍 העץ טעה ב', '🔍 The tree was wrong on ') + bad.join(' · ') + '.<br>' + more;
+    setMood(ok >= 4 ? 'think' : 'sad', 1800); beep('bad');
+    say(ok >= 4 ? tf('כמעט! העץ טעה ב-{n} ימים.', 'Almost! The tree was wrong on {n} days.', {n: 6 - ok}) : tf('אוי, נרטבתי! 🌧️ העץ שלי טעה ב-{n} ימים.', 'Oh no, I got wet! 🌧️ My tree was wrong on {n} days.', {n: 6 - ok}));
+  }
+  var keep = window.scrollY; var s0 = $('#wsay').textContent; renderWorld(); say(s0); window.scrollTo(0, keep);
+}
+
+/* ───── שלב 3: אתגר אלופים: רובי מנחש, ואז מבלבלים אותו בערפל והעץ גדל ───── */
+var FOG = {fog: 1, c: 1, w: 0, t: 9, g: 1};
+var FOGTIP = {
+  clouds: t('בעצם ערפל הוא ענן שירד נמוך. אז יש ענן! נסה שוב.', 'Actually, fog is a cloud that came down low. So there is a cloud! Try again.'),
+  wind: t('תסתכל על התמונה: הערפל עומד במקום. רוח חזקה הייתה מפזרת אותו. נסה שוב.', 'Look at the picture: the fog is standing still. A strong wind would blow it away. Try again.'),
+  temp: tf('תסתכל על המדחום: {t}. נסה שוב.', 'Look at the thermometer: {t}. Try again.', {t: twD(9)}),
+  cold: tf('תסתכל על המדחום: {t}, לא מתחת לאפס. נסה שוב.', 'Look at the thermometer: {t}, not below zero. Try again.', {t: twD(9)}),
+  ground: t('תסתכל על התמונה: הענן ממש יושב על הבתים והעצים. נסה שוב.', 'Look at the picture: the cloud is sitting right on the houses and trees. Try again.')
+};
+function tree3(){
+  var n = G.name, ph = W.phase, ST = [t('הסבר', 'Intro'), t('רובי מנחש', 'Robi guesses'), t('ערפל', 'Fog'), t('סיום', 'Finish')];
+  twMicStop();
+  if (!W.t3){ W.mine = tscore(G.wtree) === 6; W.t3 = W.mine ? tclone(G.wtree) : robiTree(); W.path = []; }
+  var tree = W.t3, fogTop = W.fog ? '<div class="noread">' + twScene(FOG) + '</div>' : '';
+  if (ph === 'intro'){
+    steps(ST, 0); setMood('happy', 1500); say(t('בוא נשחק! אתה חושב, ואני מנחש 😏', 'Let’s play! You think, and I guess 😏'));
+    P(comic([['🌳', (W.mine ? t('אני משתמש בעץ שבנית בשלב 2!', 'I’m using the tree you built in level 2!') : t('אני משתמש בעץ שלי.', 'I’m using my own tree.')) + t(' אתה חושב על מזג אוויר, ואני שואל שאלות מהעץ ומנחש.', ' You think of a kind of weather, and I ask questions from the tree and guess.')],
+              ['🎤', (FEATURES.voice && SR) ? t('עונים לי ״כן״ או ״לא״. אפשר ללחוץ, ואפשר גם לענות בקול.', 'Answer me “yes” or “no”. You can tap, and you can also answer out loud.') : t('עונים לי ״כן״ או ״לא״ בלחיצה.', 'Answer me “yes” or “no” by tapping.')],
+              ['🌫️', t('ואחר כך? תנסה לבלבל אותי עם מזג אוויר שאני עוד לא מכיר. מתערב שלא תצליח!', 'And then? Try to trick me with weather I don’t know yet. I bet you can’t!')]]) +
+      t('<button class="btn" id="go" type="button">בוא נתחיל</button>', '<button class="btn" id="go" type="button">Let’s start</button>'));
+    on('go', function(){ W.phase = 'think'; renderWorld(); });
+  }
+  else if (ph === 'think'){
+    steps(ST, 1); setMood('happy'); sayAgain(t('חשבת על מזג אוויר? אני מוכן לשאול!', 'Have you thought of a kind of weather? I’m ready to ask!'));
+    P(t('<h3>🤫 חשוב על מזג אוויר אחד</h3>', '<h3>🤫 Think of one kind of weather</h3>') +
+      tf('<p>בחר בראש אחד מהכרטיסים, ואל תגלה ל{n}.</p>', '<p>Pick one of the cards in your head, and don’t tell {n}.</p>', {n: n}) +
+      '<div class="twcards">' + tleaves(tree).map(function(k){ return '<span>' + WX[k][0] + '<small>' + esc(WX[k][1]) + '</small></span>'; }).join('') + '</div>' +
+      '<div class="twbox">' + tdraw(tree) + '</div>' +
+      t('<button class="btn" id="go" type="button">חשבתי! תתחיל לשאול</button>', '<button class="btn" id="go" type="button">I’ve got one! Start asking</button>'));
+    twFit();
+    on('go', function(){ W.phase = 'ask'; W.fog = false; W.path = []; W.msg = ''; W.round++; renderWorld(); window.scrollTo(0, 0); });
+  }
+  else if (ph === 'ask'){
+    steps(ST, W.fog ? 2 : 1);
+    var path = W.path, node = tat(tree, path);
+    if (node.kids){
+      var Qn = TQ[node.k];
+      setMood('think'); if (W.msg) say(W.msg); else sayAgain(Qn.q);
+      P((W.fog ? t('<h3>🌫️ מבלבלים את רובי</h3><p>ענה על כל שאלה לפי התמונה.</p>', '<h3>🌫️ Tricking Robi</h3><p>Answer each question by looking at the picture.</p>') + fogTop : tf('<h3>🎤 {n} שואל</h3>', '<h3>🎤 {n} is asking</h3>', {n: n})) +
+        (W.msg ? '<p class="res no noread">' + W.msg + '</p>' : '') + twAsk(Qn.q, Qn.a) +
+        '<div class="twbox">' + tdraw(tree, {on: path, cur: path}) + '</div>');
+      twFit(); twMicWire();
+      twTapAns(function(i){
+        if (W.fog && i !== Qn.f(FOG)){ W.msg = '🌫️ ' + FOGTIP[node.k]; beep('bad'); twKeep(renderWorld); return; }   // בסיבוב הערפל: רמז רק אחרי תשובה שלא מתאימה לתמונה
+        W.path = path.concat(i); W.msg = ''; beep('tap'); twKeep(renderWorld);
+      });
+    } else {
+      var w = WX[node.leaf];
+      setMood('think'); if (W.msg) say(W.msg); else sayAgain(tf('אני חושב שזה… {w}! {e} צדקתי?', 'I think it’s… {w}! {e} Was I right?', {w: w[1], e: w[0]}));
+      P((W.fog ? t('<h3>🌫️ מבלבלים את רובי</h3>', '<h3>🌫️ Tricking Robi</h3>') + fogTop : tf('<h3>🎤 {n} מנחש</h3>', '<h3>🎤 {n} guesses</h3>', {n: n})) +
+        '<div class="twguess">' + w[0] + '<b>' + esc(w[1]) + '</b></div>' + (W.msg ? '<p class="res no noread">' + W.msg + '</p>' : '') +
+        '<div class="twask"><b class="twq">' + t('צדקתי?', 'Was I right?') + '</b><div class="row"><button type="button" data-a="0">' + t('👍 כן! צדקת', '👍 Yes! You’re right') + '</button><button type="button" data-a="1">' + t('👎 לא, טעית', '👎 No, you’re wrong') + '</button></div>' + twMicBtn() + '</div>' +
+        '<div class="twbox">' + tdraw(tree, {on: path}) + '</div>');
+      twFit(); twMicWire();
+      twTapAns(function(i){
+        if (i === 0){
+          if (W.fog && node.leaf !== 'fog'){ W.msg = tf('אתה בטוח? בתמונה יש ערפל, ולא {w} 🤔', 'Are you sure? The picture shows fog, not {w} 🤔', {w: w[1]}); beep('bad'); twKeep(renderWorld); return; }
+          W.msg = (W.fog ? t('יש! עכשיו אני מזהה ערפל! 🌫️ ', 'Yes! Now I recognize fog! 🌫️ ') : t('יש! העץ עבד! 💃 ', 'Yes! The tree worked! 💃 ')) + GEAR[node.leaf] + '.'; W.happy = true; W.right++;
+          W.phase = 'after'; renderWorld(); return;
+        }
+        if (W.fog && node.leaf === 'fog'){ W.msg = t('אבל בתמונה באמת יש ערפל 😄 תסתכל שוב.', 'But the picture really does show fog 😄 Look again.'); twKeep(renderWorld); return; }
+        if (W.fog && !W.grown){ W.phase = 'wrong'; W.msg = ''; renderWorld(); return; }
+        W.msg = tf('הממ… העץ שלי הגיע ל{w}. אולי ענית אחרת על אחת השאלות? בוא ננסה שוב.', 'Hmm… my tree reached {w}. Maybe you answered one of the questions differently? Let’s try again.', {w: w[1]}); W.happy = false;
+        W.phase = 'after'; renderWorld();
+      });
+    }
+  }
+  else if (ph === 'after'){
+    steps(ST, W.grown ? 3 : 1);
+    if (W.happy){ setMood('happy', 1800); beep('good'); confetti(); } else { setMood('worry', 1600); beep('bad'); }
+    sayAgain(W.msg);
+    P('<h3>' + (W.happy ? t('🎉 העץ עבד!', '🎉 The tree worked!') : t('🤔 משהו לא הסתדר', '🤔 Something didn’t fit')) + '</h3>' +
+      '<div class="twbox">' + tdraw(tree, {on: W.path}) + '</div>' +
+      (W.grown ? '' : (W.right ? tf('<p>{n} מוכן לאתגר. תנסה לבלבל אותו עם משהו שהוא עוד לא מכיר: ערפל!</p>', '<p>{n} is ready for a challenge. Try to trick it with something it doesn’t know yet: fog!</p>', {n: n}) : '')) +
+      '<div class="row"><button class="btn alt" id="again" type="button">' + t('🔁 עוד סיבוב', '🔁 Another round') + '</button>' +
+      '<button class="btn' + (W.grown ? ' alt' : '') + '" id="fog" type="button">' + (W.grown ? t('🌫️ שוב ערפל', '🌫️ Fog again') : t('🌫️ בואו נבלבל את רובי', '🌫️ Let’s trick Robi')) + '</button></div>' +
+      (W.grown ? t('<button class="btn" id="fin" type="button">הסברתי ✓ לסיום</button>', '<button class="btn" id="fin" type="button">I explained ✓ Finish</button>') : ''));
+    twFit();
+    on('again', function(){ W.phase = 'think'; W.fog = false; renderWorld(); window.scrollTo(0, 0); });
+    on('fog', function(){ W.phase = 'ask'; W.fog = true; W.path = []; W.msg = ''; W.round++; renderWorld(); window.scrollTo(0, 0); });
+    on('fin', function(){ W.first = finishLevel(2, 3); W.phase = 'end'; renderWorld(); window.scrollTo(0, 0); });
+  }
+  else if (ph === 'wrong'){
+    steps(ST, 2); setMood('sad');
+    var old = tat(tree, W.path).leaf;
+    if (W.msg) say(W.msg); else sayAgain(tf('אוי! לא הכרתי ערפל, אז הגעתי ל{w} 😢 איזו שאלה תעזור לי להבדיל בין {w} לערפל?', 'Oh no! I didn’t know fog, so I reached {w} 😢 Which question will help me tell {w} and fog apart?', {w: WX[old][1]}));
+    P(t('<h3>😢 רובי טעה</h3>', '<h3>😢 Robi was wrong</h3>') + '<div class="noread">' + twScene(FOG) + '</div>' +
+      tf('<p>בעץ של {n} אין ענף לערפל. בחר שאלה שתעזור לו להבדיל בין {w} לערפל:</p>', '<p>{n}’s tree has no branch for fog. Pick a question that will help it tell {w} and fog apart:</p>', {n: n, w: WX[old][1]}) +
+      (W.msg ? '<p class="res no noread">' + W.msg + '</p>' : '') +
+      '<div class="twopts">' + [['wind', TQ.wind.q], ['ground', TQ.ground.q], ['time', t('זה בבוקר או בערב?', 'Is it morning or evening?')]].map(function(o){ return '<button type="button" data-o="' + o[0] + '">❓ ' + esc(o[1]) + '</button>'; }).join('') + '</div>' +
+      '<div class="twbox">' + tdraw(tree, {on: W.path}) + '</div>');
+    twFit();
+    $('#panel').querySelectorAll('.twopts button').forEach(function(b){ b.onclick = function(){
+      var o = b.dataset.o;
+      if (o === 'wind'){ W.msg = tf('גם ב{w} וגם בערפל אין רוח חזקה, אז השאלה הזאת לא מפרידה ביניהם 🤔 נסה אחרת.', 'Neither {w} nor fog has a strong wind, so that question doesn’t split them 🤔 Try another.', {w: WX[old][1]}); beep('bad'); twKeep(renderWorld); return; }
+      if (o === 'time'){ W.msg = tf('גם {w} וגם ערפל יכולים להיות בבוקר ובערב. השאלה הזאת לא עוזרת לי להבדיל 🤔 נסה אחרת.', 'Both {w} and fog can happen in the morning and in the evening. That question doesn’t help me tell them apart 🤔 Try another.', {w: WX[old][1]}); beep('bad'); twKeep(renderWorld); return; }
+      act(function(){   // ✓ העץ גדל: העלה הופך לשאלה ״הענן נוגע בקרקע?״, עם ענף לערפל וענף לעלה הישן
+        var nt = tclone(tree), at = tat(nt, W.path); delete at.leaf; at.k = 'ground'; at.kids = [TL('fog'), TL(old)];
+        W.t3 = nt; W.grown = true; W.newp = W.path.slice(); W.oldLeaf = old; W.msg = ''; W.phase = 'explain';
+        beep('win'); confetti(); renderWorld(); window.scrollTo(0, 0);
+      })();
+    }; });
+  }
+  else if (ph === 'explain'){
+    steps(ST, 3); setMood('happy');
+    var gp = W.newp || W.path, old2 = W.oldLeaf || 'rain'; W.newp = null;
+    say(tf('העץ שלי גדל! 🌱 מעכשיו, כשאני מגיע לכאן, אני שואל: הענן נוגע בקרקע? אם כן, זה ערפל. אם לא, זה {w}.', 'My tree grew! 🌱 From now on, when I get here, I ask: is the cloud touching the ground? If yes, it’s fog. If no, it’s {w}.', {w: WX[old2][1]}));
+    P(t('<h3>🌱 העץ גדל ענף חדש!</h3>', '<h3>🌱 The tree grew a new branch!</h3>') +
+      '<div class="twbox">' + tdraw(tree, {grow: gp, on: gp.concat(0)}) + '</div>' +
+      t('<div class="rule">🌫️ רובי טעה, כי בעץ שלו לא הייתה שאלה שמפרידה בין ערפל לגשם. כשמגיע משהו חדש שהמכונה לא ראתה, היא טועה, ובביטחון מלא!</div>', '<div class="rule">🌫️ Robi was wrong, because its tree had no question that splits fog from rain. When something new comes along that a machine has never seen, it gets it wrong, and with full confidence!</div>') +
+      t('<div class="rule">🌱 איך מתקנים? מוסיפים שאלה שמפרידה. ככה עצים של מחשבים גדלים: עוד דוגמאות, ועוד שאלות טובות.</div>', '<div class="rule">🌱 How do we fix it? We add a question that splits them. That’s how computer trees grow: more examples, and more good questions.</div>') +
+      '<p><b>' + esc(who()) + tf(', עכשיו תסביר ל{n} בקול, במילים שלך: למה הוא טעה בערפל?', ', now explain to {n} out loud, in your own words: why was it wrong about the fog?', {n: n}) + '</b></p>' +
+      '<div class="row"><button class="btn alt" id="fog" type="button">' + t('🌫️ לבדוק שוב בערפל', '🌫️ Test the fog again') + '</button>' +
+      t('<button class="btn" id="fin" type="button">הסברתי ✓</button></div>', '<button class="btn" id="fin" type="button">I explained ✓</button></div>'));
+    twFit();
+    on('fog', function(){ W.phase = 'ask'; W.fog = true; W.path = []; W.msg = ''; W.round++; renderWorld(); window.scrollTo(0, 0); });
+    on('fin', function(){ W.first = finishLevel(2, 3); W.phase = 'end'; renderWorld(); window.scrollTo(0, 0); });
+  }
+  else if (ph === 'end'){
+    steps(ST, 3); setMood('happy'); say(t('עכשיו אני יודע לקבל החלטות! 🌳', 'Now I know how to make decisions! 🌳'));
+    P(t('<h3>סיימת את עץ השאלות! ⭐⭐⭐</h3>', '<h3>You finished the Question Tree! ⭐⭐⭐</h3>') + (W.first ? t('<p>הרווחת ', '<p>You earned ') + STARS_NEW_LEVEL + t(' ⭐ לחנות.</p>', ' ⭐ for the shop.</p>') : '') + mindHtml(curWorld, 'w') +
+      t('<div class="rule">🌳 מה למדנו: עץ החלטה מגיע לתשובה בעזרת שאלות. כל שאלה טובה מפרידה בין דברים שונים, וכשמגיע משהו חדש, מגדלים לעץ ענף חדש. ככה מחשבים עוזרים לחזאים, לרופאים ולמשחקים להחליט.</div>', '<div class="rule">🌳 What we learned: a decision tree reaches an answer with questions. Every good question splits different things apart, and when something new comes along, the tree grows a new branch. That’s how computers help forecasters, doctors and games decide.</div>') +
+      tf('<p>🔤 שמת לב? כל השאלות של {n} הן <b>מילים</b>. בעולם 5, <b>ים המילים 🔤</b>, נגלה איך מחשב מבין מילים.</p>', '<p>🔤 Did you notice? All of {n}’s questions are <b>words</b>. In world 5, <b>Word Sea 🔤</b>, we’ll find out how a computer understands words.</p>', {n: n}) +
+      showBtn() + t('<div class="row"><button class="btn alt" id="shop" type="button">🛠️ לחנות התוספות</button><button class="btn alt" id="map" type="button">🗺️ למפה</button></div>', '<div class="row"><button class="btn alt" id="shop" type="button">🛠️ To the accessory shop</button><button class="btn alt" id="map" type="button">🗺️ To the map</button></div>'));
+    on('shop', function(){ go('shop'); });
+    on('map', function(){ go('map'); });
+    on('show', function(){ W = fresh(SHOW_IDX); renderWorld(); window.scrollTo(0, 0); });
+  }
+}
+
+/* ───── 🎁 בונוס: העץ שלי. בונים עץ להחלטה מהחיים, ובודקים אותו על סבא ───── */
+var MYQ = {
+  rain:   {q: t('יורד גשם בחוץ?', 'Is it raining outside?'), a: TW_YN},
+  friend: {q: t('יש חבר לשחק איתו?', 'Is there a friend to play with?'), a: TW_YN},
+  time:   {q: t('יש הרבה זמן?', 'Is there lots of time?'), a: TW_YN},
+  tired:  {q: t('אתה עייף?', 'Are you tired?'), a: TW_YN}
+};
+var MYA = {ball: ['⚽', t('כדורגל', 'soccer')], bike: ['🚲', t('אופניים', 'bike ride')], puzzle: ['🧩', t('פאזל', 'puzzle')], board: ['🎲', t('משחק קופסה', 'board game')], book: ['📚', t('ספר', 'a book')], draw: ['🎨', t('ציור', 'drawing')]};
+var MYQC = ['rain', 'friend', 'time', 'tired'], MYAC = ['ball', 'bike', 'puzzle', 'board', 'book', 'draw'];
+function tree4(){
+  var n = G.name, ph = W.phase, ST = [t('הסבר', 'Intro'), t('בונים', 'Building'), t('בודקים', 'Testing'), t('סיום', 'Finish')], o = {QS: MYQ, WS: MYA};
+  twMicStop();
+  if (ph === 'intro'){
+    steps(ST, 0); setMood('happy'); say(t('עץ החלטה עובד על כל החלטה! 🌳', 'A decision tree works for any decision! 🌳'));
+    P(comic([['🎮', t('עד עכשיו בנינו עצים למזג אוויר. אבל עץ החלטה עובד על כל החלטה! למשל: <b>מה לשחק היום?</b>', 'So far we built trees for weather. But a decision tree works for any decision! For example: <b>what should we play today?</b>')],
+              ['🌱', t('אתה בונה את העץ: שאלות מהחיים שלך, ובעלים משחקים שאתה אוהב. אפשר עד 3 שאלות.', 'You build the tree: questions from your life, and games you like on the leaves. Up to 3 questions.')],
+              ['👴', tf('אחר כך בודקים אותו על {g}, או על מישהו אחר בבית: {n} שואל את השאלות, ומציע משחק.', 'Then you test it on {g}, or on someone else at home: {n} asks the questions, and suggests a game.', {g: DUEL_OTHER, n: n})]]) +
+      t('<button class="btn" id="go" type="button">לבנות את העץ שלי</button>', '<button class="btn" id="go" type="button">Build my tree</button>'));
+    on('go', function(){ W.phase = 'build'; W.tree = TN(null, [TL(null), TL(null)]); W.grow = false; W.hint = ''; W.tries = 0; W.right = 0; renderWorld(); });
+  }
+  else if (ph === 'build'){
+    steps(ST, 1);
+    if (!W.tree) W.tree = TN(null, [TL(null), TL(null)]);
+    var q = tcount(W.tree), ready = tfull(W.tree) && q >= 2, nw = W.newp; W.newp = null;
+    if (W.robi){ setMood('happy'); say(W.robi); W.robi = ''; }
+    else if (!W.hint){ setMood('think'); say(q < 2 ? t('בחר שאלה ומשחקים. ואחר כך נגדל עוד שאלה 🌱', 'Pick a question and games. Then we’ll grow another question 🌱') : t('עץ יפה! כשהוא מוכן, בודקים אותו 👴', 'Nice tree! When it’s ready, we test it 👴')); }
+    P(t('<h3>🌳 העץ שלי: מה לשחק היום?</h3>', '<h3>🌳 My tree: what should we play today?</h3>') +
+      t('<p>לחץ על שאלה 🟫 או על עלה 🟢 כדי לבחור. כל לחיצה מחליפה.</p>', '<p>Tap a question 🟫 or a leaf 🟢 to choose. Each tap changes it.</p>') +
+      '<div class="noread">' + turnTag(t('בונה', 'Building')) +
+      '<div class="twbox" id="twed">' + tdraw(W.tree, {tap: true, growable: W.grow, grow: nw, QS: MYQ, WS: MYA, label: t('העץ שלי', 'My tree')}) + '</div>' +
+      '<p class="twqcount">' + tf('🟫 שאלות בעץ: {q} מתוך {m}', '🟫 Questions in the tree: {q} of {m}', {q: q, m: MAXQ}) + (q < 2 ? t(' · צריך לפחות 2', ' · you need at least 2') : '') + '</p>' +
+      '<div class="row"><button class="btn" id="test" type="button"' + (ready ? '' : ' aria-disabled="true"') + '>' + tf('👴 לבדוק על {g}', '👴 Test it on {g}', {g: DUEL_OTHER}) + '</button>' +
+      '<button type="button" class="twgrow' + (W.grow ? ' on' : '') + '" id="grow"' + (q < MAXQ ? '' : ' disabled') + '>' + (W.grow ? t('🌱 עכשיו לחץ על עלה', '🌱 Now tap a leaf') : t('🌱 מוסיפים שאלה', '🌱 Add a question')) + '</button></div>' +
+      (W.hint ? '<div class="twnote">' + W.hint + '</div>' : '') + (tdup(W.tree) ? '<div class="twnote">' + TW_DUP + '</div>' : '') + '</div>');
+    twFit();
+    twTreeTaps(function(p){ W.hint = ''; twEdit(p, MYQC, MYAC, MYQ); });
+    var gb = $('#panel').querySelector('#grow'); if (gb) gb.onclick = function(){ if (tcount(W.tree) >= MAXQ) return; W.grow = !W.grow; beep('tap'); if (W.grow) W.robi = t('לחץ על אחד העלים, והוא יהפוך לשאלה חדשה.', 'Tap one of the leaves, and it will turn into a new question.'); twKeep(renderWorld); };
+    on('test', function(){
+      if (tcount(W.tree) < 2){ W.hint = t('צריך לפחות 2 שאלות. לחץ על ״🌱 מוסיפים שאלה״ ואז על עלה 🙂', 'You need at least 2 questions. Tap “🌱 Add a question” and then a leaf 🙂'); W.round++; twKeep(renderWorld); return; }
+      if (!tfull(W.tree)){ W.hint = t('יש עוד שאלה או עלה ריק. לחץ עליהם כדי לבחור 🙂', 'There’s still an empty question or leaf. Tap them to choose 🙂'); W.round++; twKeep(renderWorld); return; }
+      W.phase = 'test'; W.path = []; W.round++; renderWorld(); window.scrollTo(0, 0); });
+  }
+  else if (ph === 'test'){
+    steps(ST, 2);
+    var path = W.path || [], node = tat(W.tree, path), tag = '<span class="turn">' + tf('🎤 עונה: {g}', '🎤 Answering: {g}', {g: DUEL_OTHER}) + '</span>';
+    if (node.kids){
+      var Qn = MYQ[node.k];
+      setMood('think'); sayAgain(Qn.q);
+      P(tf('<h3>👴 בודקים את העץ על {g}</h3>', '<h3>👴 Testing the tree on {g}</h3>', {g: DUEL_OTHER}) + tag +
+        tf('<p class="small-note">שאל את {g} (או מישהו אחר בבית), ולחץ לפי התשובה.</p>', '<p class="small-note">Ask {g} (or someone else at home), and tap their answer.</p>', {g: DUEL_OTHER}) +
+        twAsk(Qn.q, Qn.a) + '<div class="twbox">' + tdraw(W.tree, {on: path, cur: path, QS: MYQ, WS: MYA}) + '</div>');
+      twFit(); twMicWire();
+      twTapAns(function(i){ W.path = path.concat(i); beep('tap'); twKeep(renderWorld); });
+    } else {
+      var a = MYA[node.leaf];
+      setMood('happy'); sayAgain(tf('אני ממליץ: {w}! {e} מתאים לך, {g}?', 'I suggest: {w}! {e} Does that suit you, {g}?', {w: a[1], e: a[0], g: DUEL_OTHER}));
+      P(tf('<h3>👴 בודקים את העץ על {g}</h3>', '<h3>👴 Testing the tree on {g}</h3>', {g: DUEL_OTHER}) + tag +
+        '<div class="twguess">' + a[0] + '<b>' + esc(a[1]) + '</b></div>' +
+        '<div class="twask"><b class="twq">' + tf('מתאים לך, {g}?', 'Does that suit you, {g}?', {g: DUEL_OTHER}) + '</b><div class="row"><button type="button" data-a="0">' + t('👍 כן, בדיוק!', '👍 Yes, exactly!') + '</button><button type="button" data-a="1">' + t('👎 לא מתאים', '👎 Not really') + '</button></div>' + twMicBtn() + '</div>' +
+        '<div class="twbox">' + tdraw(W.tree, {on: path, QS: MYQ, WS: MYA}) + '</div>');
+      twFit(); twMicWire();
+      twTapAns(function(i){
+        W.tries++; if (i === 0) W.right++;
+        W.happy = i === 0; W.phase = 'tested'; renderWorld(); window.scrollTo(0, 0);
+      });
+    }
+  }
+  else if (ph === 'tested'){
+    steps(ST, 2);
+    if (W.happy){ setMood('happy', 1800); confetti(); beep('good'); sayAgain(t('יש! העץ שלך יודע להחליט! 🎉', 'Yes! Your tree knows how to decide! 🎉')); }
+    else { setMood('worry', 1600); beep('bad'); sayAgain(t('אוי, העץ טעה. אפשר להחליף את העלה, או להוסיף שאלה שתעזור לו.', 'Oh, the tree was wrong. You can change the leaf, or add a question that will help it.')); }
+    P('<h3>' + (W.happy ? t('🎉 העץ צדק!', '🎉 The tree was right!') : t('🔧 העץ צריך תיקון', '🔧 The tree needs fixing')) + '</h3>' +
+      '<p>' + tf('בדיקות: {n} · העץ צדק: {r}', 'Tests: {n} · The tree was right: {r}', {n: W.tries, r: W.right}) + '</p>' +
+      '<div class="twbox">' + tdraw(W.tree, {on: W.path, QS: MYQ, WS: MYA}) + '</div>' +
+      '<div class="row"><button class="btn alt" id="again" type="button">' + t('🔁 עוד בדיקה', '🔁 Another test') + '</button><button class="btn alt" id="fix" type="button">' + t('🔧 לתקן את העץ', '🔧 Fix the tree') + '</button></div>' +
+      (W.tries >= 2 ? t('<button class="btn" id="fin" type="button">סיימנו ✓</button>', '<button class="btn" id="fin" type="button">We’re done ✓</button>') : t('<p class="small-note">עוד בדיקה אחת, ואפשר לסיים.</p>', '<p class="small-note">One more test, and you can finish.</p>')));
+    twFit();
+    on('again', function(){ W.phase = 'test'; W.path = []; W.round++; renderWorld(); window.scrollTo(0, 0); });
+    on('fix', function(){ W.phase = 'build'; W.hint = ''; renderWorld(); window.scrollTo(0, 0); });
+    on('fin', function(){ W.st = W.right >= 2 ? 3 : W.right ? 2 : 1; W.first = finishLevel(3, W.st); W.phase = 'end'; renderWorld(); window.scrollTo(0, 0); });
+  }
+  else if (ph === 'end'){
+    steps(ST, 3); setMood('happy'); confetti(); beep('win'); say(t('אתה בונה עצים אמיתי! 🌳', 'You’re a real tree builder! 🌳'));
+    P(t('<h3>סיימת את שלב הבונוס! ', '<h3>You finished the bonus level! ') + '⭐'.repeat(W.st) + '☆'.repeat(3 - W.st) + '</h3>' + (W.first ? t('<p>הרווחת ', '<p>You earned ') + STARS_NEW_LEVEL + t(' ⭐ לחנות.</p>', ' ⭐ for the shop.</p>') : '') +
+      t('<div class="rule">🌳 עץ החלטה עובד על כל החלטה, לא רק על מזג אוויר. גם אפליקציות ומשחקים משתמשים בעצים כאלה, כדי להחליט מה להציע לך.</div>', '<div class="rule">🌳 A decision tree works for any decision, not just weather. Apps and games use trees like this too, to decide what to suggest to you.</div>') +
+      t('<div class="rule">🧠 העץ יודע רק את מה שבנית בו. אם רצית משחק שאין בעלים, העץ לא יכול לנחש אותו. בשביל זה בודקים על אנשים אמיתיים, ומתקנים.</div>', '<div class="rule">🧠 The tree only knows what you built into it. If you wanted a game that isn’t on the leaves, the tree can’t guess it. That’s why you test it on real people, and fix it.</div>') +
+      t('<div class="row"><button class="btn" id="again" type="button">🔁 לבנות עץ חדש</button><button class="btn alt" id="show" type="button">🎪 תפוס את הטעות</button></div>', '<div class="row"><button class="btn" id="again" type="button">🔁 Build a new tree</button><button class="btn alt" id="show" type="button">🎪 Catch the Mistake</button></div>'));
+    on('again', function(){ W = fresh(3); renderWorld(); });
+    on('show', function(){ W = fresh(SHOW_IDX); renderWorld(); });
+  }
+}
+
+
 /* ═══════════ 🎪 תפוס את הטעות ═══════════
    בסוף כל עולם רובי עולה לבמה ומראה מהר 8 דברים שלמד. לפעמים הוא טועה, בדיוק כמו בינה מלאכותית אמיתית,
    וגם אז הוא בטוח בעצמו. כשרואים טעות לוחצים ״😮 טעות!״. לחיצה כשהוא צודק = אזעקת שווא.
@@ -2733,6 +3433,20 @@ var SHOWS = {
         var it = {vis: sgrid(d.g), says: out.length ? t('זה ', 'It is ') + out.map(function(o){ return art(o.name); }).join(t(' וגם ', ' and ')) + '!' : t('זו לא צורה שאני מכיר!', 'That isn’t a shape I know!'), wrong: !ok,
           truth: ok ? t('נכון, זה ', 'Yes, it is ') + art(d.t) + '.' : t('בעצם זה ', 'Actually it is ') + art(d.t) + '.'};
         (it.wrong ? wr : rt).push(it);
+      });
+      return showMix(wr, rt);
+    }},
+  tree: {ms: 5600, intro: t('הוא יראה ימים, ויגיד מה התחזית לפי העץ שלו.', 'It will look at days, and say the forecast according to its tree.'),
+    lesson: '🌳 ' + t('רובי טועה כשמגיע יום שהעץ שלו לא מכיר, כמו ערפל, או כשהוא קורא לא נכון את המדחום. גם עץ טוב טועה, אם התשובה לשאלה לא נכונה.', 'Robi gets it wrong when a day comes that its tree doesn’t know, like fog, or when it misreads the thermometer. Even a good tree is wrong if the answer to a question is wrong.'),
+    make: function(){
+      var tree = robiTree(), wr = [], rt = [];
+      [{c: 0, w: 0, t: 30}, {c: 0, w: 1, t: 18}, {c: 1, w: 1, t: 8}, {c: 1, w: 0, t: -4}, {c: 1, w: 0, t: 12}, {c: 1, w: 0, t: 26}, {c: 0, w: 0, t: 5}, {c: 1, w: 1, t: 24},
+       {fog: 1, c: 1, w: 0, t: 7, g: 1}, {fog: 1, c: 1, w: 0, t: 3, g: 1}, {c: 1, w: 0, t: 2, mis: -3}, {c: 1, w: 0, t: 23, mis: 18}].forEach(function(d){
+        // טעות = יום של ערפל (העץ לא מכיר), או שרובי קרא לא נכון את המדחום (mis)
+        var truth = d.fog ? 'fog' : trun(tree, d).leaf, said = d.mis != null ? trun(tree, {c: d.c, w: d.w, t: d.mis}).leaf : trun(tree, d).leaf, wrong = said !== truth;
+        var it = {vis: twScene(d), says: tf('התחזית: {w} {e}!', 'The forecast: {w} {e}!', {w: WX[said][1], e: WX[said][0]}), wrong: wrong,
+          truth: !wrong ? tf('נכון, {w}.', 'Right, {w}.', {w: WX[truth][1]}) : d.fog ? t('בעצם זה ערפל. בעץ של רובי אין ענף לערפל.', 'Actually it’s fog. Robi’s tree has no branch for fog.') : tf('בעצם המדחום מראה {a}, ורובי קרא {b}.', 'Actually the thermometer shows {a}, and Robi read {b}.', {a: twD(d.t), b: twD(d.mis)})};
+        (wrong ? wr : rt).push(it);
       });
       return showMix(wr, rt);
     }}
@@ -3190,6 +3904,7 @@ function invLevel(){
 var MECHANICS = {
   layers:   {levels: [{name:t('הפנס הסורק', 'The Scanning Lamp'), run: lay1}, {name:t('חידת החוטים', 'The Wire Puzzle'), run: lay2}, {name:t('אתגר אלופים', 'Champions Challenge'), run: lay3}, {name:t('ממציאי הגלאים', 'Detector Inventors'), ico:'🎁', run: invLevel}, {name:t('תפוס את הטעות', 'Catch the Mistake'), ico:'🎪', run: showLevel}]},
   examples: {levels: [{name:t('מראים דוגמאות', 'Showing examples'), run: level1}, {name:t('בוחרים חכם', 'Choose Wisely'), run: level2}, {name:t('אתגר אלופים', 'Champions Challenge'), run: level3}, {name:t('החוק הסודי', 'The Secret Rule'), ico:'🎁', run: secretLevel}, {name:t('תפוס את הטעות', 'Catch the Mistake'), ico:'🎪', run: showLevel}]},
+  tree:     {levels: [{name:t('החזאי הצעיר', 'The Young Forecaster'), run: tree1}, {name:t('בונים עץ', 'Build a Tree'), run: tree2}, {name:t('אתגר אלופים', 'Champions Challenge'), run: tree3}, {name:t('העץ שלי', 'My Tree'), ico:'🎁', run: tree4}, {name:t('תפוס את הטעות', 'Catch the Mistake'), ico:'🎪', run: showLevel}]},
   pixels:   {levels: [{name:t('פנסי הצבע', 'Color Lamps'), run: pix1}, {name:t('התמונה המתבהרת', 'The Clearing Picture'), run: pix2}, {name:t('אתגר אלופים', 'Champions Challenge'), run: pix3}, {name:t('הפיקסל הקסום', 'The Magic Pixel'), ico:'🎁', run: camLevel}, {name:t('תפוס את הטעות', 'Catch the Mistake'), ico:'🎪', run: showLevel}]}
 };
 
