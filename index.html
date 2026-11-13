@@ -41,6 +41,7 @@ button{font:inherit;cursor:pointer;border-radius:14px;border:2px solid transpare
 button:focus-visible,input:focus-visible{outline:3px solid var(--coral);outline-offset:2px}
 button:disabled{opacity:.45;cursor:not-allowed}
 .btn{background:var(--coral);color:#fff;font-family:var(--display);font-size:18px;box-shadow:0 4px 0 #c94a2f}
+.startbtn{display:block;width:100%;margin-top:18px;padding:14px 12px;font-size:21px}   /* ▶️ כפתור ההתחלה בסדנה */
 .btn:active:not(:disabled){transform:translateY(3px);box-shadow:0 1px 0 #c94a2f}
 .btn.alt{background:var(--sea2);box-shadow:0 4px 0 #0c3a44}
 .row{display:flex;gap:10px;flex-wrap:wrap}
@@ -378,6 +379,7 @@ div.res{text-align:center}
       <input type="text" id="t1" maxlength="10" autocomplete="off" aria-label="השם שלך" data-en-aria="Your name">
       <span class="lbl" data-en="Body color">צבע הגוף</span><div class="sw" id="sw-body"></div>
       <span class="lbl" data-en="Eye color">צבע העיניים</span><div class="sw" id="sw-eyes"></div>
+      <button type="button" class="btn startbtn" id="startbtn">▶️ מתחילים לשחק!</button>   <!-- ▶️ פיני 13.11: לא כולם מבינים שהעולמות למטה, הכפתור מוביל ישר לפעילות -->
     </div>
     <div class="card">
       <h2 data-en="Accessory Shop">חנות התוספות</h2>
@@ -1141,12 +1143,18 @@ function go(s){
   if (s !== 'world') camSrc = null;   // 🔒 התמונה מהמצלמה נמחקת כשיוצאים מהעולם
   ['shop','map','world'].forEach(function(k){ $('#s-' + k).hidden = k !== s; });
   document.querySelectorAll('.tabs button').forEach(function(b){ if (b.dataset.go === s) b.setAttribute('aria-current', 'page'); else b.removeAttribute('aria-current'); });
-  if (s === 'shop'){ mount('stage-shop'); renderMind(); }
+  if (s === 'shop'){ mount('stage-shop'); renderMind(); startLbl(); }
   if (s === 'world'){ mount('stage-world'); renderWorld(); }
   if (s === 'map') renderMap();
   window.scrollTo(0, 0); flySoon();
 }
 document.querySelectorAll('.tabs button').forEach(function(b){ b.addEventListener('click', function(){ go(b.dataset.go); }); });
+/* ▶️ כפתור ההתחלה בסדנה: שחקן חדש ⇐ ״מתחילים״, מי שכבר שיחק ⇐ ״ממשיכים״. מוביל לעולם ולשלב שבו עצרו */
+function startLbl(){
+  var played = Object.keys(G.prog).some(function(k){ return G.prog[k].some(Boolean); });
+  $('#startbtn').textContent = played ? t('▶️ ממשיכים לשחק!', '▶️ Keep playing!') : t('▶️ מתחילים לשחק!', '▶️ Start playing!');
+}
+$('#startbtn').addEventListener('click', function(){ beep('tap'); go('world'); });
 
 /* ───────── 🛠️ הסדנה והחנות ───────── */
 function renderWorkshop(){
