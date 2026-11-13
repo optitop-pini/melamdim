@@ -383,6 +383,9 @@ div.res{text-align:center}
 .modes{display:flex;gap:6px;flex-wrap:wrap;margin-top:6px}
 .modes button{font-size:13.5px;min-height:36px;padding:3px 12px;background:#fff;border:1.5px solid var(--line);border-radius:999px}
 .modes button[aria-pressed="true"]{background:var(--sea2);color:#fff;border-color:var(--sea2);font-weight:700}
+.modes .tipbtn{font-weight:700;border-color:var(--sun);background:#fff7dc}
+.modes .tipbtn[aria-expanded="true"]{background:var(--sun)}
+.gtip{flex-basis:100%;background:#fff7dc;border:2px solid var(--sun);border-radius:14px;padding:8px 12px;font-size:15px;line-height:1.5}   /* 💡 הטיפ של סבא פיני */
 .duelbar{display:flex;flex-wrap:wrap;justify-content:center;align-items:center;gap:6px 14px;background:#fff7dc;border:2px solid var(--sun);border-radius:14px;padding:4px 10px;font-size:15px}
 .duelbar .dn{display:flex;align-items:center;gap:6px;font-weight:700}
 .duelbar .dn b{font-family:var(--display);font-weight:400;font-size:22px;color:var(--sea)}
@@ -666,6 +669,7 @@ Object.keys(DEF).forEach(function(k){ G[k] = store.get(k, JSON.parse(JSON.string
 if (G.name === 'רובי' || G.name === 'Robi') G.name = ROBOT_DEFAULT_NAME;   // 🌐 השם השמור הוא ברירת המחדל של השפה השנייה ⇒ מציגים את זו של השפה הנוכחית
 if (G.teachers && (G.teachers[0] === 'מורה' || G.teachers[0] === 'Teacher')) G.teachers[0] = TEACHER_DEFAULTS[0];
 if (G.teachers && (G.teachers[1] === 'סבא' || G.teachers[1] === 'Grandpa')) G.teachers[1] = TEACHER_DEFAULTS[1];
+G.duel = false;   // ⚔️ אין יותר דו-קרב: כל שחקן משחק לעצמו (פיני 14.11.2026). במקומו יש 💡 טיפ מסבא פיני
 function save(){ Object.keys(DEF).forEach(function(k){ store.set(k, G[k]); }); }
 function prog(id){   // לכל עולם: [שלב 1, שלב 2, שלב 3, בונוס, הופעה]. רק 3 הראשונים נספרים בכוכבי העולם ובמוח
   if (!G.prog[id]) G.prog[id] = [0, 0, 0];
@@ -1083,7 +1087,6 @@ function openHello(next){
   $('#hello-h').textContent = hi;
   $('#hello-p').textContent = intro + today + (named() ? '' : t(' (את השם שלך אפשר לכתוב בסדנה, ואז אגיד לך שלום בשם.)', ' (You can write your name in the Workshop, and then I’ll say hello to you by name.)'));
   $('#hello-sk').innerHTML = learned.length ? t('<span>🧠 כבר לימדת אותי:</span>', '<span>🧠 You have already taught me:</span>') + learned.map(function(x){ return '<span>' + x.icon + ' ' + x.skill + '</span>'; }).join('') : '';
-  var vs = named() ? esc(tch[0]) + t(' נגד ', ' vs ') + esc(DUEL_OTHER) : t('אתה נגד ', 'You vs ') + esc(DUEL_OTHER);
   var news = [   // [גרסה, תכונה, שורה]
     [3, '', t('🌳 עולם חדש נפתח במפה: עץ השאלות! שם אלמד לקבל החלטות.', '🌳 A new world opened on the map: the Question Tree! There I’ll learn to make decisions.')],
     [3, 'fly', t('💡 הרעיון שלך התגשם! גלול למטה, ואני ממריא ומרחף איתך על המסך 🚀', '💡 Your idea came true! Scroll down, and I take off and fly with you on the screen 🚀')],
@@ -1093,7 +1096,6 @@ function openHello(next){
     [2, '', t('🧠 המוח שלי: כל שלב שתלמד מדליק בו נקודת אור.', '🧠 My brain: every level you teach lights up a dot in it.')],
     [2, '', t('🎪 בסוף כל עולם אני עושה הופעה, ואתה תופס את הטעויות שלי.', '🎪 At the end of every world I put on a show, and you catch my mistakes.')],
     [2, '', t('🎁 שלב בונוס חדש בכל עולם.', '🎁 A new bonus level in every world.')],
-    [2, '', '⚔️ ' + vs + t(': מי מנחש טוב יותר מה אעשה?', ': who guesses better what I’ll do?')],
     [2, '', t('😜 ותיגע בי בסדנה… אני רגיש לדגדוגים!', '😜 And touch me in the Workshop… I’m ticklish!')]
   ].filter(function(n){ return n[1] ? FEATURES[n[1]] && (G.seen || []).indexOf(n[1]) < 0 : n[0] > (G.hello || 0); });
   $('#hello-new').innerHTML = news.length && played ? t('<div class="hnew"><b>✨ מה חדש אצלי?</b>', '<div class="hnew"><b>✨ What’s new with me?</b>') +
@@ -1825,14 +1827,44 @@ function duelEnd(){   // בסוף שלב: רובי מכריז על המנצח
   W.duelWin = duelWinner();
   setTimeout(function(){ if (screen !== 'world') return; duelBar(); robotLine(W.duelWin); }, 1100);
 }
+/* 💡 טיפ מסבא פיני: טיפ אחד לכל שלב. מכוון איך לחשוב, בלי לתת את התשובה. זמין תמיד */
+function gTip(){
+  var n = G.name, SHOW = t('לפני שאתה לוחץ ״טעות!״, תשאל את עצמך: מה הייתי עונה אני? אם ' + n + ' ענה אחרת, תפסת אותו. ואם אתה לא בטוח, עדיף לא ללחוץ.',
+                         'Before you tap “Mistake!”, ask yourself: what would I answer? If ' + n + ' answered differently, you caught it. And if you’re not sure, better not to tap.');
+  var T = {
+    examples: [t('אם תראה ל' + n + ' רק חתולים כתומים, הוא יחשוב שכל חיה כתומה היא חתול. תראה לו חיות שונות: צבעים שונים, אוזניים שונות וגדלים שונים.', 'If you show ' + n + ' only orange cats, it will think every orange animal is a cat. Show it different animals: different colors, different ears and different sizes.'),
+               t('הצבע הוא הדבר הראשון ש' + n + ' בודק. בחר דוגמאות כך שהצבע לא יספיק לו כדי להחליט.', 'Color is the first thing ' + n + ' checks. Pick examples so that color isn’t enough for it to decide.'),
+               t('תחשוב על מה ' + n + ' מסתכל כשהוא מחליט. איזו חיה תגרום לדבר הזה לשקר לו?', 'Think about what ' + n + ' looks at when it decides. What animal would make that thing lie to it?'),
+               t('תהיה בלש: בכל בדיקה שנה רק דבר אחד בחיה, ותראה אם זה משנה. כך תגלה את החוק בהכי מעט בדיקות.', 'Be a detective: in each test change only one thing about the animal, and see if it matters. That way you’ll find the rule in the fewest tests.'),
+               SHOW],
+    pixels:   [t('שנה כל פעם רק פנס אחד, ותראה מה קורה לצבע. כמו מדען!', 'Change only one lamp at a time, and see what happens to the color. Like a scientist!'),
+               t('ניחוש מוקדם שווה יותר, אבל יש רק ניחוש אחד. בהתחלה חפש את הצבעים ואת הצורה הכללית, ולא פרטים קטנים. נחש כשאתה כמעט בטוח.', 'An early guess is worth more, but you only get one guess. At first, look for the colors and the general shape, not small details. Guess when you’re almost sure.'),
+               t(n + ' משווה ריבוע מול ריבוע, לפי המקום. תחשוב: מה אפשר לשנות בלב, כך שכל אחד עדיין יבין שזה לב?', n + ' compares square against square, by position. Think: what could you change about the heart, so that everyone still sees it’s a heart?'),
+               t('הכי קל לזהות דבר אחד גדול באמצע, על רקע פשוט. נסה גם תמונה קשה, ותראה מי מזהה ראשון.', 'The easiest thing to recognize is one big thing in the middle, on a plain background. Try a hard picture too, and see who recognizes it first.'),
+               SHOW],
+    layers:   [t('כל פנס סורק את כל התמונה. חפש בצורה: יש בה קו עומד? קו שוכב? אלכסון? כל קו שמצאת הוא פנס שיידלק.', 'Each lamp scans the whole picture. Look at the shape: does it have a vertical line? A horizontal line? A diagonal? Every line you find is a lamp that will light up.'),
+               t('קודם חבר לכל צורה ✓ ירוק לפנסים שהיא מדליקה. ואם שתי צורות מתבלבלות, חפש פנס שיש רק לאחת מהן, ושים ✗ אדום בשורה של השנייה.', 'First connect each shape with a green ✓ to the lamps it lights up. And if two shapes get mixed up, find a lamp only one of them has, and put a red ✗ in the other one’s row.'),
+               t('המגדל בודק רק אילו קווים יש בציור. תחשוב: איזה ציור יש בו את אותם קווים כמו בצורה, אבל הוא בכלל לא הצורה הזאת?', 'The tower only checks which lines are in the drawing. Think: what drawing has the same lines as the shape, but isn’t that shape at all?'),
+               t('תסתכל על הפלוס ועל הריבוע, וחפש דבר אחד שיש באחד ואין בשני. הוא יכול להיות הפנס החדש שלך.', 'Look at the plus and the square, and find one thing that one has and the other doesn’t. It can be your new lamp.'),
+               SHOW],
+    tree:     [t('תמיד מתחילים מהשאלה שלמעלה, ויורדים בענף של התשובה. אל תדלג על שאלה, גם אם נראה לך שאתה יודע.', 'Always start from the question at the top, and go down the branch of the answer. Don’t skip a question, even if you think you know.'),
+               t('שאלה ראשונה טובה מחלקת את הימים לקבוצות שונות. בדוק, ותסתכל במד כמה כל שאלה הוסיפה.', 'A good first question splits the days into different groups. Test it, and look at the meter to see how much each question added.'),
+               t(n + ' מכיר רק את מה שיש בעץ שלו. תחשוב על מזג אוויר שאין לו עלה בעץ.', n + ' only knows what’s in its tree. Think of weather that has no leaf in the tree.'),
+               t('שאלה טובה היא שאלה שהתשובה עליה באמת משנה מה כדאי לשחק. ואל תשאל את אותה שאלה פעמיים באותו ענף.', 'A good question is one whose answer really changes what to play. And don’t ask the same question twice on one branch.'),
+               SHOW]
+  };
+  return (T[curWorld] || [])[W.level] || '';
+}
+var tipOpen = '';   // 💡 באיזה שלב הטיפ פתוח עכשיו (נשאר פתוח עד שעוברים שלב)
 function renderModes(){
-  var vs = named() ? G.teachers[0] + t(' נגד ', ' vs ') + DUEL_OTHER : t('אתה נגד ', 'You vs ') + DUEL_OTHER;
-  $('#modes').innerHTML = '<button type="button" data-m="team" aria-pressed="' + !G.duel + t('">🤖 אני ורובי</button><button type="button" data-m="duel" aria-pressed="', '">🤖 Me and the robot</button><button type="button" data-m="duel" aria-pressed="') + !!G.duel + '">⚔️ ' + esc(vs) + '</button>';
-  $('#modes').querySelectorAll('button').forEach(function(b){ b.onclick = function(){
-    var d = b.dataset.m === 'duel'; if (d === !!G.duel) return;
-    G.duel = d; save(); beep('tap'); renderModes(); duelBar();
-    toast(d ? t('⚔️ דו-קרב! בשלב 1 ובהופעה, כל ניחוש נכון בתור שלך = נקודה', '⚔️ Duel! In level 1 and in the show, every correct guess on your turn = a point') : t('🤖 אתה ורובי צוות אחד', '🤖 You and the robot are one team'));
-  }; });
+  var k = curWorld + '|' + W.level, tip = gTip(), open = tipOpen === k;
+  $('#modes').innerHTML = tip ? '<button type="button" class="tipbtn" aria-expanded="' + open + '" aria-controls="gtip">💡 ' + t('טיפ מ', 'A tip from ') + NARRATOR + '</button>' +
+    '<div class="gtip" id="gtip" role="note"' + (open ? '' : ' hidden') + '><b>👴 ' + NARRATOR + ':</b> ' + tip + '</div>' : '';
+  var b = $('#modes .tipbtn');
+  if (b) b.onclick = function(){
+    tipOpen = open ? '' : k; beep('tap'); renderModes();
+    if (!open && HEV && !G.muted) speakList([{text: clean(tip)}]);   // 🎙️ סבא פיני מקריא את הטיפ (בקול הטלפון)
+  };
 }
 function duelBar(){
   var b = $('#duelbar'), d = W.duel || [0, 0];
@@ -3309,7 +3341,7 @@ function tree3(){
   }
 }
 
-/* ───── 🎁 בונוס: העץ שלי. בונים עץ להחלטה מהחיים, ובודקים אותו על סבא ───── */
+/* ───── 🎁 בונוס: העץ שלי. בונים עץ להחלטה מהחיים, ובודקים אותו על מישהו בבית ───── */
 var MYQ = {
   rain:   {q: t('יורד גשם בחוץ?', 'Is it raining outside?'), a: TW_YN},
   friend: {q: t('יש חבר לשחק איתו?', 'Is there a friend to play with?'), a: TW_YN},
@@ -3325,7 +3357,7 @@ function tree4(){
     steps(ST, 0); setMood('happy'); say(t('עץ החלטה עובד על כל החלטה! 🌳', 'A decision tree works for any decision! 🌳'));
     P(comic([['🎮', t('עד עכשיו בנינו עצים למזג אוויר. אבל עץ החלטה עובד על כל החלטה! למשל: <b>מה לשחק היום?</b>', 'So far we built trees for weather. But a decision tree works for any decision! For example: <b>what should we play today?</b>')],
               ['🌱', t('אתה בונה את העץ: שאלות מהחיים שלך, ובעלים משחקים שאתה אוהב. אפשר עד 3 שאלות.', 'You build the tree: questions from your life, and games you like on the leaves. Up to 3 questions.')],
-              ['👴', tf('אחר כך בודקים אותו על {g}, או על מישהו אחר בבית: {n} שואל את השאלות, ומציע משחק.', 'Then you test it on {g}, or on someone else at home: {n} asks the questions, and suggests a game.', {g: DUEL_OTHER, n: n})]]) +
+              ['👪', tf('אחר כך בודקים אותו על מישהו בבית: {n} שואל אותו את השאלות, ומציע לו משחק.', 'Then you test it on someone at home: {n} asks them the questions, and suggests a game.', {n: n})]]) +
       t('<button class="btn" id="go" type="button">לבנות את העץ שלי</button>', '<button class="btn" id="go" type="button">Build my tree</button>'));
     on('go', function(){ W.phase = 'build'; W.tree = TN(null, [TL(null), TL(null)]); W.grow = false; W.hint = ''; W.tries = 0; W.right = 0; renderWorld(); });
   }
@@ -3334,13 +3366,13 @@ function tree4(){
     if (!W.tree) W.tree = TN(null, [TL(null), TL(null)]);
     var q = tcount(W.tree), ready = tfull(W.tree) && q >= 2, nw = W.newp; W.newp = null;
     if (W.robi){ setMood('happy'); say(W.robi); W.robi = ''; }
-    else if (!W.hint){ setMood('think'); say(q < 2 ? t('בחר שאלה ומשחקים. ואחר כך נגדל עוד שאלה 🌱', 'Pick a question and games. Then we’ll grow another question 🌱') : t('עץ יפה! כשהוא מוכן, בודקים אותו 👴', 'Nice tree! When it’s ready, we test it 👴')); }
+    else if (!W.hint){ setMood('think'); say(q < 2 ? t('בחר שאלה ומשחקים. ואחר כך נגדל עוד שאלה 🌱', 'Pick a question and games. Then we’ll grow another question 🌱') : t('עץ יפה! כשהוא מוכן, בודקים אותו על מישהו בבית 👪', 'Nice tree! When it’s ready, we test it on someone at home 👪')); }
     P(t('<h3>🌳 העץ שלי: מה לשחק היום?</h3>', '<h3>🌳 My tree: what should we play today?</h3>') +
       t('<p>לחץ על שאלה 🟫 או על עלה 🟢 כדי לבחור. כל לחיצה מחליפה.</p>', '<p>Tap a question 🟫 or a leaf 🟢 to choose. Each tap changes it.</p>') +
       '<div class="noread">' + turnTag(t('בונה', 'Building')) +
       '<div class="twbox" id="twed">' + tdraw(W.tree, {tap: true, growable: W.grow, grow: nw, QS: MYQ, WS: MYA, label: t('העץ שלי', 'My tree')}) + '</div>' +
       '<p class="twqcount">' + tf('🟫 שאלות בעץ: {q} מתוך {m}', '🟫 Questions in the tree: {q} of {m}', {q: q, m: MAXQ}) + (q < 2 ? t(' · צריך לפחות 2', ' · you need at least 2') : '') + '</p>' +
-      '<div class="row"><button class="btn" id="test" type="button"' + (ready ? '' : ' aria-disabled="true"') + '>' + tf('👴 לבדוק על {g}', '👴 Test it on {g}', {g: DUEL_OTHER}) + '</button>' +
+      '<div class="row"><button class="btn" id="test" type="button"' + (ready ? '' : ' aria-disabled="true"') + '>' + t('👪 לבדוק על מישהו בבית', '👪 Test it on someone at home') + '</button>' +
       '<button type="button" class="twgrow' + (W.grow ? ' on' : '') + '" id="grow"' + (q < MAXQ ? '' : ' disabled') + '>' + (W.grow ? t('🌱 עכשיו לחץ על עלה', '🌱 Now tap a leaf') : t('🌱 מוסיפים שאלה', '🌱 Add a question')) + '</button></div>' +
       (W.hint ? '<div class="twnote">' + W.hint + '</div>' : '') + (tdup(W.tree) ? '<div class="twnote">' + TW_DUP + '</div>' : '') + '</div>');
     twFit();
@@ -3353,21 +3385,21 @@ function tree4(){
   }
   else if (ph === 'test'){
     steps(ST, 2);
-    var path = W.path || [], node = tat(W.tree, path), tag = '<span class="turn">' + tf('🎤 עונה: {g}', '🎤 Answering: {g}', {g: DUEL_OTHER}) + '</span>';
+    var path = W.path || [], node = tat(W.tree, path), tag = '<span class="turn">' + t('🎤 עונה: מישהו בבית', '🎤 Answering: someone at home') + '</span>';
     if (node.kids){
       var Qn = MYQ[node.k];
       setMood('think'); sayAgain(Qn.q);
-      P(tf('<h3>👴 בודקים את העץ על {g}</h3>', '<h3>👴 Testing the tree on {g}</h3>', {g: DUEL_OTHER}) + tag +
-        tf('<p class="small-note">שאל את {g} (או מישהו אחר בבית), ולחץ לפי התשובה.</p>', '<p class="small-note">Ask {g} (or someone else at home), and tap their answer.</p>', {g: DUEL_OTHER}) +
+      P(t('<h3>👪 בודקים את העץ על מישהו בבית</h3>', '<h3>👪 Testing the tree on someone at home</h3>') + tag +
+        t('<p class="small-note">שאל מישהו בבית את השאלה, ולחץ לפי התשובה שלו.</p>', '<p class="small-note">Ask someone at home the question, and tap their answer.</p>') +
         twAsk(Qn.q, Qn.a) + '<div class="twbox">' + tdraw(W.tree, {on: path, cur: path, QS: MYQ, WS: MYA}) + '</div>');
       twFit(); twMicWire();
       twTapAns(function(i){ W.path = path.concat(i); beep('tap'); twKeep(renderWorld); });
     } else {
       var a = MYA[node.leaf];
-      setMood('happy'); sayAgain(tf('אני ממליץ: {w}! {e} מתאים לך, {g}?', 'I suggest: {w}! {e} Does that suit you, {g}?', {w: a[1], e: a[0], g: DUEL_OTHER}));
-      P(tf('<h3>👴 בודקים את העץ על {g}</h3>', '<h3>👴 Testing the tree on {g}</h3>', {g: DUEL_OTHER}) + tag +
+      setMood('happy'); sayAgain(tf('אני ממליץ: {w}! {e} זה מתאים לך?', 'I suggest: {w}! {e} Does that suit you?', {w: a[1], e: a[0]}));
+      P(t('<h3>👪 בודקים את העץ על מישהו בבית</h3>', '<h3>👪 Testing the tree on someone at home</h3>') + tag +
         '<div class="twguess">' + a[0] + '<b>' + esc(a[1]) + '</b></div>' +
-        '<div class="twask"><b class="twq">' + tf('מתאים לך, {g}?', 'Does that suit you, {g}?', {g: DUEL_OTHER}) + '</b><div class="row"><button type="button" data-a="0">' + t('👍 כן, בדיוק!', '👍 Yes, exactly!') + '</button><button type="button" data-a="1">' + t('👎 לא מתאים', '👎 Not really') + '</button></div>' + twMicBtn() + '</div>' +
+        '<div class="twask"><b class="twq">' + t('זה מתאים לך?', 'Does that suit you?') + '</b><div class="row"><button type="button" data-a="0">' + t('👍 כן, בדיוק!', '👍 Yes, exactly!') + '</button><button type="button" data-a="1">' + t('👎 לא מתאים', '👎 Not really') + '</button></div>' + twMicBtn() + '</div>' +
         '<div class="twbox">' + tdraw(W.tree, {on: path, QS: MYQ, WS: MYA}) + '</div>');
       twFit(); twMicWire();
       twTapAns(function(i){
