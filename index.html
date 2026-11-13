@@ -217,6 +217,9 @@ button.det[aria-pressed="true"]{border-color:var(--dc);background:color-mix(in s
 .tests{display:flex;flex-direction:column;gap:6px}
 .tests>div{display:flex;align-items:center;gap:8px;background:#fff;border-radius:12px;padding:4px 8px;font-size:14.5px}
 .tests .mini{max-width:36px;flex:0 0 36px}
+.tests .tlamps{display:flex;align-items:center;gap:7px;flex:0 0 auto;font-size:13px}   /* 🔦 אילו פנסים הצורה מדליקה */
+.tests .tlamps .m3{width:22px;gap:1.5px}
+.res .m3{vertical-align:middle;margin:0 4px}
 .tower{display:flex;flex-direction:column;gap:6px}
 .floor{border:2px solid var(--line);border-radius:14px;padding:6px 8px;background:#fff;display:flex;flex-wrap:wrap;align-items:center;gap:6px}
 .floor .fl{flex:0 0 100%;font-size:12px;color:var(--mute)}
@@ -2639,6 +2642,47 @@ function lay1(){
   }
 }
 
+/* 💡 רמז מדורג בחידת החוטים: מוצאים את הבעיה הראשונה במגדל ומסבירים אותה בגובה העיניים.
+   ניסיון 1 = רמז כללי · מניסיון 2 = מה בדיוק לא עובד ואיך מתקנים · מניסיון 4 = גם מראים את הפנס עצמו */
+function wireHint(net, last, tries){
+  if (tries < 2) return t('💡 כמעט! בדוק בטבלה איזו צורה הדליקה נוירון לא נכון.', '💡 Almost! Check in the table which shape lit up a wrong neuron.');
+  var sure = tries >= 4;
+  var lamp = function(d){ return sure ? ' ' + t('הנה הפנס:', 'Here’s the lamp:') + m3(d) + '(' + d.name + ')' : ''; };
+  var row = function(si, di){ return net[si * 4 + di]; };
+  // 1. נוירון בלי אף חוט ירוק לא נדלק אף פעם
+  for (var si = 0; si < SHP.length; si++){
+    if (!DET.some(function(d, di){ return row(si, di) === 1; })){
+      var s0 = SHP[si], l0 = litOf(s0.g);
+      return tf('💡 לנוירון ה{s} אין אף חוט ירוק ✓, ולכן הוא אף פעם לא נדלק. בשורה של ה{s}, חבר ✓ לפנסים שה{s} מדליק. רואים אותם בתוצאות, ליד ה{s}.',
+                '💡 The {s} neuron has no green wire ✓, so it never lights up. In the {s} row, connect ✓ to the lamps the {s} lights up. You can see them in the results, next to the {s}.', {s: s0.name}) +
+             (sure ? ' ' + t('הנה הם:', 'Here they are:') + DET.filter(function(d){ return l0[d.id]; }).map(m3).join('') : '');
+    }
+  }
+  // 2. צורה שלא הדליקה את הנוירון שלה
+  for (var i = 0; i < last.length; i++){
+    var tr = last[i], s1 = tr.s, k1 = SHP.indexOf(s1), l1 = litOf(s1.g);
+    if (tr.out.indexOf(s1) >= 0) continue;
+    var badG = DET.filter(function(d, di){ return row(k1, di) === 1 && !l1[d.id]; });
+    if (badG.length) return tf('💡 ה{s} לא הדליק את הנוירון שלו. בשורה של ה{s} יש ✓ ירוק לפנס שה{s} לא מדליק, וחוט ירוק אומר ״בלי הפנס הזה אני לא נדלק״.',
+                               '💡 The {s} didn’t light up its own neuron. In the {s} row there’s a green ✓ to a lamp the {s} doesn’t light, and a green wire says “without this lamp I don’t light up”.', {s: s1.name}) + lamp(badG[0]);
+    var badR = DET.filter(function(d, di){ return row(k1, di) === -1 && l1[d.id]; });
+    if (badR.length) return tf('💡 ה{s} לא הדליק את הנוירון שלו. בשורה של ה{s} יש ✗ אדום לפנס שה{s} כן מדליק, וחוט אדום עוצר את הנוירון.',
+                               '💡 The {s} didn’t light up its own neuron. In the {s} row there’s a red ✗ to a lamp the {s} does light, and a red wire stops the neuron.', {s: s1.name}) + lamp(badR[0]);
+  }
+  // 3. צורה שהדליקה בטעות גם נוירון של צורה אחרת
+  for (var j = 0; j < last.length; j++){
+    var A = last[j].s, B = last[j].out.filter(function(o){ return o !== A; })[0];
+    if (!B) continue;
+    var la = litOf(A.g), lb = litOf(B.g), kb = SHP.indexOf(B);
+    var onlyA = DET.filter(function(d){ return la[d.id] && !lb[d.id]; });
+    if (onlyA.length) return tf('💡 ה{a} הדליק בטעות גם את נוירון ה{b}. חפש פנס שה{a} מדליק וה{b} לא, ושים עליו ✗ אדום בשורה של ה{b}. כך ה{b} לא יידלק כשרואים {a}.',
+                                '💡 The {a} also lit up the {b} neuron by mistake. Find a lamp the {a} lights and the {b} doesn’t, and put a red ✗ on it in the {b} row. Then the {b} won’t light up when it sees a {a}.', {a: A.name, b: B.name}) + lamp(onlyA[0]);
+    var onlyB = DET.filter(function(d, di){ return lb[d.id] && !la[d.id] && row(kb, di) !== 1; });
+    if (onlyB.length) return tf('💡 ה{a} הדליק בטעות גם את נוירון ה{b}. חפש פנס שה{b} מדליק וה{a} לא, וחבר אותו ✓ ירוק בשורה של ה{b}.',
+                                '💡 The {a} also lit up the {b} neuron by mistake. Find a lamp the {b} lights and the {a} doesn’t, and connect it with a green ✓ in the {b} row.', {a: A.name, b: B.name}) + lamp(onlyB[0]);
+  }
+  return t('💡 בדוק בתוצאות אילו פנסים כל צורה מדליקה, והשווה לחוטים בשורה שלה.', '💡 Check in the results which lamps each shape lights up, and compare them with the wires in its row.');
+}
 /* ───── שלב 2: חידת החוטים (בונים את קומה 2) ───── */
 function lay2(){
   var n = G.name, ph = W.phase, ST = [t('הסבר', 'Intro'),t('חיבור חוטים', 'Connecting wires'),t('סיכום', 'Summary')];
@@ -2661,7 +2705,8 @@ function lay2(){
       });
     });
     var res = W.last ? '<div class="tests">' + W.last.map(function(tr){
-      return '<div>' + mini(tr.s.g) + '<span>' + (tr.out.length ? t('נדלק: ', 'Lit: ') + tr.out.map(function(o){ return o.name; }).join(' + ') : t('אף נוירון לא נדלק', 'No neuron lit up')) + ' ' + (tr.ok ? '✓' : '✗') + '</span></div>';
+      var tl = litOf(tr.s.g), lamps = DET.filter(function(d){ return tl[d.id]; });
+      return '<div>' + mini(tr.s.g) + '<span class="tlamps" role="img" aria-label="' + esc(tr.s.name + t(' מדליק: ', ' lights up: ') + lamps.map(function(d){ return d.name; }).join(', ')) + '">🔦' + lamps.map(m3).join('') + '</span><span>' + (tr.out.length ? t('נדלק: ', 'Lit: ') + tr.out.map(function(o){ return o.name; }).join(' + ') : t('אף נוירון לא נדלק', 'No neuron lit up')) + ' ' + (tr.ok ? '✓' : '✗') + '</span></div>';
     }).join('') + '</div>' : '';
     P(t('<h3>חבר חוטים מהפנסים לנוירונים</h3>', '<h3>Connect wires from the lamps to the neurons</h3>') +
       t('<p class="small-note">לחיצה על משבצת מחליפה: · בלי חוט ← ✓ ירוק, צריך ← ✗ אדום, אסור</p>', '<p class="small-note">Tap a square to change it: no wire → ✓ green (needed) → ✗ red (forbidden)</p>') +
@@ -2677,9 +2722,7 @@ function lay2(){
       W.tries++;
       W.last = SHP.map(function(s){ var o = netOut(W.wires, s.g); return {s: s, out: o, ok: o.length === 1 && o[0] === s}; });
       if (W.last.every(function(t){ return t.ok; })){ G.wires = W.wires.slice(); save(); W.phase = 'sum'; renderWorld(); return; }
-      var mixXT = W.last[1].out.some(function(o){ return o.id === 'x'; }) || W.last[2].out.some(function(o){ return o.id === 'tri'; });
-      W.hint = mixXT && W.tries >= 2 ? t('💡 למשולש ולאיקס יש אלכסונים. מה יש למשולש ואין לאיקס? נסה חוט אדום ✗ אצל אחד מהם.', '💡 The triangle and the X both have diagonals. What does the triangle have that the X doesn’t? Try a red wire ✗ on one of them.') :
-               W.tries >= 2 ? t('💡 פתח את ״מה ראינו בשלב 1״, ובדוק אילו פנסים כל צורה מדליקה.', '💡 Open "What we saw in level 1", and check which lamps each shape lights up.') : t('💡 כמעט! בדוק בטבלה איזו צורה הדליקה נוירון לא נכון.', '💡 Almost! Check in the table which shape lit up a wrong neuron.');
+      W.hint = wireHint(W.wires, W.last, W.tries);
       var keep = window.scrollY; renderWorld(); window.scrollTo(0, keep);
       setMood('worry', 1600); beep('bad'); say(t('משהו התבלבל לי במגדל… 😟', 'Something got mixed up in my tower… 😟'));
     });
