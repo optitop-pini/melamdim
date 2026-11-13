@@ -286,6 +286,46 @@ body.f-move .stage.fly{touch-action:none}
 .brainlbl{position:absolute;bottom:32px;inset-inline:0;margin:0 auto;width:max-content;max-width:92%;background:var(--ink);color:#fff;
   border-radius:999px;padding:4px 12px;font-weight:700;font-size:13.5px;z-index:2;pointer-events:none;animation:saypop .25s ease-out}
 @media (prefers-reduced-motion:reduce){.stage.fly.in,.stage.fly::before,.flysay{animation:none}}
+/* 🎤 מרכז הפקודות של רובי */
+#voicecard{scroll-margin-top:calc(var(--toph,56px) + 8px)}
+.vexp{background:#fff7dc;border:2px solid var(--sun);border-radius:14px;padding:10px;display:flex;flex-direction:column;gap:8px}
+.vexp p{font-size:15px;line-height:1.45;padding:3px 6px;margin-bottom:4px}
+#vskip{font-size:19px;padding:12px 14px;width:100%}
+.vmic{align-self:center;width:84px;height:84px;min-height:84px;padding:0;border-radius:50%;font-size:40px;line-height:1;background:var(--coral);box-shadow:0 5px 0 #c94a2f}
+.vmic[aria-pressed="true"]{background:#d62828;animation:vpulse 1s ease-in-out infinite}
+@keyframes vpulse{50%{box-shadow:0 0 0 14px rgba(214,40,40,.25)}}
+@media (prefers-reduced-motion:reduce){.vmic[aria-pressed="true"]{animation:none}}
+.vtype{display:flex;gap:8px}.vtype input{flex:1;min-width:0}.vtype .btn{font-size:17px;padding:8px 14px}
+.vheard{min-height:1.4em}
+.vbub{background:#fff;border:2px solid var(--sea2);border-radius:4px 16px 16px 16px;padding:8px 12px;font-size:15.5px}
+.vbub::before{content:"🤖 "}
+.vlearn{display:flex;flex-wrap:wrap;gap:8px;background:#fff7dc;border:2px solid var(--sun);border-radius:14px;padding:10px}
+.vlearn button{background:#fff;border-color:var(--line);font-size:15px;font-weight:700}
+#vlist{display:flex;flex-direction:column;gap:8px}
+.vw{border:2px solid var(--line);border-radius:14px;padding:8px 10px;display:flex;flex-direction:column;gap:6px;background:#fff}
+.vw b{font-size:15px}.vw.lock{background:#eee;color:#777;border-style:dashed}
+.vw .vch{display:flex;flex-wrap:wrap;gap:6px}
+.vchip{min-height:44px;padding:3px 10px;font-size:14px;background:#e3f4f2;border-color:#bfe3df;font-weight:700}
+.vw.lock .vchip{background:#e2e2e2;color:#777;border-color:#d2d2d2}
+.vbtns .btn{flex:1 1 150px;font-size:16px}
+.vexpb{gap:8px}.vexpb .btn{flex:1 1 140px}
+.vpriv{font-size:13px}
+.vwords{border:2px dashed var(--sea2);border-radius:14px;padding:8px 10px;display:flex;flex-direction:column;gap:6px;background:#fff}
+.vwords b{font-size:15px}.vwords .vch{display:flex;flex-wrap:wrap;gap:6px}
+.vwords .vchip{background:#fff7dc;border-color:var(--sun)}
+.vmixv{position:relative;width:110px;height:70px;margin:8px auto 2px;background:#10141c;border-radius:12px;isolation:isolate}
+.vmixv i{position:absolute;width:40px;height:40px;border-radius:50%;mix-blend-mode:screen;top:15px}
+.learnscr{position:absolute;inset:0;z-index:9;background:rgba(18,32,58,.97);color:#fff;overflow-y:auto;padding:8px 10px 0;display:flex;flex-direction:column;gap:4px;touch-action:pan-y}
+.learnscr h3{color:#fff;font-size:18px}.learnscr .lg{font-size:13px;color:#cfdcf5}
+.learnscr .lw{display:flex;align-items:center;justify-content:space-between;gap:4px;border-radius:9px;padding:3px 7px;background:rgba(255,255,255,.1);font-size:14px}
+.learnscr .lw.off{opacity:.4}
+.learnscr .lw span.n{flex:1;min-width:0;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
+.learnscr .lc{display:flex;gap:3px}
+.learnscr .lc i{font-style:normal;min-width:30px;text-align:center;border-radius:7px;padding:1px 2px;font-size:13px;background:rgba(255,255,255,.15)}
+.learnscr .lc i.ok{background:#62c370;color:#10361a;font-weight:700}
+.learnscr button{align-self:center;background:var(--sun);font-weight:700;min-height:44px;padding:2px 22px;margin-top:2px;flex:none}
+.learnscr .lfoot{position:sticky;bottom:0;display:flex;justify-content:center;padding:6px 0 8px;background:rgba(18,32,58,.97);margin-top:auto}
+.learnscr .lwd{font-size:14px;background:rgba(255,213,74,.16);border-radius:9px;padding:4px 7px}
 /* 🎪 תפוס את הטעות */
 .levels .lx{grid-column:1/-1;display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:6px}
 .show{display:flex;flex-direction:column;gap:10px}
@@ -366,6 +406,21 @@ div.res{text-align:center}
   <section class="screen" id="s-shop">
     <div><h1 data-en="The Robot Workshop">הסדנה של הרובוט</h1><p class="lead" data-en="Here you design the robot: name, colors and extras from the shop. Drag it to rotate it, and on the back of its head you’ll see its brain.">כאן אתה מעצב את הרובוט: שם, צבעים ותוספות מהחנות. גרור אותו כדי לסובב, ובגב הראש תראה את המוח שלו.</p></div>
     <div class="stage" id="stage-shop"></div>
+    <!-- 🎤 מרכז הפקודות של רובי -->
+    <div class="card" id="voicecard" hidden>
+      <h3 data-en="🎤 Robi’s Command Center">🎤 מרכז הפקודות של רובי</h3>
+      <p class="small-note" data-en="Press the microphone and tell the robot what to do. Or type it.">לחץ על המיקרופון ואמור לרובוט מה לעשות. או הקלד.</p>
+      <button class="vmic" id="vmic" type="button" aria-pressed="false" aria-label="לחץ ודבר" data-en-aria="Press and speak">🎤</button>
+      <div class="vtype"><input type="text" id="vtxt" maxlength="40" dir="auto" autocomplete="off" aria-label="הקלד פקודה" placeholder="הקלד פקודה…" data-en-aria="Type a command" data-en-ph="Type a command…"><button class="btn alt" id="vsend" type="button" data-en="Send">שלח</button></div>
+      <p class="small-note vpriv" data-en="🔒 The microphone opens only when you press it. Your browser recognizes the speech, sometimes with help from its company’s servers. The game itself saves no recordings.">🔒 המיקרופון נפתח רק כשלוחצים. הדפדפן מזהה את הדיבור, לפעמים בעזרת השרתים של החברה שלו. המשחק עצמו לא שומר הקלטות.</p>
+      <div class="vexp" id="vexp" hidden><div class="row vexpb"><button class="btn" id="vskip" type="button" data-en="⏭️ Skip the explanation">⏭️ דלג על ההסבר</button><button class="btn alt" id="vread" type="button" hidden data-en="🔊 Read it to me">🔊 תקריא לי</button></div><div id="vexptxt"></div></div>
+      <p class="small-note vheard" id="vheard" aria-live="polite"></p>
+      <div class="vbub" id="vsay" aria-live="polite" hidden></div>
+      <div class="vlearn" id="vlearn" hidden></div>
+      <div class="vwords" id="vwords" hidden></div>
+      <div id="vlist"></div>
+      <div class="row vbtns"><button class="btn alt" id="vhelp" type="button" data-en="❓ What can I say?">❓ מה אפשר להגיד?</button><button class="btn alt" id="vbrain" type="button" data-en="🧠 Robi, what did you learn?">🧠 רובי, מה למדת?</button></div>
+    </div>
     <div id="mindbox"></div>
     <div class="card">
       <h3 data-en="How does the robot feel?">איך הרובוט מרגיש?</h3>
@@ -461,7 +516,8 @@ var SAVE_KEY = 'mlr1-';             // אם משנים את זה, כל השחק�
 var FEATURES = {
   fly: true,       // 🚀 רובי המרחף: כשגוללים למטה, רובי ממריא ומרחף בפינה
   move: true,      // ✋ גוררים את רובי המרחף באצבע, והוא נשאר איפה שעזבת (צריך גם fly)
-  brain: true      // 🧠 מסובבים את רובי בסדנה, ורואים בגב הראש את המוח עם האזורים הדלוקים
+  brain: true,     // 🧠 מסובבים את רובי בסדנה, ורואים בגב הראש את המוח עם האזורים הדלוקים
+  voice: true      // 🎤 מרכז הפקודות של רובי: אומרים (או מקלידים) פקודות, והוא מבצע. כבוי = שום שינוי במשחק
 };
 
 /* 🤖 עיצוב הרובוט: כאן עומר ו-Claude מעצבים את הצורה */
@@ -516,6 +572,8 @@ var DEF = {stars: START_STARS, owned: [], worn: [], body: '#ffc93c', eyes: '#5ff
   wires: null,    // המגדל שבנית בעולם 3
   read: true,     // 🗣️ רובי מקריא בקול את ההסברים
   duel: false,    // ⚔️ מצב דו-קרב: מורה נגד מורה
+  words: {},      // 🎤 מילים ש״לימדת״ את רובי: מילה ⇐ פעולה
+  mine: null,     // 🎨 הצבע שהילד בחר לפני שרובי התחלף לצבע של אור
   hello: 0,       // 👋 איזה ״מה חדש״ כבר ראית במסך הפתיחה
   seen: [],       // ✨ אילו תכונות חדשות כבר הוצגו לך ב״מה חדש״
   flypos: null};  // ✋ איפה השארת את רובי המרחף (בטלפון הזה)
@@ -819,7 +877,7 @@ function speakList(list){
       started = true; talking(!!it.robot);
       if (it.el){ it.el.classList.add('reading'); var b = it.el.closest('.bub'); if (b) b.classList.add('shown'); }
     };
-    u.onend = u.onerror = function(){ if (it.el) it.el.classList.remove('reading'); if (i === list.length - 1){ talking(false); revealAll(); } };
+    u.onend = u.onerror = function(){ if (it.el) it.el.classList.remove('reading'); if (it.after) it.after(); if (i === list.length - 1){ talking(false); revealAll(); } };
     SYN.speak(u);
   });
   setTimeout(function(){ if (!started) revealAll(); }, 2500);   // הקול לא התחיל? מראים את כל הבועות
@@ -1140,10 +1198,11 @@ $('#mute').addEventListener('click', function(){ G.muted = !G.muted; save(); mut
 var screen = 'shop';
 function go(s){
   screen = s; stopTalk(); if (s !== 'map') flyHold = false;
+  if (FEATURES.voice) vLeave(s);
   if (s !== 'world') camSrc = null;   // 🔒 התמונה מהמצלמה נמחקת כשיוצאים מהעולם
   ['shop','map','world'].forEach(function(k){ $('#s-' + k).hidden = k !== s; });
   document.querySelectorAll('.tabs button').forEach(function(b){ if (b.dataset.go === s) b.setAttribute('aria-current', 'page'); else b.removeAttribute('aria-current'); });
-  if (s === 'shop'){ mount('stage-shop'); renderMind(); startLbl(); }
+  if (s === 'shop'){ mount('stage-shop'); renderMind(); startLbl(); if (FEATURES.voice){ vRefresh(); setTimeout(vTourMaybe, 700); } }
   if (s === 'world'){ mount('stage-world'); renderWorld(); }
   if (s === 'map') renderMap();
   window.scrollTo(0, 0); flySoon();
@@ -1179,7 +1238,7 @@ function renderWorkshop(){
   nm.oninput = function(){ G.name = nm.value.trim() || ROBOT_DEFAULT_NAME; save(); brand(); showMood(); };
   var tn = $('#t1'); tn.value = named() ? G.teachers[0] : ''; tn.placeholder = t('למשל: נועם', 'e.g. Leo');
   tn.oninput = function(){ G.teachers[0] = tn.value.trim() || TEACHER_DEFAULTS[0]; save(); };
-  renderShop(); renderMind();
+  renderShop(); renderMind(); if (FEATURES.voice) vRefresh();
 }
 function renderShop(){
   var el = $('#shop'); el.innerHTML = '';
@@ -1265,6 +1324,310 @@ function mindHtml(newId, uid){
   return '<div class="mind"><h3>🧠 ' + tf('המוח של {n}', "{n}'s brain", {n: n}) + '</h3><p class="cap">' + cap + '</p>' + g + '<div class="abil">' + chips.join('') + '</div></div>';
 }
 function renderMind(){ var b = $('#mindbox'); if (b) b.innerHTML = FEATURES.brain ? '' : mindHtml(null, 's'); }   // 🧠 כשהמוח על רובי עצמו, הדף שמתחתיו יורד
+
+/* ═══════════ 🎤 מרכז הפקודות של רובי ═══════════
+   הילד אומר (או מקליד) פקודה, ורובי מבצע. הפקודות של כל עולם נפתחות אחרי שלושת השלבים הראשונים בו.
+   זיהוי הדיבור עושה הדפדפן (SpeechRecognition), רק אחרי לחיצה על 🎤. שום הקלטה לא נשמרת.
+   מילה שרובי לא מכיר ⇐ הוא שואל מה לעשות בה, ושומר (G.words): ככה רואים שבינה לומדת מדוגמאות.
+   לפני שמתחילים, קריין מסביר בקול מה אפשר להגיד, ואפשר לדלג. */
+var VCOL = {red:'#e53935', green:'#2e9e4f', blue:'#2a6fdb', yellow:'#ffe135', magenta:'#e0309f', cyan:'#19d3e6', white:'#f7f7f2'};
+var VMIX = {
+  'green,red': [VCOL.yellow, t('אור אדום ואור ירוק יחד נותנים צהוב! 🟡', 'Red light and green light together make yellow! 🟡')],
+  'blue,red': [VCOL.magenta, t('אור אדום ואור כחול יחד נותנים סגול-ורוד! 🟣', 'Red light and blue light together make magenta, a purple-pink! 🟣')],
+  'blue,green': [VCOL.cyan, t('אור ירוק ואור כחול יחד נותנים טורקיז! 🩵', 'Green light and blue light together make cyan, a turquoise! 🩵')],
+  'blue,green,red': [VCOL.white, t('שלושת האורות יחד נותנים לבן! ⚪', 'All three lights together make white! ⚪')]
+};
+var VONE = {red: t('אני אדום! 🔴', 'I’m red! 🔴'), green: t('אני ירוק! 🟢', 'I’m green! 🟢'), blue: t('אני כחול! 🔵', 'I’m blue! 🔵')};
+var vMixTold = false, VLIGHT = {red: '#ff0000', green: '#00ff00', blue: '#0000ff'};   // בהדמיה: אורות מלאים, כדי שהחפיפה תיראה בדיוק צהוב, טורקיז או לבן
+function vIsV(hex){ return Object.keys(VCOL).some(function(k){ return VCOL[k] === hex; }); }
+function vSetBody(hex){ if (!vIsV(G.body)) G.mine = G.body; G.body = hex; save(); applyLook(); vSwatches(); setMood('happy', 1600); beep('tap'); }
+var VHINT = {   // צבע שאין לו פקודה: [השם, מה לערבב, מה להגיד]
+  'green,red': [t('צהוב', 'yellow'), t('אדום וירוק', 'red and green')],
+  'blue,red': [t('סגול-ורוד', 'purple-pink'), t('אדום וכחול', 'red and blue')],
+  'blue,green': [t('טורקיז', 'turquoise'), t('ירוק וכחול', 'green and blue')],
+  'blue,green,red': [t('לבן', 'white'), t('אדום וירוק וכחול', 'red and green and blue')]
+};
+function vMixVis(c){   // שלושה אורות על רקע שחור: איפה שהם נפגשים רואים את הצבע החדש
+  var d = document.createElement('div'); d.className = 'vmixv'; d.setAttribute('aria-hidden', 'true');
+  var pos = c.length === 2 ? [[22, 15], [48, 15]] : [[20, 6], [50, 6], [35, 26]];
+  c.forEach(function(k, i){ var e = document.createElement('i'); e.style.background = VLIGHT[k]; e.style.left = pos[i][0] + 'px'; e.style.top = pos[i][1] + 'px'; d.appendChild(e); });
+  return d;
+}
+function vOffer(btns){   // כפתורים קטנים מתחת לתשובה של רובי (משתמשים בתיבה של ״מה לעשות?״)
+  var box = $('#vlearn'); box.innerHTML = '';
+  btns.forEach(function(x){ var b = document.createElement('button'); b.type = 'button'; b.textContent = x[0]; b.onclick = function(){ box.hidden = true; box.innerHTML = ''; x[1](); }; box.appendChild(b); });
+  box.hidden = !btns.length;
+}
+function vBackBtn(){
+  if (!vIsV(G.body)) return;
+  vOffer([[t('🎨 חזור לצבע שלי', '🎨 Back to my color'), function(){ var m = G.mine || BODY[0][0]; G.body = m; save(); applyLook(); vSwatches(); beep('tap'); vReply(t('חזרתי לצבע שלי 😊', 'I’m back to my color 😊')); }]]);
+}
+function vSwatches(){   // מסמנים את הצבע החדש בבחירת הצבעים של הסדנה
+  var i = BODY.map(function(c){ return c[0]; }).indexOf(G.body);
+  document.querySelectorAll('#sw-body button').forEach(function(b, k){ b.setAttribute('aria-pressed', String(k === i)); });
+}
+function vMood(m, line){ return function(){ setMood(m, 3500); beep(m === 'sad' || m === 'worry' ? 'bad' : 'good'); return line; }; }
+var ACTS = {
+  dance: {w: 'examples', lbl: t('לרקוד 💃', 'Dance 💃'), run: function(){ setMood('happy', 3200); fxPlay('dance', 3200); beep('good'); return t('אני רוקד! 💃', 'I’m dancing! 💃'); }},
+  happy: {w: 'examples', lbl: t('לשמוח 😄', 'Be happy 😄'), run: vMood('happy', t('איזה כיף! אני שמח! 😄', 'How fun! I’m happy! 😄'))},
+  sad:   {w: 'examples', lbl: t('להיות עצוב 😢', 'Be sad 😢'), run: vMood('sad', t('אוי… אני עצוב 😢', 'Oh… I’m sad 😢'))},
+  think: {w: 'examples', lbl: t('לחשוב 🤔', 'Think 🤔'), run: vMood('think', t('הממ… אני חושב 🤔', 'Hmm… I’m thinking 🤔'))},
+  worry: {w: 'examples', lbl: t('לדאוג 😟', 'Worry 😟'), run: vMood('worry', t('אוי, אני מוטרד 😟', 'Oh, I’m worried 😟'))},
+  red:   {w: 'pixels', lbl: t('להיות אדום 🔴', 'Be red 🔴'), run: function(){ vSetBody(VCOL.red); return VONE.red; }},
+  green: {w: 'pixels', lbl: t('להיות ירוק 🟢', 'Be green 🟢'), run: function(){ vSetBody(VCOL.green); return VONE.green; }},
+  blue:  {w: 'pixels', lbl: t('להיות כחול 🔵', 'Be blue 🔵'), run: function(){ vSetBody(VCOL.blue); return VONE.blue; }},
+  learned: {w: 'layers', lbl: t('לספר מה למדתי 🧠', 'Tell what I learned 🧠'), run: function(){ vLearnShow(); return t('בוא אראה לך מה למדתי! 🧠', 'Let me show you what I learned! 🧠'); }}
+};
+var VROWS = [   // מה מוצג ברשימה: [עולם, [טקסטים לדוגמה]]
+  ['examples', [t('תרקוד', 'dance'), t('תשמח', 'be happy'), t('תהיה עצוב', 'be sad'), t('תחשוב', 'think'), t('תדאג', 'worry')]],
+  ['pixels', [t('תהיה אדום', 'be red'), t('תהיה ירוק', 'be green'), t('תהיה כחול', 'be blue'), t('אדום וירוק', 'red and green'), t('אדום וכחול', 'red and blue'), t('ירוק וכחול', 'green and blue'), t('אדום וירוק וכחול', 'red and green and blue')]],
+  ['layers', [t('מה למדת?', 'what did you learn?')]]
+];
+function vOpen(id){ return FEATURES.voice && mindDone(id) === 3; }
+function vWorld(id){ return WORLDS.filter(function(w){ return w.id === id; })[0]; }
+function vWords(k){ return Object.prototype.hasOwnProperty.call(G.words || {}, k) ? G.words[k] : null; }
+function vNorm(s){   // אותיות קטנות, בלי ניקוד, בלי סימני פיסוק ובלי רווחים כפולים
+  return String(s).toLowerCase().replace(/[֑-ׇ]/g, '').replace(/[^א-תa-z0-9\s]/g, ' ').replace(/\s+/g, ' ').trim();
+}
+function vParse(n){
+  if (/למדת|\blearn/.test(n)) return {id: 'learned'};
+  if (/רקוד|ריקוד|רקד|\bdanc/.test(n)) return {id: 'dance'};
+  var c = [];
+  if (/אדום|אדומ|\bred\b/.test(n)) c.push('red');
+  if (/ירוק|\bgreen\b/.test(n)) c.push('green');
+  if (/כחול|\bblue\b/.test(n)) c.push('blue');
+  if (c.length) return {cols: c.sort()};
+  if (/צהוב|\byellow/.test(n)) return {hint: 'green,red'};
+  if (/סגול|ורוד|מגנטה|\bpurple|\bpink|\bmagenta|\bviolet/.test(n)) return {hint: 'blue,red'};
+  if (/טורקיז|תכלת|\bcyan|\bturquoise|\bteal/.test(n)) return {hint: 'blue,green'};
+  if (/לבן|\bwhite/.test(n)) return {hint: 'blue,green,red'};
+  if (/שמח|\bhappy|\bglad/.test(n)) return {id: 'happy'};
+  if (/עצוב|\bsad\b/.test(n)) return {id: 'sad'};
+  if (/חשוב|\bthink/.test(n)) return {id: 'think'};
+  if (/דאג|מוטרד|\bworr/.test(n)) return {id: 'worry'};
+  return null;
+}
+function vColors(c){
+  if (c.length === 1){ vSetBody(VCOL[c[0]]); return VONE[c[0]]; }
+  var m = VMIX[c.join(',')]; vSetBody(m[0]); fxPlay('giggle', 1000);
+  var more = vMixTold ? '' : t(' ככה המסך שלך יוצר את כל הצבעים: משלושה אורות קטנים בכל פיקסל. בצבעי גואש זה עובד אחרת!', ' That’s how your screen makes every color: from three tiny lights in each pixel. Paint works differently!');
+  vMixTold = true; return m[1] + more;
+}
+var vBubT = null;
+function vReply(txt, extra){
+  var b = $('#vsay'); b.textContent = txt; b.hidden = false; if (extra) b.appendChild(extra);
+  if (!(HEV && G.read && !G.muted)) return;
+  robotLine(txt);
+}
+function vLearnBox(word){   // רובי לא הכיר מילה: שואל מה לעשות בה
+  var box = $('#vlearn'); box.innerHTML = '';
+  if (word === null){ box.hidden = true; return; }
+  Object.keys(ACTS).filter(function(id){ return vOpen(ACTS[id].w); }).forEach(function(id){
+    var b = document.createElement('button'); b.type = 'button'; b.textContent = ACTS[id].lbl;
+    b.onclick = function(){
+      if (!G.words || Array.isArray(G.words)) G.words = {};
+      G.words[word] = id; save(); box.hidden = true; box.innerHTML = ''; vWordsRefresh();
+      vReply(t('תודה! למדתי את ׳', 'Thanks! I learned ‘') + word + t('׳ מדוגמה אחת שלך. בינה אמיתית צריכה הרבה דוגמאות, כמו ביער הדוגמאות. ', '’ from one example of yours. Real AI needs lots of examples, like in Example Forest. ') + ACTS[id].run());
+    };
+    box.appendChild(b);
+  });
+  var no = document.createElement('button'); no.type = 'button'; no.textContent = t('✖ לא משנה', '✖ Never mind');
+  no.onclick = function(){ box.hidden = true; box.innerHTML = ''; };
+  box.appendChild(no); box.hidden = false;
+}
+function vHandle(raw){
+  raw = String(raw || '').replace(/\s+/g, ' ').trim().slice(0, 40);
+  if (!raw) return;
+  vTourStop(false);
+  $('#vheard').textContent = t('שמעתי: ', 'I heard: ') + raw;
+  vLearnBox(null);
+  var n = vNorm(raw), p = null, pre = '';
+  if (!n){ vReply(t('לא שמעתי כלום. נסה שוב 😊', 'I didn’t hear anything. Try again 😊')); return; }
+  p = vParse(n);
+  if (!p){
+    var k = vWords(n); if (!k) n.split(' ').some(function(x){ k = vWords(x); return !!k; });
+    if (k && ACTS[k]){ p = {id: k}; pre = t('למדתי את זה ממך! ', 'I learned this from you! '); }
+  }
+  if (!p){
+    if (!Object.keys(ACTS).some(function(id){ return vOpen(ACTS[id].w); })){ vReply(t('עוד אין לי פקודות. הפקודות נפתחות אחרי שלושת השלבים הראשונים בעולם 🔒', 'I don’t have commands yet. Commands unlock after the first three levels of a world 🔒')); return; }
+    if (n.length > 20){ vReply(t('זה ארוך מדי בשבילי. נסה מילה אחת או שתיים 😊', 'That’s too long for me. Try one or two words 😊')); return; }
+    vReply(tf('לא הכרתי את המילה ׳{w}׳. מה לעשות כשאומרים אותה?', 'I didn’t know the word ‘{w}’. What should I do when it’s said?', {w: n}));
+    vLearnBox(n); return;
+  }
+  var wid = (p.cols || p.hint) ? 'pixels' : ACTS[p.id].w;
+  if (!vOpen(wid)){ vReply(tf('את זה אלמד אחרי שתסיים את שלושת השלבים הראשונים ב{w} 🔒', 'I’ll learn that after you finish the first three levels in {w} 🔒', {w: vWorld(wid).name})); return; }
+  if (p.hint){
+    var h = VHINT[p.hint];
+    vReply(tf('אין לי פקודה ל{c}, אבל אפשר לערבב אור! {c} יוצא מ: {m}.', 'I don’t have a command for {c}, but you can mix light! Mix {m} to get {c}.', {c: h[0], m: h[1]}));
+    vOffer([[t('🎨 נסה: ״', '🎨 Try: “') + h[1] + t('״', '”'), function(){ vHandle(h[1]); }]]); return;
+  }
+  vReply(pre + (p.cols ? vColors(p.cols) : ACTS[p.id].run()), p.cols && p.cols.length > 1 ? vMixVis(p.cols) : null);
+  vBackBtn();   // כל עוד רובי בצבע של אור, הכפתור לחזרה לצבע שלך נשאר
+}
+/* 📚 המילים שהילד לימד את רובי: אפשר למחוק כל אחת */
+function vWordList(){ var w = G.words && !Array.isArray(G.words) ? G.words : {}; return Object.keys(w).filter(function(k){ return ACTS[w[k]]; }).map(function(k){ return [k, w[k]]; }); }
+function vWordsRefresh(){
+  var box = $('#vwords'), L = vWordList(); box.innerHTML = ''; box.hidden = !L.length; if (!L.length) return;
+  var h = document.createElement('b'); h.textContent = t('📚 מילים שלימדת אותי', '📚 Words you taught me'); box.appendChild(h);
+  var ch = document.createElement('div'); ch.className = 'vch';
+  L.forEach(function(x){
+    var b = document.createElement('button'); b.type = 'button'; b.className = 'vchip';
+    b.textContent = t('׳', '‘') + x[0] + t('׳ ⇐ ', '’ → ') + ACTS[x[1]].lbl + ' ✖';
+    b.setAttribute('aria-label', tf('למחוק את המילה {w}', 'Delete the word {w}', {w: x[0]}));
+    b.onclick = function(){ delete G.words[x[0]]; save(); beep('tap'); vWordsRefresh(); vReply(tf('שכחתי את ׳{w}׳. אפשר ללמד אותי שוב 🙂', 'I forgot ‘{w}’. You can teach me again 🙂', {w: x[0]})); };
+    ch.appendChild(b);
+  });
+  box.appendChild(ch);
+}
+/* 📋 רשימת הפקודות: פתוחות בצבע, נעולות באפור */
+function vRefresh(){
+  $('#voicecard').hidden = !FEATURES.voice; if (!FEATURES.voice) return;
+  $('#vmic').hidden = !SR;
+  if (!SR && !$('#vheard').textContent) $('#vheard').textContent = t('אין מיקרופון בדפדפן הזה. אפשר להקליד את הפקודה 🙂', 'There is no microphone in this browser. You can type the command 🙂');
+  var L = $('#vlist'); L.innerHTML = '';
+  VROWS.forEach(function(r, i){
+    var w = vWorld(r[0]), open = vOpen(r[0]), d = document.createElement('div'); d.className = 'vw' + (open ? '' : ' lock');
+    var h = document.createElement('b'); h.textContent = open ? w.icon + ' ' + w.name : '🔒 ' + tf('נפתח אחרי עולם {i}: {n}', 'Unlocks after world {i}: {n}', {i: i + 1, n: w.icon + ' ' + w.name}); d.appendChild(h);
+    var ch = document.createElement('div'); ch.className = 'vch';
+    r[1].forEach(function(x){
+      var b = document.createElement('button'); b.type = 'button'; b.className = 'vchip'; b.textContent = t('״', '“') + x + t('״', '”'); b.disabled = !open;
+      b.onclick = function(){ vHandle(x); }; ch.appendChild(b);
+    });
+    d.appendChild(ch); L.appendChild(d);
+  });
+  vWordsRefresh();
+  $('#vbrain').disabled = !vOpen('layers');
+  $('#vbrain').textContent = vOpen('layers') ? t('🧠 רובי, מה למדת?', '🧠 Robi, what did you learn?') : t('🧠 רובי, מה למדת? 🔒', '🧠 Robi, what did you learn? 🔒');
+}
+/* 🎤 המיקרופון: נפתח רק בלחיצה. אם הדפדפן יודע לזהות במכשיר עצמו (processLocally) מנסים קודם כך, ואם זה נכשל, בדרך הרגילה */
+var SR = window.SpeechRecognition || window.webkitSpeechRecognition, vrec = null;
+function vListen(on){ var b = $('#vmic'); b.setAttribute('aria-pressed', String(on)); }
+function vMicErr(code){
+  vListen(false);
+  $('#vheard').textContent = code === 'no-speech' ? t('לא שמעתי כלום. נסה שוב, או הקלד 😊', 'I didn’t hear anything. Try again, or type it 😊') :
+    (code === 'not-allowed' || code === 'service-not-allowed') ? t('אי אפשר להשתמש במיקרופון כרגע. אפשר להקליד את הפקודה 😊', 'I can’t use the microphone right now. You can type the command 😊') :
+    code === 'audio-capture' ? t('לא מצאתי מיקרופון בטלפון. אפשר להקליד את הפקודה 😊', 'I couldn’t find a microphone. You can type the command 😊') :
+    code === 'language-not-supported' ? t('הטלפון הזה לא מזהה דיבור בשפה הזאת. אפשר להקליד את הפקודה 😊', 'This phone can’t recognize speech in this language. You can type the command 😊') :
+    t('משהו לא עבד עם המיקרופון. אפשר להקליד את הפקודה 😊', 'Something went wrong with the microphone. You can type the command 😊');
+}
+function vMic(local){
+  if (!SR) return;
+  try {
+    vTourStop(false);
+    var r = new SR(), triedLocal = false;
+    r.lang = LANG === 'en' ? 'en-US' : 'he-IL'; r.interimResults = false; r.maxAlternatives = 1; r.continuous = false;
+    if (local && 'processLocally' in r){ try { r.processLocally = true; triedLocal = true; } catch(e){} }
+    vrec = r;
+    r.onresult = function(e){ try { vHandle(e.results[0][0].transcript); } catch(x){} };
+    r.onerror = function(e){
+      if (vrec !== r) return;
+      var c = e && e.error;
+      if (triedLocal && c !== 'not-allowed' && c !== 'service-not-allowed' && c !== 'no-speech' && c !== 'aborted'){ vrec = null; vMic(false); return; }
+      vrec = null; if (c !== 'aborted') vMicErr(c); else vListen(false);
+    };
+    r.onend = function(){ if (vrec === r){ vrec = null; vListen(false); } };
+    r.start(); vListen(true);
+    $('#vheard').textContent = t('מקשיב… 👂', 'Listening… 👂');
+  } catch(e){ vrec = null; vMicErr('error'); }
+}
+$('#vmic').addEventListener('click', function(){
+  if (vrec){ try { vrec.stop(); } catch(e){} return; }
+  stopTalk(); vMic(true);
+});
+function vSend(){ var i = $('#vtxt'), v = i.value; i.value = ''; vHandle(v); }
+$('#vsend').addEventListener('click', vSend);
+$('#vtxt').addEventListener('keydown', function(e){ if (e.key === 'Enter'){ e.preventDefault(); vSend(); } });
+$('#vbrain').addEventListener('click', function(){ vHandle(t('מה למדת', 'what did you learn')); });
+/* 🔊 ההסבר בקול: מה לוחצים ומה אפשר להגיד, עם דוגמה לכל פקודה. פעם אחת אוטומטית, ואחר כך בכפתור ״מה אפשר להגיד?״ */
+var vTourOn = false, vTourItems = [];
+function vTourTexts(){
+  var a = [t('ברוך הבא למרכז הפקודות של רובי! כאן אתה מדבר אל הרובוט, והוא עושה מה שתגיד.', 'Welcome to Robi’s Command Center! Here you talk to the robot, and it does what you say.'),
+    t('איך עושים את זה? לוחצים על כפתור המיקרופון ומדברים. אם אין מיקרופון, אפשר להקליד בתיבה ולהקיש על שלח.', 'How? Press the microphone button and speak. If there is no microphone, you can type in the box and tap Send.')];
+  if (vOpen('examples')) a.push(t('בעולם יער הדוגמאות נפתחו לך פקודות. תגיד ״תרקוד״, והוא ירקוד. תגיד ״תשמח״, ״תהיה עצוב״, ״תחשוב״ או ״תדאג״, והוא יראה לך איך הוא מרגיש.', 'In Example Forest you unlocked commands. Say “dance”, and it dances. Say “be happy”, “be sad”, “think” or “worry”, and it shows you how it feels.'));
+  if (vOpen('pixels')) a.push(t('בעולם עיר הפיקסלים תגיד ״תהיה אדום״, ״תהיה ירוק״ או ״תהיה כחול״, והוא ישנה את הצבע שלו. אפשר גם לערבב אור: תגיד ״אדום וירוק״ ותראה איזה צבע יוצא!', 'In Pixel City, say “be red”, “be green” or “be blue”, and it changes its color. You can also mix light: say “red and green” and see what color comes out!'));
+  if (vOpen('layers')) a.push(t('בעולם מגדל השכבות תשאל ״מה למדת?״, והוא יסתובב ויראה לך את המוח שלו, עם כל מה שלמד.', 'In the Tower of Layers, ask “what did you learn?”, and it turns around and shows you its brain, with everything it learned.'));
+  if (!(vOpen('examples') && vOpen('pixels') && vOpen('layers'))) a.push(t('ויש עוד פקודות שמחכות! כשתסיים את שלושת השלבים הראשונים בעוד עולם, הן ייפתחו.', 'And more commands are waiting! When you finish the first three levels of another world, they unlock.'));
+  a.push(t('ואם תגיד מילה שאני לא מכיר, אשאל אותך מה לעשות בה, ואלמד אותה. אפשר ללחוץ על דלג בכל רגע.', 'And if you say a word I don’t know, I’ll ask you what to do with it, and I’ll learn it. You can tap Skip at any time.'));
+  return a;
+}
+function vTourStart(){
+  var box = $('#vexp'), tx = $('#vexptxt'); tx.innerHTML = '';
+  var items = vTourTexts().map(function(s){ var p = document.createElement('p'); p.textContent = s; tx.appendChild(p); return {text: clean(s), el: p}; });
+  vTourOn = true; $('#vskip').textContent = t('⏭️ דלג על ההסבר', '⏭️ Skip the explanation'); box.hidden = false;
+  items[items.length - 1].after = function(){ if (vTourOn) $('#vskip').textContent = t('✓ הבנתי', '✓ Got it'); };
+  vTourItems = items; $('#vread').hidden = !HEV || reading();
+  if (reading()) speakList(items); else stopTalk();
+  box.scrollIntoView({block: 'nearest'});
+}
+function vTourStop(hide){ var was = vTourOn; vTourOn = false; if (was || hide) stopTalk(); if (hide) $('#vexp').hidden = true; }
+$('#vskip').addEventListener('click', function(){ vTourStop(true); beep('tap'); });
+$('#vread').addEventListener('click', function(){ if (!HEV || !vTourItems.length) return; vTourOn = true; speakList(vTourItems); });   // לחיצה מפורשת: מקריאים גם כשההקראה כבויה
+$('#vhelp').addEventListener('click', function(){ beep('tap'); vTourStart(); });
+function vTourMaybe(){   // הפעם הראשונה: כשהמרכז נראה על המסך ויש בו פקודה פתוחה
+  if (!FEATURES.voice || screen !== 'shop' || !$('#hello').hidden || (G.seen || []).indexOf('voicetour') >= 0) return;
+  if (!Object.keys(ACTS).some(function(id){ return vOpen(ACTS[id].w); })) return;
+  var r = $('#voicecard').getBoundingClientRect(); if (r.height < 10 || r.top > innerHeight * .8 || r.bottom < 80) return;
+  G.seen = (G.seen || []).concat('voicetour'); save(); vTourStart();
+}
+window.addEventListener('scroll', function(){ if (FEATURES.voice && screen === 'shop') vTourMaybe(); }, {passive: true});
+/* 🧠 ״רובי, מה למדת?״: רובי מסתובב, המוח שבגב הראש נראה, ומעליו מסך עם כל מה שלמד */
+var vTurnTok = 0, vLearnOn = false;
+function vTurn(target, ms, done){
+  if (!R){ if (done) done(); return; }
+  var from = Math.atan2(Math.sin(R.yaw), Math.cos(R.yaw)), s0 = performance.now(), my = ++vTurnTok;
+  if (target !== 0) target = from < 0 ? -Math.PI : Math.PI;
+  R.hold = 1e15; if (RM) ms = 1;
+  (function step(now){
+    if (my !== vTurnTok) return;
+    var k = Math.min(1, (now - s0) / ms), e = k < .5 ? 2 * k * k : 1 - Math.pow(-2 * k + 2, 2) / 2;
+    R.yaw = from + (target - from) * e;
+    if (k < 1) requestAnimationFrame(step); else if (done) done();
+  })(s0);
+}
+function vLearnHide(instant){
+  var o = $('#stage-shop').querySelector('.learnscr'); if (o) o.remove();
+  vLearnOn = false;
+  if (instant){ vTurnTok++; if (R) R.hold = 0; } else vTurn(0, 700, function(){ if (R) R.hold = 0; });
+}
+function vLearnShow(){
+  if (vLearnOn) return; vLearnOn = true; stopTalk();
+  var host = $('#stage-shop'), tok = vTurnTok + 1;
+  function build(){
+    if (!vLearnOn) return;
+    var o = document.createElement('div'); o.className = 'learnscr'; o.setAttribute('role', 'dialog');
+    ['pointerdown', 'pointerup', 'pointermove'].forEach(function(ev){ o.addEventListener(ev, function(e){ e.stopPropagation(); }); });
+    var h = document.createElement('h3'); h.textContent = tf('🧠 {n} מתוך 27 נקודות אור', '🧠 {n} of 27 light dots', {n: mindLit()}); o.appendChild(h);
+    var g = document.createElement('div'); g.className = 'lg'; g.textContent = t('1 · 2 · 3 = השלבים · 🎁 בונוס · 🎪 תפסו את הטעות', '1 · 2 · 3 = the levels · 🎁 bonus · 🎪 catch the mistake'); o.appendChild(g);
+    WORLDS.forEach(function(w){
+      var row = document.createElement('div'), p = w.ready ? prog(w.id) : [0, 0, 0, 0, 0]; row.className = 'lw' + (w.ready ? '' : ' off');
+      var nm = document.createElement('span'); nm.className = 'n'; nm.textContent = w.icon + ' ' + w.name; row.appendChild(nm);
+      if (w.ready){
+        var lc = document.createElement('span'); lc.className = 'lc';
+        ['1', '2', '3', '🎁', '🎪'].forEach(function(lbl, i){ var c = document.createElement('i'); c.className = p[i] ? 'ok' : ''; c.textContent = (p[i] ? '✓' : '') + lbl; lc.appendChild(c); });
+        row.appendChild(lc);
+      }
+      o.appendChild(row);
+    });
+    var wl = vWordList();
+    if (wl.length){ var wd = document.createElement('div'); wd.className = 'lwd'; wd.textContent = t('📚 מילים שלימדת אותי: ', '📚 Words you taught me: ') + wl.map(function(x){ return x[0] + t(' ⇐ ', ' → ') + clean(ACTS[x[1]].lbl); }).join(' · '); o.appendChild(wd); }
+    var ft = document.createElement('div'); ft.className = 'lfoot';
+    var cl = document.createElement('button'); cl.type = 'button'; cl.textContent = t('✓ סגור', '✓ Close'); cl.onclick = function(){ vLearnHide(); beep('tap'); }; ft.appendChild(cl); o.appendChild(ft);
+    o.addEventListener('click', function(e){ if (e.target === o) vLearnHide(); });
+    host.appendChild(o); cl.focus({preventScroll: true});
+  }
+  host.scrollIntoView({block: 'center', behavior: RM ? 'auto' : 'smooth'});
+  if (R && R.host === host) vTurn(Math.PI, RM ? 1 : 800, build); else build();
+}
+function vLeave(s){ vTourStop(false); if (s !== 'shop' && vLearnOn) vLearnHide(true); }
+/* 🎤 בסוף כל עולם: כפתור שמוביל למרכז הפקודות */
+function vFinishBtn(){
+  var sh = $('#panel').querySelector('button.btn#show:not(.alt)');
+  if (!sh || $('#panel').querySelector('#tovoice')) return;
+  var b = document.createElement('button'); b.type = 'button'; b.className = 'btn alt'; b.id = 'tovoice';
+  b.textContent = t('🎤 נסה פקודות חדשות לרובי', '🎤 Try new commands for Robi');
+  sh.insertAdjacentElement('afterend', b);
+  b.onclick = function(){ beep('tap'); go('shop'); setTimeout(function(){ $('#voicecard').scrollIntoView({block: 'start'}); setTimeout(vTourMaybe, 400); }, 120); };
+}
 
 var resetArmed = false;
 $('#reset').addEventListener('click', function(){
@@ -1378,6 +1741,7 @@ function P(html){
   if (reading()) $('#panel').querySelectorAll('.comic').forEach(function(c){
     var f = c.querySelector('.bub p'); if (f && (lvlKey() !== readKey || !readDone[clean(f.textContent)])) c.classList.add('seq');
   });
+  if (FEATURES.voice) vFinishBtn();
 }
 function on(id, fn){ var el = $('#panel').querySelector('#' + id); if (el) el.onclick = act(fn); }   // מחפשים רק בלוח המשחק, כי גם לחנות ולמפה יש מזהים כמו shop ו-map
 function showBtn(){ return '<button class="btn" id="show" type="button">🎪 ' + G.name + t(' רוצה להראות מה למד!</button>', ' wants to show what it learned!</button>'); }   // בסוף כל עולם: ההופעה
