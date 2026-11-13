@@ -884,7 +884,7 @@ function speakList(list){
 }
 function panelItems(){
   return Array.prototype.filter.call($('#panel').querySelectorAll(READ_SEL), function(el){
-    return !el.closest('button, .tests, .abil, details, .mem, figure') && !el.querySelector('p, .rule') && clean(el.textContent);
+    return !el.closest('button, .tests, .abil, details, .mem, figure, .noread') && !el.querySelector('p, .rule') && clean(el.textContent);   // .noread = הקריין שותק כאן
   });
 }
 function lvlKey(){ return curWorld + '|' + W.level + '|' + W.rid; }
@@ -2123,17 +2123,18 @@ function pix1(){
   else if (ph === 'mix'){
     steps(ST, 1);
     var mx = MIX[W.ti], L = W.lamps;
-    P(t('<h3>שלט ', '<h3>Sign ') + (W.ti + 1) + t(' מתוך ', ' of ') + MIX.length + ': ' + mx.name + '</h3>' +
+    // 🔇 פיני 13.11: בזמן הערבוב הקריין לא מקריא (גם לא את המספרים). הילד משחק עם הפנסים בשקט, ורובי רק מגיב
+    P(t('<h3 class="noread">שלט ', '<h3 class="noread">Sign ') + (W.ti + 1) + t(' מתוך ', ' of ') + MIX.length + ': ' + mx.name + '</h3>' +
       turnTag(t('תור של', 'Turn')) +
       '<div class="mixrow"><figure><div class="swatch" style="background:' + rgb(mx.l) + t('"></div><figcaption>השלט</figcaption></figure>', '"></div><figcaption>The sign</figcaption></figure>') +
       '<figure><div class="pix">' + CH.map(function(c, i){ return '<span style="background:' + c[1] + ';opacity:' + [0.08, 0.5, 1][L[i]] + '"></span>'; }).join('') + t('</div><figcaption>הפיקסל מקרוב</figcaption></figure>', '</div><figcaption>The pixel up close</figcaption></figure>') +
       '<figure><div class="swatch" style="background:' + rgb(L) + t('"></div><figcaption>הפיקסל מרחוק</figcaption></figure></div>', '"></div><figcaption>The pixel from far away</figcaption></figure></div>') +
-      t('<p class="small-note">לחץ על פנס כדי להדליק אותו, להחליש אותו או לכבות אותו.</p>', '<p class="small-note">Tap a lamp to turn it on, make it weaker, or turn it off.</p>') +
+      t('<p class="small-note noread">לחץ על פנס כדי להדליק אותו, להחליש אותו או לכבות אותו.</p>', '<p class="small-note noread">Tap a lamp to turn it on, make it weaker, or turn it off.</p>') +
       '<div class="lamps">' + CH.map(function(c, i){
         return '<button type="button" class="lamp" data-i="' + i + '"><i style="background:' + c[1] + ';opacity:' + [0.15, 0.55, 1][L[i]] + ';box-shadow:' + (L[i] ? '0 0 ' + (L[i] * 10) + 'px ' + c[1] : 'none') + '"></i><b>' + c[0] + '</b><small>' + LV_HE[L[i]] + '</small></button>';
       }).join('') + '</div>' +
-      t('<p class="nums">המחשב שומר 3 מספרים: ', '<p class="nums">The computer saves 3 numbers: ') + CH.map(function(c, i){ return c[0] + ' ' + LV[L[i]]; }).join(' · ') + '</p>' +
-      (W.hint ? '<p class="res no">' + W.hint + '</p>' : '') +
+      t('<p class="nums noread">המחשב שומר 3 מספרים: ', '<p class="nums noread">The computer saves 3 numbers: ') + CH.map(function(c, i){ return c[0] + ' ' + LV[L[i]]; }).join(' · ') + '</p>' +
+      (W.hint ? '<p class="res no noread">' + W.hint + '</p>' : '') +
       '<button class="btn" id="go" type="button">' + n + t(', תצבע את השלט!</button>', ', paint the sign!</button>'));
     $('#panel').querySelectorAll('.lamp').forEach(function(b){ b.onclick = function(){
       var i = +b.dataset.i, keep = window.scrollY;
@@ -2143,7 +2144,8 @@ function pix1(){
     on('go', function(){
       var keep = window.scrollY, key = 'mix' + W.ti;
       if (W.lamps.join() !== mx.l.join()){
-        W.miss++; W.hint = mixHint(W.lamps, mx, W.miss);
+        W.miss++;   // 💡 פיני 13.11: קודם משחקים לבד. רמז רק מהניסיון החמישי
+        W.hint = W.miss >= 5 ? mixHint(W.lamps, mx, W.miss - 4) : tf('🔁 עוד לא, יצא צבע אחר. נסה שוב! (ניסיון {n})', '🔁 Not yet, that’s a different color. Try again! (try {n})', {n: W.miss});
         renderWorld(); window.scrollTo(0, keep);
         setMood('sad', 1400); beep('bad'); say(t('אוי, יצא לי צבע אחר… 😢', 'Oops, I got a different color… 😢'));
         return;
