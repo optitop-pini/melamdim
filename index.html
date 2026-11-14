@@ -256,6 +256,14 @@ details p{display:flex;align-items:center;gap:6px;flex-wrap:wrap;margin-top:4px}
 .skills span{background:#fff;border:1.5px solid var(--line);border-radius:999px;padding:2px 10px;font-size:13.5px}
 .hnew{background:var(--paper);border:2px solid var(--sun);border-radius:18px;padding:10px 12px;text-align:start;display:flex;flex-direction:column;gap:3px;font-size:14.5px;line-height:1.45}
 .hnew b{font-family:var(--display);font-weight:400;font-size:17px;color:var(--sea)}
+.hmsg{background:var(--paper);border:2px solid var(--coral);border-radius:18px;padding:10px 12px;text-align:start;display:flex;flex-direction:column;gap:3px;font-size:15.5px;line-height:1.45}   /* 💌 מסר מסבא פיני */
+.hmsg b{font-family:var(--display);font-weight:400;font-size:17px;color:var(--coral)}
+.hshare{background:rgba(255,250,240,.85);border:1.5px dashed var(--line);border-radius:16px;padding:8px 12px;text-align:start;display:flex;flex-direction:column;gap:6px;font-size:14.5px}   /* 📮 השליחה לסבא */
+.hshare p{margin:0}
+.hshare input{font:inherit;border:1.5px solid var(--line);border-radius:10px;padding:6px 10px;min-height:40px}
+.hshare .btn{align-self:flex-start;font-size:15px;min-height:40px}
+.sharerow{display:flex;align-items:center;gap:8px;font-size:14px;margin-top:4px}
+.sharerow input{width:20px;height:20px}
 /* 😜 רובי חי: נמנום עם 💤, ובועת דגדוג */
 .stage.sleeping::after{content:'💤';position:absolute;top:6%;inset-inline-end:8%;font-size:30px;animation:zz 2.4s ease-in-out infinite;pointer-events:none}
 .robo.sleeping::after{font-size:20px}
@@ -305,6 +313,16 @@ body.f-move .stage.fly{touch-action:none}
 .vlearn{display:flex;flex-wrap:wrap;gap:8px;background:#fff7dc;border:2px solid var(--sun);border-radius:14px;padding:10px}
 .vlearn button{background:#fff;border-color:var(--line);font-size:15px;font-weight:700}
 #vlist{display:flex;flex-direction:column;gap:8px}
+/* 🎤 לדבר עם רובי בתוך שלב: כפתור ליד רובי, ולוח קטן בתחתית */
+.rmic{flex:0 0 48px;width:48px;height:48px;min-height:48px;padding:0;border-radius:50%;font-size:23px;line-height:1;background:var(--coral);border:none;box-shadow:0 3px 0 #c94a2f;align-self:center}
+.flymic{position:absolute;top:4px;inset-inline-end:0;z-index:3;width:44px;height:44px;min-height:44px;padding:0;border-radius:50%;font-size:21px;line-height:1;background:var(--coral);border:2px solid #fff;box-shadow:0 3px 0 #c94a2f}
+.qtalk{position:fixed;inset-inline:8px;bottom:calc(var(--tabh,66px) + 8px);z-index:8;max-width:440px;margin:0 auto;max-height:50vh;overflow-y:auto;background:var(--paper);border:2px solid var(--sea2);border-radius:20px;padding:10px 12px;box-shadow:0 10px 30px rgba(15,76,92,.3);display:flex;flex-direction:column;gap:8px}
+.qhead{display:flex;justify-content:space-between;align-items:center;gap:8px}
+.qhead b{font-family:var(--display);font-weight:400;font-size:19px;color:var(--sea)}
+.qx{min-height:42px;min-width:42px;padding:0;border-radius:12px;background:#fff;border:1.5px solid var(--line);font-size:17px}
+.qrow{display:flex;gap:10px;align-items:center}.qrow .vtype{flex:1;min-width:0}
+.qmic{width:56px;height:56px;min-height:56px;font-size:26px;flex:0 0 56px}
+.qtalk .vchip{font-size:15px}
 .vw{border:2px solid var(--line);border-radius:14px;padding:8px 10px;display:flex;flex-direction:column;gap:6px;background:#fff}
 .vw b{font-size:15px}.vw.lock{background:#eee;color:#777;border-style:dashed}
 .vw .vch{display:flex;flex-wrap:wrap;gap:6px}
@@ -518,6 +536,7 @@ html[dir="ltr"] .twtree text{direction:ltr}
       <input type="text" id="rname" maxlength="12" autocomplete="off">
       <span class="lbl" data-en="Your name">השם שלך</span>
       <input type="text" id="t1" maxlength="10" autocomplete="off" aria-label="השם שלך" data-en-aria="Your name">
+      <label class="sharerow" id="sharerow" hidden><input type="checkbox" id="share"><span id="share-l"></span></label>
       <span class="lbl" data-en="Body color">צבע הגוף</span><div class="sw" id="sw-body"></div>
       <span class="lbl" data-en="Eye color">צבע העיניים</span><div class="sw" id="sw-eyes"></div>
       <button type="button" class="btn startbtn" id="startbtn">▶️ מתחילים לשחק!</button>   <!-- ▶️ פיני 13.11: לא כולם מבינים שהעולמות למטה, הכפתור מוביל ישר לפעילות -->
@@ -546,6 +565,7 @@ html[dir="ltr"] .twtree text{direction:ltr}
     <div class="robobar" id="robobar">
       <div class="stage robo" id="stage-world"></div>
       <div class="bubble"><span class="wmood" id="wmood"></span><p id="wsay" aria-live="polite"></p><button class="rd" id="readagain" type="button" aria-label="להקריא שוב את המסך" data-en-aria="Read the screen again" hidden>🔊</button></div>
+      <button class="rmic" id="qopen" type="button" hidden aria-expanded="false" aria-controls="qtalk" aria-label="לדבר עם רובי" data-en-aria="Talk to Robi">🎤</button>
     </div>
     <div class="steps" id="steps"></div>
     <div class="card" id="panel" aria-live="polite"></div>
@@ -560,6 +580,15 @@ html[dir="ltr"] .twtree text{direction:ltr}
 </div></nav>
 <div class="toast" id="toast" hidden></div>
 <!-- 🚀 רובי המרחף: מופיע כשהמקום הרגיל של רובי יוצא מהמסך -->
+<div class="qtalk" id="qtalk" role="dialog" aria-labelledby="qtitle" hidden>
+  <div class="qhead"><b id="qtitle" data-en="🎤 Talk to Robi">🎤 לדבר עם רובי</b><button class="qx" id="qclose" type="button" aria-label="סגור" data-en-aria="Close">✖</button></div>
+  <p class="small-note" data-en="Ask for help with this level, or give Robi a command. Press the microphone, or type.">אפשר לבקש עזרה בשלב, או לתת לרובי פקודה. לוחצים על המיקרופון, או מקלידים.</p>
+  <div class="qrow"><button class="vmic qmic" id="qmic" type="button" aria-pressed="false" aria-label="לחץ ודבר" data-en-aria="Press and speak">🎤</button><div class="vtype"><input type="text" id="qtxt" maxlength="40" dir="auto" autocomplete="off" aria-label="הקלד לרובי" placeholder="הקלד לרובי…" data-en-aria="Type to Robi" data-en-ph="Type to Robi…"><button class="btn alt" id="qsend" type="button" data-en="Send">שלח</button></div></div>
+  <div class="vch"><button class="vchip" id="qhelp" type="button" data-en="🆘 Help with this level">🆘 עזרה בשלב</button></div>
+  <p class="small-note vheard" id="qheard" aria-live="polite"></p>
+  <div class="vbub" id="qsay" aria-live="polite" hidden></div>
+  <div class="vlearn" id="qlearn" hidden></div>
+</div>
 <div class="stage fly" id="flyer" hidden role="button" tabindex="0" aria-label="רובי המרחף. נגיעה בו: מה הוא אמר" data-en-aria="The flying robot. Tap it to hear what it said"></div>
 <div class="flysay" id="flysay" aria-live="polite" hidden></div>
 <!-- 👋 מסך הפתיחה: רובי מברך את המורים בשמות ומספר מה מחכה היום -->
@@ -571,6 +600,8 @@ html[dir="ltr"] .twtree text{direction:ltr}
     <p class="lead" id="hello-p"></p>
     <div class="skills" id="hello-sk"></div>
     <div id="hello-new"></div>
+    <div class="hmsg" id="hello-msg" hidden></div>
+    <div class="hshare" id="hello-share" hidden></div>
     <div class="row"><button class="btn" id="hello-say" type="button" data-en="👋 Hello, robot!">👋 שלום רובי!</button><button class="btn alt" id="hello-go" type="button" data-en="▶ Let's go!">▶ יוצאים לדרך!</button></div>
   </div>
 </div>
@@ -603,8 +634,10 @@ var FEATURES = {
   fly: true,       // 🚀 רובי המרחף: כשגוללים למטה, רובי ממריא ומרחף בפינה
   move: true,      // ✋ גוררים את רובי המרחף באצבע, והוא נשאר איפה שעזבת (צריך גם fly)
   brain: true,     // 🧠 מסובבים את רובי בסדנה, ורואים בגב הראש את המוח עם האזורים הדלוקים
-  voice: true      // 🎤 מרכז הפקודות של רובי: אומרים (או מקלידים) פקודות, והוא מבצע. כבוי = שום שינוי במשחק
+  voice: true,     // 🎤 מרכז הפקודות של רובי: אומרים (או מקלידים) פקודות, והוא מבצע. כבוי = שום שינוי במשחק
+  admin: false     // 🛠️ שולח לסבא פיני את ההתקדמות (רק כינוי) ומציג מסר ממנו. כבוי = שום שינוי במשחק
 };
+var ADMIN_URL = '';   // 🛠️ הכתובת של לוח הבקרה של סבא (Apps Script, נגמרת ב-/exec). ריק = לא שולחים כלום
 
 /* 🤖 עיצוב הרובוט: כאן עומר ו-Claude מעצבים את הצורה */
 var ROBOT = {
@@ -659,6 +692,10 @@ var DEF = {stars: START_STARS, owned: [], worn: [], body: '#ffc93c', eyes: '#5ff
   wtree: null,    // 🌳 העץ שבנית בעולם 4 (נשמר רק אם צדק בכל 6 הימים)
   read: true,     // 🗣️ רובי מקריא בקול את ההסברים
   duel: false,    // ⚔️ מצב דו-קרב: מורה נגד מורה
+  share: true,    // 📮 לשלוח לסבא פיני את ההתקדמות (פיני 14.11: דלוק מההתחלה, ומי שלא רוצה מבטל)
+  shareSeen: false, // 📮 הילד כבר ראה במסך הפתיחה שהשליחה דלוקה
+  forgetPending: false,   // 🧹 ביקשו למחוק אצל סבא ועוד לא הצליח לצאת (אין רשת) ⇒ מנסים שוב
+  pid: '',        // 🎲 מזהה אקראי של המכשיר, כדי ששני ילדים עם אותו כינוי לא יתערבבו
   words: {},      // 🎤 מילים ש״לימדת״ את רובי: מילה ⇐ פעולה
   mine: null,     // 🎨 הצבע שהילד בחר לפני שרובי התחלף לצבע של אור
   hello: 0,       // 👋 איזה ״מה חדש״ כבר ראית במסך הפתיחה
@@ -680,6 +717,7 @@ function prog(id){   // לכל עולם: [שלב 1, שלב 2, שלב 3, בונו
 /* ───────── צלילים (בלי קבצים) ───────── */
 var AC = null, SND = {good:[523,659,784], bad:[392,311], buy:[880,1175], tap:[660], win:[523,659,784,1047], tickle:[784,988,784,1175]};
 function beep(name){
+  if (name === 'bad') aLog('fail');   // 🛠️ כל טעות בשלב נספרת ללוח הבקרה (גם כשהצליל כבוי)
   if (G.muted) return;
   try {
     AC = AC || new (window.AudioContext || window.webkitAudioContext)();
@@ -1062,7 +1100,7 @@ setInterval(function(){
 /* ═══════════ 👋 רובי מכיר אותך ═══════════
    בכל פתיחה של המשחק רובי מברך את המורים בשמות שכתבו בסדנה, מספר מה כבר לימדו אותו ומה מחכה היום.
    ״מה חדש״ מופיע רק בפעם הראשונה אחרי עדכון (G.hello שומר איזה עדכון כבר ראית). */
-var HELLO_VER = 3;   // גרסת ״מה חדש״ הבסיסית. תכונה שנדלקת מופיעה ב״מה חדש״ פעם אחת (G.seen)
+var HELLO_VER = 4;   // גרסת ״מה חדש״ הבסיסית. תכונה שנדלקת מופיעה ב״מה חדש״ פעם אחת (G.seen)
 function esc(t){ return String(t).replace(/[&<>"']/g, function(c){ return {'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]; }); }
 function named(){ var t = G.teachers[0]; return !!t && t !== TEACHER_DEFAULTS[0] && t !== 'מורה א׳'; }   // 'מורה א׳' = ברירת המחדל הישנה בשמורים קיימים
 function who(){ return named() ? G.teachers[0] : TEACHER_DEFAULTS[0]; }
@@ -1085,9 +1123,10 @@ function openHello(next){
     t('סיימת את כל העולמות הפתוחים! מחכים לך שלבי בונוס 🎁 והופעות 🎪.', 'You finished all the open worlds! Bonus levels 🎁 and shows 🎪 are waiting for you.');
   var intro = played ? t('התגעגעתי אליך! ', 'I missed you! ') : t('אני ', 'I’m ') + G.name + t(', רובוט שעוד לא יודע כלום. אתה תהיה המורה שלי. ', ', a robot who doesn’t know anything yet. You’ll be my teacher. ');
   $('#hello-h').textContent = hi;
-  $('#hello-p').textContent = intro + today + (named() ? '' : t(' (את השם שלך אפשר לכתוב בסדנה, ואז אגיד לך שלום בשם.)', ' (You can write your name in the Workshop, and then I’ll say hello to you by name.)'));
+  $('#hello-p').textContent = intro + today + (named() || (adminOn() && !G.shareSeen) ? '' : t(' (את השם שלך אפשר לכתוב בסדנה, ואז אגיד לך שלום בשם.)', ' (You can write your name in the Workshop, and then I’ll say hello to you by name.)'));
   $('#hello-sk').innerHTML = learned.length ? t('<span>🧠 כבר לימדת אותי:</span>', '<span>🧠 You have already taught me:</span>') + learned.map(function(x){ return '<span>' + x.icon + ' ' + x.skill + '</span>'; }).join('') : '';
   var news = [   // [גרסה, תכונה, שורה]
+    [FEATURES.voice ? 4 : 0, '', t('🎤 חדש: בכל שלב יש לידי כפתור 🎤. אפשר לבקש ממני עזרה בשלב, או לתת לי פקודה.', '🎤 New: in every level there’s a 🎤 button next to me. You can ask me for help with the level, or give me a command.')],
     [3, '', t('🌳 עולם חדש נפתח במפה: עץ השאלות! שם אלמד לקבל החלטות.', '🌳 A new world opened on the map: the Question Tree! There I’ll learn to make decisions.')],
     [3, 'fly', t('💡 הרעיון שלך התגשם! גלול למטה, ואני ממריא ומרחף איתך על המסך 🚀', '💡 Your idea came true! Scroll down, and I take off and fly with you on the screen 🚀')],
     [3, 'move', t('✋ רעיון שלך: גרור אותי באצבע לאן שתרצה, ואני אשאר שם.', '✋ Your idea: drag me with your finger wherever you like, and I’ll stay there.')],
@@ -1100,16 +1139,20 @@ function openHello(next){
   ].filter(function(n){ return n[1] ? FEATURES[n[1]] && (G.seen || []).indexOf(n[1]) < 0 : n[0] > (G.hello || 0); });
   $('#hello-new').innerHTML = news.length && played ? t('<div class="hnew"><b>✨ מה חדש אצלי?</b>', '<div class="hnew"><b>✨ What’s new with me?</b>') +
     news.map(function(n){ return '<span>' + n[2] + '</span>'; }).join('') + '</div>' : '';
+  aHelloShare(); aMsg(); aForget();   // 🛠️ ״נשלח לסבא״ בפעם הראשונה, ומסר מסבא אם יש
   $('#hello-say').className = 'btn'; $('#hello-go').className = 'btn alt';
   $('#hello').hidden = false; mount('stage-hello'); setMood('idle');
   $('#hello-say').focus({preventScroll: true});
 }
 $('#hello-say').addEventListener('click', function(){
   fxPlay('wave', 2800); beep('good');
-  robotLine($('#hello-h').textContent + ' ' + $('#hello-p').textContent.replace(/\(.*\)/, ''));
+  var hl = $('#hello-h').textContent + ' ' + $('#hello-p').textContent.replace(/\(.*\)/, '');
+  if (helloMsg && HEV && G.read && !G.muted) speakList([{text: clean(hl), robot: true}, {text: clean(t('מסר מ', 'A message from ') + NARRATOR + ': ' + helloMsg)}]);   // 💌 סבא פיני מקריא את המסר שלו
+  else robotLine(hl);
   $('#hello-say').className = 'btn alt'; $('#hello-go').className = 'btn';   // אחרי השלום, ״יוצאים לדרך״ הוא הכפתור הראשי
 });
 $('#hello-go').addEventListener('click', function(){
+  aHelloGo();   // 📮 כינוי שנכתב במסך הפתיחה
   G.hello = HELLO_VER; G.seen = (G.seen || []).concat(Object.keys(FEATURES).filter(function(k){ return FEATURES[k] && (G.seen || []).indexOf(k) < 0; }));
   save(); beep('tap');
   $('#hello').hidden = true; go(helloNext);
@@ -1326,6 +1369,7 @@ function renderWorkshop(){
   nm.oninput = function(){ G.name = nm.value.trim() || ROBOT_DEFAULT_NAME; save(); brand(); showMood(); };
   var tn = $('#t1'); tn.value = named() ? G.teachers[0] : ''; tn.placeholder = t('למשל: נועם', 'e.g. Leo');
   tn.oninput = function(){ G.teachers[0] = tn.value.trim() || TEACHER_DEFAULTS[0]; save(); };
+  aWorkshop();   // 📮 מתג השליחה לסבא (רק כשלוח הבקרה דלוק)
   renderShop(); renderMind(); if (FEATURES.voice) vRefresh();
 }
 function renderShop(){
@@ -1418,6 +1462,8 @@ function renderMind(){ var b = $('#mindbox'); if (b) b.innerHTML = FEATURES.brai
    זיהוי הדיבור עושה הדפדפן (SpeechRecognition), רק אחרי לחיצה על 🎤. שום הקלטה לא נשמרת.
    מילה שרובי לא מכיר ⇐ הוא שואל מה לעשות בה, ושומר (G.words): ככה רואים שבינה לומדת מדוגמאות.
    לפני שמתחילים, קריין מסביר בקול מה אפשר להגיד, ואפשר לדלג. */
+var vCtx = 'shop';   // איפה מדברים עם רובי עכשיו: 'shop' = מרכז הפקודות בסדנה · 'lvl' = הלוח הקטן בתוך שלב
+function vE(k){ return $('#' + (vCtx === 'lvl' ? 'q' : 'v') + k); }
 var VCOL = {red:'#e53935', green:'#2e9e4f', blue:'#2a6fdb', yellow:'#ffe135', magenta:'#e0309f', cyan:'#19d3e6', white:'#f7f7f2'};
 var VMIX = {
   'green,red': [VCOL.yellow, t('אור אדום ואור ירוק יחד נותנים צהוב! 🟡', 'Red light and green light together make yellow! 🟡')],
@@ -1442,7 +1488,7 @@ function vMixVis(c){   // שלושה אורות על רקע שחור: איפה �
   return d;
 }
 function vOffer(btns){   // כפתורים קטנים מתחת לתשובה של רובי (משתמשים בתיבה של ״מה לעשות?״)
-  var box = $('#vlearn'); box.innerHTML = '';
+  var box = vE('learn'); box.innerHTML = '';
   btns.forEach(function(x){ var b = document.createElement('button'); b.type = 'button'; b.textContent = x[0]; b.onclick = function(){ box.hidden = true; box.innerHTML = ''; x[1](); }; box.appendChild(b); });
   box.hidden = !btns.length;
 }
@@ -1477,7 +1523,7 @@ var ACTS = {
   red:   {w: 'pixels', lbl: t('להיות אדום 🔴', 'Be red 🔴'), run: function(){ vSetBody(VCOL.red); return VONE.red; }},
   green: {w: 'pixels', lbl: t('להיות ירוק 🟢', 'Be green 🟢'), run: function(){ vSetBody(VCOL.green); return VONE.green; }},
   blue:  {w: 'pixels', lbl: t('להיות כחול 🔵', 'Be blue 🔵'), run: function(){ vSetBody(VCOL.blue); return VONE.blue; }},
-  learned: {w: 'layers', lbl: t('לספר מה למדתי 🧠', 'Tell what I learned 🧠'), run: function(){ vLearnShow(); return t('בוא אראה לך מה למדתי! 🧠', 'Let me show you what I learned! 🧠'); }},
+  learned: {w: 'layers', lbl: t('לספר מה למדתי 🧠', 'Tell what I learned 🧠'), run: function(){ if (vCtx === 'lvl') return tf('במוח שלי דולקות {n} מתוך 27 נקודות אור 🧠. בסדנה אני מסתובב ומראה לך אותו.', '{n} of 27 light dots are on in my brain 🧠. In the Workshop I turn around and show it to you.', {n: mindLit()}); vLearnShow(); return t('בוא אראה לך מה למדתי! 🧠', 'Let me show you what I learned! 🧠'); }},
   weather: {w: 'tree', lbl: t('לחזות מזג אוויר 🌤️', 'Forecast the weather 🌤️'), run: function(){ return vWxStart(); }}
 };
 var VROWS = [   // מה מוצג ברשימה: [עולם, [טקסטים לדוגמה]]
@@ -1491,6 +1537,19 @@ function vWorld(id){ return WORLDS.filter(function(w){ return w.id === id; })[0]
 function vWords(k){ return Object.prototype.hasOwnProperty.call(G.words || {}, k) ? G.words[k] : null; }
 function vNorm(s){   // אותיות קטנות, בלי ניקוד, בלי סימני פיסוק ובלי רווחים כפולים
   return String(s).toLowerCase().replace(/[֑-ׇ]/g, '').replace(/[^א-תa-z0-9\s]/g, ' ').replace(/\s+/g, ' ').trim();
+}
+function vHelpQ(n){ return /(^|\s)(עזרה|ת?עזור|רמז|טיפ|תקוע|נתקעתי)(\s|$)|מה עושים|מה לעשות|איך עושים|איך משחקים|לא מבין|לא הבנתי|לא יודע מה|\b(help|hint|tip|stuck)\b|what do i do|how do i/.test(n); }
+function vLevelHelp(){   // רובי אומר איפה אנחנו, וסבא פיני נותן את הטיפ של השלב (בלי לגלות תשובה)
+  var M = MECHANICS[curWorld], lv = M && M.levels[W.level], w = vWorld(curWorld), tip = gTip(), d = document.createElement('div');
+  d.innerHTML = tip || ''; var tipTxt = d.textContent.trim();
+  if (!lv || !w){ vReply(t('אני כאן איתך 🙂 בוחרים שלב, ואז אפשר לבקש ממני עזרה.', 'I’m here with you 🙂 Pick a level, and then you can ask me for help.')); return; }
+  var head = tf('אנחנו ב{w}, בשלב ״{l}״.', 'We’re in {w}, in the level “{l}”.', {w: w.name, l: lv.name});
+  var tipLine = tipTxt ? t('💡 הטיפ של ', '💡 The tip from ') + NARRATOR + ': ' + tipTxt : '';
+  var b = vE('say'); b.textContent = head + (tipLine ? ' ' + tipLine : ''); b.hidden = false;
+  if (tipTxt && tipOpen !== curWorld + '|' + W.level){ tipOpen = curWorld + '|' + W.level; renderModes(); aLog('tip'); }
+  vOffer(HEV ? [[t('🔊 תקריא לי את ההוראות', '🔊 Read me the instructions'), function(){ readAll(); }]] : []);
+  setMood('think', 2500);
+  if (HEV && G.read && !G.muted) speakList([{text: clean(head), robot: true}].concat(tipLine ? [{text: clean(tipLine)}] : []));
 }
 function vParse(n){
   if (/מזג|אוויר|תחזית|\bweather|\bforecast/.test(n)) return {id: 'weather'};
@@ -1519,18 +1578,18 @@ function vColors(c){
 }
 var vBubT = null;
 function vReply(txt, extra){
-  var b = $('#vsay'); b.textContent = txt; b.hidden = false; if (extra) b.appendChild(extra);
+  var b = vE('say'); b.textContent = txt; b.hidden = false; if (extra) b.appendChild(extra);
   if (!(HEV && G.read && !G.muted)) return;
   robotLine(txt);
 }
 function vLearnBox(word){   // רובי לא הכיר מילה: שואל מה לעשות בה
-  var box = $('#vlearn'); box.innerHTML = '';
+  var box = vE('learn'); box.innerHTML = '';
   if (word === null){ box.hidden = true; return; }
   Object.keys(ACTS).filter(function(id){ return vOpen(ACTS[id].w); }).forEach(function(id){
     var b = document.createElement('button'); b.type = 'button'; b.textContent = ACTS[id].lbl;
     b.onclick = function(){
       if (!G.words || Array.isArray(G.words)) G.words = {};
-      G.words[word] = id; save(); box.hidden = true; box.innerHTML = ''; vWordsRefresh();
+      G.words[word] = id; save(); aSoon(); box.hidden = true; box.innerHTML = ''; vWordsRefresh();
       vReply(t('תודה! למדתי את ׳', 'Thanks! I learned ‘') + word + t('׳ מדוגמה אחת שלך. בינה אמיתית צריכה הרבה דוגמאות, כמו ביער הדוגמאות. ', '’ from one example of yours. Real AI needs lots of examples, like in Example Forest. ') + ACTS[id].run());
     };
     box.appendChild(b);
@@ -1543,14 +1602,20 @@ function vHandle(raw){
   raw = String(raw || '').replace(/\s+/g, ' ').trim().slice(0, 40);
   if (!raw) return;
   vTourStop(false);
-  $('#vheard').textContent = t('שמעתי: ', 'I heard: ') + raw;
+  vE('heard').textContent = t('שמעתי: ', 'I heard: ') + raw;
   vLearnBox(null);
   var n = vNorm(raw), p = null, pre = '';
   if (!n){ vReply(t('לא שמעתי כלום. נסה שוב 😊', 'I didn’t hear anything. Try again 😊')); return; }
-  if (vWx){   // 🌳 באמצע ״מה מזג האוויר?״: ״כן״ או ״לא״ הם תשובה לשאלה של העץ
+  var isHelp = vHelpQ(n) && !vWords(n);
+  if (vWx && !isHelp){   // 🌳 באמצע ״מה מזג האוויר?״: ״כן״ או ״לא״ הם תשובה לשאלה של העץ
     var wa = twHeard(raw, vWxN());
     if (wa >= 0){ vWxAnswer(wa); return; }
     vWx = null; vOffer([]);
+  }
+  if (isHelp){   // 🆘 ״עזרה״, ״רמז״, ״מה עושים?״
+    if (vCtx === 'lvl') vLevelHelp();
+    else { var hb = vE('say'); hb.textContent = t('הנה מה שאפשר להגיד לי 👇', 'Here’s what you can say to me 👇'); hb.hidden = false; vTourStart(); }
+    return;
   }
   p = vParse(n);
   if (!p){
@@ -1610,24 +1675,26 @@ function vRefresh(){
 }
 /* 🎤 המיקרופון: נפתח רק בלחיצה. אם הדפדפן יודע לזהות במכשיר עצמו (processLocally) מנסים קודם כך, ואם זה נכשל, בדרך הרגילה */
 var SR = window.SpeechRecognition || window.webkitSpeechRecognition, vrec = null;
-function vListen(on){ var b = $('#vmic'); b.setAttribute('aria-pressed', String(on)); }
+function vListen(on){ var b = vE('mic'); b.setAttribute('aria-pressed', String(on)); }
 function vMicErr(code){
   vListen(false);
-  $('#vheard').textContent = code === 'no-speech' ? t('לא שמעתי כלום. נסה שוב, או הקלד 😊', 'I didn’t hear anything. Try again, or type it 😊') :
+  vE('heard').textContent = code === 'no-speech' ? t('לא שמעתי כלום. נסה שוב, או הקלד 😊', 'I didn’t hear anything. Try again, or type it 😊') :
     (code === 'not-allowed' || code === 'service-not-allowed') ? t('אי אפשר להשתמש במיקרופון כרגע. אפשר להקליד את הפקודה 😊', 'I can’t use the microphone right now. You can type the command 😊') :
     code === 'audio-capture' ? t('לא מצאתי מיקרופון בטלפון. אפשר להקליד את הפקודה 😊', 'I couldn’t find a microphone. You can type the command 😊') :
     code === 'language-not-supported' ? t('הטלפון הזה לא מזהה דיבור בשפה הזאת. אפשר להקליד את הפקודה 😊', 'This phone can’t recognize speech in this language. You can type the command 😊') :
     t('משהו לא עבד עם המיקרופון. אפשר להקליד את הפקודה 😊', 'Something went wrong with the microphone. You can type the command 😊');
 }
+function vMicStopAll(){ if (vrec){ var r = vrec; vrec = null; try { r.abort(); } catch(e){} vListen(false); } twMicStop(); }   // 🎤 עוצרים כל מיקרופון פתוח
 function vMic(local){
   if (!SR) return;
+  twMicStop();
   try {
     vTourStop(false);
     var r = new SR(), triedLocal = false;
     r.lang = LANG === 'en' ? 'en-US' : 'he-IL'; r.interimResults = false; r.maxAlternatives = 1; r.continuous = false;
     if (local && 'processLocally' in r){ try { r.processLocally = true; triedLocal = true; } catch(e){} }
     vrec = r;
-    r.onresult = function(e){ try { vHandle(e.results[0][0].transcript); } catch(x){} };
+    r.onresult = function(e){ if (vrec !== r) return; try { vHandle(e.results[0][0].transcript); } catch(x){} };
     r.onerror = function(e){
       if (vrec !== r) return;
       var c = e && e.error;
@@ -1636,7 +1703,7 @@ function vMic(local){
     };
     r.onend = function(){ if (vrec === r){ vrec = null; vListen(false); } };
     r.start(); vListen(true);
-    $('#vheard').textContent = t('מקשיב… 👂', 'Listening… 👂');
+    vE('heard').textContent = t('מקשיב… 👂', 'Listening… 👂');
   } catch(e){ vrec = null; vMicErr('error'); }
 }
 $('#vmic').addEventListener('click', function(){
@@ -1728,7 +1795,42 @@ function vLearnShow(){
   host.scrollIntoView({block: 'center', behavior: RM ? 'auto' : 'smooth'});
   if (R && R.host === host) vTurn(Math.PI, RM ? 1 : 800, build); else build();
 }
-function vLeave(s){ vTourStop(false); if (s !== 'shop' && vLearnOn) vLearnHide(true); }
+function vLeave(s){ vTourStop(false); if (s !== 'shop' && vLearnOn) vLearnHide(true); if (s !== 'world') qClose(); if (vrec){ var lr = vrec; vrec = null; try { lr.abort(); } catch(e){} vListen(false); } $('#flymic').hidden = s !== 'world'; }
+/* 🎤 לדבר עם רובי בתוך שלב: אותן פקודות כמו בסדנה, ו״עזרה״ נותנת את הטיפ של סבא פיני */
+var qLvl = '', qFrom = null;
+function qReset(){ if ($('#qtalk').hidden) return; $('#qsay').hidden = true; $('#qsay').textContent = ''; $('#qheard').textContent = ''; vOffer([]); }
+function qOpen(e){
+  if (!FEATURES.voice || screen !== 'world') return;
+  if (!$('#qtalk').hidden){ qClose(); return; }
+  qFrom = e && e.currentTarget || $('#qopen');
+  vTourStop(false); vMicStopAll(); vCtx = 'lvl'; $('#qopen').setAttribute('aria-expanded', 'true');
+  $('#qtalk').hidden = false; $('#qmic').hidden = !SR;
+  if (!SR && !$('#qheard').textContent) $('#qheard').textContent = t('אין מיקרופון בדפדפן הזה. אפשר להקליד 🙂', 'There is no microphone in this browser. You can type 🙂');
+  beep('tap'); (SR ? $('#qmic') : $('#qclose')).focus({preventScroll: true});
+}
+function qClose(){
+  if ($('#qtalk').hidden) return;
+  if (vrec){ var r = vrec; vrec = null; try { r.abort(); } catch(e){} }
+  vListen(false); if (vWx){ vWx = null; } vOffer([]);
+  $('#qtalk').hidden = true; vCtx = 'shop'; $('#qopen').setAttribute('aria-expanded', 'false');
+  if (qFrom && document.activeElement && $('#qtalk').contains(document.activeElement) && !qFrom.hidden) qFrom.focus({preventScroll: true});
+}
+(function(){
+  var fm = document.createElement('button'); fm.type = 'button'; fm.className = 'flymic'; fm.id = 'flymic'; fm.hidden = true; fm.textContent = '🎤';
+  fm.setAttribute('aria-label', t('לדבר עם רובי', 'Talk to Robi'));
+  ['pointerdown', 'pointerup', 'keydown'].forEach(function(ev){ fm.addEventListener(ev, function(e){ e.stopPropagation(); }); });   // לא גרירה ולא נגיעה ברובי
+  fm.addEventListener('click', function(e){ e.stopPropagation(); qOpen(e); });
+  $('#flyer').appendChild(fm);
+  $('#qopen').hidden = !FEATURES.voice;
+  $('#qopen').addEventListener('click', qOpen);
+  $('#qclose').addEventListener('click', function(){ beep('tap'); qClose(); });
+  $('#qmic').addEventListener('click', function(){ if (vrec){ try { vrec.stop(); } catch(e){} return; } stopTalk(); vMic(true); });
+  function qSend(){ var i = $('#qtxt'), v = i.value; i.value = ''; vHandle(v); }
+  $('#qsend').addEventListener('click', qSend);
+  $('#qtxt').addEventListener('keydown', function(e){ if (e.key === 'Enter'){ e.preventDefault(); qSend(); } });
+  $('#qhelp').addEventListener('click', function(){ vHandle(t('עזרה', 'help')); });
+  document.addEventListener('keydown', function(e){ if (e.key === 'Escape' && !$('#qtalk').hidden) qClose(); });
+})();
 /* 🎤 בסוף כל עולם: כפתור שמוביל למרכז הפקודות */
 function vFinishBtn(){
   var sh = $('#panel').querySelector('button.btn#show:not(.alt)');
@@ -1829,7 +1931,7 @@ function duelEnd(){   // בסוף שלב: רובי מכריז על המנצח
 }
 /* 💡 טיפ מסבא פיני: טיפ אחד לכל שלב. מכוון איך לחשוב, בלי לתת את התשובה. זמין תמיד */
 function gTip(){
-  var n = G.name, SHOW = t('לפני שאתה לוחץ ״טעות!״, תשאל את עצמך: מה הייתי עונה אני? אם ' + n + ' ענה אחרת, תפסת אותו. ואם אתה לא בטוח, עדיף לא ללחוץ.',
+  var n = esc(G.name), SHOW = t('לפני שאתה לוחץ ״טעות!״, תשאל את עצמך: מה הייתי עונה אני? אם ' + n + ' ענה אחרת, תפסת אותו. ואם אתה לא בטוח, עדיף לא ללחוץ.',
                          'Before you tap “Mistake!”, ask yourself: what would I answer? If ' + n + ' answered differently, you caught it. And if you’re not sure, better not to tap.');
   var T = {
     examples: [t('אם תראה ל' + n + ' רק חתולים כתומים, הוא יחשוב שכל חיה כתומה היא חתול. תראה לו חיות שונות: צבעים שונים, אוזניים שונות וגדלים שונים.', 'If you show ' + n + ' only orange cats, it will think every orange animal is a cat. Show it different animals: different colors, different ears and different sizes.'),
@@ -1863,6 +1965,7 @@ function renderModes(){
   var b = $('#modes .tipbtn');
   if (b) b.onclick = function(){
     tipOpen = open ? '' : k; beep('tap'); renderModes();
+    if (!open) aLog('tip');   // 🛠️ ביקש טיפ
     if (!open && HEV && !G.muted) speakList([{text: clean(tip)}]);   // 🎙️ סבא פיני מקריא את הטיפ (בקול הטלפון)
   };
 }
@@ -1875,6 +1978,91 @@ function duelBar(){
     (W.duelWin ? '<span class="win">' + esc(W.duelWin) + '</span>' : '');
 }
 function teacher(){ return duelOn() ? duelName(W.turn) : who(); }
+
+/* ═══════════ 🛠️ לוח הבקרה של סבא פיני: מה נשלח, ומסר ממנו ═══════════
+   נשלח רק כשהמתג FEATURES.admin דלוק, יש ADMIN_URL, והילד לא ביטל (G.share).
+   נשלח: כינוי, מזהה אקראי של המכשיר, עולם ושלב, ״סיים / טעה / ביקש טיפ״, כוכבים, ומילים שלימד את רובי.
+   ⛔ שם מלא, טלפון, תמונה, מיקום. כינוי או מילה עם 3 ספרות ומעלה לא נשלחים (שלא ייצא מספר טלפון) */
+var AQ = [], aT = null, aPlace = '', helloMsg = '';
+function adminOn(){ return !!(FEATURES.admin && ADMIN_URL); }
+function aShare(){ return adminOn() && G.share !== false && !!G.shareSeen; }   // נשלח רק אחרי שהילד ראה שזה נשלח
+function aDigits(v){ return (String(v).match(/\d/g) || []).length >= 3; }   // 3 ספרות ומעלה בסך הכול = אולי טלפון
+function aClean(v){ v = String(v || '').trim(); return aDigits(v) ? v.replace(/[\d\-–.()+\/]/g, '').replace(/\s+/g, ' ').trim() : v; }
+function aNick(){ return named() ? aClean(G.teachers[0]) : ''; }
+function aLog(type, v){
+  if (!aShare() || screen !== 'world') return;
+  AQ.push({t: Date.now(), w: curWorld, l: W.level, type: type, v: v == null ? '' : v});
+  if (AQ.length > 60) AQ.shift();
+  aSoon();
+}
+function aSoon(){ if (!aShare() || aT) return; aT = setTimeout(aFlush, 4000); }   // טיימר אחד: אירועים נוספים מצטרפים אליו ולא דוחים אותו
+function aPost(o, fail, ok){   // שולח לשרת של סבא. no-cors: לא קוראים תשובה, רק יודעים אם לא הייתה רשת
+  try { fetch(ADMIN_URL, {method: 'POST', mode: 'no-cors', body: JSON.stringify(o), keepalive: true}).then(function(){ if (ok) ok(); }, function(){ if (fail) fail(); }); }
+  catch(e){ if (fail) fail(); }
+}   // מחכים 4 שניות, ושולחים הכול יחד
+function aWords(){ return vWordList().filter(function(x){ return !aDigits(x[0]); }).map(function(x){ return [x[0], (ACTS[x[1]] && ACTS[x[1]].lbl) || x[1]]; }); }
+function aFlush(){
+  clearTimeout(aT); aT = null;
+  if (!aShare()){ AQ = []; return; }
+  if (navigator.onLine === false) return;   // 📴 אין רשת ⇒ האירועים מחכים בתור, ונשלחים כשהרשת חוזרת
+  if (!G.pid){ G.pid = Math.random().toString(36).slice(2, 10) + Date.now().toString(36).slice(-6); save(); }
+  var c = G.cur || {}, evs = AQ.splice(0, 60);
+  aPost({id: G.pid, nick: aNick(), place: {w: c.w || '', l: c.l || 0}, stars: G.prog, words: aWords(), events: evs},
+    function(){ AQ = evs.concat(AQ).slice(-60); });   // השליחה נכשלה ⇒ מחזירים לתור
+}
+document.addEventListener('visibilitychange', function(){ if (document.visibilityState === 'hidden' && aShare() && (AQ.length || aT)) aFlush(); });   // יוצאים מהמשחק ⇒ שולחים מה שנשאר ומה שחיכה
+window.addEventListener('online', function(){ aForget(); if (aShare()) aSoon(); });   // הרשת חזרה ⇒ שולחים את מה שחיכה (גם כוכבים ומקום בלי אירועים)
+function aForget(){   // 🧹 בקשת המחיקה יוצאת עד שהיא מצליחה: עכשיו, בפתיחה הבאה, או כשהרשת חוזרת
+  if (!adminOn() || !G.forgetPending || !G.pid || navigator.onLine === false) return;
+  aPost({forget: 1, id: G.pid}, null, function(){ G.forgetPending = false; save(); });
+}
+/* 💌 מסר מסבא: מסר לכולם, ומסר אישי לפי הכינוי (הכינוי נשלח בגוף הבקשה, לא בכתובת) */
+function aMsg(){
+  var box = $('#hello-msg'); box.hidden = true; box.innerHTML = ''; helloMsg = '';
+  if (!adminOn()) return;
+  fetch(ADMIN_URL, {method: 'POST', body: JSON.stringify({msg: 1, nick: aShare() ? aNick() : ''})})
+    .then(function(r){ return r.json(); }).then(function(m){
+      var lines = [m && m.mine, m && m.all].filter(function(x){ return x && String(x).trim(); }).map(String);
+      if (!lines.length || $('#hello').hidden) return;
+      helloMsg = lines.join(' ');
+      box.innerHTML = '<b>💌 ' + t('מסר מ', 'A message from ') + NARRATOR + ':</b>' + lines.map(function(x){ return '<span>' + esc(x) + '</span>'; }).join('');
+      box.hidden = false;
+    }).catch(function(){});
+}
+/* 📮 בפעם הראשונה: ״ההתקדמות נשלחת לסבא״, כינוי אם עוד אין, וכפתור לביטול */
+function aHelloShare(){
+  var b = $('#hello-share'); b.hidden = true; b.innerHTML = '';
+  if (!adminOn() || G.shareSeen) return;
+  b.innerHTML = '<p>📮 ' + t('מה שלמדת ואיפה נתקעת נשלח לסבא פיני. נשלח רק הכינוי שלך.', 'What you learned and where you got stuck is sent to Grandpa Pini. Only your nickname is sent.') + '</p>' +
+    (named() ? '' : '<label for="hello-nick">' + t('איך לקרוא לך? כתוב כינוי, לא שם מלא 🙂', 'What should I call you? Write a nickname, not your full name 🙂') + '</label><input id="hello-nick" type="text" maxlength="10" autocomplete="off">') +
+    '<button type="button" class="btn alt" id="hello-noshare">' + t('לשחק בלי לשלוח', 'Play without sending') + '</button>';
+  b.hidden = false;
+  $('#hello-noshare').onclick = function(){
+    G.share = false; G.shareSeen = true; save(); beep('tap');
+    b.innerHTML = '<p>' + t('בסדר, לא נשלח כלום. אפשר לשנות את זה בסדנה.', 'OK, nothing is sent. You can change this in the Workshop.') + '</p>';
+  };
+}
+function aHelloGo(){
+  if (!adminOn() || G.shareSeen) return;
+  var hn = $('#hello-nick'), v = hn ? aClean(hn.value).slice(0, 10) : '';
+  if (v) G.teachers[0] = v;
+  G.shareSeen = true; save();
+}
+function aWorkshop(){
+  var row = $('#sharerow'), cb = $('#share'), lbl = $('#t1').previousElementSibling;
+  row.hidden = !adminOn();
+  if (lbl) lbl.textContent = adminOn() ? t('הכינוי שלך (לא שם מלא)', 'Your nickname (not your full name)') : t('השם שלך', 'Your name');
+  if (!adminOn()) return;
+  $('#share-l').textContent = t('📮 לשלוח לסבא פיני מה למדתי (רק הכינוי)', '📮 Send Grandpa Pini what I learned (nickname only)');
+  cb.checked = G.share !== false;
+  cb.onchange = function(){
+    if (!cb.checked && G.pid && adminOn()){ clearTimeout(aT); aT = null; AQ = []; G.forgetPending = true; setTimeout(aForget, 3000); }   // 🧹 מוחקים אצל סבא את מה שנשלח (אחרי 3 שניות, כדי ששליחה שכבר בדרך תגיע קודם)
+    if (cb.checked) G.forgetPending = false;
+    G.share = cb.checked; G.shareSeen = true; save(); beep('tap');
+    toast(cb.checked ? t('📮 נשלח לסבא פיני', '📮 Sending to Grandpa Pini') : t('לא נשלח כלום, ומה שנשלח נמחק', 'Nothing is sent, and what was sent is deleted'));
+    if (cb.checked) aSoon();
+  };
+}
 function P(html){
   $('#panel').innerHTML = html;
   // 🗣️ כשרובי מקריא, בועות הקומיקס שעוד לא הוקראו מופיעות אחת אחרי השנייה, בקצב ההקראה
@@ -1887,6 +2075,7 @@ function on(id, fn){ var el = $('#panel').querySelector('#' + id); if (el) el.on
 function showBtn(){ return '<button class="btn" id="show" type="button">🎪 ' + G.name + t(' רוצה להראות מה למד!</button>', ' wants to show what it learned!</button>'); }   // בסוף כל עולם: ההופעה
 function steps(names, cur){ $('#steps').innerHTML = names.map(function(n, i){ return '<span class="' + (i === cur ? 'on' : '') + '">' + n + '</span>'; }).join(''); }
 function finishLevel(li, st){
+  aLog('finish', st);   // 🛠️ סיים שלב
   var p = prog(curWorld), first = !p[li];
   p[li] = Math.max(p[li], st); save();
   duelEnd();
@@ -1899,6 +2088,8 @@ function renderWorld(){
   say(''); paintHook = null; gridMin = 4; animTok++; noSleep = 0;
   if (curWorld !== 'pixels' || W.level !== 3) camSrc = null;   // 🔒 יוצאים מהפיקסל הקסום = התמונה נמחקת
   G.cur = {w: curWorld, l: W.level}; store.set('cur', G.cur);   // 💾 בפעם הבאה ממשיכים מהשלב הזה
+  if (qLvl !== curWorld + '|' + W.level){ qLvl = curWorld + '|' + W.level; qReset(); }   // 🎤 שלב חדש ⇐ בלי התשובה של השלב הקודם
+  if (aShare() && aPlace !== curWorld + '|' + W.level){ aPlace = curWorld + '|' + W.level; aSoon(); }   // 🛠️ נכנס לשלב חדש
   mech.levels[W.level].run();      // קודם השלב עצמו (הוא יכול לעדכן כוכבים), ואחר כך שורת השלבים
   // שורה ראשונה: 3 השלבים. שורה שנייה: 🎁 בונוס ו-🎪 הופעה, שנפתחים אחרי שלב 3
   var row1 = '', row2 = '';
@@ -2994,7 +3185,7 @@ function twMicWire(){
     if (twRec){ try { twRec.stop(); } catch(e){} return; }
     var btns = $('#panel').querySelectorAll('[data-a]'), out = $('#panel').querySelector('#twheard');
     if (!btns.length) return;
-    stopTalk();
+    stopTalk(); if (vrec){ var vr = vrec; vrec = null; try { vr.abort(); } catch(e){} vListen(false); }   // 🎤 המיקרופון של רובי נסגר כשעונים לעץ בקול
     try {
       var r = new SR(); r.lang = LANG === 'en' ? 'en-US' : 'he-IL'; r.interimResults = false; r.maxAlternatives = 3; r.continuous = false;
       twRec = r; b.setAttribute('aria-pressed', 'true'); out.textContent = t('מקשיב… 👂', 'Listening… 👂');
@@ -3541,7 +3732,7 @@ function showLevel(){
   else if (W.phase === 'end'){
     var mist = W.items.filter(function(i){ return i.wrong; }).length;
     var st = W.caught === mist && !W.falseA ? 3 : W.caught >= mist - 1 && W.falseA <= 1 ? 2 : W.caught ? 1 : 0;
-    if (!W.scored){ W.scored = true; W.gain = Math.max(0, st - p[SHOW_IDX]); if (W.gain){ p[SHOW_IDX] = st; addStars(W.gain); } save(); }
+    if (!W.scored){ W.scored = true; aLog('finish', st); W.gain = Math.max(0, st - p[SHOW_IDX]); if (W.gain){ p[SHOW_IDX] = st; addStars(W.gain); } save(); }
     steps(ST, 2);
     if (st === 3){ setMood('worry'); say(t('וואו, תפסת את כל הטעויות שלי! אתה בודק מעולה 🕵️', 'Wow, you caught all my mistakes! You’re a great checker 🕵️')); }
     else { setMood('happy'); say(W.missed ? t('חה! הצלחתי להבריח ', 'Ha! I sneaked ') + W.missed + t(' טעויות 😜', ' mistakes past you 😜') : t('כמעט! נסה שוב 😄', 'Almost! Try again 😄')); }
