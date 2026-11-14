@@ -1552,6 +1552,7 @@ function vLevelHelp(){   // רובי אומר איפה אנחנו, וסבא פי
   if (HEV && G.read && !G.muted) speakList([{text: clean(head), robot: true}].concat(tipLine ? [{text: clean(tipLine)}] : []));
 }
 function vParse(n){
+  if (/^(היי|הי|שלום|אהלן|hi|hello|hey)( |$)/.test(n)) return {greet: true};   // 👋 ״היי״ ⇐ רובי מברך ומציע לחזור על מה שלמדנו
   if (/מזג|אוויר|תחזית|\bweather|\bforecast/.test(n)) return {id: 'weather'};
   if (/למדת|\blearn/.test(n)) return {id: 'learned'};
   if (/רקוד|ריקוד|רקד|\bdanc/.test(n)) return {id: 'dance'};
@@ -1628,6 +1629,7 @@ function vHandle(raw){
     vReply(tf('לא הכרתי את המילה ׳{w}׳. מה לעשות כשאומרים אותה?', 'I didn’t know the word ‘{w}’. What should I do when it’s said?', {w: n}));
     vLearnBox(n); return;
   }
+  if (p.greet){ vGreet(); return; }
   var wid = (p.cols || p.hint) ? 'pixels' : ACTS[p.id].w;
   if (!vOpen(wid)){ vReply(tf('את זה אלמד אחרי שתסיים את שלושת השלבים הראשונים ב{w} 🔒', 'I’ll learn that after you finish the first three levels in {w} 🔒', {w: vWorld(wid).name})); return; }
   if (p.hint){
@@ -1637,6 +1639,20 @@ function vHandle(raw){
   }
   vReply(pre + (p.cols ? vColors(p.cols) : ACTS[p.id].run()), p.cols && p.cols.length > 1 ? vMixVis(p.cols) : null);
   vBackBtn();   // כל עוד רובי בצבע של אור, הכפתור לחזרה לצבע שלך נשאר
+}
+/* 👋 היי רובי: מברך בשם השחקן ושואל אם לעבור על מה שלמדנו */
+function vGreet(){
+  var nm = (G.teachers && G.teachers[0]) || '';
+  vReply(tf('היי {n}! 😄 רוצה שנעבור יחד על מה שלמדנו?', 'Hi {n}! 😄 Want to go over what we learned together?', {n: nm}).replace(/ !/, '!'));
+  vOffer([[t('✅ כן', '✅ Yes'), vReview], [t('❌ לא', '❌ No'), function(){ vReply(t('בסדר! תגיד לי מה לעשות 🙂', 'Okay! Tell me what to do 🙂')); }]]);
+}
+function vReview(){
+  var done = WORLDS.filter(function(w){ return w.ready && mindDone(w.id) > 0; }).map(function(w){ return w.name; });
+  var wl = vWordList();
+  var txt = done.length ? tf('למדנו ב: {w}. ', 'We learned in: {w}. ', {w: done.join(', ')}) : t('עוד לא סיימנו שלב. בוא נתחיל עולם! ', 'We haven’t finished a level yet. Let’s start a world! ');
+  if (wl.length) txt += tf('ולימדת אותי {k} מילים משלך. ', 'And you taught me {k} words of your own. ', {k: wl.length});
+  vReply(txt + (done.length ? t('תראה את המוח שלי 🧠', 'Look at my brain 🧠') : ''));
+  if (done.length) vLearnShow();
 }
 /* 📚 המילים שהילד לימד את רובי: אפשר למחוק כל אחת */
 function vWordList(){ var w = G.words && !Array.isArray(G.words) ? G.words : {}; return Object.keys(w).filter(function(k){ return ACTS[w[k]]; }).map(function(k){ return [k, w[k]]; }); }
