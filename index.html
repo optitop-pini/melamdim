@@ -493,6 +493,109 @@ html[dir="ltr"] .twtree text{direction:ltr}
 /* 🎪 בהופעה: כרטיס יום קטן */
 .svis .twday{width:100%;max-width:300px}
 .svis .twsky{min-height:96px;font-size:38px}
+/* 🔤 ים המילים: בקבוקים, מכתבים, טביעות אצבע ומילים כפולות. ארבעת סוגי השכנים: 💧 מים · 🐾 חי · 🌱 צומח · 😋 אוכל */
+#panel{--ws-w:#1f7fc0;--ws-wbg:#e2f1fb;--ws-a:#c8661c;--ws-abg:#fdecdc;--ws-p:#2f8f58;--ws-pbg:#e2f4e8;--ws-f:#c93a6e;--ws-fbg:#fce4ed;--ws-mA:#b4471c;--ws-mAbg:#fde7da;--ws-mB:#3d55c4;--ws-mBbg:#e5e9fb}
+.wssea{position:relative;display:flex;gap:16px;justify-content:center;align-items:flex-end;min-height:68px;padding-bottom:10px}
+.wswave{position:absolute;inset:auto 0 0;width:100%;height:14px;fill:#bfe6ee}
+.wsbtl{width:32px;height:52px;display:block;flex:none;position:relative}
+.wsbtl .ck{fill:#a7713f}.wsbtl .gl{fill:#bfe6ee;stroke:#2c7d95;stroke-width:2}.wsbtl .pp{fill:var(--paper);stroke:#a7713f;stroke-width:1.5}.wsbtl .ln{stroke:#a7713f;stroke-width:1.5;fill:none}
+.wssea span{position:relative;z-index:1}
+.wssea .wait{opacity:.3}.wssea .done{opacity:.55;transform:rotate(80deg) translateX(8px)}.wssea .cur{animation:wsbob 2.4s ease-in-out infinite}
+@keyframes wsbob{0%,100%{transform:translateY(0) rotate(-7deg)}50%{transform:translateY(-6px) rotate(7deg)}}
+.wsnote{background:#fff6df;border:2px solid #ecd9a8;border-radius:6px 18px 6px 18px;padding:12px 14px;font-size:21px;line-height:2;box-shadow:0 3px 0 #ecd9a8;text-wrap:pretty}
+.wsmys{display:inline-block;border:2px dashed var(--sea2);border-radius:10px;padding:0 8px;color:var(--sea);font-family:var(--display);background:#fff;line-height:1.45}
+.wsmys.known{border-style:solid;background:var(--sky)}
+.wsnb{border-radius:8px;padding:1px 3px;transition:background-color .3s}
+.wsnb sup{font-size:13px;margin-inline-start:2px;vertical-align:super;line-height:0}
+.wsnb.lit.ax-w{background:var(--ws-wbg);color:var(--ws-w);box-shadow:inset 0 -3px 0 var(--ws-w)}
+.wsnb.lit.ax-a{background:var(--ws-abg);color:var(--ws-a);box-shadow:inset 0 -3px 0 var(--ws-a)}
+.wsnb.lit.ax-p{background:var(--ws-pbg);color:var(--ws-p);box-shadow:inset 0 -3px 0 var(--ws-p)}
+.wsnb.lit.ax-f{background:var(--ws-fbg);color:var(--ws-f);box-shadow:inset 0 -3px 0 var(--ws-f)}
+.wsnb.lit.mA{background:var(--ws-mAbg);color:var(--ws-mA);box-shadow:inset 0 -3px 0 var(--ws-mA)}
+.wsnb.lit.mB{background:var(--ws-mBbg);color:var(--ws-mB);box-shadow:inset 0 -3px 0 var(--ws-mB)}
+.wsfp{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:6px}
+.wsfpc{border:2px solid;border-radius:12px;padding:6px 4px 5px;display:flex;flex-direction:column;align-items:center;gap:2px}
+.wsfpc .fe{font-size:19px;line-height:1.1}
+.wsfpc b{font-family:var(--display);font-weight:400;font-size:26px;line-height:1.1;font-variant-numeric:tabular-nums}
+.wsfpc i{display:block;width:80%;height:7px;border-radius:99px;background:#fff;overflow:hidden}
+.wsfpc i s{display:block;height:100%;border-radius:99px;transition:width .4s}
+.wsfpc small{font-size:12.5px;font-weight:700;color:var(--mute)}
+.wsfpc.ax-w{border-color:var(--ws-w);background:var(--ws-wbg)}.wsfpc.ax-w b{color:var(--ws-w)}.wsfpc.ax-w s{background:var(--ws-w)}
+.wsfpc.ax-a{border-color:var(--ws-a);background:var(--ws-abg)}.wsfpc.ax-a b{color:var(--ws-a)}.wsfpc.ax-a s{background:var(--ws-a)}
+.wsfpc.ax-p{border-color:var(--ws-p);background:var(--ws-pbg)}.wsfpc.ax-p b{color:var(--ws-p)}.wsfpc.ax-p s{background:var(--ws-p)}
+.wsfpc.ax-f{border-color:var(--ws-f);background:var(--ws-fbg)}.wsfpc.ax-f b{color:var(--ws-f)}.wsfpc.ax-f s{background:var(--ws-f)}
+.wsfpc.bump b{animation:wsbump .55s cubic-bezier(.3,1.8,.5,1)}
+@keyframes wsbump{from{transform:scale(1.8)}to{transform:scale(1)}}
+.wsfp.sm{gap:4px}.wsfp.sm .wsfpc{padding:4px 2px}.wsfp.sm b{font-size:19px}.wsfp.sm .fe{font-size:15px}.wsfp.sm small{display:none}
+.wscap{margin:0 0 6px;font-size:14px;font-weight:700;color:var(--mute)}
+.wscmp{display:grid;grid-template-columns:1fr 1fr;gap:10px}
+.wscmp>div{min-width:0;display:flex;flex-direction:column;justify-content:flex-end}
+.wshonest{font-size:14px;color:var(--mute);background:#fff;border:1px dashed var(--line);border-radius:12px;padding:8px 10px}
+.wscards{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:6px;padding-top:10px}
+.wscards.c6{grid-template-columns:repeat(3,minmax(0,1fr))}
+.wscard{position:relative;min-height:84px;border-radius:14px;border:2px solid var(--line);background:#fff;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:2px;padding:6px 3px;color:var(--ink)}
+.wscard:disabled{opacity:1;cursor:default}
+.wscard .we{font-size:30px;line-height:1.1}
+.wscard .wn{font-size:13.5px;font-weight:700}
+.wscard i{width:84%;height:6px;background:#e7eeec;border-radius:99px;overflow:hidden;display:block}
+.wscard i s{display:block;height:100%;background:var(--sea2);border-radius:99px}
+.wscard em{font-style:normal;font-size:12.5px;color:var(--mute);font-variant-numeric:tabular-nums}
+.wscard.best{border-color:var(--sea2);box-shadow:inset 0 0 0 2px var(--sea2)}
+.wscard .rb{position:absolute;top:-11px;inset-inline-start:-4px;background:#fff;border:2px solid var(--sea2);border-radius:99px;font-size:13px;line-height:1.4;padding:0 5px}
+.wscard .kb{position:absolute;top:-11px;inset-inline-end:-4px;background:#fff;border:2px solid var(--line);border-radius:99px;font-size:13px;line-height:1.4;padding:0 4px}
+.wscard.kidok{border-color:var(--good);background:#eaf7ee}
+.wscard.kidno{border-color:var(--bad);background:#fdeee6}
+.wscard.ans{border-color:var(--sun);background:#fff8dc;box-shadow:inset 0 0 0 2px var(--sun)}
+.wssecret{display:flex;align-items:center;gap:10px;background:var(--sea);color:var(--paper);border-radius:14px;padding:8px 12px;font-weight:700}
+.wssecret>span:first-child{font-size:34px;line-height:1}
+.wssecret b{font-family:var(--display);font-weight:400;font-size:22px;color:var(--sun)}
+.wssecret small{font-weight:400;font-size:13.5px}
+.wsbopts{display:flex;flex-direction:column;gap:6px}
+.wsbopt{display:flex;align-items:center;gap:10px;min-height:50px;text-align:start;border:2px solid var(--line);background:#fff;border-radius:14px;padding:6px 10px;font-size:16.5px;color:var(--ink);width:100%}
+.wsbopt .wsbtl{width:20px;height:32px}
+.wsbopt b{color:var(--sea)}
+.wsbopt[aria-pressed="true"]{border-color:var(--sea2);background:var(--sky);box-shadow:inset 0 0 0 2px var(--sea2)}
+.wsbopt[aria-pressed="true"]::after{content:"✓";margin-inline-start:auto;font-weight:700;color:var(--sea2);font-size:18px}
+.wsbcount{font-size:14.5px;font-weight:700;color:var(--sea2)}
+.wsmrow{display:grid;grid-template-columns:1fr 1fr;gap:8px}
+.wsmbtn{min-height:78px;border-radius:16px;border:2px solid;background:#fff;font-size:15.5px;font-weight:700;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:2px;color:var(--ink);padding:6px}
+.wsmbtn span{font-size:30px;line-height:1.1}
+.wsmbtn.A{border-color:var(--ws-mA)}.wsmbtn.B{border-color:var(--ws-mB)}
+.wsmbtn.pick.A{background:var(--ws-mAbg);box-shadow:inset 0 0 0 2px var(--ws-mA)}.wsmbtn.pick.B{background:var(--ws-mBbg);box-shadow:inset 0 0 0 2px var(--ws-mB)}
+.wsmbtn:disabled{opacity:1;cursor:default;background:#f4f1e8;color:var(--mute)}.wsmbtn.pick:disabled{color:var(--ink)}
+.wsvote{display:grid;grid-template-columns:auto 1fr auto;gap:8px;align-items:center;font-weight:700;font-size:18px;font-variant-numeric:tabular-nums}
+.wsvote .vA{color:var(--ws-mA)}.wsvote .vB{color:var(--ws-mB)}
+.wsvote i{display:flex;height:16px;border-radius:99px;overflow:hidden;background:#e7eeec}
+.wsvote i s{display:block;height:100%;transition:width .4s}
+.wsvote .sA{background:var(--ws-mA)}.wsvote .sB{background:var(--ws-mB)}
+.wsbuild{display:flex;flex-direction:column;gap:8px;background:#fff;border:2px solid var(--line);border-radius:14px;padding:10px}
+.wsbuild p{font-weight:700;font-size:14.5px;color:var(--mute)}
+.wschips{display:flex;flex-wrap:wrap;gap:6px}
+.wschip{min-height:44px;border:2px solid var(--line);background:var(--paper);border-radius:999px;padding:4px 16px;font-size:16.5px;font-weight:700;color:var(--ink)}
+.wschip[aria-pressed="true"]{border-color:var(--sea2);background:var(--sky);color:var(--sea)}
+.wschip:disabled{opacity:1;color:var(--mute)}
+.wsguess .wschip{flex:1 1 90px;min-height:52px;font-size:18px;border-color:var(--sea2);color:var(--sea2);background:#fff}
+.wsline{font-size:21px;line-height:1.8;background:#fff;border:2px solid var(--line);border-radius:14px;padding:10px 14px;font-family:var(--display)}
+.wsline b{font-weight:400;color:var(--sea2);background:var(--sky);border-radius:8px;padding:0 4px}
+.wscur{color:var(--sea2);animation:wsblink 1s steps(2) infinite}.wscur::after{content:"▌"}
+.wsvh{position:absolute;width:1px;height:1px;overflow:hidden;clip-path:inset(50%);white-space:nowrap}
+@keyframes wsblink{50%{opacity:0}}
+.wsnext{background:#fff;border:2px solid var(--sea2);border-radius:14px;padding:10px;display:flex;flex-direction:column;gap:6px}
+.wsnext:empty{display:none}
+.wsnr{display:grid;grid-template-columns:minmax(64px,auto) 1fr auto;gap:8px;align-items:center;font-size:15px}
+.wsnr i{height:12px;background:#e7eeec;border-radius:99px;overflow:hidden}
+.wsnr s{display:block;height:100%;background:#9fb0b4;border-radius:99px}
+.wsnr.best s{background:var(--sea2)}.wsnr.best b{color:var(--sea2)}
+.wsnr em{font-style:normal;font-size:13px;color:var(--mute);font-variant-numeric:tabular-nums;white-space:nowrap}
+.wslibs{display:grid;grid-template-columns:1fr 1fr;gap:10px}
+.wslibs button{min-height:130px;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:4px;background:#fff;border-color:var(--sea2);font-family:var(--display);font-size:19px;color:var(--sea)}
+.wslibs button span{font-size:40px;line-height:1.1}
+.wslibs button small{font-family:var(--body);font-size:13px;color:var(--mute)}
+.wsswap{display:flex;flex-direction:column;gap:8px}
+.wsswap p{background:#fff;border:2px solid var(--line);border-radius:14px;padding:8px 12px;font-size:15px}
+.wsswap b{font-family:var(--display);font-weight:400;font-size:19px;color:var(--sea)}
+.svis .wsshow{width:100%;max-width:360px;font-size:19px;text-align:start}
+@media (prefers-reduced-motion:reduce){.wssea .cur,.wsfpc.bump b,.wscur{animation:none}.wsfpc i s,.wsvote i s{transition:none}}
 </style>
 </head>
 <body>
@@ -670,7 +773,7 @@ var WORLDS = [
   {id:'pixels',   name:t('עיר הפיקסלים', 'Pixel City'),   sub:t('איך מחשב רואה תמונה', 'How a computer sees a picture'),   icon:'🎨', color:'#ff7f61', ability:t('רואה תמונות', 'sees pictures'), skill:t('רואה תמונות', 'sees pictures'), ready:true},
   {id:'layers',   name:t('מגדל השכבות', 'Tower of Layers'),    sub:t('מוח מלאכותי', 'An artificial brain'),           icon:'🧠', color:'#a993f0', ability:t('מזהה צורות בעזרת קומות של נוירונים', 'recognizes shapes using floors of neurons'), skill:t('מזהה צורות', 'recognizes shapes'), ready:true},
   {id:'tree',     name:t('עץ השאלות', 'Question Tree'),      sub:t('עצי החלטה', 'Decision trees'),             icon:'🌳', color:'#3fa36b', ability:t('מקבל החלטות בעזרת עץ של שאלות', 'makes decisions with a tree of questions'), skill:t('מקבל החלטות', 'makes decisions'), ready:true},
-  {id:'words',    name:t('ים המילים', 'Word Sea'),      sub:t('איך מחשב מבין שפה', 'How a computer understands language'),     icon:'🔤', color:'#4aa3df', skill:t('מבין מילים', 'understands words')},
+  {id:'words',    name:t('ים המילים', 'Word Sea'),      sub:t('איך מחשב מבין שפה', 'How a computer understands language'),     icon:'🔤', color:'#4aa3df', ability:t('מבין מילים לפי השכנים שלהן', 'understands words by their neighbors'), skill:t('מבין מילים', 'understands words'), ready:true},
   {id:'recs',     name:t('קולנוע ההמלצות', 'Recommendation Cinema'), sub:t('מערכת המלצות', 'Recommendation systems'),          icon:'🍿', color:'#ef6f93', skill:t('ממליץ', 'recommends things')},
   {id:'prompt',   name:t('סטודיו הפרומפטים', 'Prompt Studio'), sub:t('בינה יוצרת', 'Creative AI'),          icon:'🖌️', color:'#f2a33a', skill:t('יוצר ציורים', 'creates pictures')},
   {id:'sensors',  name:t('מבוך החיישנים', 'Sensor Maze'),  sub:t('רובוטים וחיישנים', 'Robots and sensors'),      icon:'📡', color:'#6c86d9', skill:t('מרגיש את העולם', 'feels the world')},
@@ -1100,7 +1203,7 @@ setInterval(function(){
 /* ═══════════ 👋 רובי מכיר אותך ═══════════
    בכל פתיחה של המשחק רובי מברך את המורים בשמות שכתבו בסדנה, מספר מה כבר לימדו אותו ומה מחכה היום.
    ״מה חדש״ מופיע רק בפעם הראשונה אחרי עדכון (G.hello שומר איזה עדכון כבר ראית). */
-var HELLO_VER = 4;   // גרסת ״מה חדש״ הבסיסית. תכונה שנדלקת מופיעה ב״מה חדש״ פעם אחת (G.seen)
+var HELLO_VER = 5;   // גרסת ״מה חדש״ הבסיסית. תכונה שנדלקת מופיעה ב״מה חדש״ פעם אחת (G.seen)
 function esc(t){ return String(t).replace(/[&<>"']/g, function(c){ return {'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]; }); }
 function named(){ var t = G.teachers[0]; return !!t && t !== TEACHER_DEFAULTS[0] && t !== 'מורה א׳'; }   // 'מורה א׳' = ברירת המחדל הישנה בשמורים קיימים
 function who(){ return named() ? G.teachers[0] : TEACHER_DEFAULTS[0]; }
@@ -1127,6 +1230,7 @@ function openHello(next){
   $('#hello-sk').innerHTML = learned.length ? t('<span>🧠 כבר לימדת אותי:</span>', '<span>🧠 You have already taught me:</span>') + learned.map(function(x){ return '<span>' + x.icon + ' ' + x.skill + '</span>'; }).join('') : '';
   var news = [   // [גרסה, תכונה, שורה]
     [FEATURES.voice ? 4 : 0, '', t('🎤 חדש: בכל שלב יש לידי כפתור 🎤. אפשר לבקש ממני עזרה בשלב, או לתת לי פקודה.', '🎤 New: in every level there’s a 🎤 button next to me. You can ask me for help with the level, or give me a command.')],
+    [5, '', t('🔤 עולם חדש נפתח במפה: ים המילים! שם אלמד איך מחשב מבין מילים.', '🔤 A new world opened on the map: Word Sea! There I’ll learn how a computer understands words.')],
     [3, '', t('🌳 עולם חדש נפתח במפה: עץ השאלות! שם אלמד לקבל החלטות.', '🌳 A new world opened on the map: the Question Tree! There I’ll learn to make decisions.')],
     [3, 'fly', t('💡 הרעיון שלך התגשם! גלול למטה, ואני ממריא ומרחף איתך על המסך 🚀', '💡 Your idea came true! Scroll down, and I take off and fly with you on the screen 🚀')],
     [3, 'move', t('✋ רעיון שלך: גרור אותי באצבע לאן שתרצה, ואני אשאר שם.', '✋ Your idea: drag me with your finger wherever you like, and I’ll stay there.')],
@@ -1524,13 +1628,15 @@ var ACTS = {
   green: {w: 'pixels', lbl: t('להיות ירוק 🟢', 'Be green 🟢'), run: function(){ vSetBody(VCOL.green); return VONE.green; }},
   blue:  {w: 'pixels', lbl: t('להיות כחול 🔵', 'Be blue 🔵'), run: function(){ vSetBody(VCOL.blue); return VONE.blue; }},
   learned: {w: 'layers', lbl: t('לספר מה למדתי 🧠', 'Tell what I learned 🧠'), run: function(){ if (vCtx === 'lvl') return tf('במוח שלי דולקות {n} מתוך 27 נקודות אור 🧠. בסדנה אני מסתובב ומראה לך אותו.', '{n} of 27 light dots are on in my brain 🧠. In the Workshop I turn around and show it to you.', {n: mindLit()}); vLearnShow(); return t('בוא אראה לך מה למדתי! 🧠', 'Let me show you what I learned! 🧠'); }},
-  weather: {w: 'tree', lbl: t('לחזות מזג אוויר 🌤️', 'Forecast the weather 🌤️'), run: function(){ return vWxStart(); }}
+  weather: {w: 'tree', lbl: t('לחזות מזג אוויר 🌤️', 'Forecast the weather 🌤️'), run: function(){ return vWxStart(); }},
+  means:   {w: 'words', lbl: t('לנחש משמעות 🔤', 'Guess a meaning 🔤'), run: function(p){ return vMean(p && p.s); }}   // 🔤 ״לחצתי על העכבר״ ⇐ רובי סופר שכנים
 };
 var VROWS = [   // מה מוצג ברשימה: [עולם, [טקסטים לדוגמה]]
   ['examples', [t('תרקוד', 'dance'), t('תשמח', 'be happy'), t('תהיה עצוב', 'be sad'), t('תחשוב', 'think'), t('תדאג', 'worry')]],
   ['pixels', [t('תהיה אדום', 'be red'), t('תהיה ירוק', 'be green'), t('תהיה כחול', 'be blue'), t('אדום וירוק', 'red and green'), t('אדום וכחול', 'red and blue'), t('ירוק וכחול', 'green and blue'), t('אדום וירוק וכחול', 'red and green and blue')]],
   ['layers', [t('מה למדת?', 'what did you learn?')]],
-  ['tree', [t('מה מזג האוויר?', 'what’s the weather?')]]
+  ['tree', [t('מה מזג האוויר?', 'what’s the weather?')]],
+  ['words', [t('החתול רדף אחרי העכבר', 'the cat chased the mouse'), t('לחצתי על העכבר', 'I clicked the mouse'), t('הכוכב שר על הבמה', 'the star sang on stage')]]
 ];
 function vOpen(id){ return FEATURES.voice && mindDone(id) === 3; }
 function vWorld(id){ return WORLDS.filter(function(w){ return w.id === id; })[0]; }
@@ -1552,7 +1658,8 @@ function vLevelHelp(){   // רובי אומר איפה אנחנו, וסבא פי
   if (HEV && G.read && !G.muted) speakList([{text: clean(head), robot: true}].concat(tipLine ? [{text: clean(tipLine)}] : []));
 }
 function vParse(n){
-  if (/^(היי|הי|שלום|אהלן|hi|hello|hey)( |$)/.test(n)) return {greet: true};   // 👋 ״היי״ ⇐ רובי מברך ומציע לחזור על מה שלמדנו
+  if (/^(היי|הי|שלום|אהלן|hi|hello|hey)( |$)/.test(n)) return {greet: true};
+  if (vOpen('words') && vMeanFind(n)) return {id: 'means', s: n};   // 🔤 משפט עם ״עכבר״ או ״כוכב״   // 👋 ״היי״ ⇐ רובי מברך ומציע לחזור על מה שלמדנו
   if (/מזג|אוויר|תחזית|\bweather|\bforecast/.test(n)) return {id: 'weather'};
   if (/למדת|\blearn/.test(n)) return {id: 'learned'};
   if (/רקוד|ריקוד|רקד|\bdanc/.test(n)) return {id: 'dance'};
@@ -1637,7 +1744,7 @@ function vHandle(raw){
     vReply(tf('אין לי פקודה ל{c}, אבל אפשר לערבב אור! {c} יוצא מ: {m}.', 'I don’t have a command for {c}, but you can mix light! Mix {m} to get {c}.', {c: h[0], m: h[1]}));
     vOffer([[t('🎨 נסה: ״', '🎨 Try: “') + h[1] + t('״', '”'), function(){ vHandle(h[1]); }]]); return;
   }
-  vReply(pre + (p.cols ? vColors(p.cols) : ACTS[p.id].run()), p.cols && p.cols.length > 1 ? vMixVis(p.cols) : null);
+  vReply(pre + (p.cols ? vColors(p.cols) : ACTS[p.id].run(p)), p.cols && p.cols.length > 1 ? vMixVis(p.cols) : null);
   vBackBtn();   // כל עוד רובי בצבע של אור, הכפתור לחזרה לצבע שלך נשאר
 }
 /* 👋 היי רובי: מברך בשם השחקן ושואל אם לעבור על מה שלמדנו */
@@ -1739,7 +1846,8 @@ function vTourTexts(){
   if (vOpen('pixels')) a.push(t('בעולם עיר הפיקסלים תגיד ״תהיה אדום״, ״תהיה ירוק״ או ״תהיה כחול״, והוא ישנה את הצבע שלו. אפשר גם לערבב אור: תגיד ״אדום וירוק״ ותראה איזה צבע יוצא!', 'In Pixel City, say “be red”, “be green” or “be blue”, and it changes its color. You can also mix light: say “red and green” and see what color comes out!'));
   if (vOpen('layers')) a.push(t('בעולם מגדל השכבות תשאל ״מה למדת?״, והוא יסתובב ויראה לך את המוח שלו, עם כל מה שלמד.', 'In the Tower of Layers, ask “what did you learn?”, and it turns around and shows you its brain, with everything it learned.'));
   if (vOpen('tree')) a.push(t('בעולם עץ השאלות תשאל ״מה מזג האוויר?״, והוא ישאל אותך שאלות מהעץ, עד שיגיע לתחזית.', 'In the Question Tree, ask “what’s the weather?”, and it will ask you questions from the tree, until it reaches a forecast.'));
-  if (!(vOpen('examples') && vOpen('pixels') && vOpen('layers') && vOpen('tree'))) a.push(t('ויש עוד פקודות שמחכות! כשתסיים את שלושת השלבים הראשונים בעוד עולם, הן ייפתחו.', 'And more commands are waiting! When you finish the first three levels of another world, they unlock.'));
+  if (vOpen('words')) a.push(t('בעולם ים המילים תגיד לי משפט עם ״עכבר״ או ״כוכב״, למשל ״לחצתי על העכבר״, ואנחש לפי השכנים למה התכוונת.', 'In Word Sea, say a sentence with “mouse”, “star” or “bat”, like “I clicked the mouse”, and I’ll guess from the neighbors what you meant.'));
+  if (!(vOpen('examples') && vOpen('pixels') && vOpen('layers') && vOpen('tree') && vOpen('words'))) a.push(t('ויש עוד פקודות שמחכות! כשתסיים את שלושת השלבים הראשונים בעוד עולם, הן ייפתחו.', 'And more commands are waiting! When you finish the first three levels of another world, they unlock.'));
   a.push(t('ואם תגיד מילה שאני לא מכיר, אשאל אותך מה לעשות בה, ואלמד אותה. אפשר ללחוץ על דלג בכל רגע.', 'And if you say a word I don’t know, I’ll ask you what to do with it, and I’ll learn it. You can tap Skip at any time.'));
   return a;
 }
@@ -1969,6 +2077,11 @@ function gTip(){
                t('שאלה ראשונה טובה מחלקת את הימים לקבוצות שונות. בדוק, ותסתכל במד כמה כל שאלה הוסיפה.', 'A good first question splits the days into different groups. Test it, and look at the meter to see how much each question added.'),
                t(n + ' מכיר רק את מה שיש בעץ שלו. תחשוב על מזג אוויר שאין לו עלה בעץ.', n + ' only knows what’s in its tree. Think of weather that has no leaf in the tree.'),
                t('שאלה טובה היא שאלה שהתשובה עליה באמת משנה מה כדאי לשחק. ואל תשאל את אותה שאלה פעמיים באותו ענף.', 'A good question is one whose answer really changes what to play. And don’t ask the same question twice on one branch.'),
+               SHOW],
+    words:    [t('לא כל מילה במכתב עוזרת. חפש מילים שמספרות מה הדבר עושה, איפה הוא חי או איך אוכלים אותו. ״ראיתי״ ו״אתמול״ לא מלמדות כלום.', 'Not every word in the letter helps. Look for words that tell what the thing does, where it lives or how it’s eaten. “Saw” and “yesterday” teach nothing.'),
+               t('לפני ששולחים, תחשוב: איזו מילה בספרייה של ' + n + ' דומה למילה הסודית? שלח בקבוק עם משהו שיש רק למילה הסודית.', 'Before you send, think: which word in ' + n + '’s library is similar to the secret word? Send a bottle with something only the secret word has.'),
+               t('סופרים כמו ' + n + ': כמה שכנים במשפט שייכים לכל משמעות? ובאתגר האלופים, תחשוב אילו מילים באות בדרך כלל ליד עכבר של מחשב.', 'Count like ' + n + ': how many neighbors in the sentence belong to each meaning? And in the Champions Challenge, think which words usually come next to a computer mouse.'),
+               t(n + ' כותב תמיד את המילה שבאה הכי הרבה פעמים אחרי המילה האחרונה, בספרייה שקרא. תחשוב: על מה כותבים הכי הרבה בסיפורי ים? ובמתכונים?', n + ' always writes the word that came most often after the last word, in the library it read. Think: what do sea stories write about most? And recipes?'),
                SHOW]
   };
   return (T[curWorld] || [])[W.level] || '';
@@ -4182,11 +4295,673 @@ function invLevel(){
   }
 }
 
+/* ═══════════ 🔤 ים המילים: איך מחשב מבין מילים ═══════════
+   אצל רובי כל מילה היא רשימה של 4 מספרים, כמו טביעת אצבע: כמה פעמים ראה לידה שכן מכל סוג
+   (💧 מים · 🐾 חי · 🌱 צומח · 😋 אוכל). למילים עם שכנים דומים יש רשימות דומות.
+   ״כמה דומה״ = משווים את הכיוון של שתי הרשימות (דמיון קוסינוס). 100% = אותו כיוון בדיוק.
+   מחשבים אמיתיים: מאות מספרים לכל מילה, בלי שמות, ממיליוני משפטים. */
+var WS_AX = [{k: 'w', e: '💧', n: t('מים', 'water')}, {k: 'a', e: '🐾', n: t('חי', 'animal')}, {k: 'p', e: '🌱', n: t('צומח', 'plant')}, {k: 'f', e: '😋', n: t('אוכל', 'food')}];
+var WS_AXI = {w: 0, a: 1, p: 2, f: 3};
+var WS_D = {   // 📚 הספרייה של רובי: מילים שהוא כבר קרא עליהן הרבה, וטביעת האצבע של כל אחת
+  dolphin: {e: '🐬', n: t('דולפין', 'dolphin'), v: [5, 4, 0, 0]},
+  fish:    {e: '🐟', n: t('דג', 'fish'), v: [5, 3, 0, 2]},
+  cat:     {e: '🐈', n: t('חתול', 'cat'), v: [0, 5, 0, 0]},
+  melon:   {e: '🍉', n: t('אבטיח', 'watermelon'), v: [1, 0, 3, 5]},
+  sunfl:   {e: '🌻', n: t('חמנייה', 'sunflower'), v: [1, 0, 5, 1], g: 1},   // g = נקבה: ״זו חמנייה״
+  carrot:  {e: '🥕', n: t('גזר', 'carrot'), v: [0, 0, 4, 4]}
+};
+var WS_ALL = ['fish', 'dolphin', 'cat', 'melon', 'sunfl', 'carrot'];
+var WS_SURE = 0.05;   // אם שתי המילים הראשונות קרובות יותר מזה, רובי מתלבט
+function wsSim(a, b){ var d = 0, na = 0, nb = 0; for (var i = 0; i < 4; i++){ d += a[i] * b[i]; na += a[i] * a[i]; nb += b[i] * b[i]; } return na && nb ? d / Math.sqrt(na * nb) : 0; }
+function wsRank(v, keys){ return keys.map(function(k){ return {k: k, s: wsSim(v, WS_D[k].v)}; }).sort(function(x, y){ return y.s - x.s; }); }
+function wsPct(s){ return Math.round(s * 100); }
+function wsT(ms){ return RM ? 60 : ms; }   // מי שביקש פחות תנועה: בלי לחכות
+function wsNW(n){ return n === 0 ? t('אף שכן', 'no neighbors') : n === 1 ? t('שכן אחד', '1 neighbor') : n + t(' שכנים', ' neighbors'); }
+function wsZe(d){ return d.g ? 'זו' : 'זה'; }
+function wsName(s){ return s.replace(/@/g, G.name); }   // @ במשפט = השם של הרובוט
+function wsOn(tok){ return tok === animTok && screen === 'world'; }   // עדיין באותו מסך? (יצאת באמצע ⇐ האנימציה עוצרת)
+
+/* ✉️ משפט: {מילה|סוג} = שכן שמלמד, [M] = המילה המסתורית, [X] = המילה הכפולה */
+function wsParse(s){
+  s = wsName(s);
+  var out = [], re = /\{([^|}]+)\|(\w)\}|\[M\]|\[X\]/g, last = 0, m;
+  while ((m = re.exec(s))){
+    if (m.index > last) out.push([s.slice(last, m.index), '']);
+    out.push(m[0] === '[M]' ? [null, 'M'] : m[0] === '[X]' ? [null, 'X'] : [m[1], m[2]]);
+    last = re.lastIndex;
+  }
+  if (last < s.length) out.push([s.slice(last), '']);
+  return out;
+}
+function wsTagged(toks){ return toks.filter(function(x){ return x[1] && x[1] !== 'M' && x[1] !== 'X'; }); }
+function wsSent(toks, o){   // o.lit = כמה שכנים כבר נדלקו, לפי הסדר
+  var c = 0;
+  return toks.map(function(x){
+    if (x[1] === 'M' || x[1] === 'X') return '<span class="wsmys' + (o.known ? ' known' : '') + '">' + esc(o.word) + '</span>';
+    if (!x[1]) return esc(x[0]);
+    var on = c++ < (o.lit || 0), ax = WS_AXI[x[1]] != null ? WS_AX[WS_AXI[x[1]]] : null;
+    return '<span class="wsnb ' + (ax ? 'ax-' + x[1] : 'm' + x[1]) + (on ? ' lit' : '') + '">' + esc(x[0]) + (on ? '<sup aria-hidden="true">' + (ax ? ax.e : o.sup[x[1]]) + '</sup>' : '') + '</span>';
+  }).join('');
+}
+function wsFp(v, o){   // 🔢 טביעת האצבע: 4 מספרים
+  o = o || {};
+  return '<div class="wsfp' + (o.small ? ' sm' : '') + '" role="img" aria-label="' + WS_AX.map(function(a, i){ return a.n + ' ' + v[i]; }).join(', ') + '">' + WS_AX.map(function(a, i){
+    return '<div class="wsfpc ax-' + a.k + (o.bump === i ? ' bump' : '') + '"><span class="fe" aria-hidden="true">' + a.e + '</span><b>' + v[i] + '</b><i><s style="width:' + Math.min(100, v[i] / 6 * 100) + '%"></s></i><small>' + a.n + '</small></div>';
+  }).join('') + '</div>';
+}
+function wsCards(keys, o){   // 🃏 המילים שרובי מכיר. o.v = טביעת האצבע לבדיקה ⇐ אחוזי דמיון, ו-🤖 על המילה שהוא בוחר
+  o = o || {};
+  var sims = {}, best = null, unsure = false;
+  if (o.v){ var rk = wsRank(o.v, keys); if (rk[0].s > 0){ rk.forEach(function(r){ sims[r.k] = r.s; }); best = rk[0].k; unsure = rk[0].s - rk[1].s < WS_SURE; } }
+  return '<div class="wscards c' + keys.length + (o.tap ? ' tap' : '') + '">' + keys.map(function(k){
+    var d = WS_D[k], s = sims[k], st = (o.mark && o.mark[k]) || '';
+    return '<button type="button" class="wscard ' + st + (best === k ? ' best' : '') + '" data-k="' + k + '"' + (o.tap ? '' : ' disabled') + ' aria-label="' + esc(d.n) + (s != null ? tf(', דומה ב-{p}%', ', {p}% alike', {p: wsPct(s)}) : '') + '">' +
+      '<span class="we" aria-hidden="true">' + d.e + '</span><span class="wn">' + esc(d.n) + '</span>' +
+      (s != null ? '<i><s style="width:' + wsPct(s) + '%"></s></i><em>' + wsPct(s) + '%</em>' : '') +
+      (best === k ? '<span class="rb" aria-hidden="true">🤖' + (unsure ? '?' : '') + '</span>' : '') +
+      (st === 'kidok' || st === 'kidno' ? '<span class="kb" aria-hidden="true">👆</span>' : '') + '</button>';
+  }).join('') + '</div>';
+}
+var WS_BTL = '<svg class="wsbtl" viewBox="0 0 40 64" aria-hidden="true"><rect class="ck" x="15" y="1" width="10" height="7" rx="2"/><path class="gl" d="M14 8h12v9c7 3 9 8 9 14v25a6 6 0 0 1-6 6H11a6 6 0 0 1-6-6V31c0-6 2-11 9-14z"/><rect class="pp" x="11" y="30" width="18" height="22" rx="3"/><path class="ln" d="M14 36h12M14 41h12M14 46h8"/></svg>';
+function wsBottles(n, cur){   // 🍾 בקבוקים שצפים על הגלים: שנקראו, שעכשיו, ושמחכים
+  var s = ''; for (var i = 0; i < n; i++) s += '<span class="' + (i < cur ? 'done' : i === cur ? 'cur' : 'wait') + '">' + WS_BTL + '</span>';
+  return '<div class="wssea" aria-hidden="true">' + s + '<svg class="wswave" viewBox="0 0 200 14" preserveAspectRatio="none"><path d="M0 7 Q12.5 0 25 7 T50 7 T75 7 T100 7 T125 7 T150 7 T175 7 T200 7 V14 H0z"/></svg></div>';
+}
+/* 🔦 רובי קורא: השכנים נדלקים אחד אחד, וכל שכן מוסיף 1 למספר שלו. בסוף: after(הרשימה החדשה) */
+function wsReadAnim(toks, word, v0, after, wait){
+  var tok = animTok, tg = wsTagged(toks), i = 0, v = v0.slice();
+  setTimeout(function next(){
+    if (!wsOn(tok)) return;
+    if (i >= tg.length){ setTimeout(function(){ if (wsOn(tok)) after(v); }, wsT(tg.length ? 300 : 700)); return; }
+    var ax = WS_AXI[tg[i][1]]; v[ax]++; i++;
+    var nt = $('#wsnote'), fp = $('#panel .wsfpbox .wsfp');
+    if (nt) nt.innerHTML = wsSent(toks, {word: word, lit: i});
+    if (fp) fp.outerHTML = wsFp(v, {bump: ax});
+    beep('tap'); setTimeout(next, wsT(560));
+  }, wsT(wait || 300));
+}
+
+/* ───── שלב 1: המילה המסתורית. 3 בקבוקים לכל מילה. הילד מנחש, ורובי ממלא את המספרים מהשכנים ───── */
+var WS_R1 = [
+  {w: t('פְּלוּמְפָּה', 'plumpa'), ans: 'dolphin', c: ['dolphin', 'fish', 'cat', 'sunfl'],
+   b: [t('ראיתי [M] גדולה אתמול.', 'I saw a big [M] yesterday.'), t('ה[M] {שוחה|w} בין ה{גלים|w}.', 'The [M] {swims|w} between the {waves|w}.'), t('ה[M] {נושמת|a} אוויר ו{משחקת|a} עם חברים.', 'The [M] {breathes|a} air and {plays|a} with friends.')],
+   zero: t('המילים כאן, ״ראיתי״, ״גדולה״ ו״אתמול״, יכולות לבוא ליד כל דבר. הן לא מלמדות אותי כלום, והמספרים שלי עדיין אפס 🤷', 'The words here, “saw”, “big” and “yesterday”, can go next to anything. They don’t teach me anything, and my numbers are still zero 🤷')},
+  {w: t('זְרוּבִּיק', 'zrubik'), ans: 'melon', c: ['melon', 'sunfl', 'carrot', 'cat'],
+   b: [t('את ה[M] {שותלים|p} באביב.', 'We {plant|p} the [M] in spring.'), t('ה[M] {מתוק|f} ו{טעים|f} מאוד.', 'The [M] is {sweet|f} and very {tasty|f}.'), t('בקיץ {אוכלים|f} [M] קר ו{עסיסי|w}, מלא {מים|w}.', 'In summer we {eat|f} cold, {juicy|w} [M], full of {water|w}.')]},
+  {w: t('טוּטִימְבָּה', 'tutimba'), ans: 'cat', c: ['cat', 'dolphin', 'fish', 'sunfl'],
+   b: [t('ה[M] {שותה|a} {מים|w} מהקערה.', 'The [M] {drinks|a} {water|w} from the bowl.'), t('ה[M] {מיללה|a} ו{ישנה|a} על הספה.', 'The [M] {meowed|a} and {slept|a} on the sofa.'), t('ה[M] {רדפה|a} אחרי {עכבר|a}.', 'The [M] {chased|a} a {mouse|a}.')]}
+];
+function wsNewWord(i){ W.ti = i; W.gw = 0; W.b = 0; W.v = [0, 0, 0, 0]; W.got = -1; W.kidok = ''; W.kidno = []; W.sub = 'guess'; W.msg = ''; W.round++; }
+function wsGuess1(k){
+  var R = WS_R1[W.ti], d = WS_D[k], n = G.name, miss = W.paid['x' + W.ti] || 0;   // ניחוש שגוי שבוטל ב-↩ עדיין נספר
+  if (k === R.ans){
+    W.gw = Math.max(1, 3 - Math.max(W.b, miss)); W.got = W.b; W.pts += W.gw; W.kidok = k; W.kidno = []; W.msgOk = true; beep('good');
+    if (!W.paid['w' + W.ti]){ W.paid['w' + W.ti] = 1; addStars(STARS_GOOD_GUESS); duelPoint(W.turn % 2); }   // ⭐ לחנות: פעם אחת לכל מילה
+    W.msg = tf('יש! {w} זה {d} {e} {s} עכשיו נראה אם {n} יגלה.', 'Yes! A {w} is a {d} {e} {s} Now let’s see if {n} finds out.', {w: R.w, d: d.n, e: d.e, s: '🏅'.repeat(W.gw), n: n});
+  } else {
+    W.paid['x' + W.ti] = Math.max(miss, W.b + 1); W.kidno = W.kidno.concat(k); W.msgOk = false; beep('bad');
+    W.msg = tf('לא {d}. לא נורא, נראה מה {n} לומד מהמכתב.', 'Not a {d}. That’s okay, let’s see what {n} learns from the letter.', {d: d.n, n: n});
+  }
+  W.sub = 'read'; W.round++; twKeep(renderWorld);
+}
+function words1(){
+  var n = G.name, ph = W.phase, ST = [t('הסבר', 'Intro'), t('מגלים מילים', 'Finding words'), t('סיכום', 'Summary')];
+  if (ph === 'intro'){
+    steps(ST, 0); setMood('think'); say(t('מצאתי בים בקבוק עם מכתב! 🍾', 'I found a bottle with a letter in the sea! 🍾'));
+    P(comic([['🍾', tf('{n} מצא בים בקבוק עם מכתב! אבל בשבילו אלה רק סימנים על נייר. מחשב לא מבין מילים כמו שאנחנו מבינים.', '{n} found a bottle with a letter in the sea! But to {n} it’s just marks on paper. A computer doesn’t understand words the way we do.', {n: n})],
+              ['🔢', t('אז הוא הופך כל מילה ל<b>מספרים</b>. זוכרים את עיר הפיקסלים? שם כל פיקסל היה 3 מספרים. כאן כל מילה היא רשימה של מספרים, כמו <b>טביעת אצבע</b>.', 'So it turns every word into <b>numbers</b>. Remember Pixel City? There every pixel was 3 numbers. Here every word is a list of numbers, like a <b>fingerprint</b>.')],
+              ['🏘️', t('את המספרים הוא לומד מה<b>שכנים</b> של המילה, המילים שבאות לידה במשפטים. למילים עם שכנים דומים יש רשימות דומות.', 'It learns the numbers from the word’s <b>neighbors</b>, the words that come next to it in sentences. Words with similar neighbors get similar lists.')]]) +
+      '<p class="wsnote noread">' + wsSent(wsParse(t('ה[M] {שוחה|w} ב{ים|w} ו{קופץ|a} מעל ה{גלים|w}.', 'The [M] {swims|w} in the {sea|w} and {jumps|a} over the {waves|w}.')), {word: WS_D.dolphin.n, known: true, lit: 9}) + '</p>' +
+      '<div class="wscmp noread"><div><p class="wscap">🐬 ' + esc(WS_D.dolphin.n) + '</p>' + wsFp(WS_D.dolphin.v, {small: true}) + '</div><div><p class="wscap">🐟 ' + esc(WS_D.fish.n) + '</p>' + wsFp(WS_D.fish.v, {small: true}) + '</div></div>' +
+      tf('<p class="small-note">כל מספר אומר כמה פעמים {n} ראה ליד המילה שכן מסוג מסוים: 💧 מים · 🐾 חי · 🌱 צומח · 😋 אוכל. לדולפין ולדג יש שכנים דומים, ים, שוחה וגלים, ולכן הרשימות שלהם כמעט אותו דבר.</p>', '<p class="small-note">Each number says how many times {n} saw a certain kind of neighbor next to the word: 💧 water · 🐾 animal · 🌱 plant · 😋 food. A dolphin and a fish have similar neighbors, sea, swims and waves, so their lists are almost the same.</p>', {n: n}) +
+      tf('<p class="wshonest">ל{n} יש רק 4 מספרים לכל מילה. למחשבים אמיתיים יש מאות מספרים לכל מילה, והם למדו אותם ממיליוני משפטים. למספרים שלהם אין שמות כמו ״מים״ או ״אוכל״, המחשב מוצא אותם לבד. לכל זה קוראים <b>עיבוד שפה טבעית</b>, וככה עובדים גם צ׳אטבוטים ועוזרים קוליים.</p>', '<p class="wshonest">{n} has only 4 numbers for each word. Real computers have hundreds of numbers for each word, and they learned them from millions of sentences. Their numbers don’t have names like “water” or “food”, the computer finds them by itself. All this is called <b>natural language processing</b>, and it’s how chatbots and voice assistants work too.</p>', {n: n}) +
+      t('<button class="btn" id="go" type="button">לפתוח את הבקבוק</button>', '<button class="btn" id="go" type="button">Open the bottle</button>'));
+    on('go', function(){ W.phase = 'play'; wsNewWord(0); renderWorld(); window.scrollTo(0, 0); });
+  }
+  else if (ph === 'play'){
+    steps(ST, 1);
+    var R = WS_R1[W.ti], toks = wsParse(R.b[W.b]), sub = W.sub, mark = {};
+    W.kidno.forEach(function(k){ mark[k] = 'kidno'; }); if (W.kidok) mark[W.kidok] = 'kidok';
+    var head = '<h3>🍾 ' + tf('מילה מסתורית {i} מתוך {k}', 'Mystery word {i} of {k}', {i: W.ti + 1, k: WS_R1.length}) + '</h3><div class="twcnt">' + (sub === 'reveal' ? '' : tf('בקבוק {b} מתוך 3', 'Bottle {b} of 3', {b: W.b + 1}) + ' · ') + '🏅 ' + W.pts + '</div>' + wsBottles(3, sub === 'reveal' ? 3 : W.b);
+    var note = '<p class="wsnote" id="wsnote">' + wsSent(toks, {word: R.w, lit: sub === 'said' || sub === 'reveal' ? 99 : 0}) + '</p>';
+    var fpb = '<div class="wsfpbox noread"><p class="wscap">' + tf('🔢 טביעת האצבע של ״{w}״, לפי מה ש{n} קרא עד עכשיו', '🔢 The fingerprint of “{w}”, from what {n} has read so far', {w: R.w, n: n}) + '</p>' + wsFp(W.v) + '</div>';
+    if (sub === 'guess' && W.got >= 0){   // כבר גילית את המילה: רובי ממשיך לקרוא לבד
+      setMood('think'); say(t('עוד מכתב! אני קורא…', 'Another letter! I’m reading…'));
+      P(head + note + '<p class="lbl">' + tf('כבר גילית מה זו {w} 😎 נראה אם גם {n} יגלה.', 'You already found out what a {w} is 😎 Let’s see if {n} finds out too.', {w: R.w, n: n}) + '</p>' +
+        wsCards(R.c, {mark: mark}) + tf('<button class="btn" id="go" type="button">🤖 {n} קורא את המכתב</button>', '<button class="btn" id="go" type="button">🤖 {n} reads the letter</button>', {n: n}) + fpb);
+      on('go', function(){ W.sub = 'read'; W.msg = ''; W.round++; twKeep(renderWorld); });
+    }
+    else if (sub === 'guess'){
+      setMood('think'); say(W.b === 0 ? t('מילה חדשה! אני לא מכיר אותה בכלל. מה אתה חושב שהיא?', 'A new word! I don’t know it at all. What do you think it is?') : t('הנה עוד בקבוק. עכשיו אתה כבר יודע?', 'Here’s another bottle. Do you know now?'));
+      P(head + turnTag(t('מנחש', 'Guessing')) + note +
+        '<p class="lbl">' + (W.b === 0 ? '1️⃣ ' : '') + tf('קרא את המכתב. מה זו {w}? אם אתה יודע, לחץ על התמונה.', 'Read the letter. What is a {w}? If you know, tap the picture.', {w: R.w}) + '</p>' +
+        wsCards(R.c, {tap: true, mark: mark}) +
+        tf('<button class="btn alt" id="pass" type="button">🤷 עוד לא יודע, ש{n} יקרא</button>', '<button class="btn alt" id="pass" type="button">🤷 Not sure yet, let {n} read it</button>', {n: n}) + fpb);
+      $('#panel').querySelectorAll('.wscards button').forEach(function(b){ b.onclick = act(function(){ wsGuess1(b.dataset.k); }); });
+      on('pass', function(){ W.sub = 'read'; W.msg = ''; W.round++; twKeep(renderWorld); });
+    }
+    else if (sub === 'read'){
+      setMood('think'); say(t('קורא, ומחפש שכנים שמלמדים משהו…', 'Reading, and looking for neighbors that teach me something…'));
+      P(head + note + (W.msg ? '<p class="res noread ' + (W.msgOk ? 'ok' : 'no') + '">' + W.msg + '</p>' : '') + wsCards(R.c, {mark: mark}) + fpb);
+      wsReadAnim(toks, R.w, W.v, function(v){ W.v = v; W.sub = 'said'; W.round++; twKeep(renderWorld); }, W.msg ? 1100 : 400);
+    }
+    else if (sub === 'said'){
+      var rk = wsRank(W.v, R.c), top = rk[0], d = WS_D[top.k], d2 = WS_D[rk[1].k], tg = wsTagged(toks).length;
+      if (top.s === 0){ setMood('worry'); say(R.zero || t('אין כאן שכנים שמלמדים משהו. המספרים לא זזו 🤷', 'There are no neighbors here that teach anything. The numbers didn’t move 🤷')); }
+      else if (top.s - rk[1].s < WS_SURE){ setMood('think'); say(tf('אני מתלבט… {a} {ae} או {b} {be}? המספרים דומים לשניהם. צריך עוד שכנים 🤔', 'I can’t decide… a {a} {ae} or a {b} {be}? The numbers look like both. I need more neighbors 🤔', {a: d.n, ae: d.e, b: d2.n, be: d2.e})); }
+      else { setMood('happy'); say(tf('לפי המספרים, {w} הכי דומה ל{d} {e}, ב-{p}%. {z} {d}!', 'By my numbers, a {w} is most like a {d} {e}, {p}% alike. It’s a {d}!', {w: R.w, d: d.n, e: d.e, p: wsPct(top.s), z: wsZe(d)})); }
+      P(head + note + '<p class="lbl">' + (tg ? tf('המילים הצבעוניות הן השכנים שלימדו את {n}. כל שכן הוסיף 1 למספר שלו.', 'The colored words are the neighbors that taught {n}. Each neighbor added 1 to its number.', {n: n}) : t('אף מילה לא נצבעה. מילים כמו ״ראיתי״ ו״אתמול״ לא מלמדות כלום.', 'No word lit up. Words like “saw” and “yesterday” don’t teach anything.')) + '</p>' +
+        wsCards(R.c, {v: W.v, mark: mark}) + fpb +
+        '<button class="btn" id="go" type="button">' + (W.b < 2 ? t('🍾 הבקבוק הבא', '🍾 The next bottle') : tf('🔍 מה זו {w}?', '🔍 What is a {w}?', {w: R.w})) + '</button>');
+      on('go', function(){ if (W.b < 2){ W.b++; W.sub = 'guess'; W.msg = ''; } else W.sub = 'reveal'; W.round++; renderWorld(); window.scrollTo(0, 0); });
+    }
+    else {   // reveal: מה המילה באמת, ומשווים את שתי טביעות האצבע
+      var rk2 = wsRank(W.v, R.c), robiOk = rk2[0].k === R.ans, da = WS_D[R.ans], m2 = {};
+      Object.keys(mark).forEach(function(k){ m2[k] = mark[k]; }); m2[R.ans] = W.got >= 0 ? 'kidok' : 'ans';
+      setMood(robiOk ? 'happy' : 'sad', 2000); if (robiOk) beep('good');
+      say(robiOk ? tf('גם אני גיליתי! הרשימה של {w} דומה מאוד לרשימה של {d}. הבנו מילה שלא הכרנו, רק מהשכנים שלה 💡', 'I found out too! The list of a {w} is very similar to the list of a {d}. We understood a word we didn’t know, just from its neighbors 💡', {w: R.w, d: da.n})
+                 : tf('אוי, אני חשבתי {x}. היו לי מעט מדי שכנים 😢', 'Oh no, I thought it was a {x}. I had too few neighbors 😢', {x: WS_D[rk2[0].k].n}));
+      P(head + note + '<p class="res ' + (W.got >= 0 ? 'ok' : '') + '">' + tf('{w} זה {d} {e}!', 'A {w} is a {d} {e}!', {w: R.w, d: da.n, e: da.e}) + ' ' + (W.got >= 0 ? tf('גילית בבקבוק {b} ', 'You found it in bottle {b} ', {b: W.got + 1}) + '🏅'.repeat(W.gw || 1) : t('הפעם לא ניחשת, וזה בסדר.', 'This time you didn’t guess, and that’s okay.')) + '</p>' +
+        wsCards(R.c, {v: W.v, mark: m2}) +
+        '<div class="wscmp noread"><div><p class="wscap">🍾 ' + tf('״{w}״ מהבקבוקים', '“{w}” from the bottles', {w: R.w}) + '</p>' + wsFp(W.v, {small: true}) + '</div><div><p class="wscap">' + da.e + ' ' + tf('{d} בספרייה של {n}', '{d} in {n}’s library', {d: da.n, n: n}) + '</p>' + wsFp(da.v, {small: true}) + '</div></div>' +
+        '<button class="btn" id="go" type="button">' + (W.ti < WS_R1.length - 1 ? t('▶️ למילה המסתורית הבאה', '▶️ To the next mystery word') : t('🌊 לסיכום', '🌊 To the summary')) + '</button>');
+      on('go', function(){
+        W.turn++;
+        if (W.ti < WS_R1.length - 1) wsNewWord(W.ti + 1);
+        else { W.st = W.pts >= 6 ? 3 : W.pts >= 3 ? 2 : 1; W.first = finishLevel(0, W.st); W.phase = 'sum'; W.round++; }
+        renderWorld(); window.scrollTo(0, 0);
+      });
+    }
+  }
+  else if (ph === 'sum'){
+    steps(ST, 2); setMood('happy'); confetti(); beep('win'); say(t('איזה כיף! עכשיו תורך ללמד אותי.', 'How fun! Now it’s your turn to teach me.'));
+    P('<h3>' + tf('אספת {p} 🏅 מתוך 9 · ', 'You collected {p} 🏅 of 9 · ', {p: W.pts}) + '⭐'.repeat(W.st) + '</h3>' + (W.first ? t('<p>הרווחת ', '<p>You earned ') + STARS_NEW_LEVEL + t(' ⭐ לחנות.</p>', ' ⭐ for the shop.</p>') : '') +
+      tf('<div class="rule">🔢 גילית את הסוד של {n}: אצלו כל מילה היא <b>רשימה של מספרים</b>, כמו טביעת אצבע. את המספרים הוא לומד מה<b>שכנים</b> של המילה, ולמילים עם שכנים דומים יש רשימות דומות. ככה מחשב מבין מילה שהוא לא הכיר. במחשבים אמיתיים יש מאות מספרים כאלה, ואין להם שמות כמו ״מים״ או ״אוכל״.</div>', '<div class="rule">🔢 You discovered {n}’s secret: for it, every word is a <b>list of numbers</b>, like a fingerprint. It learns the numbers from the word’s <b>neighbors</b>, and words with similar neighbors get similar lists. That’s how a computer understands a word it didn’t know. Real computers have hundreds of numbers like these, and they don’t have names like “water” or “food”.</div>', {n: n}) +
+      t('<div class="rule">🤷 לא כל מילה מלמדת. ״ראיתי״, ״גדול״ ו״אתמול״ יכולות לבוא ליד כל דבר, ולכן הן לא עוזרות לנחש.</div>', '<div class="rule">🤷 Not every word teaches. “Saw”, “big” and “yesterday” can go next to anything, so they don’t help you guess.</div>') +
+      t('<div class="row"><button class="btn alt" id="again" type="button">לשחק שוב</button><button class="btn" id="go" type="button">לשלב 2: שולחים בקבוקים</button></div>', '<div class="row"><button class="btn alt" id="again" type="button">Play again</button><button class="btn" id="go" type="button">To level 2: Sending Bottles</button></div>'));
+    on('again', function(){ W = fresh(0); W.phase = 'play'; wsNewWord(0); renderWorld(); window.scrollTo(0, 0); });
+    on('go', function(){ W = fresh(1); renderWorld(); window.scrollTo(0, 0); });
+  }
+}
+
+/* ───── שלב 2: שולחים בקבוקים. רק הילד יודע את המילה הסודית, ושולח 3 משפטים מתוך 6 ───── */
+var WS_R2 = [
+  {s: 'fish', b: [t('ה[M] {שוחה|w} ב{ים|w}.', 'The [M] {swims|w} in the {sea|w}.'), t('ראיתי [M] יפה אתמול.', 'I saw a pretty [M] yesterday.'), t('את ה[M] {אוכלים|f} עם {אורז|f}.', 'We {eat|f} the [M] with {rice|f}.'), t('ה[M] {קפץ|a} מעל ה{גלים|w}.', 'The [M] {jumped|a} over the {waves|w}.'), t('קניתי [M] גדול.', 'I bought a big [M].'), t('ה[M] {צולל|w} עמוק.', 'The [M] {dives|w} deep.')],
+   tk: 'dolphin', trap: t('גם דג וגם דולפין שוחים בים.', 'Both a fish and a dolphin swim in the sea.'), q: t('מה עושים עם דג, ולא עושים עם דולפין? 🍽️', 'What do people do with a fish, but not with a dolphin? 🍽️')},
+  {s: 'cat', b: [t('ה[M] {מילל|a} כל הלילה.', 'The [M] {meowed|a} all night.'), t('ה[M] {שותה|a} {מים|w} מהקערה.', 'The [M] {drinks|a} {water|w} from the bowl.'), t('ה[M] {קפץ|a} ל{בריכה|w}.', 'The [M] {jumped|a} into the {pool|w}.'), t('ראיתי [M] גדול בחצר.', 'I saw a big [M] in the yard.'), t('ה[M] {רדף|a} אחרי {ציפור|a}.', 'The [M] {chased|a} a {bird|a}.'), t('ה[M] שחור ויפה.', 'The [M] is black and pretty.')],
+   tk: 'dolphin', trap: t('בקבוקים שמראים חתול ליד מים מזכירים ל@ דולפין.', 'Bottles that show a cat near water remind @ of a dolphin.'), q: t('איזה משפט מראה משהו שרק חתול עושה?', 'Which sentence shows something only a cat does?')}
+];
+function wsPlain(s, w){ return wsName(s).replace(/\{([^|}]+)\|\w\}/g, '$1').split('[M]').join(w); }   // המשפט בלי הסימונים
+function wsNewSecret(i){ W.ti = i; W.sel = []; W.tries = 0; W.v = null; W.hint = ''; W.robi = ''; W.sub = 'pick'; W.round++; }
+function wsResult2(v, list){
+  var R = WS_R2[W.ti], rk = wsRank(v, WS_ALL), top = rk[0], d = WS_D[top.k], d2 = WS_D[rk[1].k], n = G.name;
+  var gray = list.filter(function(i){ return !wsTagged(wsParse(R.b[i])).length; }).length;
+  W.v = v;
+  if (top.k === R.s && top.s - rk[1].s >= WS_SURE){
+    W.got = W.tries === 1 ? 3 : W.tries === 2 ? 2 : 1; W.pts += W.got; W.gray = gray; W.sub = 'won';
+  } else {
+    var why;
+    if (top.s === 0){ W.robi = t('לא למדתי כלום! כל הבקבוקים היו אפורים 🤷', 'I didn’t learn anything! All the bottles were gray 🤷'); W.robiMood = 'worry'; why = t('בבקבוקים ששלחת אין אף שכן צבעוני. נסה בקבוקים עם מילים שמלמדות.', 'The bottles you sent have no colored neighbors. Try bottles with words that teach.'); }
+    else if (top.s - rk[1].s < WS_SURE){ W.robi = tf('אני מתלבט בין {a} {ae} ל{b} {be}… המספרים דומים לשניהם 🤔', 'I can’t decide between a {a} {ae} and a {b} {be}… The numbers look like both 🤔', {a: d.n, ae: d.e, b: d2.n, be: d2.e}); W.robiMood = 'think'; why = tf('{n} צריך בקבוק שמפריד בין {a} ל{b}. ', '{n} needs a bottle that tells a {a} and a {b} apart. ', {n: n, a: d.n, b: d2.n}) + R.q; }
+    else { W.robi = tf('{z} {d} {e}! לא? 😢', 'It’s a {d} {e}! No? 😢', {d: d.n, e: d.e, z: wsZe(d)}); W.robiMood = 'sad'; why = tf('{n} חשב שזה {d}. ', '{n} thought it was a {d}. ', {n: n, d: d.n}) + (top.k === R.tk ? wsName(R.trap) : tf('הבקבוקים שבחרת מזכירים לו {d}.', 'The bottles you picked remind it of a {d}.', {d: d.n})) + ' ' + R.q; }
+    if (W.tries >= 2 && gray) why += '<br>' + t('💡 בקבוק בלי מילים צבעוניות, כמו ״ראיתי״, הוא אפור. אין בו שכנים שמלמדים משהו, אז חבל לבזבז עליו בקבוק.', '💡 A bottle with no colored words, like “saw”, is gray. It has no neighbors that teach anything, so don’t waste a bottle on it.');
+    W.hint = why; W.robi += t(' שנה בקבוק ונסה שוב.', ' Change a bottle and try again.'); W.sub = 'pick'; beep('bad');
+  }
+  W.round++; renderWorld(); window.scrollTo(0, 0);
+}
+function words2(){
+  var n = G.name, ph = W.phase, ST = [t('הסבר', 'Intro'), t('שולחים', 'Sending'), t('סיכום', 'Summary')];
+  if (ph === 'intro'){
+    steps(ST, 0); setMood('idle'); say(t('עכשיו אתה המורה! 🍾', 'Now you are the teacher! 🍾'));
+    P(comic([['🤫', tf('עכשיו רק אתה יודע את <b>המילה הסודית</b>. במכתבים ש{n} יקבל, יהיה כתוב ״???״ במקומה.', 'Now only you know the <b>secret word</b>. The letters {n} gets will say “???” instead of it.', {n: n})],
+              ['🍾', tf('יש 6 בקבוקים עם משפטים, אבל מותר לשלוח רק <b>3</b>. בחר את הבקבוקים שילמדו את {n} הכי הרבה.', 'There are 6 bottles with sentences, but you can send only <b>3</b>. Pick the bottles that will teach {n} the most.', {n: n})],
+              ['🧐', t('זהירות: יש בקבוקים <b>אפורים</b> שלא מלמדים כלום, ויש מילים דומות שקל להתבלבל ביניהן, כמו דג ודולפין.', 'Careful: some bottles are <b>gray</b> and teach nothing, and some words are similar and easy to mix up, like a fish and a dolphin.')]]) +
+      t('<button class="btn" id="go" type="button">לבחור בקבוקים</button>', '<button class="btn" id="go" type="button">Pick bottles</button>'));
+    on('go', function(){ W.phase = 'play'; wsNewSecret(0); renderWorld(); window.scrollTo(0, 0); });
+  }
+  else if (ph === 'play'){
+    steps(ST, 1);
+    var R = WS_R2[W.ti], sd = WS_D[R.s], sub = W.sub;
+    var head = '<h3>🤫 ' + tf('מילה סודית {i} מתוך {k}', 'Secret word {i} of {k}', {i: W.ti + 1, k: WS_R2.length}) + '</h3><div class="twcnt">🏅 ' + W.pts + (W.tries && sub === 'pick' ? ' · ' + tf('ניסיון {k}', 'Try {k}', {k: W.tries + 1}) : '') + '</div>' +
+      '<p class="wssecret"><span aria-hidden="true">' + sd.e + '</span><span>' + t('המילה הסודית שלך: ', 'Your secret word: ') + '<b>' + esc(sd.n) + '</b><br><small>' + tf('{n} לא רואה אותה. במכתבים שלו יהיה כתוב ״???״ במקומה.', '{n} can’t see it. Its letters will say “???” instead.', {n: n}) + '</small></span></p>';
+    var lib = '<div class="noread"><p class="wscap">' + tf('📚 המילים ש{n} מכיר', '📚 The words {n} knows', {n: n}) + '</p>';
+    if (sub === 'pick'){
+      if (W.robi){ setMood(W.robiMood || 'think'); say(W.robi); }
+      else { setMood('happy'); say(t('אני מוכן! שלח לי 3 בקבוקים, ואני אנסה לגלות את המילה הסודית.', 'I’m ready! Send me 3 bottles, and I’ll try to find out the secret word.')); }
+      var opts = R.b.map(function(s, i){
+        var on2 = W.sel.indexOf(i) >= 0, txt = wsName(s).replace(/\{([^|}]+)\|\w\}/g, '$1').split('[M]').map(esc).join('<b>' + esc(sd.n) + '</b>');
+        return '<button type="button" class="wsbopt" data-i="' + i + '" aria-pressed="' + on2 + '">' + WS_BTL + '<span>' + txt + '</span></button>';
+      }).join('');
+      P(head + (W.hint ? '<p class="twnote">🔍 ' + W.hint + '</p>' : '') +
+        '<p class="lbl">' + t('בחר 3 בקבוקים ושלח:', 'Pick 3 bottles and send:') + '</p>' +
+        '<p class="wsvh" aria-hidden="true">' + esc(t('הבקבוקים: ', 'The bottles: ') + R.b.map(function(s){ return wsPlain(s, sd.n); }).join(' ')) + '</p><div class="wsbopts">' + opts + '</div>' +
+        '<p class="wsbcount">' + tf('🍾 נבחרו {k} מתוך 3', '🍾 {k} of 3 picked', {k: W.sel.length}) + '</p>' +
+        '<button class="btn" id="send" type="button"' + (W.sel.length === 3 ? '' : ' aria-disabled="true"') + '>' + tf('🚀 שולחים ל{n}', '🚀 Send to {n}', {n: n}) + '</button>' +
+        lib + wsCards(WS_ALL, {v: W.v}) + '</div>');
+      $('#panel').querySelectorAll('.wsbopt').forEach(function(b){ b.onclick = act(function(){
+        var i = +b.dataset.i, s = W.sel.slice(), at = s.indexOf(i);
+        if (at >= 0) s.splice(at, 1);
+        else if (s.length >= 3){ say(t('מותר רק 3 בקבוקים. בטל אחד קודם 🙂', 'Only 3 bottles are allowed. Remove one first 🙂')); beep('bad'); return; }
+        else s.push(i);
+        W.sel = s; W.round++; beep('tap'); twKeep(renderWorld);
+      }); });
+      on('send', function(){
+        if (W.sel.length !== 3){ say(tf('צריך לבחור בדיוק 3 בקבוקים. כרגע נבחרו {k}.', 'You need to pick exactly 3 bottles. Right now {k} are picked.', {k: W.sel.length})); beep('bad'); return; }
+        var tk = 't' + W.ti; W.paid[tk] = (W.paid[tk] || 0) + 1; W.tries = W.paid[tk];   // ↩ לא מאפס את הניסיונות
+        W.sub = 'send'; W.hint = ''; W.robi = ''; W.round++; renderWorld(); window.scrollTo(0, 0);
+      });
+    }
+    else if (sub === 'send'){   // 🚀 רובי קורא את 3 הבקבוקים, ובונה טביעת אצבע ל״???״
+      setMood('think');
+      var list = W.sel.slice().sort(), v = [0, 0, 0, 0], j = 0, tok = animTok;
+      P(head + wsBottles(3, 0) + '<p class="wsnote noread" id="wsnote"></p>' +
+        '<div class="wsfpbox noread"><p class="wscap">' + t('🔢 טביעת האצבע של ״???״, לפי הבקבוקים ששלחת', '🔢 The fingerprint of “???”, from the bottles you sent') + '</p>' + wsFp(v) + '</div>' + lib + wsCards(WS_ALL) + '</div>');
+      setTimeout(function nextBottle(){
+        if (!wsOn(tok)) return;
+        if (j >= list.length){ setTimeout(function(){ if (wsOn(tok)) wsResult2(v, list); }, wsT(300)); return; }
+        var toks = wsParse(R.b[list[j]]), tg = wsTagged(toks), i = 0, bt = $('#panel .wssea');
+        if (bt) bt.outerHTML = wsBottles(3, j);
+        var nt = $('#wsnote'); if (nt) nt.innerHTML = wsSent(toks, {word: '???', lit: 0});
+        say(tf('בקבוק {j} מתוך 3… ', 'Bottle {j} of 3… ', {j: j + 1}) + (tg.length ? t('יש פה שכנים!', 'There are neighbors here!') : t('הממ, אין פה אף שכן שמלמד משהו.', 'Hmm, there’s no neighbor here that teaches anything.')));
+        (function nextWord(){
+          if (!wsOn(tok)) return;
+          if (i >= tg.length){ j++; setTimeout(nextBottle, wsT(tg.length ? 800 : 1300)); return; }
+          var ax = WS_AXI[tg[i][1]]; v[ax]++; i++;
+          var nt2 = $('#wsnote'), fp = $('#panel .wsfpbox .wsfp');
+          if (nt2) nt2.innerHTML = wsSent(toks, {word: '???', lit: i});
+          if (fp) fp.outerHTML = wsFp(v, {bump: ax});
+          beep('tap'); setTimeout(nextWord, wsT(520));
+        })();
+      }, wsT(400));
+    }
+    else {   // won: רובי גילה את המילה הסודית
+      setMood('happy'); confetti(); beep('good');
+      say(tf('זה {d} {e}! דומה ב-{p}%. הבקבוקים שבחרת לימדו אותי בדיוק מה שצריך 💃', 'It’s a {d} {e}! {p}% alike. The bottles you picked taught me exactly what I needed 💃', {d: sd.n, e: sd.e, p: wsPct(wsSim(W.v, sd.v))}));
+      P(head + '<p class="res ok">🏆 ' + '🏅'.repeat(W.got) + ' ' + (W.gray ? (W.gray === 1 ? tf('שים לב: אחד הבקבוקים ששלחת היה אפור, ולא לימד את {n} כלום. הוא הצליח בזכות האחרים.', 'Notice: one of the bottles you sent was gray, and taught {n} nothing. It succeeded thanks to the others.', {n: n}) : tf('שים לב: {g} מהבקבוקים ששלחת היו אפורים, ולא לימדו את {n} כלום. הוא הצליח בזכות האחר.', 'Notice: {g} of the bottles you sent were gray, and taught {n} nothing. It succeeded thanks to the other one.', {g: W.gray, n: n})) : t('כל בקבוק ששלחת עשה עבודה. ככה בוחר מורה טוב.', 'Every bottle you sent did its job. That’s how a good teacher chooses.')) + '</p>' +
+        lib + wsCards(WS_ALL, {v: W.v}) + '</div>' +
+        '<button class="btn" id="go" type="button">' + (W.ti < WS_R2.length - 1 ? t('▶️ למילה הסודית הבאה', '▶️ To the next secret word') : t('🌊 לסיכום', '🌊 To the summary')) + '</button>');
+      on('go', function(){
+        if (W.ti < WS_R2.length - 1) wsNewSecret(W.ti + 1);
+        else { W.st = W.pts >= 5 ? 3 : W.pts >= 3 ? 2 : 1; W.first = finishLevel(1, W.st); W.phase = 'sum'; W.round++; }
+        renderWorld(); window.scrollTo(0, 0);
+      });
+    }
+  }
+  else if (ph === 'sum'){
+    steps(ST, 2); setMood('happy'); confetti(); beep('win'); say(t('למדתי ממך מילים חדשות! עכשיו בוא נראה מה קורה כשלמילה אחת יש שתי משמעויות.', 'I learned new words from you! Now let’s see what happens when one word has two meanings.'));
+    P('<h3>' + tf('אספת {p} 🏅 מתוך 6 · ', 'You collected {p} 🏅 of 6 · ', {p: W.pts}) + '⭐'.repeat(W.st) + '</h3>' + (W.first ? t('<p>הרווחת ', '<p>You earned ') + STARS_NEW_LEVEL + t(' ⭐ לחנות.</p>', ' ⭐ for the shop.</p>') : '') +
+      t('<div class="rule">🎯 מורה טוב בוחר משפטים עם שכנים שמלמדים, ובמיוחד שכנים ש<b>מפרידים</b> בין שתי מילים דומות, כמו דג ודולפין.</div>', '<div class="rule">🎯 A good teacher picks sentences with neighbors that teach, and especially neighbors that <b>tell apart</b> two similar words, like a fish and a dolphin.</div>') +
+      t('<div class="rule">📚 גם מחשבים אמיתיים לומדים רק ממה שנותנים להם לקרוא. משפטים טובים יותר = מחשב שמבין יותר.</div>', '<div class="rule">📚 Real computers also learn only from what they’re given to read. Better sentences = a computer that understands more.</div>') +
+      t('<div class="row"><button class="btn alt" id="again" type="button">לשחק שוב</button><button class="btn" id="go" type="button">לשלב 3: מילה כפולה</button></div>', '<div class="row"><button class="btn alt" id="again" type="button">Play again</button><button class="btn" id="go" type="button">To level 3: Double Words</button></div>'));
+    on('again', function(){ W = fresh(1); W.phase = 'play'; wsNewSecret(0); renderWorld(); window.scrollTo(0, 0); });
+    on('go', function(){ W = fresh(2); renderWorld(); window.scrollTo(0, 0); });
+  }
+}
+
+/* ───── שלב 3: מילה אחת, שתי משמעויות. כל שכן מצביע בשביל משמעות אחת, ורובי סופר.
+   באתגר האלופים בונים משפט על עכבר אמיתי, ומבלבלים את רובי עם שכנים של מחשב ───── */
+var WS_MEAN = {
+  mouse: {w: t('עכבר', 'mouse'), A: ['🐭', t('חיה קטנה', 'a small animal')], B: ['🖱️', t('עכבר של מחשב', 'a computer mouse')]},
+  star:  {w: t('כוכב', 'star'), A: ['⭐', t('כוכב בשמיים', 'a star in the sky')], B: ['🎤', t('זמר מפורסם', 'a famous singer')]},
+  third: {w: t('עלה', 'bat'), A: [t('🍃', '🦇'), t('עלה של עץ', 'an animal that flies')], B: [t('⬆️', '⚾'), t('הלך למעלה', 'a baseball bat')]}   // בעברית ״עלה״, באנגלית bat
+};
+var WS_S3 = [
+  {m: 'mouse', s: t('ה{חתול|A} {רדף|A} אחרי ה[X].', 'The {cat|A} {chased|A} the [X].')},
+  {m: 'star', s: t('ב{לילה|A} ה[X] {שר|B} על ה{במה|B} מול כולם.', 'At {night|A}, the [X] {sang|B} on the {stage|B} in front of everyone.')},
+  {m: 'third', s: t('@ [X] ב{מדרגות|B} ל{קומה|B} השנייה.', '@ {hit|B} the {ball|B} hard with the [X].')},
+  {m: 'mouse', s: t('{לחצתי|B} על ה[X], וה{מסך|B} נדלק.', 'I {clicked|B} the [X], and the {screen|B} turned on.')}
+];
+function wsWin(S){ var tg = wsTagged(wsParse(S.s)), a = tg.filter(function(x){ return x[1] === 'A'; }).length; return a > tg.length - a ? 'A' : 'B'; }   // מה הספירה תגיד
+function wsSup(M){ return {A: M.A[0], B: M.B[0]}; }
+function wsVote(a, b, M){   // 🗳️ פס ההצבעה: כמה שכנים לכל משמעות
+  var s = a + b, wa = s ? a / s * 100 : 50, wb = s ? b / s * 100 : 50;
+  return '<div class="wsvote" role="img" aria-label="' + esc(M.A[1]) + ' ' + a + ', ' + esc(M.B[1]) + ' ' + b + '"><span class="vA">' + M.A[0] + ' ' + a + '</span><i><s class="sA" style="width:' + wa + '%"></s><s class="sB" style="width:' + wb + '%"></s></i><span class="vB">' + b + ' ' + M.B[0] + '</span></div>';
+}
+function wsCount(toks, M, after){   // רובי סופר: כל שכן שנדלק מוסיף קול למשמעות שלו
+  var tok = animTok, tg = wsTagged(toks), i = 0, a = 0, b = 0;
+  setTimeout(function next(){
+    if (!wsOn(tok)) return;
+    if (i >= tg.length){ setTimeout(function(){ if (wsOn(tok)) after(a, b); }, wsT(400)); return; }
+    if (tg[i][1] === 'A') a++; else b++; i++;
+    var nt = $('#wsnote'), vt = $('#panel .wsvote');
+    if (nt) nt.innerHTML = wsSent(toks, {word: M.w, known: true, lit: i, sup: wsSup(M)});
+    if (vt) vt.outerHTML = wsVote(a, b, M);
+    beep('tap'); setTimeout(next, wsT(560));
+  }, wsT(350));
+}
+var WS_SLOTS = [   // [המילה, למי היא מצביעה, הפועל בהווה (למשפט ״אבל עכבר של מחשב לא…״), מה בא לפניה באנגלית]
+  {q: t('מה העכבר עשה?', 'What did the mouse do?'), o: [[t('אכל', 'ate'), 'A', t('אוכל', 'eat'), ''], [t('נשך', 'bit'), 'A', t('נושך', 'bite'), ''], [t('רחרח', 'sniffed'), 'A', t('מרחרח', 'sniff'), '']]},
+  {q: t('את מה?', 'What?'), o: [[t('הגבינה', 'cheese'), 'A', '', t('', 'the ')], [t('הכבל', 'cable'), 'B', '', t('', 'the ')], [t('המקלדת', 'keyboard'), 'B', '', t('', 'the ')]]},
+  {q: t('של מי?', 'Whose?'), o: [[t('החתול', 'cat'), 'A', '', t('', 'the ')], [t('המחשב', 'computer'), 'B', '', t('', 'the ')], [t('סבא', 'Grandpa'), '', '', '']]}
+];
+function wsChToks(){
+  var s = WS_SLOTS.map(function(sl, i){ return sl.o[W.cp[i]]; }), out = [[t('ה', 'The '), ''], [null, 'X'], [' ', '']];
+  function add(o){ if (o[3]) out.push([o[3], '']); out.push([o[0], o[1] || '']); }
+  add(s[0]); out.push([t(' את ', ' '), '']); add(s[1]); out.push([t(' של ', ' of '), '']); add(s[2]); out.push(['.', '']);
+  return out;
+}
+function words3(){
+  var n = G.name, ph = W.phase, ST = [t('הסבר', 'Intro'), t('מילה כפולה', 'Double word'), t('אתגר', 'Challenge'), t('סיום', 'Finish')];
+  if (ph === 'intro'){
+    steps(ST, 0); setMood('think'); say(t('אותה מילה, שתי משמעויות? 🤯', 'One word, two meanings? 🤯'));
+    P(comic([['🐭', t('לפעמים לאותה מילה יש <b>שתי משמעויות</b>. ״עכבר״ יכול להיות חיה קטנה, ויכול להיות עכבר של מחשב.', 'Sometimes one word has <b>two meanings</b>. A “mouse” can be a small animal, or a computer mouse.')],
+              ['🗳️', tf('איך {n} יודע למה התכוונו? כל <b>שכן</b> במשפט <b>מצביע</b> בשביל משמעות אחת, ו{n} סופר את הקולות.', 'How does {n} know what was meant? Every <b>neighbor</b> in the sentence <b>votes</b> for one meaning, and {n} counts the votes.', {n: n})],
+              ['🎯', t('אתה מנחש קודם למה התכוונו, ואז רואים אם גם הספירה מגיעה לאותה תשובה.', 'First you guess what was meant, and then we see if the counting reaches the same answer.')]]) +
+      t('<button class="btn" id="go" type="button">להתחיל לספור</button>', '<button class="btn" id="go" type="button">Start counting</button>'));
+    on('go', function(){ W.phase = 'play'; W.ti = 0; W.right = 0; W.pick = ''; W.sub = 'pick'; W.round++; renderWorld(); window.scrollTo(0, 0); });
+  }
+  else if (ph === 'play'){
+    steps(ST, 1);
+    var S = WS_S3[W.ti], M = WS_MEAN[S.m], toks = wsParse(S.s), sub = W.sub;
+    var head = '<h3>🔤 ' + tf('משפט {i} מתוך {k}', 'Sentence {i} of {k}', {i: W.ti + 1, k: WS_S3.length}) + '</h3><div class="twcnt">🏅 ' + W.right + '</div>';
+    var note = '<p class="wsnote" id="wsnote">' + wsSent(toks, {word: M.w, known: true, lit: sub === 'done' ? 99 : 0, sup: wsSup(M)}) + '</p>';
+    var btns = '<div class="wsmrow">' + ['A', 'B'].map(function(k){ return '<button type="button" class="wsmbtn ' + k + (W.pick === k ? ' pick' : '') + '" data-m="' + k + '"' + (sub === 'pick' ? '' : ' disabled') + '><span aria-hidden="true">' + M[k][0] + '</span>' + esc(M[k][1]) + '</button>'; }).join('') + '</div>';
+    if (sub === 'pick'){
+      setMood('think'); say(t('אותה מילה, שתי משמעויות. אני אספור מי מהשכנים מצביע לאיזו משמעות.', 'Same word, two meanings. I’ll count which neighbors vote for which meaning.'));
+      P(head + note + '<p class="lbl">' + tf('למה התכוונו כאן ב״{w}״? בחר, ואז {n} יספור שכנים.', 'What does “{w}” mean here? Pick, and then {n} will count neighbors.', {w: M.w, n: n}) + '</p>' + btns + wsVote(0, 0, M));
+      $('#panel').querySelectorAll('.wsmbtn').forEach(function(b){ b.onclick = act(function(){ W.pick = b.dataset.m; W.sub = 'count'; W.round++; beep('tap'); twKeep(renderWorld); }); });
+    }
+    else if (sub === 'count'){
+      setMood('think'); say(t('סופר שכנים…', 'Counting neighbors…'));
+      P(head + note + btns + wsVote(0, 0, M));
+      wsCount(toks, M, function(a, b){
+        W.va = a; W.vb = b; W.okNow = W.pick === (a > b ? 'A' : 'B');
+        if (W.paid['m' + W.ti] == null) W.paid['m' + W.ti] = W.pick;   // 🏅 רק הבחירה הראשונה נספרת, גם אחרי ↩
+        W.right = WS_S3.filter(function(S2, i){ return W.paid['m' + i] === wsWin(S2); }).length;
+        W.sub = 'done'; W.round++; twKeep(renderWorld);
+      });
+    }
+    else {
+      var a = W.va, b = W.vb, win = a > b ? 'A' : 'B', los = win === 'A' ? 'B' : 'A', lo = Math.min(a, b), ok = W.okNow;
+      setMood(ok ? 'happy' : 'think', 1600); if (ok) beep('good');
+      say(tf('ספרתי: {we} {wn}, {le} {ln}. אז כאן ״{w}״ פירושו {m}!', 'I counted: {we} {wn}, {le} {ln}. So here “{w}” means {m}!', {we: M[win][0], wn: wsNW(Math.max(a, b)), le: M[los][0], ln: wsNW(lo), w: M.w, m: M[win][1]}));
+      P(head + note + btns + wsVote(a, b, M) +
+        '<p class="res ' + (ok ? 'ok' : 'no') + '">' + (ok ? t('✓ גם אתה ידעת!', '✓ You knew it too!') + (W.paid['m' + W.ti] === win ? ' 🏅' : '') : t('בחרת אחרת. תסתכל על השכנים הצבעוניים.', 'You picked differently. Look at the colored neighbors.')) + '</p>' +
+        '<button class="btn" id="go" type="button">' + (W.ti < WS_S3.length - 1 ? t('▶️ למשפט הבא', '▶️ Next sentence') : t('🏆 לאתגר האלופים', '🏆 To the Champions Challenge')) + '</button>');
+      on('go', function(){
+        if (W.ti < WS_S3.length - 1){ W.ti++; W.pick = ''; W.sub = 'pick'; }
+        else { W.phase = 'champ'; W.cp = [0, 0, 0]; W.ctries = 0; W.sub = 'build'; W.robi = ''; }
+        W.round++; renderWorld(); window.scrollTo(0, 0);
+      });
+    }
+  }
+  else if (ph === 'champ'){
+    steps(ST, 2);
+    var M3 = WS_MEAN.mouse, ct = wsChToks(), sb = W.sub;
+    var head3 = t('<h3>🏆 אתגר אלופים: מבלבלים את ', '<h3>🏆 Champions Challenge: confuse ') + esc(n) + '</h3>' +
+      '<p>' + tf('העכבר במשפט הזה הוא עכבר אמיתי 🐭, כי הוא אוכל, נושך או מרחרח. המשימה: לבחור מילים כך ש{n} יחשוב שזה עכבר של מחשב 🖱️.', 'The mouse in this sentence is a real mouse 🐭, because it eats, bites or sniffs. Your mission: pick words so that {n} thinks it’s a computer mouse 🖱️.', {n: n}) + '</p>';
+    var note3 = '<p class="wsnote" id="wsnote">' + wsSent(ct, {word: M3.w, known: true, lit: sb === 'res' ? 99 : 0, sup: wsSup(M3)}) + '</p>';
+    var build = '<div class="wsbuild noread">' + WS_SLOTS.map(function(sl, i){
+      return '<p>' + esc(sl.q) + '</p><div class="wschips">' + sl.o.map(function(o, j){ return '<button type="button" class="wschip" data-s="' + i + '" data-j="' + j + '" aria-pressed="' + (W.cp[i] === j) + '"' + (sb === 'count' ? ' disabled' : '') + '>' + esc(o[3] + o[0]) + '</button>'; }).join('') + '</div>';
+    }).join('') + '</div>';
+    if (sb === 'count'){
+      setMood('think'); say(t('סופר שכנים…', 'Counting neighbors…'));
+      P(head3 + note3 + wsVote(0, 0, M3) + build);
+      wsCount(ct, M3, function(a, b){
+        W.va = a; W.vb = b; W.round++;
+        if (b > a){ W.phase = 'explain'; renderWorld(); window.scrollTo(0, 0); return; }
+        W.robi = a === b ? tf('הממ… {a} של חיה, ו{b} של מחשב. תיקו! אני מתלבט 🤔 עוד שכן אחד של מחשב, ואולי אתבלבל.', 'Hmm… {a} for the animal, and {b} for the computer. A tie! I can’t decide 🤔 One more computer neighbor, and maybe I’ll get confused.', {a: wsNW(a), b: wsNW(b)})
+          : tf('קל! {a} של חיה, {b}. זה עכבר אמיתי 🐭. ', 'Easy! {a} for the animal, {b}. It’s a real mouse 🐭. ', {a: wsNW(a), b: b ? t('ורק ', 'and only ') + wsNW(b) + t(' של מחשב', ' for the computer') : t('ואף אחד של מחשב', 'and none for the computer')}) +
+            (W.ctries >= 2 ? t('רמז: אילו מילים באות בדרך כלל ליד עכבר של מחשב?', 'Hint: which words usually come next to a computer mouse?') : t('נסה לבחור מילים אחרות.', 'Try picking other words.'));
+        W.sub = 'res'; twKeep(renderWorld);
+      });
+    } else {
+      if (sb === 'res'){ setMood(W.va === W.vb ? 'think' : 'happy', 1600); say(W.robi); }
+      else if (W.howto){ setMood('think'); say(t('סבא פיני בחר לך מילים. נראה אם הן יבלבלו אותי…', 'Grandpa Pini picked words for you. Let’s see if they confuse me…')); }
+      else { setMood('happy'); say(t('נראה אותך מבלבל אותי! אני רק סופר שכנים, אז זה בטח בלתי אפשרי 😎', 'Let’s see you confuse me! I just count neighbors, so it’s probably impossible 😎')); }
+      P(head3 + note3 + wsVote(sb === 'res' ? W.va : 0, sb === 'res' ? W.vb : 0, M3) +
+        (W.howto && sb !== 'res' ? '<p class="twnote">' + t('💡 סבא פיני: בחרתי ״הכבל״ ו״המחשב״. שני שכנים של מחשב מול שכן אחד של חיה. עכשיו לחץ על הכפתור, ותראה מה קורה!', '💡 Grandpa Pini: I picked “cable” and “computer”. Two computer neighbors against one animal neighbor. Now tap the button, and see what happens!') + '</p>' : '') + build +
+        (sb === 'res' && W.ctries >= 3 ? '<button class="btn alt" id="howto" type="button">' + t('💡 סבא פיני, תראה לי איך', '💡 Grandpa Pini, show me how') + '</button>' : '') +
+        tf('<button class="btn" id="run" type="button">🤖 מה {n} מבין?</button>', '<button class="btn" id="run" type="button">🤖 What does {n} understand?</button>', {n: n}));
+      $('#panel').querySelectorAll('.wschip').forEach(function(c){ c.onclick = act(function(){ var cp = W.cp.slice(); cp[+c.dataset.s] = +c.dataset.j; W.cp = cp; W.sub = 'build'; W.howto = false; W.round++; beep('tap'); twKeep(renderWorld); }); });
+      on('howto', function(){ W.cp = [W.cp[0], 1, 1]; W.howto = true; W.sub = 'build'; W.robi = ''; W.round++; beep('tap'); twKeep(renderWorld); });   // 🆘 מי שנתקע: סבא פיני בוחר את המילים
+      on('run', function(){
+        W.paid.c = (W.paid.c || 0) + 1; W.ctries = W.paid.c;   // ↩ לא מאפס את הניסיונות, וכפתור סבא פיני יגיע
+        W.sub = 'count'; W.round++; renderWorld();
+        var nt = $('#wsnote'); if (nt) nt.scrollIntoView({block: 'center', behavior: RM ? 'auto' : 'smooth'});
+      });
+    }
+  }
+  else if (ph === 'explain'){
+    steps(ST, 3); setMood('worry', 2500); beep('win'); confetti();
+    var verb = WS_SLOTS[0].o[W.cp[0]];
+    say(tf('😵 בלבלת אותי! ספרתי {b} של מחשב ורק {a} של חיה, אז אמרתי עכבר של מחשב. אבל עכבר של מחשב לא {v}!', '😵 You confused me! I counted {b} for the computer and only {a} for the animal, so I said a computer mouse. But a computer mouse doesn’t {v}!', {a: wsNW(W.va), b: wsNW(W.vb), v: verb[2]}));
+    P(t('<h3>😵 בלבלת את ', '<h3>😵 You confused ') + esc(n) + '!</h3>' +
+      '<p class="wsnote noread">' + wsSent(wsChToks(), {word: WS_MEAN.mouse.w, known: true, lit: 99, sup: wsSup(WS_MEAN.mouse)}) + '</p>' + wsVote(W.va, W.vb, WS_MEAN.mouse) +
+      tf('<div class="rule">🧠 גילית איך {n} עובד: הוא רק <b>סופר שכנים</b>. הוא לא שם לב שהמילה הכי חשובה כאן היא מה העכבר עשה.</div>', '<div class="rule">🧠 You discovered how {n} works: it only <b>counts neighbors</b>. It didn’t notice that the most important word here is what the mouse did.</div>', {n: n}) +
+      t('<div class="rule">🤖 מחשבים אמיתיים, כמו צ׳אטבוטים ועוזרים קוליים, קראו מיליארדי משפטים, ושמים לב גם לסדר של המילים ולמי עשה מה. לכן בדרך כלל יבינו את המשפט הזה. אבל גם הם טועים לפעמים.</div>', '<div class="rule">🤖 Real computers, like chatbots and voice assistants, have read billions of sentences, and they also pay attention to the order of the words and to who did what. So they usually understand this sentence. But they make mistakes sometimes too.</div>') +
+      '<p><b>' + esc(who()) + tf(', עכשיו תסביר ל{n} בקול, במילים שלך: למה הוא טעה?', ', now explain to {n} out loud, in your own words: why was it wrong?', {n: n}) + '</b></p>' +
+      '<div class="row"><button class="btn alt" id="retry" type="button">' + t('🔁 לבנות משפט אחר', '🔁 Build another sentence') + '</button>' +
+      t('<button class="btn" id="fin" type="button">הסברתי ✓</button></div>', '<button class="btn" id="fin" type="button">I explained ✓</button></div>'));
+    on('retry', function(){ W.phase = 'champ'; W.sub = 'build'; W.robi = ''; W.howto = false; W.round++; renderWorld(); window.scrollTo(0, 0); });
+    on('fin', function(){ W.st = W.right >= 3 ? 3 : 2; W.first = finishLevel(2, W.st); W.phase = 'end'; W.round++; renderWorld(); window.scrollTo(0, 0); });
+  }
+  else if (ph === 'end'){
+    steps(ST, 3); setMood('happy'); say(t('עכשיו אני מבין מילים! 🔤', 'Now I understand words! 🔤'));
+    P(t('<h3>סיימת את ים המילים! ', '<h3>You finished Word Sea! ') + '⭐'.repeat(W.st || 3) + '☆'.repeat(3 - (W.st || 3)) + '</h3>' + (W.first ? t('<p>הרווחת ', '<p>You earned ') + STARS_NEW_LEVEL + t(' ⭐ לחנות.</p>', ' ⭐ for the shop.</p>') : '') + mindHtml(curWorld, 'w') +
+      t('<div class="rule">🔤 מה למדנו: מחשב הופך כל מילה לרשימה של מספרים, ולומד אותם מה<b>שכנים</b> שלה. ככה הוא מנחש מה פירוש של מילה חדשה, ובוחר משמעות למילה כפולה. לכל זה קוראים <b>עיבוד שפה טבעית</b>.</div>', '<div class="rule">🔤 What we learned: a computer turns every word into a list of numbers, and learns them from the word’s <b>neighbors</b>. That’s how it guesses what a new word means, and picks a meaning for a double word. All this is called <b>natural language processing</b>.</div>') +
+      tf('<p>🍿 {n} כבר יודע אילו מילים באות ביחד. בעולם 6, <b>קולנוע ההמלצות 🍿</b>, הוא ילמד מה אתם אוהבים, ויתחיל להמליץ.</p>', '<p>🍿 {n} already knows which words go together. In world 6, <b>Recommendation Cinema 🍿</b>, it will learn what you like, and start recommending.</p>', {n: n}) +
+      showBtn() + t('<div class="row"><button class="btn alt" id="shop" type="button">🛠️ לחנות התוספות</button><button class="btn alt" id="map" type="button">🗺️ למפה</button></div>', '<div class="row"><button class="btn alt" id="shop" type="button">🛠️ To the accessory shop</button><button class="btn alt" id="map" type="button">🗺️ To the map</button></div>'));
+    on('shop', function(){ go('shop'); });
+    on('map', function(){ go('map'); });
+    on('show', function(){ W = fresh(SHOW_IDX); renderWorld(); window.scrollTo(0, 0); });
+  }
+}
+
+/* ───── 🎁 בונוס: המשפט הבא. רובי משלים משפטים כמו צ׳אטבוט: בכל פעם הוא כותב את המילה שבאה הכי הרבה פעמים
+   אחרי המילה האחרונה, בספרייה שקרא. אותה התחלה + ספרייה אחרת = משפט אחר. ״.״ = סוף המשפט ───── */
+var WS_LIBS = {
+  sea: {ico: '🌊', name: t('סיפורי ים', 'Sea stories'), ex: t('גלים, סירות, דגים ואיים', 'waves, boats, fish and islands'), nx: LANG === 'en' ? {
+    fish: [['swam', 37], ['jumped', 12], ['baked', 1]], swam: [['in', 41], ['away', 9]], 'in': [['the', 45]], the: [['sea', 52], ['waves', 30], ['boat', 20]], sea: [['.', 60]],
+    boat: [['sailed', 40], ['sank', 6], ['baked', 0]], sailed: [['to', 28], ['away', 15]], to: [['the', 50]]
+  } : {
+    'הדג': [['שחה', 37], ['קפץ', 12], ['נאפה', 1]], 'שחה': [['בים', 41], ['מהר', 9]], 'בים': [['הכחול', 33], ['העמוק', 20]], 'הכחול': [['.', 50]],
+    'הסירה': [['שטה', 40], ['טבעה', 6], ['נאפתה', 0]], 'שטה': [['אל', 28], ['בים', 15]], 'אל': [['האי', 31], ['החוף', 22]], 'האי': [['.', 40]]
+  }},
+  food: {ico: '🍳', name: t('מתכונים', 'Recipes'), ex: t('עוגות, תנורים, סירים ותבלינים', 'cakes, ovens, pots and spices'), nx: LANG === 'en' ? {
+    fish: [['baked', 30], ['fried', 14], ['swam', 2]], baked: [['in', 35], ['with', 11]], 'in': [['the', 45]], the: [['oven', 40], ['pan', 22], ['cake', 15]], oven: [['.', 30]],
+    cake: [['came', 26], ['burned', 5], ['sailed', 0]], came: [['out', 30]], out: [['great', 25], ['of', 18]], great: [['.', 30]]
+  } : {
+    'הדג': [['נאפה', 30], ['טוגן', 14], ['שחה', 2]], 'נאפה': [['בתנור', 35], ['עם', 11]], 'בתנור': [['החם', 29], ['הגדול', 8]], 'החם': [['.', 30]],
+    'העוגה': [['יצאה', 27], ['נשרפה', 5], ['שטה', 0]], 'יצאה': [['טעימה', 30], ['מהתנור', 18]], 'טעימה': [['מאוד', 24], ['.', 20]], 'מאוד': [['.', 40]]
+  }}
+};
+var WS_FISH = {k: t('הדג', 'fish'), show: t('הדג', 'The fish')}, WS_DRAGON = {k: t('הדרקון', 'dragon'), show: t('הדרקון', 'The dragon'), dragon: true};
+function wsPrompts(lib){ return [WS_FISH, lib === 'sea' ? {k: t('הסירה', 'boat'), show: t('הסירה', 'The boat')} : {k: t('העוגה', 'cake'), show: t('העוגה', 'The cake')}, WS_DRAGON]; }
+function wsChain(nx, start){   // רובי כותב מילה אחרי מילה: תמיד המילה שבאה הכי הרבה פעמים אחרי האחרונה (עד 6 מילים)
+  var out = [], cur = start;
+  for (var i = 0; i < 6; i++){
+    var row = Object.prototype.hasOwnProperty.call(nx, cur) ? nx[cur] : null;
+    if (!row){ out.push({after: cur, opts: [], pick: null}); break; }
+    var best = row.reduce(function(m, r){ return r[1] > m[1] ? r : m; });
+    out.push({after: cur, opts: row, pick: best[0]});
+    if (best[0] === '.') break; cur = best[0];
+  }
+  return out;
+}
+function wsWords(ch){ return ch.filter(function(s){ return s.pick && s.pick !== '.'; }).map(function(s){ return s.pick; }); }
+function wsLineHtml(pr, words, done){ return esc(pr.show) + words.map(function(w){ return ' <b>' + esc(w) + '</b>'; }).join('') + (done ? (words.length ? '.' : '…') : ' <span class="wscur" aria-hidden="true"></span>'); }
+function wsSentence(pr, words){ return pr.show + (words.length ? ' ' + words.join(' ') + '.' : '…'); }
+function wsTimes(c){ return c === 0 ? t('אף פעם', 'never') : c === 1 ? t('פעם אחת', 'once') : tf('{c} פעמים', '{c} times', {c: c}); }
+function wsNextHtml(s){   // 📊 מה רובי קרא אחרי המילה האחרונה, וכמה פעמים
+  if (!s.opts.length) return '<p class="wscap">' + tf('אחרי ״{w}״ לא קראתי בספרייה אף מילה 🤷', 'After “{w}” I never read a single word in the library 🤷', {w: s.after}) + '</p>';
+  var mx = Math.max.apply(null, s.opts.map(function(r){ return r[1]; })) || 1;
+  return '<p class="wscap">' + tf('אחרי ״{w}״ קראתי בספרייה:', 'After “{w}” I read in the library:', {w: s.after}) + '</p>' + s.opts.map(function(r){
+    return '<div class="wsnr' + (r[0] === s.pick ? ' best' : '') + '"><b>' + (r[0] === '.' ? t('⏹️ סוף המשפט', '⏹️ end') : esc(r[0])) + '</b><i><s style="width:' + (r[1] / mx * 100) + '%"></s></i><em>' + wsTimes(r[1]) + '</em></div>';
+  }).join('');
+}
+function wsGenAnim(nx, pr, after){   // ✍️ המשפט נכתב מילה אחרי מילה, ולידו מה רובי ספר בכל צעד
+  var tok = animTok, ch = wsChain(nx, pr.k), i = 0, words = [];
+  setTimeout(function next(){
+    if (!wsOn(tok)) return;
+    if (i >= ch.length){ setTimeout(function(){ if (wsOn(tok)) after(); }, wsT(700)); return; }
+    var s = ch[i++], box = $('#wsnext'), ln = $('#wsline');
+    if (box) box.innerHTML = wsNextHtml(s);
+    if (s.pick && s.pick !== '.') words.push(s.pick);
+    if (ln) ln.innerHTML = wsLineHtml(pr, words, i >= ch.length);
+    beep('tap'); setTimeout(next, wsT(1400));
+  }, wsT(500));
+}
+function words4(){
+  var n = G.name, ph = W.phase, ST = [t('הסבר', 'Intro'), t('ספרייה', 'Library'), t('משלימים', 'Completing'), t('סיום', 'Finish')];
+  if (ph === 'intro'){
+    steps(ST, 0); setMood('happy'); say(t('אני רוצה לכתוב כמו צ׳אטבוט! ✍️', 'I want to write like a chatbot! ✍️'));
+    P(comic([['🤖', t('צ׳אטבוט כותב תשובה <b>מילה אחרי מילה</b>. בכל פעם הוא שואל את עצמו: איזו מילה באה הכי הרבה פעמים אחרי המילה האחרונה?', 'A chatbot writes an answer <b>word by word</b>. Each time it asks itself: which word came most often after the last word?')],
+              ['📚', tf('את זה הוא יודע מה<b>ספרייה</b> שקרא. גם {n} יקרא ספרייה שלמה, ואז ישלים משפטים.', 'It knows that from the <b>library</b> it read. {n} will read a whole library too, and then complete sentences.', {n: n})],
+              ['🎯', tf('אתה בוחר ל{n} מה לקרוא: סיפורי ים או מתכונים. ואז מנחש איך הוא ישלים כל משפט!', 'You choose what {n} reads: sea stories or recipes. Then you guess how it will complete each sentence!', {n: n})]]) +
+      t('<button class="btn" id="go" type="button">לבחור ספרייה</button>', '<button class="btn" id="go" type="button">Choose a library</button>'));
+    on('go', function(){ W.phase = 'lib'; W.round++; renderWorld(); window.scrollTo(0, 0); });
+  }
+  else if (ph === 'lib'){
+    steps(ST, 1); setMood('think'); say(t('מה לתת לי לקרוא? 📚', 'What should I read? 📚'));
+    P(t('<h3>📚 מה לתת לי לקרוא?</h3>', '<h3>📚 What should I read?</h3>') +
+      t('<p>בחר ספרייה. אני אקרא את כל הסיפורים שבה, ואספור אילו מילים באות אחת אחרי השנייה.</p>', '<p>Choose a library. I’ll read all the stories in it, and count which words come one after another.</p>') +
+      '<div class="wslibs">' + ['sea', 'food'].map(function(k){ var L = WS_LIBS[k]; return '<button type="button" data-l="' + k + '"><span aria-hidden="true">' + L.ico + '</span>' + esc(L.name) + '<small>' + esc(L.ex) + '</small></button>'; }).join('') + '</div>');
+    $('#panel').querySelectorAll('.wslibs button').forEach(function(b){ b.onclick = act(function(){ W.lib = b.dataset.l; W.ti = 0; W.right = 0; W.gpick = ''; W.sub = 'guess'; W.phase = 'play'; W.round++; beep('tap'); renderWorld(); window.scrollTo(0, 0); }); });
+  }
+  else if (ph === 'play'){
+    steps(ST, 2);
+    var L = WS_LIBS[W.lib], pr = wsPrompts(W.lib)[W.ti], ch = wsChain(L.nx, pr.k), sub = W.sub;
+    var head = '<h3>✍️ ' + tf('משפט {i} מתוך 3', 'Sentence {i} of 3', {i: W.ti + 1}) + '</h3><div class="twcnt">' + L.ico + ' ' + esc(L.name) + ' · 🏅 ' + W.right + '</div>';
+    if (sub === 'guess'){
+      var opts = pr.dragon ? [[t('עף', 'flew'), t('עף', 'flew')], [t('שחה', 'swam'), t('שחה', 'swam')], ['?', t('🤷 שום דבר', '🤷 nothing')]]
+        : L.nx[pr.k].map(function(r){ return [r[0], r[0]]; }).sort(function(x, y){ return x[0].localeCompare(y[0]); });
+      setMood('think'); say(tf('אני מתחיל: ״{s}…״ איך אמשיך?', 'I’m starting: “{s}…” How will I go on?', {s: pr.show}));
+      P(head + '<p class="wsline">' + wsLineHtml(pr, [], false) + '</p>' +
+        '<p class="lbl">' + tf('איזו מילה {n} יכתוב אחרי ״{w}״? נחש!', 'Which word will {n} write after “{w}”? Guess!', {n: n, w: pr.show}) + '</p>' +
+        '<div class="wschips wsguess">' + opts.map(function(o){ return '<button type="button" class="wschip" data-g="' + esc(o[0]) + '">' + esc(o[1]) + '</button>'; }).join('') + '</div>');
+      $('#panel').querySelectorAll('.wsguess button').forEach(function(b){ b.onclick = act(function(){ W.gpick = b.dataset.g; W.sub = 'gen'; W.round++; beep('tap'); twKeep(renderWorld); }); });
+    }
+    else if (sub === 'gen'){
+      setMood('think'); say(t('כותב מילה אחרי מילה…', 'Writing word by word…'));
+      P(head + '<p class="wsline noread" id="wsline">' + wsLineHtml(pr, [], false) + '</p><div class="wsnext noread" id="wsnext"></div>');
+      wsGenAnim(L.nx, pr, function(){
+        var key = 'b' + W.lib + W.ti; if (W.paid[key] == null) W.paid[key] = W.gpick;   // 🏅 רק הניחוש הראשון נספר, גם אחרי ↩
+        W.okNow = (ch[0].pick || '?') === W.gpick;
+        W.right = wsPrompts(W.lib).filter(function(p2, i){ return W.paid['b' + W.lib + i] === (wsChain(L.nx, p2.k)[0].pick || '?'); }).length;
+        W.sub = 'done'; W.round++; twKeep(renderWorld);
+      });
+    }
+    else {
+      var words = wsWords(ch), ok = W.okNow;
+      if (words.length){ setMood('happy', 1600); say('✍️ ' + wsSentence(pr, words)); }
+      else { setMood('worry', 1600); say(tf('לא קראתי אף פעם מה בא אחרי ״{w}״ בספרייה הזאת. אין לי מה לכתוב 🤷', 'I never read what comes after “{w}” in this library. I have nothing to write 🤷', {w: pr.show})); }
+      beep(ok ? 'good' : 'bad');
+      P(head + '<p class="wsline">' + wsLineHtml(pr, words, true) + '</p>' +
+        '<div class="wsnext noread">' + wsNextHtml(ch[0]) + '</div>' +
+        '<p class="res ' + (ok ? 'ok' : 'no') + '">' + (ok ? t('✓ ניחשת נכון!', '✓ You guessed right!') + (W.paid['b' + W.lib + W.ti] === W.gpick ? ' 🏅' : '') : pr.dragon ? tf('ניחשת ״{g}״, אבל {n} לא קרא אף פעם על דרקון.', 'You guessed “{g}”, but {n} never read about a dragon.', {g: W.gpick, n: n})
+          : tf('ניחשת ״{g}״, אבל בספרייה הזאת אחרי ״{w}״ בא הכי הרבה ״{p}״.', 'You guessed “{g}”, but in this library “{p}” came most often after “{w}”.', {g: W.gpick, w: pr.show, p: ch[0].pick})) + '</p>' +
+        (words.length ? '' : t('<div class="rule">🤷 צ׳אטבוט יודע רק את מה שקרא. על מה שלא היה בספרייה שלו, אין לו מה להגיד, או שהוא ממציא.</div>', '<div class="rule">🤷 A chatbot only knows what it read. About things that weren’t in its library, it has nothing to say, or it makes things up.</div>')) +
+        '<button class="btn" id="go" type="button">' + (W.ti < 2 ? t('▶️ למשפט הבא', '▶️ Next sentence') : t('🔁 ואם הייתי קורא ספרייה אחרת?', '🔁 And if I had read a different library?')) + '</button>');
+      on('go', function(){ if (W.ti < 2){ W.ti++; W.sub = 'guess'; W.gpick = ''; } else { W.phase = 'swap'; W.sub = 'gen'; } W.round++; renderWorld(); window.scrollTo(0, 0); });
+    }
+  }
+  else if (ph === 'swap'){   // 🔁 אותה התחלה, הספרייה השנייה
+    steps(ST, 3);
+    var A = WS_LIBS[W.lib], other = W.lib === 'sea' ? 'food' : 'sea', B = WS_LIBS[other];
+    var sA = wsSentence(WS_FISH, wsWords(wsChain(A.nx, WS_FISH.k))), sB = wsSentence(WS_FISH, wsWords(wsChain(B.nx, WS_FISH.k)));
+    var cmp = function(showB){ return '<div class="wsswap noread"><p>' + A.ico + ' ' + esc(A.name) + ':<br><b>' + esc(sA) + '</b></p><p>' + B.ico + ' ' + esc(B.name) + ':<br><b>' + (showB ? esc(sB) : '…') + '</b></p></div>'; };
+    if (W.sub === 'gen'){
+      setMood('think'); say(tf('עכשיו אני קורא את הספרייה השנייה, {b}, ומתחיל שוב: ״{s}…״', 'Now I’m reading the other library, {b}, and starting again: “{s}…”', {b: B.name, s: WS_FISH.show}));
+      P(t('<h3>🔁 אותה התחלה, ספרייה אחרת</h3>', '<h3>🔁 Same start, different library</h3>') + cmp(false) +
+        '<p class="wsline noread" id="wsline">' + wsLineHtml(WS_FISH, [], false) + '</p><div class="wsnext noread" id="wsnext"></div>');
+      wsGenAnim(B.nx, WS_FISH, function(){ W.sub = 'done'; W.round++; twKeep(renderWorld); });
+    } else {
+      setMood('happy'); confetti(); beep('win'); say(t('אותה התחלה, ויצא משפט אחר לגמרי! 🤯', 'Same start, and a totally different sentence came out! 🤯'));
+      P(t('<h3>🔁 אותה התחלה, ספרייה אחרת</h3>', '<h3>🔁 Same start, different library</h3>') + cmp(true) +
+        tf('<div class="rule">📚 {n} כותב את מה שקרא הכי הרבה. ספרייה של סיפורי ים = משפטים על ים. ספרייה של מתכונים = משפטים על אוכל.</div>', '<div class="rule">📚 {n} writes what it read most. A library of sea stories = sentences about the sea. A library of recipes = sentences about food.</div>', {n: n}) +
+        t('<div class="rule">🤖 גם צ׳אטבוטים אמיתיים כותבים מילה אחרי מילה, לפי מה שקראו. אבל הם קראו מיליארדי משפטים, ומסתכלים על כל השיחה, לא רק על המילה האחרונה. לכן הם כותבים הרבה יותר טוב, ולפעמים גם ממציאים דברים בביטחון מלא.</div>', '<div class="rule">🤖 Real chatbots also write word by word, based on what they read. But they read billions of sentences, and they look at the whole conversation, not just the last word. That’s why they write much better, and sometimes they also make things up with full confidence.</div>') +
+        t('<button class="btn" id="fin" type="button">סיימתי ✓</button>', '<button class="btn" id="fin" type="button">I’m done ✓</button>'));
+      on('fin', function(){ W.st = W.right >= 3 ? 3 : W.right >= 2 ? 2 : 1; W.first = finishLevel(3, W.st); W.phase = 'end'; W.round++; renderWorld(); window.scrollTo(0, 0); });
+    }
+  }
+  else if (ph === 'end'){
+    steps(ST, 3); setMood('happy'); confetti(); beep('win'); say(t('אני כותב כמו צ׳אטבוט! ✍️', 'I write like a chatbot! ✍️'));
+    P(t('<h3>סיימת את שלב הבונוס! ', '<h3>You finished the bonus level! ') + '⭐'.repeat(W.st) + '☆'.repeat(3 - W.st) + '</h3>' + (W.first ? t('<p>הרווחת ', '<p>You earned ') + STARS_NEW_LEVEL + t(' ⭐ לחנות.</p>', ' ⭐ for the shop.</p>') : '') +
+      t('<div class="rule">✍️ ככה עובד צ׳אטבוט: הוא מנחש את המילה הבאה, ועוד אחת, ועוד אחת, לפי מה שקרא. מה שהוא קרא קובע מה הוא יכתוב.</div>', '<div class="rule">✍️ That’s how a chatbot works: it guesses the next word, and another, and another, based on what it read. What it read decides what it will write.</div>') +
+      t('<div class="row"><button class="btn" id="again" type="button">🔁 לבחור ספרייה אחרת</button><button class="btn alt" id="show" type="button">🎪 תפוס את הטעות</button></div>', '<div class="row"><button class="btn" id="again" type="button">🔁 Choose another library</button><button class="btn alt" id="show" type="button">🎪 Catch the Mistake</button></div>'));
+    on('again', function(){ W = fresh(3); W.phase = 'lib'; renderWorld(); window.scrollTo(0, 0); });
+    on('show', function(){ W = fresh(SHOW_IDX); renderWorld(); window.scrollTo(0, 0); });
+  }
+}
+
+/* ───── 🎪 תפוס את הטעות בים המילים: 8 משפטים עם מילה כפולה. רובי סופר שכנים,
+   ובמשפטים שבהם השכנים מטעים (r = המשמעות האמיתית), הוא טועה בביטחון מלא ───── */
+var WS_SHOW = [
+  {m: 'mouse', r: 'A', s: t('ה{חתול|A} {רדף|A} אחרי ה[X] בחצר.', 'The {cat|A} {chased|A} the [X] around the yard.')},
+  {m: 'mouse', r: 'B', s: t('{לחצתי|B} על ה[X] וה{מסך|B} נדלק.', 'I {clicked|B} the [X] and the {screen|B} lit up.')},
+  {m: 'mouse', r: 'A', s: t('ה[X] הקטן {אכל|A} את ה{גבינה|A}.', 'The little [X] {ate|A} the {cheese|A}.')},
+  {m: 'star', r: 'A', s: t('ב{לילה|A} ראינו [X] {נוצץ|A} ב{שמיים|A}.', 'At {night|A} we saw a [X] {shining|A} in the {sky|A}.')},
+  {m: 'star', r: 'B', s: t('ה[X] {שר|B} על ה{במה|B} מול ה{קהל|B}.', 'The [X] {sang|B} on the {stage|B} in front of the {crowd|B}.')},
+  {m: 'star', r: 'B', s: t('כל ה{אוהדים|B} רצו להצטלם עם ה[X] של ה{סרט|B}.', 'All the {fans|B} ran to take a photo with the {movie|B} [X].')},
+  {m: 'third', r: 'A', s: t('[X] {ירוק|A} נפל מה{עץ|A}.', 'A [X] {flew|A} out of the dark {cave|A}.')},
+  {m: 'third', r: 'B', s: t('@ [X] ב{מדרגות|B} ל{קומה|B} השנייה.', '@ {hit|B} the {ball|B} hard with a [X].')},
+  // ⬇️ כאן השכנים מטעים את רובי
+  {m: 'mouse', r: 'A', s: t('ה[X] {נשך|A} את ה{כבל|B} של ה{מחשב|B}.', 'The [X] {bit|A} the {cable|B} of the {computer|B}.'), why: t('עכבר של מחשב לא נושך!', 'A computer mouse doesn’t bite!')},
+  {m: 'mouse', r: 'B', s: t('ה{חתול|A} {רדף|A} אחרי ה[X] של ה{מחשב|B} בכל החדר.', 'The {cat|A} {chased|A} the {computer|B} [X] all around the room.'), why: t('החתול רדף אחרי העכבר של המחשב, לא אחרי חיה.', 'The cat chased the computer mouse, not an animal.')},
+  {m: 'star', r: 'B', s: t('אחרי ה{הופעה|B}, ה[X] יצא ב{לילה|A} להסתכל על ה{שמיים|A}.', 'After the {concert|B}, the [X] went out at {night|A} to look at the {sky|A}.'), why: t('מי שיצא אחרי ההופעה הוא הזמר.', 'The one who went out after the concert is the singer.')},
+  // ⚠️ בעברית הסנאי עלה למעלה (B), באנגלית העטלף הוא החיה (A): המשפטים שונים, ולכן גם התשובה
+  {m: 'third', r: t('B', 'A'), s: t('הסנאי [X] על ה{עץ|A} ונעלם בין ה{ענפים|A}.', 'The {baseball|B} {team|B} found a [X] {hanging|A} upside down in the locker room.'), why: t('הסנאי טיפס למעלה. הוא לא עלה של עץ!', 'Baseball bats don’t hang upside down. It was the animal!')}
+];
+SHOWS.words = {ms: 6400, intro: t('הוא יקרא משפטים עם מילה כפולה, ויגיד מה פירוש המילה בכל משפט.', 'It will read sentences with a double word, and say what the word means in each one.'),
+  lesson: '🔤 ' + t('רובי רק סופר שכנים. כשבמשפט יש יותר שכנים של המשמעות השנייה, הוא מתבלבל, גם כשלנו ברור למה התכוונו.', 'Robi only counts neighbors. When a sentence has more neighbors of the other meaning, it gets confused, even when it’s clear to us what was meant.'),
+  make: function(){
+    var wr = [], rt = [];
+    WS_SHOW.forEach(function(d){
+      var M = WS_MEAN[d.m], toks = wsParse(d.s), tg = wsTagged(toks), a = tg.filter(function(x){ return x[1] === 'A'; }).length, said = a > tg.length - a ? 'A' : 'B', wrong = said !== d.r;
+      var it = {vis: '<p class="wsnote wsshow">' + wsSent(toks, {word: M.w, known: true, lit: 0}) + '</p>', says: tf('״{w}״ כאן זה {e} {m}!', '“{w}” here means {e} {m}!', {w: M.w, e: M[said][0], m: M[said][1]}), wrong: wrong,
+        truth: wrong ? tf('בעצם זה {e} {m}. ', 'Actually it’s {e} {m}. ', {e: M[d.r][0], m: M[d.r][1]}) + (d.why || '') : tf('נכון, זה {m}.', 'Right, it’s {m}.', {m: M[d.r][1]})};
+      (wrong ? wr : rt).push(it);
+    });
+    return showMix(wr, rt);
+  }};
+
+/* 🎤 פקודה קולית ״לחצתי על העכבר״: רובי מוצא מילה כפולה במשפט, וסופר אילו שכנים מצביעים לכל משמעות.
+   מספיק חלק ממילה, כי בעברית יש ״ה״, ״ב״, ״ו״ בהתחלה. מילה קצרה (״שר״) צריכה להתאים בדיוק */
+var WS_VM = LANG === 'en' ? {
+  mouse: {A: ['cat', 'cheese', 'tail', 'hole', 'chase', 'ran', 'run', 'trap', 'field', 'squeak', 'tiny', 'bit', 'bite', 'ate', 'eat'], B: ['computer', 'click', 'screen', 'keyboard', 'cable', 'cursor', 'laptop', 'wireless', 'scroll', 'desk', 'button', 'pad']},
+  star:  {A: ['sky', 'night', 'shin', 'twinkl', 'moon', 'space', 'telescope', 'wish', 'sun', 'bright', 'galax'], B: ['sang', 'sing', 'song', 'stage', 'famous', 'movie', 'fan', 'concert', 'crowd', 'tv', 'actor', 'football', 'soccer']},
+  bat:   {A: ['cave', 'night', 'wing', 'flew', 'fly', 'flies', 'hang', 'dark', 'upside', 'animal'], B: ['baseball', 'hit', 'ball', 'swing', 'swung', 'team', 'game', 'player', 'cricket', 'wood']}
+} : {
+  mouse: {A: ['חתול', 'גבינ', 'זנב', 'רדף', 'רודף', '=ברח', 'בורח', 'מלכוד', 'שדה', 'מכרסם', 'נשך', 'נושך', 'קטן', 'אפור', 'אכל', 'אוכל', 'צייץ', 'מצייץ'], B: ['מחשב', 'לחצ', 'לחיצ', 'מסך', 'מקלד', 'כבל', 'קליק', 'סמן', 'אלחוט', 'סוללה', 'שולחן', 'משטח']},
+  star:  {A: ['שמיים', 'שמים', 'לילה', 'נוצ', 'ירח', 'חלל', 'טלסקופ', 'זורח', 'נופל', 'משאל', 'שמש', 'מנצנ'], B: ['שר', '=שיר', 'במה', 'מפורסם', 'זמר', 'הופע', 'קהל', 'סרט', 'טלוויזי', 'אוהד', 'מעריצ', 'כדורגל', 'שחקן']}
+};
+var WS_VMN = {mouse: 'mouse', star: 'star', bat: 'third'};
+var WS_VW = LANG === 'en' ? {mouse: /^(mouse|mice)$/, star: /^stars?$/, bat: /^bats?$/} : {mouse: /^[והבלמשכ]{0,2}עכבר(ים)?$/, star: /^[והבלמשכ]{0,2}כוכב(ים)?$/};
+function wsVForms(x){ var f = [x], y = x; if (LANG !== 'en') for (var i = 0; i < 2 && /^[והבלמשכ]/.test(y); i++){ y = y.slice(1); f.push(y); } return f; }
+function wsVHit(x, st){
+  var s2 = st.replace(/^=/, ''), ex = st.charAt(0) === '=' || s2.length <= 2 || (LANG === 'en' && s2.length <= 3);
+  var suf = LANG === 'en' ? ['', 's', 'es', 'ed', 'ing'] : ['', 'ה', 'ים', 'ו', 'ות'];
+  return wsVForms(x).some(function(f){
+    if (s2.length <= 2 && !/^[וה]*$/.test(x.slice(0, x.length - f.length))) return false;   // ״בשר״ אינו ״ב+שר״: במילה של 2 אותיות מורידים רק ו׳ או ה׳
+    return ex ? suf.some(function(z){ return f === s2 + z; }) : f.indexOf(s2) === 0;
+  });
+}
+function vMeanFind(n){ var ks = Object.keys(WS_VW), w = String(n || '').split(' '); for (var i = 0; i < ks.length; i++){ if (w.some(function(x){ return WS_VW[ks[i]].test(x); })) return ks[i]; } return null; }
+function vMean(s){
+  var k = s ? vMeanFind(s) : null;
+  if (!k) return t('תגיד לי משפט עם ״עכבר״ או ״כוכב״, ואנחש לפי השכנים למה התכוונת 🔤', 'Say a sentence with “mouse”, “star” or “bat”, and I’ll guess from the neighbors what you meant 🔤');
+  var M = WS_MEAN[WS_VMN[k]], V = WS_VM[k], a = 0, b = 0;
+  s.split(' ').forEach(function(x){
+    if (!x || WS_VW[k].test(x)) return;
+    if (V.A.some(function(st){ return wsVHit(x, st); })) a++;
+    else if (V.B.some(function(st){ return wsVHit(x, st); })) b++;
+  });
+  var v = {ea: M.A[0], na: wsNW(a), eb: M.B[0], nb: wsNW(b), w: M.w};
+  if (!a && !b){ setMood('think', 2500); return tf('לא מצאתי שכנים שיעזרו לי לדעת איזה ״{w}״ זה 🤔 תוסיף מילה, למשל ״{x}״ או ״{y}״.', 'I found no neighbors that tell me which “{w}” this is 🤔 Add a word, like “{x}” or “{y}”.', {w: M.w, x: V.A[0], y: V.B[0]}); }
+  if (a === b){ setMood('think', 2500); return tf('ספרתי: {ea} {na}, {eb} {nb}. תיקו! אני מתלבט 🤔', 'I counted: {ea} {na}, {eb} {nb}. A tie! I can’t decide 🤔', v); }
+  var win = a > b ? 'A' : 'B'; v.e = M[win][0]; v.m = M[win][1];
+  fxPlay('dance', 1400); beep('good'); setMood('happy', 2500);
+  return tf('ספרתי: {ea} {na}, {eb} {nb}. אז כאן ״{w}״ זה {e} {m}!', 'I counted: {ea} {na}, {eb} {nb}. So here “{w}” means {e} {m}!', v);
+}
+
+
 /* 🧩 המכניקות: כל עולם בנוי מ-3 שלבים, ואחריהם 🎁 בונוס (מקום 3) ו-🎪 הופעה (מקום 4) */
 var MECHANICS = {
   layers:   {levels: [{name:t('הפנס הסורק', 'The Scanning Lamp'), run: lay1}, {name:t('חידת החוטים', 'The Wire Puzzle'), run: lay2}, {name:t('אתגר אלופים', 'Champions Challenge'), run: lay3}, {name:t('ממציאי הגלאים', 'Detector Inventors'), ico:'🎁', run: invLevel}, {name:t('תפוס את הטעות', 'Catch the Mistake'), ico:'🎪', run: showLevel}]},
   examples: {levels: [{name:t('מראים דוגמאות', 'Showing examples'), run: level1}, {name:t('בוחרים חכם', 'Choose Wisely'), run: level2}, {name:t('אתגר אלופים', 'Champions Challenge'), run: level3}, {name:t('החוק הסודי', 'The Secret Rule'), ico:'🎁', run: secretLevel}, {name:t('תפוס את הטעות', 'Catch the Mistake'), ico:'🎪', run: showLevel}]},
   tree:     {levels: [{name:t('החזאי הצעיר', 'The Young Forecaster'), run: tree1}, {name:t('בונים עץ', 'Build a Tree'), run: tree2}, {name:t('אתגר אלופים', 'Champions Challenge'), run: tree3}, {name:t('העץ שלי', 'My Tree'), ico:'🎁', run: tree4}, {name:t('תפוס את הטעות', 'Catch the Mistake'), ico:'🎪', run: showLevel}]},
+  words:    {levels: [{name:t('המילה המסתורית', 'The Mystery Word'), run: words1}, {name:t('שולחים בקבוקים', 'Sending Bottles'), run: words2}, {name:t('מילה כפולה', 'Double Words'), run: words3}, {name:t('המשפט הבא', 'The Next Sentence'), ico:'🎁', run: words4}, {name:t('תפוס את הטעות', 'Catch the Mistake'), ico:'🎪', run: showLevel}]},
   pixels:   {levels: [{name:t('פנסי הצבע', 'Color Lamps'), run: pix1}, {name:t('התמונה המתבהרת', 'The Clearing Picture'), run: pix2}, {name:t('אתגר אלופים', 'Champions Challenge'), run: pix3}, {name:t('הפיקסל הקסום', 'The Magic Pixel'), ico:'🎁', run: camLevel}, {name:t('תפוס את הטעות', 'Catch the Mistake'), ico:'🎪', run: showLevel}]}
 };
 
