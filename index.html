@@ -596,6 +596,89 @@ html[dir="ltr"] .twtree text{direction:ltr}
 .wsswap b{font-family:var(--display);font-weight:400;font-size:19px;color:var(--sea)}
 .svis .wsshow{width:100%;max-width:360px;font-size:19px;text-align:start}
 @media (prefers-reduced-motion:reduce){.wssea .cur,.wsfpc.bump b,.wscur{animation:none}.wsfpc i s,.wsvote i s{transition:none}}
+/* 🍿 קולנוע ההמלצות (עולם 6): סרטון = מסך כהה קטן עם 4 מספרים, והטעם = 4 תאים צבעוניים */
+.rcvid{background:linear-gradient(160deg,#3a2f63,#231e3b);color:#fff;border-radius:16px;padding:10px;width:100%;box-sizing:border-box;align-self:stretch;display:flex;gap:10px;align-items:center;border:3px solid #15112a}
+.rcvid .th{flex:none;width:64px;height:64px;border-radius:12px;background:radial-gradient(circle at 35% 30%,#5c4d93,#2a2348);display:grid;place-items:center;font-size:36px;position:relative}
+.rcvid .th::after{content:"▶";position:absolute;bottom:3px;left:4px;font-size:11px;color:var(--sun)}
+.rcvid .vt{flex:1;min-width:0;display:flex;flex-direction:column;gap:5px}
+.rcvid .vt b{font-family:var(--display);font-weight:400;font-size:19px;line-height:1.25}
+.rcnums{display:flex;gap:4px;flex-wrap:wrap}
+.rcnums span{font-size:13px;border-radius:999px;padding:0 7px;background:rgba(255,255,255,.9);color:var(--ink);font-weight:700;white-space:nowrap;font-variant-numeric:tabular-nums}
+.rcnums span.z{opacity:.5}
+.rcvid.rcbig .th{width:84px;height:84px;font-size:48px}
+.rcvid.rcmini{padding:7px;gap:8px}.rcvid.rcmini .th{width:44px;height:44px;font-size:24px}.rcvid.rcmini .vt b{font-size:16px}
+.rcvid.unknown .rcnums span{background:rgba(255,201,60,.22);color:var(--sun)}
+.rctaste{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:6px}
+.rctc{border:2px solid;border-radius:12px;padding:6px 3px 5px;display:flex;flex-direction:column;align-items:center;gap:2px;min-width:0}
+.rctc .te{font-size:19px;line-height:1.1}
+.rctc b{font-family:var(--display);font-weight:400;font-size:25px;line-height:1.1;font-variant-numeric:tabular-nums;direction:ltr}
+.rctc i{display:block;width:84%;height:7px;border-radius:99px;background:#fff;overflow:hidden}
+.rctc i s{display:block;height:100%;border-radius:99px;transition:width .4s}
+.rctc small{font-size:12px;font-weight:700;color:var(--mute)}
+.rctc.k0{border-color:#b85a12;background:#fdecdc}.rctc.k0 b{color:#b85a12}.rctc.k0 s{background:#b85a12}
+.rctc.k1{border-color:#2f7d4f;background:#e1f3e7}.rctc.k1 b{color:#2f7d4f}.rctc.k1 s{background:#2f7d4f}
+.rctc.k2{border-color:#c2366a;background:#fce4ed}.rctc.k2 b{color:#c2366a}.rctc.k2 s{background:#c2366a}
+.rctc.k3{border-color:#5e45c4;background:#ebe6fd}.rctc.k3 b{color:#5e45c4}.rctc.k3 s{background:#5e45c4}
+.rctc.bump b{animation:wsbump .55s cubic-bezier(.3,1.8,.5,1)}
+.rctaste.sm{gap:4px}.rctaste.sm .rctc{padding:3px 2px}.rctaste.sm b{font-size:17px}.rctaste.sm .te{font-size:14px}.rctaste.sm small{display:none}.rctaste.sm i{height:5px}
+.rcacts{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:6px}
+.rcacts button{min-height:62px;border-radius:14px;border:2px solid var(--line);background:#fff;font-size:15px;font-weight:700;color:var(--ink);display:flex;flex-direction:column;align-items:center;justify-content:center;gap:1px;line-height:1.2;padding:4px;font-family:var(--body)}
+.rcacts button span{font-size:24px}
+.rcacts button small{font-size:12px;color:var(--mute);font-weight:700}
+.rcacts .lk{border-color:#e0567f}.rcacts .wt{border-color:#2f7d4f}.rcacts .sk{border-color:var(--mute)}
+.rcdots{display:flex;gap:6px;justify-content:center}
+.rcdots i{width:12px;height:12px;border-radius:50%;background:var(--line)}
+.rcdots i.on{background:#e0567f}.rcdots i.cur{background:var(--sun);box-shadow:0 0 0 3px #fff6d6}
+.rchist{display:flex;gap:6px;flex-wrap:wrap;justify-content:center;font-size:15px}
+.rchist span{background:#fff;border:1px solid var(--line);border-radius:999px;padding:1px 9px}
+.rcrec{border:3px solid var(--sun);background:#fff6d6;border-radius:18px;padding:10px;display:flex;flex-direction:column;gap:8px}
+.rccalc{background:#fff;border:1px dashed #e0a91c;border-radius:12px;padding:8px 10px;font-size:14.5px;display:flex;flex-direction:column;gap:4px}
+.rccalc p{margin:0}
+.rccalc .eq{direction:ltr;text-align:right;font-variant-numeric:tabular-nums;color:var(--mute);font-size:13.5px;unicode-bidi:plaintext}
+.rccalc .win{font-weight:700;color:var(--sea)}
+.rclink{background:none;border:none;color:var(--sea2);text-decoration:underline;font-size:14.5px;min-height:40px;padding:4px;align-self:flex-start;font-family:var(--body);cursor:pointer}
+.rcppl{display:flex;flex-direction:column;gap:8px}
+.rcpp{border:2px solid var(--line);background:#fff;border-radius:14px;padding:8px 10px;display:flex;flex-direction:column;gap:6px}
+.rcpp.best{border-color:#e0567f;box-shadow:0 0 0 3px #fbd3df}
+.rcpp.pick{border-color:var(--sea2);background:#e3f4f2}
+.rcpph{display:flex;align-items:center;gap:8px}
+.rcpph .pe{font-size:28px;flex:none}
+.rcpph b{font-family:var(--display);font-weight:400;font-size:19px;flex:1}
+.rcpct{font-weight:700;color:#c2366a;font-variant-numeric:tabular-nums;white-space:nowrap}
+.rcbar{height:9px;border-radius:99px;background:#f1e7ea;overflow:hidden}
+.rcbar s{display:block;height:100%;background:#e0567f;border-radius:99px;transition:width .45s}
+.rcfav{font-size:14px;color:var(--mute)}
+.rcfeed{display:flex;flex-direction:column;gap:6px}
+.rcfi{display:flex;gap:6px;align-items:stretch}
+.rcfi .rcvid{flex:1;min-width:0}
+.rctg{flex:none;display:flex;flex-direction:column;gap:4px}
+.rctg button{width:52px;padding:0;flex:1;min-height:40px;border-radius:12px;border:2px solid var(--line);background:#fff;font-size:20px}
+.rctg button[aria-pressed="true"]{background:#e0567f;border-color:#e0567f}
+.rctg button.sk[aria-pressed="true"]{background:var(--mute);border-color:var(--mute)}
+.rctg button:disabled{opacity:.4}
+.rcmission{background:#231e3b;color:#fff;border-radius:14px;padding:10px 12px;margin:0;font-size:15.5px}
+.rcmission b{color:var(--sun)}
+.rcslots{display:grid;grid-template-columns:repeat(6,minmax(0,1fr));gap:5px}
+.rcsl{aspect-ratio:3/4;border-radius:12px;border:2px dashed var(--line);background:#fff;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:2px;font-size:12px;font-weight:700;color:var(--mute);padding:2px;min-width:0;font-family:var(--body)}
+.rcsl .se{font-size:24px;line-height:1.1}
+.rcsl .rx{font-size:16px;line-height:1}
+.rcsl.sur{border:2px solid var(--sun);background:#fff6d6;color:var(--ink)}
+.rcsl.full{border-style:solid;background:#231e3b;color:#fff}
+.rcsl.full.sur{border-color:var(--sun)}
+.rcsl.wait{opacity:.35}
+.rcsl.pop{animation:wsbump .45s cubic-bezier(.3,1.8,.5,1)}
+button.rcsl{cursor:pointer}
+.rcbub{display:flex;align-items:center;gap:10px}
+.rcbub .bb{flex:1;height:14px;border-radius:99px;background:#eee4f1;overflow:hidden}
+.rcbub .bb s{display:block;height:100%;border-radius:99px;background:linear-gradient(90deg,#9ad1f5,#c18cf0);transition:width .4s}
+.rcbub b{font-variant-numeric:tabular-nums;white-space:nowrap}
+.rcbub.hot .bb s{background:linear-gradient(90deg,#f5a89a,#e0567f)}
+.rcsecret{background:#231e3b;color:#fff;border-radius:14px;padding:10px 12px;margin:0}
+.rcsecret b{color:var(--sun)}
+.rcmission.reading,.rcsecret.reading{background:#231e3b !important}
+.rcshow{display:flex;flex-direction:column;gap:6px;align-items:center}
+.rcshow .rchist{font-size:17px}
+@media (prefers-reduced-motion: reduce){.rcsl.pop,.rctc.bump b{animation:none}.rcbar s,.rcbub .bb s,.rctc i s{transition:none}}
 </style>
 </head>
 <body>
@@ -774,7 +857,7 @@ var WORLDS = [
   {id:'layers',   name:t('מגדל השכבות', 'Tower of Layers'),    sub:t('מוח מלאכותי', 'An artificial brain'),           icon:'🧠', color:'#a993f0', ability:t('מזהה צורות בעזרת קומות של נוירונים', 'recognizes shapes using floors of neurons'), skill:t('מזהה צורות', 'recognizes shapes'), ready:true},
   {id:'tree',     name:t('עץ השאלות', 'Question Tree'),      sub:t('עצי החלטה', 'Decision trees'),             icon:'🌳', color:'#3fa36b', ability:t('מקבל החלטות בעזרת עץ של שאלות', 'makes decisions with a tree of questions'), skill:t('מקבל החלטות', 'makes decisions'), ready:true},
   {id:'words',    name:t('ים המילים', 'Word Sea'),      sub:t('איך מחשב מבין שפה', 'How a computer understands language'),     icon:'🔤', color:'#4aa3df', ability:t('מבין מילים לפי השכנים שלהן', 'understands words by their neighbors'), skill:t('מבין מילים', 'understands words'), ready:true},
-  {id:'recs',     name:t('קולנוע ההמלצות', 'Recommendation Cinema'), sub:t('מערכת המלצות', 'Recommendation systems'),          icon:'🍿', color:'#ef6f93', skill:t('ממליץ', 'recommends things')},
+  {id:'recs',     name:t('קולנוע ההמלצות', 'Recommendation Cinema'), sub:t('מערכת המלצות', 'Recommendation systems'),          icon:'🍿', color:'#ef6f93', ability:t('ממליץ לפי מה שאוהבים', 'recommends by what you like'), skill:t('ממליץ', 'recommends things'), ready:true},
   {id:'prompt',   name:t('סטודיו הפרומפטים', 'Prompt Studio'), sub:t('בינה יוצרת', 'Creative AI'),          icon:'🖌️', color:'#f2a33a', skill:t('יוצר ציורים', 'creates pictures')},
   {id:'sensors',  name:t('מבוך החיישנים', 'Sensor Maze'),  sub:t('רובוטים וחיישנים', 'Robots and sensors'),      icon:'📡', color:'#6c86d9', skill:t('מרגיש את העולם', 'feels the world')},
   {id:'final',    name:t('המבחן הגדול', 'The Big Test'),    sub:t('משחק החיקוי', 'The imitation game'),           icon:'🎭', color:'#55656b', skill:t('משוחח כמו אדם', 'chats like a person')}
@@ -792,6 +875,7 @@ var store = {
 var DEF = {stars: START_STARS, owned: [], worn: [], body: '#ffc93c', eyes: '#5ff2d8', name: ROBOT_DEFAULT_NAME, teachers: TEACHER_DEFAULTS.slice(), prog: {}, muted: false,
   cur: null,      // איפה עצרת: עולם ושלב, כדי להמשיך משם
   wires: null,    // המגדל שבנית בעולם 3
+  rct: null,      // 🍿 הטעם שלימדת בעולם 6: 4 מספרים
   wtree: null,    // 🌳 העץ שבנית בעולם 4 (נשמר רק אם צדק בכל 6 הימים)
   read: true,     // 🗣️ רובי מקריא בקול את ההסברים
   duel: false,    // ⚔️ מצב דו-קרב: מורה נגד מורה
@@ -1203,7 +1287,7 @@ setInterval(function(){
 /* ═══════════ 👋 רובי מכיר אותך ═══════════
    בכל פתיחה של המשחק רובי מברך את המורים בשמות שכתבו בסדנה, מספר מה כבר לימדו אותו ומה מחכה היום.
    ״מה חדש״ מופיע רק בפעם הראשונה אחרי עדכון (G.hello שומר איזה עדכון כבר ראית). */
-var HELLO_VER = 5;   // גרסת ״מה חדש״ הבסיסית. תכונה שנדלקת מופיעה ב״מה חדש״ פעם אחת (G.seen)
+var HELLO_VER = 6;   // גרסת ״מה חדש״ הבסיסית. תכונה שנדלקת מופיעה ב״מה חדש״ פעם אחת (G.seen)
 function esc(t){ return String(t).replace(/[&<>"']/g, function(c){ return {'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]; }); }
 function named(){ var t = G.teachers[0]; return !!t && t !== TEACHER_DEFAULTS[0] && t !== 'מורה א׳'; }   // 'מורה א׳' = ברירת המחדל הישנה בשמורים קיימים
 function who(){ return named() ? G.teachers[0] : TEACHER_DEFAULTS[0]; }
@@ -1230,6 +1314,7 @@ function openHello(next){
   $('#hello-sk').innerHTML = learned.length ? t('<span>🧠 כבר לימדת אותי:</span>', '<span>🧠 You have already taught me:</span>') + learned.map(function(x){ return '<span>' + x.icon + ' ' + x.skill + '</span>'; }).join('') : '';
   var news = [   // [גרסה, תכונה, שורה]
     [FEATURES.voice ? 4 : 0, '', t('🎤 חדש: בכל שלב יש לידי כפתור 🎤. אפשר לבקש ממני עזרה בשלב, או לתת לי פקודה.', '🎤 New: in every level there’s a 🎤 button next to me. You can ask me for help with the level, or give me a command.')],
+    [6, '', t('🍿 עולם חדש נפתח במפה: קולנוע ההמלצות! שם אלמד איך אפליקציה יודעת מה אתה אוהב.', '🍿 A new world opened on the map: Recommendation Cinema! There I’ll learn how an app knows what you like.')],
     [5, '', t('🔤 עולם חדש נפתח במפה: ים המילים! שם אלמד איך מחשב מבין מילים.', '🔤 A new world opened on the map: Word Sea! There I’ll learn how a computer understands words.')],
     [3, '', t('🌳 עולם חדש נפתח במפה: עץ השאלות! שם אלמד לקבל החלטות.', '🌳 A new world opened on the map: the Question Tree! There I’ll learn to make decisions.')],
     [3, 'fly', t('💡 הרעיון שלך התגשם! גלול למטה, ואני ממריא ומרחף איתך על המסך 🚀', '💡 Your idea came true! Scroll down, and I take off and fly with you on the screen 🚀')],
@@ -1629,14 +1714,16 @@ var ACTS = {
   blue:  {w: 'pixels', lbl: t('להיות כחול 🔵', 'Be blue 🔵'), run: function(){ vSetBody(VCOL.blue); return VONE.blue; }},
   learned: {w: 'layers', lbl: t('לספר מה למדתי 🧠', 'Tell what I learned 🧠'), run: function(){ if (vCtx === 'lvl') return tf('במוח שלי דולקות {n} מתוך 27 נקודות אור 🧠. בסדנה אני מסתובב ומראה לך אותו.', '{n} of 27 light dots are on in my brain 🧠. In the Workshop I turn around and show it to you.', {n: mindLit()}); vLearnShow(); return t('בוא אראה לך מה למדתי! 🧠', 'Let me show you what I learned! 🧠'); }},
   weather: {w: 'tree', lbl: t('לחזות מזג אוויר 🌤️', 'Forecast the weather 🌤️'), run: function(){ return vWxStart(); }},
-  means:   {w: 'words', lbl: t('לנחש משמעות 🔤', 'Guess a meaning 🔤'), run: function(p){ return vMean(p && p.s); }}   // 🔤 ״לחצתי על העכבר״ ⇐ רובי סופר שכנים
+  means:   {w: 'words', lbl: t('לנחש משמעות 🔤', 'Guess a meaning 🔤'), run: function(p){ return vMean(p && p.s); }},   // 🔤 ״לחצתי על העכבר״ ⇐ רובי סופר שכנים
+  surprise: {w: 'recs', lbl: t('תפתיע אותי 🍿', 'Surprise me 🍿'), run: function(){ return vSurprise(); }}   // 🍿 סרטון מהסוג שהכי פחות אהבת
 };
 var VROWS = [   // מה מוצג ברשימה: [עולם, [טקסטים לדוגמה]]
   ['examples', [t('תרקוד', 'dance'), t('תשמח', 'be happy'), t('תהיה עצוב', 'be sad'), t('תחשוב', 'think'), t('תדאג', 'worry')]],
   ['pixels', [t('תהיה אדום', 'be red'), t('תהיה ירוק', 'be green'), t('תהיה כחול', 'be blue'), t('אדום וירוק', 'red and green'), t('אדום וכחול', 'red and blue'), t('ירוק וכחול', 'green and blue'), t('אדום וירוק וכחול', 'red and green and blue')]],
   ['layers', [t('מה למדת?', 'what did you learn?')]],
   ['tree', [t('מה מזג האוויר?', 'what’s the weather?')]],
-  ['words', [t('החתול רדף אחרי העכבר', 'the cat chased the mouse'), t('לחצתי על העכבר', 'I clicked the mouse'), t('הכוכב שר על הבמה', 'the star sang on stage')]]
+  ['words', [t('החתול רדף אחרי העכבר', 'the cat chased the mouse'), t('לחצתי על העכבר', 'I clicked the mouse'), t('הכוכב שר על הבמה', 'the star sang on stage')]],
+  ['recs', [t('תפתיע אותי!', 'surprise me!')]]
 ];
 function vOpen(id){ return FEATURES.voice && mindDone(id) === 3; }
 function vWorld(id){ return WORLDS.filter(function(w){ return w.id === id; })[0]; }
@@ -1659,7 +1746,8 @@ function vLevelHelp(){   // רובי אומר איפה אנחנו, וסבא פי
 }
 function vParse(n){
   if (/^(היי|הי|שלום|אהלן|hi|hello|hey)( |$)/.test(n)) return {greet: true};
-  if (vOpen('words') && vMeanFind(n)) return {id: 'means', s: n};   // 🔤 משפט עם ״עכבר״ או ״כוכב״   // 👋 ״היי״ ⇐ רובי מברך ומציע לחזור על מה שלמדנו
+  if (vOpen('words') && vMeanFind(n)) return {id: 'means', s: n};   // 🔤 משפט עם ״עכבר״ או ״כוכב״
+  if (vOpen('recs') && /(תפתיע|הפתע|surprise)/.test(n)) return {id: 'surprise'};   // 🍿 ״תפתיע אותי!״
   if (/מזג|אוויר|תחזית|\bweather|\bforecast/.test(n)) return {id: 'weather'};
   if (/למדת|\blearn/.test(n)) return {id: 'learned'};
   if (/רקוד|ריקוד|רקד|\bdanc/.test(n)) return {id: 'dance'};
@@ -1847,7 +1935,8 @@ function vTourTexts(){
   if (vOpen('layers')) a.push(t('בעולם מגדל השכבות תשאל ״מה למדת?״, והוא יסתובב ויראה לך את המוח שלו, עם כל מה שלמד.', 'In the Tower of Layers, ask “what did you learn?”, and it turns around and shows you its brain, with everything it learned.'));
   if (vOpen('tree')) a.push(t('בעולם עץ השאלות תשאל ״מה מזג האוויר?״, והוא ישאל אותך שאלות מהעץ, עד שיגיע לתחזית.', 'In the Question Tree, ask “what’s the weather?”, and it will ask you questions from the tree, until it reaches a forecast.'));
   if (vOpen('words')) a.push(t('בעולם ים המילים תגיד לי משפט עם ״עכבר״ או ״כוכב״, למשל ״לחצתי על העכבר״, ואנחש לפי השכנים למה התכוונת.', 'In Word Sea, say a sentence with “mouse”, “star” or “bat”, like “I clicked the mouse”, and I’ll guess from the neighbors what you meant.'));
-  if (!(vOpen('examples') && vOpen('pixels') && vOpen('layers') && vOpen('tree') && vOpen('words'))) a.push(t('ויש עוד פקודות שמחכות! כשתסיים את שלושת השלבים הראשונים בעוד עולם, הן ייפתחו.', 'And more commands are waiting! When you finish the first three levels of another world, they unlock.'));
+  if (vOpen('recs')) a.push(t('בעולם קולנוע ההמלצות תגיד ״תפתיע אותי!״, ואמליץ לך על סרטון מסוג שעוד לא ניסית.', 'In Recommendation Cinema, say “surprise me!”, and I’ll recommend a video of a kind you haven’t tried yet.'));
+  if (!(vOpen('examples') && vOpen('pixels') && vOpen('layers') && vOpen('tree') && vOpen('words') && vOpen('recs'))) a.push(t('ויש עוד פקודות שמחכות! כשתסיים את שלושת השלבים הראשונים בעוד עולם, הן ייפתחו.', 'And more commands are waiting! When you finish the first three levels of another world, they unlock.'));
   a.push(t('ואם תגיד מילה שאני לא מכיר, אשאל אותך מה לעשות בה, ואלמד אותה. אפשר ללחוץ על דלג בכל רגע.', 'And if you say a word I don’t know, I’ll ask you what to do with it, and I’ll learn it. You can tap Skip at any time.'));
   return a;
 }
@@ -2082,6 +2171,11 @@ function gTip(){
                t('לפני ששולחים, תחשוב: איזו מילה בספרייה של ' + n + ' דומה למילה הסודית? שלח בקבוק עם משהו שיש רק למילה הסודית.', 'Before you send, think: which word in ' + n + '’s library is similar to the secret word? Send a bottle with something only the secret word has.'),
                t('סופרים כמו ' + n + ': כמה שכנים במשפט שייכים לכל משמעות? ובאתגר האלופים, תחשוב אילו מילים באות בדרך כלל ליד עכבר של מחשב.', 'Count like ' + n + ': how many neighbors in the sentence belong to each meaning? And in the Champions Challenge, think which words usually come next to a computer mouse.'),
                t(n + ' כותב תמיד את המילה שבאה הכי הרבה פעמים אחרי המילה האחרונה, בספרייה שקרא. תחשוב: על מה כותבים הכי הרבה בסיפורי ים? ובמתכונים?', n + ' always writes the word that came most often after the last word, in the library it read. Think: what do sea stories write about most? And recipes?'),
+               SHOW],
+    recs:     [t('אין כאן תשובה לא נכונה: לחץ כמו שאתה באמת לוחץ בטלפון. אחרי 5 סרטונים, פתח את ״🧮 איך חישבתי?״ ותראה למה ' + n + ' בחר דווקא בסרטון הזה.', 'There’s no wrong answer here: tap the way you really would on your phone. After 5 videos, open “🧮 How did I calculate?” and see why ' + n + ' picked that video.'),
+               t(n + ' לא יודע מה יש בסרטון של הפיצה. תסתכל מי מהצופים אהב אותו, ובאיזה מספר הטעם שלו הכי גדול. אחר כך תן ❤️ לסרטונים שגם הוא היה אוהב.', n + ' doesn’t know what’s in the pizza video. Look at which viewer liked it, and which of their numbers is biggest. Then give ❤️ to videos they would like too.'),
+               t('כל 🎲 מביא סרטון מהסוג ש' + n + ' הראה הכי פחות. אם נועה דילגה על ההפתעה הראשונה, מה תביא ההפתעה השנייה? נסה גם להזיז את ההפתעות לתאים אחרים.', 'Each 🎲 brings a video of the kind ' + n + ' showed least. If Noa skipped the first surprise, what will the second one bring? Also try moving the surprises to other boxes.'),
+               t(n + ' ימליץ ליעל רק אם מי שהכי דומה לה צפה ואהב. השווה את 4 המספרים של יעל לכל צופה: אצל מי המספרים הגדולים באותם מקומות?', n + ' will recommend it to Yael only if the viewer most like her watched and liked it. Compare Yael’s 4 numbers with each viewer: whose big numbers are in the same places?'),
                SHOW]
   };
   return (T[curWorld] || [])[W.level] || '';
@@ -4956,11 +5050,430 @@ function vMean(s){
 }
 
 
+/* ═══════════ 🍿 קולנוע ההמלצות: איך אפליקציה ״יודעת״ מה אתה אוהב ═══════════
+   כל סרטון = 4 מספרים (🐾 חיות · ⚽ ספורט · 🍳 בישול · 😂 מצחיק), כמו המילים בים המילים.
+   גם ״הטעם״ של הצופה הוא 4 מספרים: ❤️ לייק מוסיף פעמיים את המספרים של הסרטון, ✔️ צפייה עד הסוף פעם אחת, ⏭️ דילוג מוריד פעם אחת.
+   ציון של סרטון = מכפילים תא בתא ומחברים (טעם × סרטון). רובי ממליץ על הציון הכי גבוה.
+   ״אנשים כמוך״ = משווים את הכיוון של שני טעמים (דמיון קוסינוס, wsSim מים המילים). כל השמות בדויים. */
+var RC_AX = [{e: '🐾', n: t('חיות', 'animals')}, {e: '⚽', n: t('ספורט', 'sports')}, {e: '🍳', n: t('בישול', 'cooking')}, {e: '😂', n: t('מצחיק', 'funny')}];
+var RC_V = {   // 📺 הספרייה של הקולנוע
+  v1:  {e: '🐈', n: t('החתול שבעט בכדור', 'The Cat Who Kicked a Ball'), v: [3, 2, 0, 1]},
+  v2:  {e: '🥞', n: t('פנקייק בחלל', 'Pancakes in Space'), v: [0, 0, 3, 2]},
+  v3:  {e: '⚽', n: t('הגול מחצי המגרש', 'A Goal from Midfield'), v: [0, 3, 0, 0]},
+  v4:  {e: '🐕', n: t('הכלב שאפה עוגה', 'The Dog Who Baked a Cake'), v: [2, 0, 3, 2]},
+  v5:  {e: '🥚', n: t('קסם עם ביצה', 'An Egg Magic Trick'), v: [0, 0, 2, 3]},
+  v6:  {e: '🐧', n: t('הפינגווין המחליק', 'The Sliding Penguin'), v: [3, 1, 0, 2]},
+  v7:  {e: '🧑‍🍳', n: t('שף בן 10', 'A 10-Year-Old Chef'), v: [0, 0, 3, 0]},
+  v8:  {e: '🧤', n: t('השוער שנפל לבוץ', 'The Goalie Who Fell in the Mud'), v: [0, 3, 0, 3]},
+  v9:  {e: '🦜', n: t('התוכי שמחקה את סבא', 'The Parrot Who Copies Grandpa'), v: [3, 0, 0, 3]},
+  v10: {e: '🍲', n: t('מרק לחורף', 'Winter Soup'), v: [0, 0, 3, 1]},
+  v11: {e: '🐘', n: t('גור הפיל במקלחת', 'Baby Elephant in the Shower'), v: [3, 0, 0, 2]},
+  v12: {e: '🚲', n: t('סלטה על אופניים', 'A Flip on a Bike'), v: [0, 3, 0, 1]},
+  v13: {e: '🐢', n: t('מירוץ צבים', 'The Turtle Race'), v: [3, 1, 0, 1]},
+  v14: {e: '🍪', n: t('עוגיות בצורת כלב', 'Dog-Shaped Cookies'), v: [1, 0, 3, 1]},
+  v15: {e: '🐒', n: t('הקוף והסקייטבורד', 'The Monkey and the Skateboard'), v: [3, 2, 0, 2]},
+  v16: {e: '🤡', n: t('הליצן שאפה פיצה', 'The Clown Who Baked a Pizza'), v: [0, 0, 2, 3]},
+  v17: {e: '📣', n: t('הבדיחה של המאמן', 'The Coach’s Joke'), v: [0, 2, 0, 3]},
+  v18: {e: '🐇', n: t('ארנב בגינה', 'A Rabbit in the Garden'), v: [3, 0, 1, 1]}
+};
+var RC_ORDER = Object.keys(RC_V);
+var RC_ACT = {lk: [2, '❤️', t('אהבתי', 'Liked it')], wt: [1, '✔️', t('צפיתי עד הסוף', 'Watched to the end')], sk: [-1, '⏭️', t('דילגתי', 'Skipped')]};
+function rcDot(a, b){ var s = 0; for (var i = 0; i < 4; i++) s += a[i] * b[i]; return s; }   // מכפילים תא בתא ומחברים
+function rcCat(v){ return v.indexOf(Math.max.apply(null, v)); }                                // הסוג הראשי של סרטון
+function rcBest(tt, list){ return list.slice().sort(function(x, y){ return rcDot(tt, RC_V[y].v) - rcDot(tt, RC_V[x].v) || RC_ORDER.indexOf(x) - RC_ORDER.indexOf(y); }); }
+function rcApply(tt, k, a){ var v = RC_V[k].v, m = RC_ACT[a][0]; return tt.map(function(x, i){ return x + m * v[i]; }); }
+function rcSum(h){ var tt = [0, 0, 0, 0]; h.forEach(function(x){ tt = rcApply(tt, x[0], x[1]); }); return tt; }
+function rcTop(tt){ return tt.indexOf(Math.max.apply(null, tt)); }
+function rcOn(tok){ return tok === animTok && screen === 'world'; }
+function rcPctS(s){ return Math.max(0, Math.round(s * 100)); }
+function rcLiked(p){ return p.g ? t('אהבה', 'liked') : t('אהב', 'liked'); }   // נועה אהבה, דני אהב
+
+/* 🧩 רכיבים */
+function rcNums(v){ return '<div class="rcnums" aria-hidden="true">' + RC_AX.map(function(a, i){ return '<span' + (v && !v[i] ? ' class="z"' : '') + '>' + a.e + ' ' + (v ? v[i] : '❓') + '</span>'; }).join('') + '</div>'; }
+function rcVid(k, cls){ var d = RC_V[k]; return '<div class="rcvid ' + (cls || '') + '" role="img" aria-label="' + esc(d.n + ': ' + RC_AX.map(function(a, i){ return a.n + ' ' + d.v[i]; }).join(', ')) + '"><div class="th" aria-hidden="true">' + d.e + '</div><div class="vt"><b>' + esc(d.n) + '</b>' + rcNums(d.v) + '</div></div>'; }
+function rcVidX(d, cls){ return '<div class="rcvid unknown ' + (cls || '') + '"><div class="th" aria-hidden="true">' + d.e + '</div><div class="vt"><b>' + esc(d.n) + '</b>' + rcNums(null) + '</div></div>'; }
+function rcTaste(tt, prev, sm){
+  var mx = Math.max(6, Math.max.apply(null, tt.map(Math.abs)));
+  return '<div class="rctaste noread' + (sm ? ' sm' : '') + '" role="img" aria-label="' + esc(RC_AX.map(function(a, i){ return a.n + ' ' + tt[i]; }).join(', ')) + '">' + RC_AX.map(function(a, i){
+    return '<div class="rctc k' + i + (prev && prev[i] !== tt[i] ? ' bump' : '') + '"><span class="te" aria-hidden="true">' + a.e + '</span><b>' + tt[i] + '</b><i><s style="width:' + Math.round(Math.max(0, tt[i]) / mx * 100) + '%"></s></i><small>' + a.n + '</small></div>';
+  }).join('') + '</div>';
+}
+function rcHist(h){ return '<div class="rchist">' + h.map(function(x){ return '<span>' + RC_V[x[0]].e + ' ' + RC_ACT[x[1]][1] + '</span>'; }).join('') + '</div>'; }
+function rcCalc(tt, order){   // 🧮 איך רובי חישב: טעם × סרטון, תא בתא, לשלושת המובילים
+  return '<div class="rccalc noread">' + order.slice(0, 3).map(function(k, j){
+    var v = RC_V[k].v;
+    return '<p class="' + (j ? '' : 'win') + '">' + RC_V[k].e + ' ' + esc(RC_V[k].n) + ': <b>' + rcDot(tt, v) + '</b></p><p class="eq">' + v.map(function(x, i){ return '(' + tt[i] + '×' + x + ')'; }).join(' + ') + ' = ' + rcDot(tt, v) + '</p>';
+  }).join('') + '<p>' + t('הכי גבוה = הכי מתאים לטעם שלך. עליו אני ממליץ.', 'Highest = best match for your taste. That’s the one I recommend.') + '</p></div>';
+}
+
+/* ───── שלב 1: הטעם שלך. 5 סרטונים בפיד, ועל כל אחד ❤️ / ✔️ / ⏭️ ───── */
+var RC_F1 = ['v2', 'v1', 'v3', 'v9', 'v5'], RC_C1 = RC_ORDER.filter(function(k){ return RC_F1.indexOf(k) < 0; });
+var RC_PA = [['v2', 'lk'], ['v1', 'sk'], ['v3', 'lk'], ['v9', 'sk'], ['v5', 'wt']];   // 👴 איך סבא פיני לוחץ על אותם 5 סרטונים
+var rcTapT = 0;
+function rcNew1(){ W.i = 0; W.t = [0, 0, 0, 0]; W.prev = null; W.hist = []; W.robi = ''; W.rmood = 'happy'; W.calc = false; W.verdict = ''; W.pa = false; W.round++; }
+function rcPress1(a){
+  var k = RC_F1[W.i], n = G.name; W.prev = W.t; W.t = rcApply(W.t, k, a); W.hist = W.hist.concat([[k, a]]); W.i++; W.calc = false;
+  var r = RC_V[rcBest(W.t, RC_C1)[0]], top = Math.max.apply(null, W.t);
+  if (W.i === 1){ W.rmood = 'happy'; W.robi = top > 0 ? tf('סרטון אחד, וכבר הבנתי הכול! אתה מעריץ של {e} {a}!', 'One video, and I already get it! You’re a fan of {e} {a}!', {e: RC_AX[rcTop(W.t)].e, a: RC_AX[rcTop(W.t)].n}) : tf('סרטון אחד, וכבר הבנתי הכול! אתה לא אוהב {e}. אז הנה משהו אחר לגמרי.', 'One video, and I already get it! You don’t like {e}. So here’s something completely different.', {e: RC_V[k].e}); }
+  else if (W.i === RC_F1.length){ W.rmood = 'think'; W.robi = tf('5 סרטונים, ואני כבר מכיר אותך קצת. ההמלצה שלי: {e} {v}. צדקתי?', '5 videos, and I know you a little now. My recommendation: {e} {v}. Was I right?', {e: r.e, v: r.n}); }
+  else if (a === 'sk'){ W.rmood = 'sad'; W.robi = tf('אוי, דילגת. הורדתי מהטעם שלך את המספרים של {e}. עכשיו הכי מתאים לך: {v}.', 'Oh, you skipped. I took the numbers of {e} off your taste. Now your best match is: {v}.', {e: RC_V[k].e, v: r.n}); }
+  else { W.rmood = 'happy'; W.robi = (a === 'lk' ? t('אהבת! ', 'You liked it! ') : t('צפית עד הסוף, אז כנראה נהנית. ', 'You watched to the end, so you probably enjoyed it. ')) + tf('עדכנתי את הטעם. עכשיו הכי מתאים לך: {v}.', 'I updated your taste. Now your best match is: {v}.', {v: r.n}); }
+  beep(a === 'sk' ? 'bad' : 'good'); W.round++; twKeep(renderWorld);
+}
+function recs1(){
+  var n = G.name, ph = W.phase, ST = [t('הסבר', 'Intro'), t('הטעם שלך', 'Your taste'), t('סיכום', 'Summary')];
+  if (ph === 'intro'){
+    steps(ST, 0); setMood('happy'); say(t('ברוכים הבאים לקולנוע שלי! 🍿', 'Welcome to my cinema! 🍿'));
+    P(comic([['🔢', t('בים המילים כל מילה הייתה 4 מספרים. כאן <b>כל סרטון הוא 4 מספרים</b>: 🐾 חיות · ⚽ ספורט · 🍳 בישול · 😂 מצחיק.', 'In Word Sea every word was 4 numbers. Here <b>every video is 4 numbers</b>: 🐾 animals · ⚽ sports · 🍳 cooking · 😂 funny.')],
+              ['😋', tf('וגם <b>הטעם שלך הוא 4 מספרים</b>. לא צריך לכתוב ל{n} כלום: כל ❤️, כל ⏭️ דילוג וכל צפייה עד הסוף משנים אותם.', 'And <b>your taste is 4 numbers</b> too. You don’t need to write {n} anything: every ❤️, every ⏭️ skip and every watch to the end changes them.', {n: n})],
+              ['🍿', tf('ואז {n} כופל ומחבר. <b>הסרטון שהמספרים שלו הכי מתאימים לטעם שלך</b>, עליו הוא ממליץ.', 'Then {n} multiplies and adds. <b>The video whose numbers best match your taste</b> is the one it recommends.', {n: n})]]) +
+      '<div class="noread">' + rcVid('v4') + '</div>' +
+      tf('<p class="wshonest">ככה עובדות, בגדול, <b>מערכות ההמלצה</b> באפליקציות של סרטונים, שירים ומשחקים. אצל {n} יש 4 מספרים לכל סרטון. באפליקציות אמיתיות יש מאות, והן לומדות גם מכמה זמן צפית, ממה ששיתפת ומה שחיפשת.</p>', '<p class="wshonest">Roughly, this is how <b>recommendation systems</b> work in apps for videos, songs and games. {n} has 4 numbers for each video. Real apps have hundreds, and they also learn from how long you watched, what you shared and what you searched for.</p>', {n: n}) +
+      t('<button class="btn" id="go" type="button">🎬 לפיד</button>', '<button class="btn" id="go" type="button">🎬 To the feed</button>'));
+    on('go', function(){ W.phase = 'play'; rcNew1(); renderWorld(); window.scrollTo(0, 0); });
+  }
+  else if (ph === 'play'){
+    steps(ST, 1);
+    var done = W.i >= RC_F1.length, rec = W.i ? rcBest(W.t, RC_C1) : null, h = '';
+    setMood(W.i ? W.rmood : 'happy'); say(W.i ? W.robi : t('תראה לי סרטון ראשון. אני מבטיח ללמוד מהר! 🚀', 'Show me a first video. I promise to learn fast! 🚀'));
+    h += '<h3>🎬 ' + (done ? t('הטעם שלך אחרי 5 סרטונים', 'Your taste after 5 videos') : tf('סרטון {i} מתוך 5', 'Video {i} of 5', {i: W.i + 1})) + '</h3>' +
+      '<div class="rcdots" aria-hidden="true">' + RC_F1.map(function(_, j){ return '<i class="' + (j < W.i ? 'on' : j === W.i ? 'cur' : '') + '"></i>'; }).join('') + '</div>';
+    if (!done){
+      h += '<p class="lbl">' + t('מה עשית עם הסרטון הזה? לחץ כמו שאתה באמת לוחץ בטלפון.', 'What did you do with this video? Tap the way you really would on your phone.') + '</p>' + rcVid(RC_F1[W.i], 'rcbig') +
+        '<div class="rcacts">' + ['lk', 'wt', 'sk'].map(function(a){ return '<button type="button" class="' + a + '" data-a="' + a + '"><span aria-hidden="true">' + RC_ACT[a][1] + '</span>' + RC_ACT[a][2] + '<small><bdi dir="ltr">' + (RC_ACT[a][0] > 0 ? '+' : '−') + Math.abs(RC_ACT[a][0]) + '</bdi>' + t(' × הסרטון', ' × the video') + '</small></button>'; }).join('') + '</div>';
+    }
+    if (W.hist.length) h += rcHist(W.hist);
+    h += '<p class="wscap">' + tf('😋 הטעם שלך, לפי {n}:', '😋 Your taste, according to {n}:', {n: n}) + '</p>' + rcTaste(W.t, W.prev);
+    if (W.i === 1 && Math.max.apply(null, W.t) > 0) h += '<p class="twnote">' + tf('😅 <b>{n} ממהר:</b> אחרי לחיצה אחת יש לו מספר אחד גדול, אז הוא בטוח שהוא כבר מכיר אותך. נראה מה קורה אחרי עוד סרטונים.', '😅 <b>{n} is in a hurry:</b> after one tap it has one big number, so it’s sure it already knows you. Let’s see what happens after more videos.', {n: n}) + '</p>';
+    if (rec){
+      h += '<div class="rcrec"><p class="wscap">' + tf('🍿 {n} ממליץ לך:', '🍿 {n} recommends:', {n: n}) + '</p>' + rcVid(rec[0]) +
+        '<button class="rclink" id="calc" type="button" aria-expanded="' + !!W.calc + '">' + t('🧮 איך חישבתי?', '🧮 How did I calculate?') + '</button>' + (W.calc ? rcCalc(W.t, rec) : '') + '</div>';
+    }
+    if (done && !W.verdict) h += '<div class="row"><button class="btn" id="yes" type="button">' + tf('👍 צדקת, {n}!', '👍 You got it, {n}!', {n: n}) + '</button><button class="btn alt" id="nope" type="button">' + t('👎 לא צדקת', '👎 Not quite') + '</button></div>';
+    if (W.verdict){
+      h += W.verdict === 'yes' ? '<p class="res ok">' + tf('יש! {n} למד מה אתה אוהב בלי שכתבת לו מילה, רק ממה שעשית.', 'Yes! {n} learned what you like without you writing a word, just from what you did.', {n: n}) + '</p>'
+                               : '<p class="twnote">' + t('🙂 <b>5 סרטונים זה מעט.</b> ככל שצופים יותר, הטעם מדויק יותר. גם באפליקציות האמיתיות ההמלצות עקומות בהתחלה.', '🙂 <b>5 videos is not much.</b> The more you watch, the more accurate the taste gets. Real apps also give odd recommendations at first.') + '</p>';
+      if (!W.pa) h += '<button class="btn alt" id="pa" type="button">' + tf('👴 ומה {g} היה מקבל?', '👴 And what would {g} get?', {g: NARRATOR}) + '</button>';
+      else {
+        var tp = rcSum(RC_PA), rp = rcBest(tp, RC_C1)[0], same = rp === rec[0];
+        h += '<p class="wscap">' + tf('👴 {g} לחץ אחרת על אותם 5 סרטונים:', '👴 {g} tapped differently on the same 5 videos:', {g: NARRATOR}) + '</p>' + rcHist(RC_PA) + rcTaste(tp, null, true) +
+          '<div class="rcrec"><p class="wscap">' + tf('🍿 ל{g} {n} ממליץ:', '🍿 For {g}, {n} recommends:', {g: NARRATOR, n: n}) + '</p>' + rcVid(rp, 'rcmini') + '</div>' +
+          (same ? '<p class="res ok">' + t('🤝 יצאה לכם אותה המלצה, כי לימדתם טעם דומה. נסה ללחוץ אחרת, ותראה איך ההמלצה משתנה.', '🤝 You both got the same recommendation, because you taught a similar taste. Try tapping differently, and see how it changes.') + '</p>'
+                : '<div class="rule">' + t('🤯 <b>אותם 5 סרטונים בדיוק, ולכל אחד המלצה אחרת!</b> כי כל אחד לימד טעם אחר. לכן בטלפון של חבר רואים סרטונים אחרים לגמרי.', '🤯 <b>The exact same 5 videos, and a different recommendation for each of you!</b> Because each of you taught a different taste. That’s why a friend’s phone shows completely different videos.') + '</div>') +
+          '<button class="btn" id="fin" type="button">' + t('🍿 לסיכום', '🍿 To the summary') + '</button>';
+      }
+    }
+    if (W.i) h += '<button class="rclink" id="again" type="button">' + t('🔁 מההתחלה', '🔁 Start over') + '</button>';
+    P(h);
+    $('#panel').querySelectorAll('.rcacts button').forEach(function(b){ var f = act(function(){ rcPress1(b.dataset.a); }); b.onclick = function(e){ if (Date.now() - rcTapT < 450) return; rcTapT = Date.now(); f(e); }; });   // ✋ לחיצה כפולה = לחיצה אחת
+    on('calc', function(){ W.calc = !W.calc; twKeep(renderWorld); });
+    on('yes', function(){ W.verdict = 'yes'; W.rmood = 'happy'; W.robi = t('למדתי אותך! 🎉', 'Now I know you! 🎉'); beep('good'); W.round++; twKeep(renderWorld); });
+    on('nope', function(){ W.verdict = 'no'; W.rmood = 'think'; W.robi = t('אוף. אני צריך עוד דוגמאות כדי להכיר אותך.', 'Oops. I need more examples to know you.'); W.round++; twKeep(renderWorld); });
+    on('pa', function(){ W.pa = true; W.round++; twKeep(renderWorld); });
+    on('again', function(){ rcNew1(); renderWorld(); window.scrollTo(0, 0); });
+    on('fin', function(){ G.rct = W.t.slice(); save(); W.st = 3; W.first = finishLevel(0, W.st); W.phase = 'sum'; W.round++; renderWorld(); window.scrollTo(0, 0); });
+  }
+  else {
+    steps(ST, 2); setMood('happy'); confetti(); beep('win'); say(t('עכשיו אני מכיר את הטעם שלך! 🍿', 'Now I know your taste! 🍿'));
+    P('<h3>' + t('סיימת את שלב 1! ', 'You finished level 1! ') + '⭐⭐⭐</h3>' + (W.first ? t('<p>הרווחת ', '<p>You earned ') + STARS_NEW_LEVEL + t(' ⭐ לחנות.</p>', ' ⭐ for the shop.</p>') : '') +
+      tf('<div class="rule">😋 גילית את הסוד של {n}: <b>הטעם שלך הוא 4 מספרים</b>. כל ❤️, כל צפייה עד הסוף וכל ⏭️ דילוג משנים אותם, גם כשלא כתבת אף מילה. הסרטון שהכי מתאים למספרים, עליו {n} ממליץ.</div>', '<div class="rule">😋 You discovered {n}’s secret: <b>your taste is 4 numbers</b>. Every ❤️, every watch to the end and every ⏭️ skip changes them, even when you didn’t write a single word. {n} recommends the video that best matches the numbers.</div>', {n: n}) +
+      t('<div class="rule">⚡ לחיצה אחת לא מספיקה. כמו שראית, אחרי סרטון אחד ההמלצות קופצות. ככל שצופים יותר, הטעם מדויק יותר.</div>', '<div class="rule">⚡ One tap isn’t enough. As you saw, after one video the recommendations jump around. The more you watch, the more accurate the taste.</div>') +
+      t('<div class="row"><button class="btn alt" id="again" type="button">לשחק שוב</button><button class="btn" id="go" type="button">לשלב 2: אנשים כמוך</button></div>', '<div class="row"><button class="btn alt" id="again" type="button">Play again</button><button class="btn" id="go" type="button">To level 2: People Like You</button></div>'));
+    on('again', function(){ W = fresh(0); renderWorld(); window.scrollTo(0, 0); });
+    on('go', function(){ W = fresh(1); renderWorld(); window.scrollTo(0, 0); });
+  }
+}
+
+/* ───── שלב 2: אנשים כמוך. רובי לא יודע מה יש בסרטון של הפיצה, רק מי אהב אותו ───── */
+var RC_PPL = [
+  {n: t('נועה', 'Noa'), e: '🦒', t: [3, 0, 1, 3], g: 1, fav: {e: '🦙', n: t('הלמה שעשתה סלפי', 'The Llama Who Took a Selfie')}},
+  {n: t('דני', 'Danny'), e: '🏀', t: [0, 3, 0, 2], fav: {e: '🛹', n: t('הסקייטבורד שקפץ מעל השלולית', 'The Skateboard That Jumped the Puddle')}},
+  {n: t('מאיה', 'Maya'), e: '🧁', t: [1, 0, 3, 2], g: 1, fav: {e: '🍕', n: t('פיצה בצורת חתול', 'Cat-Shaped Pizza')}}
+];
+var RC_GOAL2 = 2, RC_F2 = ['v6', 'v7', 'v8', 'v4', 'v12', 'v10'];
+function rcT2(){ var tt = [0, 0, 0, 0]; W.m.forEach(function(a, i){ if (a) tt = rcApply(tt, RC_F2[i], a); }); return tt; }
+function rcPpl(tt, o){   // 👥 הצופים שרובי מכיר, וכמה כל אחד דומה לך
+  o = o || {};
+  var used = tt.some(Boolean), sims = (o.list || RC_PPL).map(function(p){ return used ? rcPctS(wsSim(tt, p.t)) : 0; }), mx = Math.max.apply(null, sims), bi = used && mx > 0 ? sims.indexOf(mx) : -1;
+  return {bi: bi, sims: sims, html: '<div class="rcppl">' + (o.list || RC_PPL).map(function(p, j){
+    return '<div class="rcpp' + (j === bi && !o.nobest ? ' best' : '') + (o.pick && o.pick[j] ? ' pick' : '') + '"' + (o.btn ? ' role="button" tabindex="0" data-j="' + j + '" aria-pressed="' + !!(o.pick && o.pick[j]) + '"' : '') + '><div class="rcpph"><span class="pe" aria-hidden="true">' + p.e + '</span><b>' + esc(p.n) + '</b>' +
+      (o.nopct ? (o.pick && o.pick[j] ? '<span class="rcpct">✓</span>' : '') : '<span class="rcpct">' + (used ? tf('דומה לך {p}%', '{p}% like you', {p: sims[j]}) : t('דומה לך ?', '?% like you')) + '</span>') + '</div>' +
+      (o.nopct ? '' : '<div class="rcbar" aria-hidden="true"><s style="width:' + sims[j] + '%"></s></div>') + rcTaste(p.t, null, true) +
+      (p.fav ? '<span class="rcfav">' + tf('❤️ הסרטון האהוב: {e} {v}', '❤️ Favorite video: {e} {v}', {e: p.fav.e, v: p.fav.n}) + '</span>' : '') + '</div>';
+  }).join('') + '</div>'};
+}
+function recs2(){
+  var n = G.name, ph = W.phase, ST = [t('הסבר', 'Intro'), t('אנשים כמוך', 'People like you'), t('סיכום', 'Summary')], goal = RC_PPL[RC_GOAL2];
+  if (ph === 'intro'){
+    steps(ST, 0); setMood('think'); say(t('יש סרטון שאני לא יודע עליו כלום… 🤔', 'There’s a video I know nothing about… 🤔'));
+    P(comic([['❓', tf('{n} מכיר את רוב הסרטונים בקולנוע. אבל על סרטון אחד הוא לא יודע כלום, אפילו לא מספר אחד: {e} <b>{v}</b>.', '{n} knows most of the videos in the cinema. But about one video it knows nothing, not even one number: {e} <b>{v}</b>.', {n: n, e: goal.fav.e, v: goal.fav.n})],
+              ['👥', tf('מה הוא כן יודע? <b>מי אהב אותו.</b> ל{n} יש שלושה צופים שהוא מכיר, ולכל אחד יש טעם משלו.', 'What does it know? <b>Who liked it.</b> {n} has three viewers it knows, and each has a taste of their own.', {n: n})],
+              ['🔍', tf('אז {n} מחפש את הצופה <b>הכי דומה לך</b>, וממליץ לך על מה שהוא אהב. לזה קוראים ״אנשים כמוך אהבו גם…״.', 'So {n} looks for the viewer <b>most like you</b>, and recommends what they liked. This is called “people like you also liked…”.', {n: n})]]) +
+      t('<button class="btn" id="go" type="button">🎯 למשימה</button>', '<button class="btn" id="go" type="button">🎯 To the mission</button>'));
+    on('go', function(){ W.phase = 'play'; W.m = ['', '', '', '', '', '']; W.rr = null; W.calc = false; W.round++; renderWorld(); window.scrollTo(0, 0); });
+  }
+  else if (ph === 'play'){
+    steps(ST, 1);
+    var tt = rcT2(), used = W.m.filter(Boolean).length, pp = rcPpl(tt), rr = W.rr, h = '';
+    if (rr){ setMood(rr.ok ? 'happy' : 'sad', 2000); say(rr.say); }
+    else { setMood('think'); say(tf('אם תהיה דומה לאחד הצופים, אמליץ לך על מה שהוא אהב! יש לך 3 לחיצות.', 'If you’re like one of the viewers, I’ll recommend what they liked! You have 3 taps.')); }
+    h += '<h3>🎯 ' + t('המשימה', 'The mission') + '</h3><p class="rcmission">' + tf('ש{n} ימליץ לך על {e} <b>״{v}״</b>. הוא לא יודע מה יש בסרטון הזה. הוא יודע רק <b>מי אהב אותו</b>.', 'Get {n} to recommend {e} <b>“{v}”</b> to you. It doesn’t know what’s in this video. It only knows <b>who liked it</b>.', {n: n, e: goal.fav.e, v: goal.fav.n}) + '</p><div class="noread">' + rcVidX(goal.fav, 'rcmini') + '</div>';
+    if (rr) h += rr.ok ? '<p class="res ok">' + tf('✓ הצלחת! {n} המליץ על סרטון שהוא לא יודע עליו כלום, רק כי {p}, שדומה לך, {l} אותו.', '✓ You did it! {n} recommended a video it knows nothing about, just because {p}, who is like you, {l} it.', {n: n, p: goal.n, l: rcLiked(goal)}) + '</p>'
+                       : '<p class="twnote">' + rr.why + '</p>';
+    h += '<button class="rclink" id="calc" type="button" aria-expanded="' + !!W.calc + '">' + tf('🧮 איך {n} יודע מי דומה לך?', '🧮 How does {n} know who is like you?', {n: n}) + '</button>' +
+      (W.calc ? '<div class="rccalc">' + tf('<p>{n} משווה את 4 המספרים שלך ל-4 המספרים של כל צופה. <b>מספרים גדולים באותם מקומות = דומים.</b></p><p>אם אצלך הכי גדול 🍳, ואצל מאיה הכי גדול 🍳, אתם דומים מאוד. 100% = בדיוק אותו טעם, 0% = שום דבר משותף.</p>', '<p>{n} compares your 4 numbers to each viewer’s 4 numbers. <b>Big numbers in the same places = alike.</b></p><p>If your biggest is 🍳, and Maya’s biggest is 🍳, you’re very alike. 100% = exactly the same taste, 0% = nothing in common.</p>', {n: n}) + '</div>' : '') +
+      '<p class="wscap">' + tf('👥 שלושה צופים ש{n} כבר מכיר:', '👥 Three viewers {n} already knows:', {n: n}) + '</p>' + pp.html;
+    if (!rr){
+      h += '<p class="lbl" style="text-align:center">' + (used >= 3 ? t('השתמשת ב-3 הלחיצות. עכשיו תבקש המלצה!', 'You used all 3 taps. Now ask for a recommendation!') : used === 2 ? t('נשארה לך לחיצה אחת מתוך 3', 'You have 1 tap left out of 3') : tf('נשארו לך {k} לחיצות מתוך 3', 'You have {k} taps left out of 3', {k: 3 - used})) + '</p>' +
+        '<div class="rcfeed">' + RC_F2.map(function(k, i){
+          var m = W.m[i], off = used >= 3 && !m;
+          return '<div class="rcfi">' + rcVid(k, 'rcmini') + '<div class="rctg">' + ['lk', 'sk'].map(function(a){ return '<button type="button" class="' + a + '" data-i="' + i + '" data-a="' + a + '" aria-pressed="' + (m === a) + '" aria-label="' + esc(RC_ACT[a][2] + ': ' + RC_V[k].n) + '"' + (off ? ' disabled' : '') + '>' + RC_ACT[a][1] + '</button>'; }).join('') + '</div></div>';
+        }).join('') + '</div><p class="wscap">' + t('😋 הטעם שלך:', '😋 Your taste:') + '</p>' + rcTaste(tt) +
+        '<button class="btn" id="ask" type="button"' + (used ? '' : ' disabled') + '>' + tf('🍿 {n}, תמליץ לי!', '🍿 {n}, recommend something!', {n: n}) + '</button>';
+    } else h += '<div class="row">' + (rr.ok ? t('<button class="btn" id="fin" type="button">🍿 לסיכום</button>', '<button class="btn" id="fin" type="button">🍿 To the summary</button>') : '') + t('<button class="btn alt" id="again" type="button">🔁 לנסות שוב</button>', '<button class="btn alt" id="again" type="button">🔁 Try again</button>') + '</div>';
+    P(h);
+    $('#panel').querySelectorAll('.rctg button').forEach(function(b){ b.onclick = act(function(){
+      var i = +b.dataset.i, a = b.dataset.a, m = W.m.slice();
+      if (m[i] === a) m[i] = ''; else if (m[i] || m.filter(Boolean).length < 3) m[i] = a; else return;
+      W.m = m; beep('tap'); W.round++; twKeep(renderWorld);
+    }); });
+    on('calc', function(){ W.calc = !W.calc; twKeep(renderWorld); });
+    on('ask', function(){
+      var p = RC_PPL[pp.bi];
+      if (p) W.paid.a = (W.paid.a || 0) + 1;   // 🏅 כמה המלצות קיבלת (↩ לא מאפס). ״אף צופה לא דומה לך״ לא נספר
+      if (pp.bi < 0) W.rr = {ok: false, say: t('אני עוד לא מכיר אותך מספיק. אף צופה לא דומה לך 🤷', 'I don’t know you well enough yet. No viewer is like you 🤷'), why: tf('רק דילגת, אז {n} יודע מה לא אוהבים, אבל לא מה כן. נסה לתת ❤️.', 'You only skipped, so {n} knows what you don’t like, but not what you do. Try giving a ❤️.', {n: n})};
+      else {
+        var ok = pp.bi === RC_GOAL2; if (ok) beep('good'); else beep('bad');
+        W.rr = {ok: ok, say: tf('אתה הכי דומה ל{p} ({s}%). {p} {l} את {e} ״{v}״, אז אני ממליץ לך עליו!', 'You’re most like {p} ({s}%). {p} liked {e} “{v}”, so I recommend it to you!', {p: p.n, s: pp.sims[pp.bi], l: rcLiked(p), e: p.fav.e, v: p.fav.n}),
+          why: tf('{n} לא מסתכל על ה״חתול״ שבשם. הוא לא יודע מה יש בסרטון! הוא רק מחפש מי דומה לך. מי מהשלושה {l} את הפיצה, ומה היא אוהבת?', '{n} doesn’t look at the “cat” in the name. It doesn’t know what’s in the video! It only looks for who is like you. Which of the three liked the pizza, and what does she like?', {n: n, l: rcLiked(goal)})};
+      }
+      W.round++; twKeep(renderWorld);
+    });
+    on('again', function(){ W.m = ['', '', '', '', '', '']; W.rr = null; W.round++; renderWorld(); window.scrollTo(0, 0); });
+    on('fin', function(){ var a = W.paid.a || 1; W.st = a <= 1 ? 3 : a === 2 ? 2 : 1; W.first = finishLevel(1, W.st); W.phase = 'sum'; W.round++; renderWorld(); window.scrollTo(0, 0); });
+  }
+  else {
+    steps(ST, 2); setMood('happy'); confetti(); beep('win'); say(t('אנשים כמוך, סרטונים כמוך! 👥', 'People like you, videos like you! 👥'));
+    P('<h3>' + t('סיימת את שלב 2! ', 'You finished level 2! ') + '⭐'.repeat(W.st) + '☆'.repeat(3 - W.st) + '</h3>' + (W.first ? t('<p>הרווחת ', '<p>You earned ') + STARS_NEW_LEVEL + t(' ⭐ לחנות.</p>', ' ⭐ for the shop.</p>') : '') +
+      tf('<div class="rule">👥 <b>אנשים כמוך אהבו גם…</b>: {n} המליץ על סרטון בלי לדעת מה יש בו. מספיק שמי שדומה לך אהב אותו.</div>', '<div class="rule">👥 <b>People like you also liked…</b>: {n} recommended a video without knowing what’s in it. It was enough that someone like you liked it.</div>', {n: n}) +
+      t('<div class="rule">🌍 באפליקציות אמיתיות משווים אותך למיליוני צופים, לא לשלושה. לכן לפעמים מופיע סרטון שלא חיפשת, וקולע בדיוק.</div>', '<div class="rule">🌍 Real apps compare you to millions of viewers, not three. That’s why sometimes a video you never searched for shows up, and it’s exactly right.</div>') +
+      t('<div class="row"><button class="btn alt" id="again" type="button">לשחק שוב</button><button class="btn" id="go" type="button">לשלב 3: הבועה</button></div>', '<div class="row"><button class="btn alt" id="again" type="button">Play again</button><button class="btn" id="go" type="button">To level 3: The Bubble</button></div>'));
+    on('again', function(){ W = fresh(1); renderWorld(); window.scrollTo(0, 0); });
+    on('go', function(){ W = fresh(2); renderWorld(); window.scrollTo(0, 0); });
+  }
+}
+
+/* ───── שלב 3: אתגר אלופים, הבועה. רובי מפעיל לבד פיד של 6 סרטונים לנועה, ותמיד בוחר את מה שהכי מתאים.
+   🎲 הפתעה = סרטון מהסוג שרובי הראה הכי פחות. נועה צופה עד הסוף רק במה שהיא אוהבת (ציון לפי הטעם האמיתי ≥ 6) ───── */
+var RC_NOA = [3, 0, 3, 1], RC_START = [3, 0, 1, 1], RC_N3 = 6, RC_MAXS = 3;   // הטעם האמיתי של נועה (סוד), ומה רובי יודע אחרי 🐇 ״ארנב בגינה״
+function rcFeed(sur){
+  var tt = RC_START.slice(), seen = {v18: 1}, shown = [1, 0, 0, 0], out = [];
+  for (var i = 0; i < RC_N3; i++){
+    var c = RC_ORDER.filter(function(k){ return !seen[k]; }), pool = c;
+    if (sur[i]){ var lc = [0, 1, 2, 3].sort(function(x, y){ return shown[x] - shown[y] || x - y; })[0]; pool = c.filter(function(k){ return rcCat(RC_V[k].v) === lc; }); if (!pool.length) pool = c; }
+    var k = rcBest(tt, pool)[0], v = RC_V[k].v, like = rcDot(RC_NOA, v) >= 6;
+    seen[k] = 1; shown[rcCat(v)]++; tt = tt.map(function(x, j){ return x + (like ? 1 : -1) * v[j]; });
+    out.push({k: k, like: like, sur: !!sur[i], t: tt.slice()});
+  }
+  return out;
+}
+function rcBubble(out){ var c = [0, 0, 0, 0]; out.forEach(function(o){ c[rcCat(RC_V[o.k].v)]++; }); var m = Math.max.apply(null, c); return {n: m, i: c.indexOf(m)}; }
+function rcJudge(out, sur){
+  var n = G.name, bb = rcBubble(out), tt = out[out.length - 1].t, nS = sur.filter(Boolean).length, skips = out.filter(function(o){ return !o.like; }).length, ax = RC_AX[bb.i];
+  var found = tt[2] >= 3 && out.some(function(o){ return o.like && rcCat(RC_V[o.k].v) === 2; });
+  if (!nS) return {first: true, mood: 'worry', say: bb.n === RC_N3 ? tf('נועה אוהבת רק {e} {a}! היא צפתה עד הסוף בכל מה שהראיתי לה, אז אני בטוח בזה.', 'Noa only likes {e} {a}! She watched everything I showed her to the end, so I’m sure of it.', {e: ax.e, a: ax.n}) : tf('הראיתי לנועה בעיקר {a}.', 'I showed Noa mostly {a}.', {a: ax.n})};
+  if (found && bb.n <= 4) return {ok: true, mood: 'happy', say: t('גיליתי! נועה אוהבת גם 🍳 בישול! ', 'I found out! Noa likes 🍳 cooking too! ') + (skips ? tf('על {k} היא דילגה, וזה בסדר: גם דילוג מלמד אותי.', 'She skipped {k}, and that’s okay: a skip teaches me too.', {k: skips === 1 ? t('הפתעה אחת', 'one surprise') : skips + t(' הפתעות', ' surprises')}) : ''),
+    why: (skips ? tf('ההפתעות עלו לנו {k}, ', 'The surprises cost us {k}, ', {k: skips === 1 ? t('דילוג אחד', 'one skip') : skips + t(' דילוגים', ' skips')}) : t('ההפתעות היו סיכון קטן, ', 'The surprises were a small risk, ')) + tf('אבל בלעדיהן {n} לא היה מגלה אף פעם שנועה אוהבת גם 🍳 בישול.', 'but without them {n} would never have found out that Noa likes 🍳 cooking too.', {n: n})};
+  if (bb.n >= 5 && bb.i === 2) return {mood: 'worry', say: t('עכשיו אני בטוח שנועה אוהבת <b>רק בישול</b>! 🍳🍳🍳', 'Now I’m sure Noa likes <b>only cooking</b>! 🍳🍳🍳'), why: tf('בועה חדשה! אחרי הדילוג על הספורט, {n} קפץ לבישול ונתקע שם. נסה לשים את ההפתעות במקום אחר.', 'A new bubble! After the skipped sports video, {n} jumped to cooking and got stuck there. Try putting the surprises somewhere else.', {n: n})};
+  if (!found) return {mood: 'think', say: t('הראיתי לנועה משהו אחר, והיא דילגה. אז היא באמת אוהבת רק חיות?', 'I showed Noa something else, and she skipped it. So she really only likes animals?'), why: t('הפתעה אחת הביאה ⚽ ספורט, ונועה דילגה. עוד הפתעה תביא סוג שעוד לא ניסו.', 'One surprise brought ⚽ sports, and Noa skipped it. Another surprise will bring a kind nobody tried yet.')};
+  return {mood: 'worry', say: tf('גיליתי משהו חדש, אבל עדיין הראיתי לה {k} מתוך 6 {e}.', 'I found something new, but I still showed her {k} of 6 {e}.', {k: bb.n, e: ax.e}), why: tf('הבועה עדיין {k} מתוך 6. צריך 4 או פחות.', 'The bubble is still {k} of 6. It needs to be 4 or less.', {k: bb.n})};
+}
+function rcSlots(out, sur, shownN, pop){
+  return '<div class="rcslots">' + sur.map(function(s, i){
+    var o = out[i];
+    if (o && i < shownN) return '<div class="rcsl full' + (o.sur ? ' sur' : '') + (i === pop ? ' pop' : '') + '" role="img" aria-label="' + esc(RC_V[o.k].n + (o.like ? ' ❤️' : ' ⏭️')) + '"><span class="se" aria-hidden="true">' + RC_V[o.k].e + '</span><span class="rx" aria-hidden="true">' + (o.like ? '❤️' : '⏭️') + '</span><span aria-hidden="true">' + RC_AX[rcCat(RC_V[o.k].v)].e + (o.sur ? '🎲' : '') + '</span></div>';
+    return '<div class="rcsl' + (o ? ' wait' : '') + '"><span class="se" aria-hidden="true">' + (s ? '🎲' : '▫️') + '</span>' + (i + 1) + '</div>';
+  }).join('') + '</div>';
+}
+function rcAnim3(tok){   // ▶️ הפיד רץ: כל סרטון נחשף אחרי הקודם
+  var k = 0;
+  (function step(){
+    if (!rcOn(tok)) return;
+    k++; var box = $('#rcfeed3'); if (box) box.innerHTML = rcSlots(W.out, W.sur, k, k - 1);
+    beep(W.out[k - 1].like ? 'tap' : 'bad');
+    if (k < W.out.length) setTimeout(step, wsT(650));
+    else setTimeout(function(){ if (!rcOn(tok)) return; W.anim = false; twKeep(renderWorld); }, wsT(500));
+  })();
+}
+function recs3(){
+  var n = G.name, ph = W.phase, ST = [t('הסבר', 'Intro'), t('הפיד של נועה', 'Noa’s feed'), t('אתגר', 'Challenge'), t('סיום', 'Finish')];
+  if (ph === 'intro'){
+    steps(ST, 0); setMood('happy'); say(t('הפעם אני ממליץ לבד, בלי עזרה! 😎', 'This time I recommend by myself, with no help! 😎'));
+    P(comic([['🐇', tf('נועה צפתה פעם אחת ב-🐇 ״ארנב בגינה״. עכשיו {n} מפעיל לה <b>לבד</b> פיד של 6 סרטונים.', 'Noa once watched 🐇 “A Rabbit in the Garden”. Now {n} runs a feed of 6 videos for her <b>by itself</b>.', {n: n})],
+              ['❤️', t('נועה צופה עד הסוף במה שהיא אוהבת, ומדלגת על מה שלא. כל צפייה וכל דילוג משנים את הטעם שלה.', 'Noa watches what she likes to the end, and skips what she doesn’t. Every watch and every skip changes her taste.')],
+              ['🫧', tf('{n} תמיד בוחר את מה שהכי מתאים לטעם שהוא מכיר. מה כבר יכול להשתבש? 😇', '{n} always picks what best matches the taste it knows. What could possibly go wrong? 😇', {n: n})]]) +
+      t('<button class="btn" id="go" type="button">▶️ להפעיל את הפיד של נועה</button>', '<button class="btn" id="go" type="button">▶️ Run Noa’s feed</button>'));
+    on('go', function(){ W.phase = 'play'; W.sur = [0, 0, 0, 0, 0, 0]; W.out = rcFeed(W.sur); W.r3 = rcJudge(W.out, W.sur); W.runs = 1; W.anim = true; W.round++; renderWorld(); window.scrollTo(0, 0); });
+  }
+  else if (ph === 'play'){
+    var champ = W.runs > 1 || (W.r3 && !W.r3.first), r3 = W.r3, nS = W.sur.filter(Boolean).length, h = '';
+    steps(ST, champ ? 2 : 1);
+    var bb = rcBubble(W.out), last = W.out[W.out.length - 1];
+    if (W.anim){ setMood('think'); say(t('מפעיל את הפיד… 📺', 'Running the feed… 📺')); }
+    else { setMood(r3.mood, 2000); say(r3.say.replace(/<\/?b>/g, '')); }
+    h += '<h3>📺 ' + t('הפיד של נועה', 'Noa’s feed') + '</h3>';
+    if (!W.anim && !r3.first) h += '<p class="rcmission">' + tf('🎯 <b>האתגר:</b> ש{n} יגלה שנועה אוהבת עוד משהו, <b>והבועה תהיה 4 מתוך 6 או פחות</b>. אפשר עד 3 הפתעות. 🎲 <b>הפתעה</b> = {n} מראה סרטון מהסוג שהוא הראה הכי פחות.', '🎯 <b>The challenge:</b> get {n} to find out that Noa likes something else, <b>and keep the bubble at 4 of 6 or less</b>. Up to 3 surprises. 🎲 <b>A surprise</b> = {n} shows a video of the kind it showed least.', {n: n}) + '</p>';
+    h += '<div id="rcfeed3">' + rcSlots(W.out, W.sur, W.anim ? 0 : W.out.length, -1) + '</div>';
+    if (!W.anim){
+      h += '<p class="small-note" style="text-align:center">' + W.out.map(function(o){ return esc(RC_V[o.k].n) + (o.like ? ' ❤️' : ' ⏭️'); }).join(' · ') + '</p>';
+      h += '<div class="rcbub' + (bb.n >= 5 ? ' hot' : '') + '"><span aria-hidden="true">🫧</span><div class="bb" aria-hidden="true"><s style="width:' + Math.round(bb.n / RC_N3 * 100) + '%"></s></div><b>' + tf('הבועה: {k} מתוך 6 {e}', 'The bubble: {k} of 6 {e}', {k: bb.n, e: RC_AX[bb.i].e}) + '</b></div>';
+      h += '<p class="wscap">' + tf('😋 הטעם של נועה, לפי {n}:', '😋 Noa’s taste, according to {n}:', {n: n}) + '</p>' + rcTaste(last.t, RC_START);
+      if (r3.first) h += '<p class="rcsecret">' + tf('🤫 <b>סוד:</b> נועה אוהבת גם 🍳 בישול! אבל {n} אף פעם לא הראה לה סרטון בישול, אז הוא לא יגלה את זה לעולם. ככה נוצרת <b>בועת המלצות</b>.', '🤫 <b>A secret:</b> Noa likes 🍳 cooking too! But {n} never showed her a cooking video, so it will never find out. That’s how a <b>recommendation bubble</b> forms.', {n: n}) + '</p>' +
+        '<button class="btn" id="ch" type="button">' + t('🎲 לאתגר האלופים', '🎲 To the Champions Challenge') + '</button>';
+      else if (r3.ok) h += '<p class="res ok">🏆 ' + r3.why + '</p><button class="btn" id="exp" type="button">' + t('🗣️ ועכשיו להסביר', '🗣️ Now explain it') + '</button>';
+      else {
+        if (r3.why) h += '<p class="twnote">' + r3.why + '</p>';
+        h += '<p class="lbl">' + t('🎲 גע בתאים כדי לשים בהם הפתעה (עד 3):', '🎲 Tap the boxes to put a surprise in them (up to 3):') + '</p><div class="rcslots">' + W.sur.map(function(s, i){
+          return '<button type="button" class="rcsl' + (s ? ' sur' : '') + '" data-i="' + i + '" aria-pressed="' + !!s + '" aria-label="' + tf('תא {i}', 'Box {i}', {i: i + 1}) + (s ? t(', הפתעה', ', surprise') : '') + '"><span class="se" aria-hidden="true">' + (s ? '🎲' : '▫️') + '</span>' + (i + 1) + '</button>';
+        }).join('') + '</div><p class="small-note" style="text-align:center">' + tf('הפתעות: {k} מתוך 3', 'Surprises: {k} of 3', {k: nS}) + '</p>' +
+          '<button class="btn" id="run" type="button"' + (nS ? '' : ' disabled') + '>' + t('▶️ להפעיל את הפיד שוב', '▶️ Run the feed again') + '</button>';
+      }
+    }
+    P(h);
+    if (W.anim) rcAnim3(animTok);
+    $('#panel').querySelectorAll('button.rcsl').forEach(function(b){ b.onclick = act(function(){
+      var i = +b.dataset.i, s = W.sur.slice();
+      if (s[i]) s[i] = 0; else if (nS < RC_MAXS) s[i] = 1; else { toast(t('3 הפתעות מספיקות. יותר מזה, זה כבר לא הפיד של נועה!', '3 surprises are enough. More than that, it’s not Noa’s feed anymore!')); return; }
+      W.sur = s; beep('tap'); W.round++; twKeep(renderWorld);
+    }); });
+    on('ch', function(){ W.r3 = {mood: 'think', say: tf('שים 🎲 הפתעות בתאים שתבחר, ואז הפעל את הפיד שוב.', 'Put 🎲 surprises in the boxes you choose, then run the feed again.'), why: ''}; W.round++; renderWorld(); window.scrollTo(0, 0); });
+    on('run', function(){ W.paid.r = (W.paid.r || 0) + 1; W.out = rcFeed(W.sur); W.r3 = rcJudge(W.out, W.sur); W.runs++; W.anim = true; W.round++; renderWorld(); });
+    on('exp', function(){ W.phase = 'explain'; W.round++; renderWorld(); window.scrollTo(0, 0); });
+  }
+  else if (ph === 'explain'){
+    steps(ST, 2); setMood('happy', 2500); beep('win'); confetti();
+    say(tf('בזכות ההפתעות שלך גיליתי שנועה אוהבת גם בישול! 🍳', 'Thanks to your surprises I found out Noa likes cooking too! 🍳'));
+    P('<h3>' + t('🫧 פוצצת את הבועה!', '🫧 You popped the bubble!') + '</h3>' + '<div class="noread">' + rcSlots(W.out, W.sur, W.out.length, -1) + '</div>' +
+      tf('<div class="rule">🫧 <b>בועת המלצות:</b> {n} ממליץ רק על מה שהוא כבר יודע שאוהבים. כל צפייה מחזקת את אותו טעם, ואת מה שלא מראים, לא מגלים לעולם.</div>', '<div class="rule">🫧 <b>A recommendation bubble:</b> {n} only recommends what it already knows you like. Every watch strengthens the same taste, and what’s never shown is never discovered.</div>', {n: n}) +
+      t('<div class="rule">🎲 לכן אפליקציות אמיתיות מוסיפות מדי פעם <b>הפתעות</b>, גם אם חלק מהן לא יעבדו. ככה הן מגלות דברים חדשים שאתה אוהב.</div>', '<div class="rule">🎲 That’s why real apps add <b>surprises</b> now and then, even if some won’t work. That’s how they discover new things you like.</div>') +
+      '<p><b>' + esc(who()) + tf(', עכשיו תסביר ל{n} בקול, במילים שלך: למה הוא נתקע על חיות, ולמה דווקא הפתעה עזרה לו?', ', now explain to {n} out loud, in your own words: why did it get stuck on animals, and why did a surprise help?', {n: n}) + '</b></p>' +
+      t('<button class="btn" id="fin" type="button">הסברתי ✓</button>', '<button class="btn" id="fin" type="button">I explained ✓</button>'));
+    on('fin', function(){ var r = W.paid.r || 1; W.st = r <= 2 ? 3 : 2; W.first = finishLevel(2, W.st); W.phase = 'end'; W.round++; renderWorld(); window.scrollTo(0, 0); });
+  }
+  else {
+    steps(ST, 3); setMood('happy'); say(t('עכשיו אני יודע להמליץ! 🍿', 'Now I know how to recommend! 🍿'));
+    P(t('<h3>סיימת את קולנוע ההמלצות! ', '<h3>You finished Recommendation Cinema! ') + '⭐'.repeat(W.st || 3) + '☆'.repeat(3 - (W.st || 3)) + '</h3>' + (W.first ? t('<p>הרווחת ', '<p>You earned ') + STARS_NEW_LEVEL + t(' ⭐ לחנות.</p>', ' ⭐ for the shop.</p>') : '') + mindHtml(curWorld, 'w') +
+      t('<div class="rule">🍿 מה למדנו: <b>מערכת המלצה</b> הופכת כל סרטון ואת הטעם שלך למספרים. היא לומדת מכל לייק, צפייה ודילוג, ממליצה על מה שאנשים כמוך אהבו, ומוסיפה הפתעות כדי לא להיתקע בבועה.</div>', '<div class="rule">🍿 What we learned: a <b>recommendation system</b> turns every video and your taste into numbers. It learns from every like, watch and skip, recommends what people like you liked, and adds surprises so it doesn’t get stuck in a bubble.</div>') +
+      tf('<p>🖌️ {n} כבר יודע להמליץ על מה שקיים. בעולם 7, <b>סטודיו הפרומפטים 🖌️</b>, הוא ילמד ליצור משהו חדש לגמרי, רק מתוך מילים.</p>', '<p>🖌️ {n} already knows how to recommend what exists. In world 7, <b>Prompt Studio 🖌️</b>, it will learn to create something completely new, just from words.</p>', {n: n}) +
+      showBtn() + t('<div class="row"><button class="btn alt" id="shop" type="button">🛠️ לחנות התוספות</button><button class="btn alt" id="map" type="button">🗺️ למפה</button></div>', '<div class="row"><button class="btn alt" id="shop" type="button">🛠️ To the accessory shop</button><button class="btn alt" id="map" type="button">🗺️ To the map</button></div>'));
+    on('shop', function(){ go('shop'); });
+    on('map', function(){ go('map'); });
+    on('show', function(){ W = fresh(SHOW_IDX); renderWorld(); window.scrollTo(0, 0); });
+  }
+}
+
+/* ───── 🎁 בונוס: הסרטון החדש. אף אחד עוד לא צפה בו, אז רובי לא יודע למי להמליץ.
+   הילד בוחר 2 צופים ראשונים. רובי ימליץ ליעל רק אם הצופה הכי דומה לה צפה ואהב ───── */
+var RC_NEW = {e: '🐬', n: t('הדולפין שלמד לצייר', 'The Dolphin Who Learned to Paint'), v: [3, 0, 0, 2]};
+var RC_P4 = RC_PPL.concat([{n: t('תום', 'Tom'), e: '🎸', t: [0, 1, 1, 3]}]);
+var RC_YAEL = {n: t('יעל', 'Yael'), e: '🐨', t: [3, 1, 0, 3], g: 1};
+function rcNear4(){ var s = RC_P4.map(function(p){ return wsSim(RC_YAEL.t, p.t); }); return s.indexOf(Math.max.apply(null, s)); }
+function recs4(){
+  var n = G.name, ph = W.phase, ST = [t('הסבר', 'Intro'), t('צופים ראשונים', 'First viewers'), t('סיום', 'Finish')];
+  if (ph === 'intro'){
+    steps(ST, 0); setMood('worry'); say(t('הגיע סרטון חדש, ואף אחד עוד לא ראה אותו! 😟', 'A new video arrived, and nobody has watched it yet! 😟'));
+    P(comic([['🐬', tf('הגיע לקולנוע סרטון חדש: {e} <b>״{v}״</b>. אף אחד עוד לא צפה בו, אז {n} לא יודע עליו כלום.', 'A new video arrived at the cinema: {e} <b>“{v}”</b>. Nobody has watched it yet, so {n} knows nothing about it.', {e: RC_NEW.e, v: RC_NEW.n, n: n})],
+              ['🤷', tf('ו{n} ממליץ רק על מה שאנשים כמוך אהבו. סרטון שאף אחד לא ראה, הוא לא ימליץ עליו אף פעם!', 'And {n} only recommends what people like you liked. A video nobody watched, it will never recommend!', {n: n})],
+              ['📤', tf('<b>המשימה:</b> בחר 2 צופים ראשונים שיראו את הסרטון, כדי ש{n} ימליץ עליו ל{y} {e}.', '<b>The mission:</b> pick 2 first viewers to watch the video, so that {n} recommends it to {y} {e}.', {n: n, y: RC_YAEL.n, e: RC_YAEL.e})]]) +
+      t('<button class="btn" id="go" type="button">📤 לבחור צופים</button>', '<button class="btn" id="go" type="button">📤 Pick viewers</button>'));
+    on('go', function(){ W.phase = 'play'; W.pk = [0, 0, 0, 0]; W.sent = false; W.round++; renderWorld(); window.scrollTo(0, 0); });
+  }
+  else if (ph === 'play'){
+    steps(ST, 1);
+    var cnt = W.pk.filter(Boolean).length, near = rcNear4(), h = '';
+    var reac = RC_P4.map(function(p){ return rcDot(p.t, RC_NEW.v) >= 9; }), ok = W.sent && W.pk[near] && reac[near];
+    if (!W.sent){ setMood('think'); say(tf('את מי להושיב ראשון מול {e}?', 'Who should watch {e} first?', {e: RC_NEW.e})); }
+    else if (ok){ setMood('happy', 2000); say(tf('{p} אהבה, והיא הכי דומה ל{y}. אז אני ממליץ ל{y} על הסרטון החדש! 🐬', '{p} liked it, and she’s the most like {y}. So I recommend the new video to {y}! 🐬', {p: RC_P4[near].n, y: RC_YAEL.n})); }
+    else { setMood('sad', 2000); say(tf('הצופים הראשונים דילגו, ו{p}, הכי דומה ל{y}, בכלל לא ראתה. אני לא ממליץ על זה 😢', 'The first viewers skipped it, and {p}, the most like {y}, didn’t even see it. I won’t recommend it 😢', {p: RC_P4[near].n, y: RC_YAEL.n})); }
+    h += '<div class="noread">' + rcVidX(RC_NEW, 'rcmini') + '</div>' +
+      '<p class="rcmission">' + tf('🎯 ש{n} ימליץ על הסרטון ל{y} {e}. {n} ימליץ לה רק אם <b>הצופה הכי דומה לה</b> צפה ואהב.', '🎯 Get {n} to recommend the video to {y} {e}. {n} will recommend it to her only if <b>the viewer most like her</b> watched and liked it.', {n: n, y: RC_YAEL.n, e: RC_YAEL.e}) + '</p>' +
+      '<p class="wscap">' + tf('{e} הטעם של {y}:', '{e} {y}’s taste:', {e: RC_YAEL.e, y: RC_YAEL.n}) + '</p>' + rcTaste(RC_YAEL.t, null, true) +
+      '<p class="lbl">' + (W.sent ? t('📤 הצופים הראשונים:', '📤 The first viewers:') : tf('📤 בחר 2 צופים ראשונים ({k} מתוך 2):', '📤 Pick 2 first viewers ({k} of 2):', {k: cnt})) + '</p>';
+    h += '<div class="rcppl">' + RC_P4.map(function(p, j){
+      var pk = W.pk[j], res = W.sent && pk ? (reac[j] ? ' ❤️ ' + t('צפה עד הסוף', 'watched it all') : ' ⏭️ ' + t('דילג', 'skipped')) : '';
+      return (W.sent ? '<div' : '<button type="button" data-j="' + j + '" aria-pressed="' + !!pk + '" aria-label="' + esc(p.n + ': ' + RC_AX.map(function(a, i){ return a.n + ' ' + p.t[i]; }).join(', ')) + '"') + ' class="rcpp' + (pk ? ' pick' : '') + (W.sent && j === near ? ' best' : '') + '" style="text-align:start;font:inherit;color:inherit"><span class="rcpph"><span class="pe" aria-hidden="true">' + p.e + '</span><b>' + esc(p.n) + '</b>' + (pk && !W.sent ? '<span class="rcpct">✓</span>' : '') + (res ? '<span class="rcpct">' + res + '</span>' : '') + '</span>' + rcTaste(p.t, null, true) +
+        (W.sent && j === near ? '<span class="rcfav">' + tf('👥 הכי דומה ל{y} ({p}%)', '👥 Most like {y} ({p}%)', {y: RC_YAEL.n, p: rcPctS(wsSim(RC_YAEL.t, p.t))}) + '</span>' : '') + (W.sent ? '</div>' : '</button>');
+    }).join('') + '</div>';
+    if (!W.sent) h += '<button class="btn" id="send" type="button"' + (cnt === 2 ? '' : ' disabled') + '>' + t('📤 לשלוח להם את הסרטון', '📤 Send them the video') + '</button>';
+    else if (ok) h += '<p class="res ok">' + t('✓ הסרטון החדש התחיל להתפשט! ', '✓ The new video started to spread! ') + '</p><div class="rule">' + t('🚀 ככה גם באפליקציות אמיתיות: סרטון חדש מוצג קודם לקבוצה קטנה. אם הם אוהבים, הוא מגיע לאנשים שדומים להם, ומשם לעוד ועוד.', '🚀 Real apps do this too: a new video is shown to a small group first. If they like it, it reaches people like them, and from there to more and more.') + '</div>' +
+      '<button class="btn" id="fin" type="button">' + t('🎁 לסיום', '🎁 To the finish') + '</button>';
+    else h += '<p class="twnote">' + tf('💡 תסתכל על הטעם של {y}: מי מהצופים הכי דומה לה? ומי מהם יאהב סרטון על {e}?', '💡 Look at {y}’s taste: which viewer is most like her? And which of them would like a video about {e}?', {y: RC_YAEL.n, e: RC_NEW.e}) + '</p>' +
+      '<button class="btn alt" id="again" type="button">' + t('🔁 לבחור צופים אחרים', '🔁 Pick other viewers') + '</button>';
+    P(h);
+    $('#panel').querySelectorAll('button.rcpp').forEach(function(b){ b.onclick = act(function(){
+      var j = +b.dataset.j, pk = W.pk.slice();
+      if (pk[j]) pk[j] = 0; else if (pk.filter(Boolean).length < 2) pk[j] = 1; else return;
+      W.pk = pk; beep('tap'); W.round++; twKeep(renderWorld);
+    }); });
+    on('send', function(){ W.paid.s = (W.paid.s || 0) + 1; W.sent = true; beep(W.pk[near] && reac[near] ? 'good' : 'bad'); W.round++; twKeep(renderWorld); });
+    on('again', function(){ W.pk = [0, 0, 0, 0]; W.sent = false; W.round++; renderWorld(); window.scrollTo(0, 0); });
+    on('fin', function(){ var s = W.paid.s || 1; W.st = s <= 1 ? 3 : 2; W.first = finishLevel(3, W.st); W.phase = 'end'; W.round++; renderWorld(); window.scrollTo(0, 0); });
+  }
+  else {
+    steps(ST, 2); setMood('happy'); confetti(); beep('win'); say(t('הסרטון החדש יצא לעולם! 🐬', 'The new video is out in the world! 🐬'));
+    P(t('<h3>סיימת את שלב הבונוס! ', '<h3>You finished the bonus level! ') + '⭐'.repeat(W.st) + '☆'.repeat(3 - W.st) + '</h3>' +
+      tf('<div class="rule">🐬 <b>סרטון חדש צריך צופים ראשונים.</b> בלי אף צפייה, {n} לא יודע למי להמליץ עליו. לכן חשוב מי רואה ראשון: אנשים שיאהבו אותו, ושדומים לעוד הרבה אנשים.</div>', '<div class="rule">🐬 <b>A new video needs first viewers.</b> Without a single view, {n} doesn’t know who to recommend it to. That’s why it matters who watches first: people who will like it, and who are like many other people.</div>', {n: n}) +
+      showBtn() + t('<div class="row"><button class="btn alt" id="again" type="button">לשחק שוב</button><button class="btn alt" id="map" type="button">🗺️ למפה</button></div>', '<div class="row"><button class="btn alt" id="again" type="button">Play again</button><button class="btn alt" id="map" type="button">🗺️ To the map</button></div>'));
+    on('again', function(){ W = fresh(3); renderWorld(); window.scrollTo(0, 0); });
+    on('map', function(){ go('map'); });
+    on('show', function(){ W = fresh(SHOW_IDX); renderWorld(); window.scrollTo(0, 0); });
+  }
+}
+
+/* ───── 🎪 הופעה: רובי רואה מה כל צופה עשה, וממליץ. בשלוש פעמים הוא טועה:
+   ספר דילוג כאילו היה לייק, או בחר את הציון הכי נמוך ───── */
+var RC_SHOW = [
+  {h: [['v9', 'lk'], ['v6', 'wt'], ['v3', 'sk']]}, {h: [['v2', 'lk'], ['v7', 'wt'], ['v8', 'sk']]}, {h: [['v3', 'lk'], ['v12', 'lk'], ['v2', 'sk']]},
+  {h: [['v5', 'lk'], ['v16', 'wt'], ['v13', 'sk']]}, {h: [['v11', 'lk'], ['v4', 'sk'], ['v17', 'wt']]}, {h: [['v1', 'lk'], ['v10', 'sk'], ['v9', 'wt']]},
+  {h: [['v8', 'lk'], ['v18', 'sk'], ['v5', 'wt']]},
+  {h: [['v7', 'sk'], ['v11', 'lk'], ['v10', 'sk']], x: 'skip'}, {h: [['v3', 'sk'], ['v12', 'sk'], ['v6', 'lk']], x: 'skip'}, {h: [['v2', 'sk'], ['v13', 'lk'], ['v14', 'sk']], x: 'skip'},
+  {h: [['v6', 'lk'], ['v15', 'lk'], ['v3', 'sk']], x: 'low'}, {h: [['v10', 'lk'], ['v4', 'wt'], ['v8', 'sk']], x: 'low'}
+];
+function rcShowSaid(d){   // מה רובי אומר, ומה נכון באמת
+  var seen = d.h.map(function(x){ return x[0]; }), c = RC_ORDER.filter(function(k){ return seen.indexOf(k) < 0; }), tt = rcSum(d.h), right = rcBest(tt, c)[0];
+  if (d.x === 'skip') return {said: rcBest(rcSum(d.h.map(function(x){ return [x[0], x[1] === 'sk' ? 'lk' : x[1]]; })), c)[0], right: right};
+  if (d.x === 'low') return {said: rcBest(tt, c).pop(), right: right};
+  return {said: right, right: right};
+}
+SHOWS.recs = {ms: 6400, intro: t('הוא יראה לך מה כל צופה עשה, ויגיד על איזה סרטון הוא ממליץ לו.', 'It will show you what each viewer did, and say which video it recommends to them.'),
+  lesson: '🍿 ' + t('רובי ממליץ לפי הטעם: לייק מוסיף, דילוג מוריד, וממליצים על הציון הכי גבוה. כשהוא סופר לא נכון, ההמלצה יוצאת עקומה.', 'Robi recommends by taste: a like adds, a skip takes away, and you recommend the highest score. When it counts wrong, the recommendation comes out crooked.'),
+  make: function(){
+    var wr = [], rt = [];
+    RC_SHOW.forEach(function(d){
+      var s = rcShowSaid(d), wrong = s.said !== s.right, a = RC_V[s.said], b = RC_V[s.right];
+      var it = {vis: '<div class="rcshow"><p class="wscap">' + t('הצופה עשה:', 'The viewer did:') + '</p>' + rcHist(d.h) + '</div>', says: tf('אני ממליץ לו על {e} ״{v}״!', 'I recommend {e} “{v}”!', {e: a.e, v: a.n}), wrong: wrong,
+        truth: wrong ? tf('בעצם הכי מתאים לו {e} ״{v}״. ', 'Actually the best match is {e} “{v}”. ', {e: b.e, v: b.n}) + (d.x === 'skip' ? t('רובי ספר דילוג כאילו היה לייק!', 'Robi counted a skip as if it were a like!') : t('רובי בחר את הציון הכי נמוך במקום הכי גבוה!', 'Robi picked the lowest score instead of the highest!')) : tf('נכון, {e} ״{v}״ הכי מתאים לו.', 'Right, {e} “{v}” is the best match.', {e: b.e, v: b.n})};
+      (wrong ? wr : rt).push(it);
+    });
+    return showMix(wr, rt);
+  }};
+
+/* 🎤 פקודה קולית ״תפתיע אותי!״: רובי בוחר סרטון מהסוג שהכי פחות אהבת בשלב 1 (G.rct), ומסביר למה */
+function vSurprise(){
+  var tt = G.rct || [0, 0, 0, 0], lo = 0, hi = 0;
+  tt.forEach(function(x, i){ if (x < tt[lo]) lo = i; if (x > tt[hi]) hi = i; });
+  var pool = RC_ORDER.filter(function(k){ return rcCat(RC_V[k].v) === lo && RC_F1.indexOf(k) < 0; }), d = RC_V[pool[Math.floor(Math.random() * pool.length)]];   // סרטון שלא היה בפיד של שלב 1
+  fxPlay('dance', 1400); beep('good'); setMood('happy', 2500);
+  if (!G.rct || hi === lo) return tf('עוד לא לימדת אותי מה אתה אוהב, אז הנה הפתעה: {e} ״{v}״! 🍿', 'You haven’t taught me what you like yet, so here’s a surprise: {e} “{v}”! 🍿', {e: d.e, v: d.n});
+  return tf('עד עכשיו אהבת בעיקר {he} {hn}. הפעם אפתיע אותך עם {le} {ln}: {e} ״{v}״! כי זה הסוג שהכי פחות אהבת עד עכשיו 🍿', 'So far you mostly liked {he} {hn}. This time I’ll surprise you with {le} {ln}: {e} “{v}”! Because it’s the kind you liked least so far 🍿', {he: RC_AX[hi].e, hn: RC_AX[hi].n, le: RC_AX[lo].e, ln: RC_AX[lo].n, e: d.e, v: d.n});
+}
+
 /* 🧩 המכניקות: כל עולם בנוי מ-3 שלבים, ואחריהם 🎁 בונוס (מקום 3) ו-🎪 הופעה (מקום 4) */
 var MECHANICS = {
   layers:   {levels: [{name:t('הפנס הסורק', 'The Scanning Lamp'), run: lay1}, {name:t('חידת החוטים', 'The Wire Puzzle'), run: lay2}, {name:t('אתגר אלופים', 'Champions Challenge'), run: lay3}, {name:t('ממציאי הגלאים', 'Detector Inventors'), ico:'🎁', run: invLevel}, {name:t('תפוס את הטעות', 'Catch the Mistake'), ico:'🎪', run: showLevel}]},
   examples: {levels: [{name:t('מראים דוגמאות', 'Showing examples'), run: level1}, {name:t('בוחרים חכם', 'Choose Wisely'), run: level2}, {name:t('אתגר אלופים', 'Champions Challenge'), run: level3}, {name:t('החוק הסודי', 'The Secret Rule'), ico:'🎁', run: secretLevel}, {name:t('תפוס את הטעות', 'Catch the Mistake'), ico:'🎪', run: showLevel}]},
   tree:     {levels: [{name:t('החזאי הצעיר', 'The Young Forecaster'), run: tree1}, {name:t('בונים עץ', 'Build a Tree'), run: tree2}, {name:t('אתגר אלופים', 'Champions Challenge'), run: tree3}, {name:t('העץ שלי', 'My Tree'), ico:'🎁', run: tree4}, {name:t('תפוס את הטעות', 'Catch the Mistake'), ico:'🎪', run: showLevel}]},
+  recs:     {levels: [{name:t('הטעם שלך', 'Your Taste'), run: recs1}, {name:t('אנשים כמוך', 'People Like You'), run: recs2}, {name:t('הבועה', 'The Bubble'), run: recs3}, {name:t('הסרטון החדש', 'The New Video'), ico:'🎁', run: recs4}, {name:t('תפוס את הטעות', 'Catch the Mistake'), ico:'🎪', run: showLevel}]},
   words:    {levels: [{name:t('המילה המסתורית', 'The Mystery Word'), run: words1}, {name:t('שולחים בקבוקים', 'Sending Bottles'), run: words2}, {name:t('מילה כפולה', 'Double Words'), run: words3}, {name:t('המשפט הבא', 'The Next Sentence'), ico:'🎁', run: words4}, {name:t('תפוס את הטעות', 'Catch the Mistake'), ico:'🎪', run: showLevel}]},
   pixels:   {levels: [{name:t('פנסי הצבע', 'Color Lamps'), run: pix1}, {name:t('התמונה המתבהרת', 'The Clearing Picture'), run: pix2}, {name:t('אתגר אלופים', 'Champions Challenge'), run: pix3}, {name:t('הפיקסל הקסום', 'The Magic Pixel'), ico:'🎁', run: camLevel}, {name:t('תפוס את הטעות', 'Catch the Mistake'), ico:'🎪', run: showLevel}]}
 };
