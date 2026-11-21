@@ -171,6 +171,9 @@ input[type=text]{font:inherit;font-size:17px;width:100%;padding:10px 12px;border
 .wmood{font-size:13px;font-weight:700;color:var(--sea2)}
 .bubble p{font-size:15.5px;line-height:1.4;min-height:2.8em}
 .savenote{font-size:13px;color:var(--mute);background:#f1f5f4;border-radius:12px;padding:8px 12px}
+.joinnote{background:#e3f4f2;border:2px solid var(--sea2);border-radius:14px;padding:10px 12px;display:flex;flex-direction:column;gap:6px;font-size:15px}
+.joinnote p{margin:0}
+#joinbox .hcard{gap:14px}#joinbox .jicon{font-size:64px;line-height:1}
 /* 🎨 עיר הפיקסלים */
 .mixrow{display:flex;gap:10px;justify-content:center;align-items:flex-end}
 .mixrow figure,.pair figure,.mem figure{margin:0;display:flex;flex-direction:column;align-items:center;gap:4px;font-size:12.5px;color:var(--mute)}
@@ -733,6 +736,7 @@ button.rcsl{cursor:pointer}
       <div class="shop" id="shop"></div>
     </div>
     <p class="savenote" data-en="💾 Stars, purchases and progress are saved on this phone only, in the browser where you play. Every phone that opens the link gets its own game, and nobody can see anyone else's game.">💾 הכוכבים, הקניות וההתקדמות נשמרים בטלפון הזה בלבד, בדפדפן שבו משחקים. כל טלפון שנכנס לקישור מקבל משחק משלו, ואף אחד לא רואה את המשחק של אחרים.</p>
+    <div class="joinnote" id="joinnote" hidden><p id="joinnote-p"></p><button class="linkish" id="joinback" type="button"></button></div>   <!-- 🤝 משחק משותף מלוח הבקרה -->
     <button class="linkish" id="reset" type="button" data-en="Start the whole game over">להתחיל את כל המשחק מחדש</button>
   </section>
 
@@ -778,6 +782,15 @@ button.rcsl{cursor:pointer}
 <div class="stage fly" id="flyer" hidden role="button" tabindex="0" aria-label="רובי המרחף. נגיעה בו: מה הוא אמר" data-en-aria="The flying robot. Tap it to hear what it said"></div>
 <div class="flysay" id="flysay" aria-live="polite" hidden></div>
 <!-- 👋 מסך הפתיחה: רובי מברך את המורים בשמות ומספר מה מחכה היום -->
+<div class="hello" id="joinbox" hidden role="dialog" aria-modal="true" aria-labelledby="join-h">
+  <div class="hcard">
+    <div class="jicon" aria-hidden="true">🤝</div>
+    <h1 id="join-h"></h1>
+    <p class="lead" id="join-p"></p>
+    <p class="small-note" id="join-msg" aria-live="polite"></p>
+    <div class="row"><button class="btn" id="join-yes" type="button"></button><button class="btn alt" id="join-no" type="button"></button></div>
+  </div>
+</div>
 <div class="hello" id="hello" hidden role="dialog" aria-modal="true" aria-labelledby="hello-h">
   <div class="hcard">
     <div class="hlang" id="hello-lang" role="group" aria-label="Language / שפה">🌐 <button type="button" data-l="he" aria-pressed="true">עברית</button> | <button type="button" data-l="en" aria-pressed="false">English</button></div>
@@ -883,6 +896,7 @@ var DEF = {stars: START_STARS, owned: [], worn: [], body: '#ffc93c', eyes: '#5ff
   shareSeen: false, // 📮 הילד כבר ראה במסך הפתיחה שהשליחה דלוקה
   forgetPending: false,   // 🧹 ביקשו למחוק אצל סבא ועוד לא הצליח לצאת (אין רשת) ⇒ מנסים שוב
   pid: '',        // 🎲 מזהה אקראי של המכשיר, כדי ששני ילדים עם אותו כינוי לא יתערבבו
+  link: null,     // 🤝 משחק משותף מלוח הבקרה: {id, nick} של השחקן שממשיכים את המשחק שלו
   words: {},      // 🎤 מילים ש״לימדת״ את רובי: מילה ⇐ פעולה
   mine: null,     // 🎨 הצבע שהילד בחר לפני שרובי התחלף לצבע של אור
   hello: 0,       // 👋 איזה ״מה חדש״ כבר ראית במסך הפתיחה
@@ -2059,7 +2073,7 @@ $('#reset').addEventListener('click', function(){
   if (!resetArmed){ resetArmed = true; $('#reset').textContent = t('בטוח? כל הכוכבים, הקניות וההתקדמות יימחקו. לחץ שוב לאישור', 'Are you sure? All the stars, purchases and progress will be erased. Tap again to confirm'); setTimeout(function(){ resetArmed = false; $('#reset').textContent = t('להתחיל את כל המשחק מחדש', 'Start the whole game over'); }, 5000); return; }
   resetArmed = false; $('#reset').textContent = t('להתחיל את כל המשחק מחדש', 'Start the whole game over');
   Object.keys(DEF).forEach(function(k){ G[k] = JSON.parse(JSON.stringify(DEF[k])); }); save();
-  curWorld = 'examples'; W = fresh(0); HIST = []; applyLook(); renderWorkshop(); stars(); brand(); muteIcon(); readIcon(); setMood('idle'); toast(t('המשחק התחיל מחדש', 'The game started over'));
+  curWorld = 'examples'; W = fresh(0); HIST = []; applyLook(); renderWorkshop(); stars(); brand(); muteIcon(); readIcon(); setMood('idle'); aJoinNote(); toast(t('המשחק התחיל מחדש', 'The game started over'));
 });
 
 /* ───────── 🗺️ המפה ───────── */
@@ -2211,7 +2225,7 @@ function adminOn(){ return !!(FEATURES.admin && ADMIN_URL); }
 function aShare(){ return adminOn() && G.share !== false && !!G.shareSeen; }   // נשלח רק אחרי שהילד ראה שזה נשלח
 function aDigits(v){ return (String(v).match(/\d/g) || []).length >= 3; }   // 3 ספרות ומעלה בסך הכול = אולי טלפון
 function aClean(v){ v = String(v || '').trim(); return aDigits(v) ? v.replace(/[\d\-–.()+\/]/g, '').replace(/\s+/g, ' ').trim() : v; }
-function aNick(){ return named() ? aClean(G.teachers[0]) : ''; }
+function aNick(){ if (G.link && G.link.nick) return aClean(G.link.nick); return named() ? aClean(G.teachers[0]) : ''; }   // 🤝 משחק משותף ⇒ הכינוי של השחקן שהמשחק שלו
 function aLog(type, v){
   if (!aShare() || screen !== 'world') return;
   AQ.push({t: Date.now(), w: curWorld, l: W.level, type: type, v: v == null ? '' : v});
@@ -2279,7 +2293,7 @@ function aWorkshop(){
   $('#share-l').textContent = t('📮 לשלוח לסבא פיני מה למדתי (רק הכינוי)', '📮 Send Grandpa Pini what I learned (nickname only)');
   cb.checked = G.share !== false;
   cb.onchange = function(){
-    if (!cb.checked && G.pid && adminOn()){ clearTimeout(aT); aT = null; AQ = []; G.forgetPending = true; setTimeout(aForget, 3000); }   // 🧹 מוחקים אצל סבא את מה שנשלח (אחרי 3 שניות, כדי ששליחה שכבר בדרך תגיע קודם)
+    if (!cb.checked && G.pid && adminOn() && !G.link){ clearTimeout(aT); aT = null; AQ = []; G.forgetPending = true; setTimeout(aForget, 3000); }   // 🧹 מוחקים אצל סבא את מה שנשלח (אחרי 3 שניות, כדי ששליחה שכבר בדרך תגיע קודם)
     if (cb.checked) G.forgetPending = false;
     G.share = cb.checked; G.shareSeen = true; save(); beep('tap');
     toast(cb.checked ? t('📮 נשלח לסבא פיני', '📮 Sending to Grandpa Pini') : t('לא נשלח כלום, ומה שנשלח נמחק', 'Nothing is sent, and what was sent is deleted'));
@@ -5501,6 +5515,121 @@ function setLang(l){   // שומרים שפה, ומרעננים: כך כל המ�
   });
 })();
 
+/* ═══════════ 🤝 משחקים ביחד: ממשיכים מלוח הבקרה את המשחק של שחקן אחר ═══════════
+   סבא לוחץ בלוח הבקרה ״▶️ להמשיך מכאן״ ⇐ המשחק נפתח עם ‎#join=<מזהה>~<כינוי>.
+   מביאים מהשרת את השלבים, הכוכבים, המקום והמילים של השחקן. המשחק שהיה במכשיר נשמר בצד (mlr1-bak), ובסדנה יש כפתור לחזור אליו.
+   מאותו רגע שני המכשירים שולחים לאותו שחקן בשרת, והשרת שומר לכל שלב את הכוכבים הגבוהים מבין השניים.
+   כל מכשיר שנפתח (או חוזר אליו אחרי דקה) מושך מהשרת את מה ששיחקו במכשיר השני.
+   ⛔ שמות המורים, צבעי הרובוט, הקניות וכוכבי החנות לא עוברים: הם נשארים בכל מכשיר */
+var BAK = SAVE_KEY + 'bak', aPullT = 0, aJoin = null, backArmed = false, aJoinLate = false;   // aJoinLate = הקישור הגיע כשהמשחק כבר היה פתוח
+function aPull(id, ok, fail){
+  if (!adminOn() || !id || navigator.onLine === false){ if (fail) fail(); return; }
+  aPullT = Date.now();
+  fetch(ADMIN_URL, {method: 'POST', body: JSON.stringify({msg: 1, pull: 1, id: id})}).then(function(r){ return r.json(); })   // msg:1 ⇐ שרת ישן שלא מכיר pull עונה רק ״מסרים״, ולא כותב כלום בגיליון
+    .then(function(d){ if (d && d.pull === true && d.ok && d.stars && typeof d.stars === 'object') ok(d); else if (fail) fail(); }, function(){ if (fail) fail(); });
+}
+function aActOf(lbl){ return Object.keys(ACTS).filter(function(k){ return ACTS[k].lbl === lbl; })[0] || ''; }   // 🎤 בשרת נשמרת התווית של הפעולה ⇐ מחזירים אותה לפעולה
+function aMerge(d){   // מכניס את מה שבא מהשרת: לכל שלב הכוכבים הגבוהים מבין השניים, ומילים שעוד אין. מחזיר כמה שלבים השתפרו
+  var up = 0, s = d.stars || {};
+  Object.keys(s).forEach(function(w){
+    if (!MECHANICS[w] || !Array.isArray(s[w])) return;
+    var p = prog(w);
+    s[w].slice(0, 5).forEach(function(v, i){ v = Math.max(0, Math.min(3, Math.round(+v || 0))); if (v > p[i]){ p[i] = v; up++; } });
+  });
+  if (!G.words || Array.isArray(G.words)) G.words = {};
+  (Array.isArray(d.words) ? d.words : []).forEach(function(x){ var k = x && String(x[0] || ''), a = x ? aActOf(x[1]) : ''; if (k && a && !G.words[k]) G.words[k] = a; });
+  return up;
+}
+function aPlaceOk(p){ return !!(p && MECHANICS[p.w] && WORLDS.some(function(x){ return x.id === p.w && x.ready; })); }
+function aSync(){   // 🔄 נכנסים למשחק ⇐ מושכים את מה ששיחקו במכשיר השני
+  if (!aShare() || !G.pid || Date.now() - aPullT < 60000) return;
+  var pid = G.pid;
+  aPull(pid, function(d){
+    if (G.pid !== pid) return;   // בינתיים עברו למשחק של שחקן אחר
+    var up = aMerge(d);
+    if (!up) return;
+    if (aPlaceOk(d.place) && screen !== 'world'){ G.cur = {w: d.place.w, l: Math.max(0, Math.min(4, +d.place.l || 0))}; curWorld = G.cur.w; W = fresh(G.cur.l); HIST = []; }
+    save(); renderWorkshop(); if (screen === 'map') renderMap();
+    toast(tf('🤝 נכנס לכאן מה ששיחקתם במכשיר השני: {n}', '🤝 What you played on the other device is here now: {n}', {n: up === 1 ? t('שלב אחד', '1 level') : up + t(' שלבים', ' levels')}));
+  });
+}
+function aJoinHash(){
+  var m = /^#join=([A-Za-z0-9]{4,24})~(.{0,400})$/.exec(location.hash || ''), n = '';
+  if (!m) return null;
+  try { n = decodeURIComponent(m[2]); } catch(e){}
+  return {id: m[1], nick: aClean(n).slice(0, 20) || t('השחקן', 'the player')};
+}
+function aClearHash(){ try { history.replaceState(null, '', location.pathname + location.search); } catch(e){} }
+function aJoinAsk(j){
+  aJoin = j;
+  var same = j.id === G.pid;
+  $('#join-h').textContent = tf('להמשיך את המשחק של {n}?', 'Continue {n}’s game?', {n: j.nick});
+  $('#join-p').textContent = same ? tf('כבר משחקים כאן במשחק של {n}. אביא את מה שהוא שיחק בינתיים, ונמשיך מהשלב שבו עצרתם.', 'You’re already playing {n}’s game here. I’ll bring what was played in the meantime, and we’ll continue from where you stopped.', {n: j.nick}) :
+    tf('המשחק ייפתח עם השלבים והכוכבים של {n}, בשלב שבו עצר. מה שתשחקו כאן יחזור גם למשחק של {n}. המשחק שהיה במכשיר הזה נשמר בצד, ובסדנה יש כפתור לחזור אליו.', 'The game will open with {n}’s levels and stars, at the level where they stopped. What you play here will go back to {n}’s game too. The game that was on this device is kept aside, and the Workshop has a button to go back to it.', {n: j.nick});
+  $('#join-msg').textContent = '';
+  $('#join-yes').textContent = t('▶️ כן, להמשיך', '▶️ Yes, continue'); $('#join-yes').disabled = false;
+  $('#join-no').textContent = t('לא עכשיו', 'Not now');
+  $('#joinbox').hidden = false; $('#join-yes').focus({preventScroll: true});
+}
+function aBackup(){   // 💾 שומרים בצד את המשחק שהיה במכשיר, פעם אחת (גם אם עוברים אחר כך למשחק של שחקן אחר)
+  if (localStorage.getItem(BAK) != null) return;
+  var o = {};
+  for (var i = 0; i < localStorage.length; i++){ var k = localStorage.key(i); if (k.indexOf(SAVE_KEY) === 0 && k !== BAK && k !== SAVE_KEY + 'lang') o[k] = localStorage.getItem(k); }
+  localStorage.setItem(BAK, JSON.stringify(o));
+}
+$('#join-yes').addEventListener('click', function(){
+  var j = aJoin, b = $('#join-yes'); if (!j) return;
+  b.disabled = true; $('#join-msg').textContent = t('מביא את המשחק…', 'Getting the game…');
+  aPull(j.id, function(d){
+    if (j.id !== G.pid){
+      try { aBackup(); } catch(e){ b.disabled = false; $('#join-msg').textContent = t('לא הצלחתי לשמור בצד את המשחק שבמכשיר, אז לא החלפתי אותו.', 'I couldn’t keep this device’s game aside, so I didn’t replace it.'); return; }
+      if (aShare() && (AQ.length || aT)) aFlush();   // 📮 מה שחיכה לשליחה מהמשחק הקודם יוצא עוד בשם שלו
+      clearTimeout(aT); aT = null; AQ = [];
+      G.prog = {}; G.words = {}; G.cur = null; G.wires = null; G.rct = null; G.wtree = null;   // מה שנבנה בשלבים שייך למשחק הקודם
+      G.pid = j.id; G.share = true; G.shareSeen = true; G.forgetPending = false;
+    }
+    G.link = {id: j.id, nick: j.nick};
+    aMerge(d);
+    if (aPlaceOk(d.place)) G.cur = {w: d.place.w, l: Math.max(0, Math.min(4, +d.place.l || 0))};
+    G.hello = HELLO_VER; save();
+    $('#joinbox').hidden = true; aClearHash(); aJoin = null; aJoinNote();
+    if (G.cur){ curWorld = G.cur.w; W = fresh(G.cur.l); HIST = []; }
+    renderWorkshop(); go(G.cur ? 'world' : 'map');
+    toast(tf('🤝 ממשיכים את המשחק של {n}!', '🤝 Continuing {n}’s game!', {n: j.nick}));
+  }, function(){
+    b.disabled = false;
+    $('#join-msg').textContent = t('לא הצלחתי להביא את המשחק. בדוק שיש אינטרנט ונסה שוב. אם זה חוזר, ייתכן שלוח הבקרה עוד לא עודכן.', 'I couldn’t get the game. Check that you’re online and try again. If it keeps happening, the control panel may not be updated yet.');
+  });
+});
+$('#join-no').addEventListener('click', function(){
+  $('#joinbox').hidden = true; aClearHash(); aJoin = null;
+  if (aJoinLate){ aJoinLate = false; return; }   // באמצע משחק ⇐ ממשיכים בדיוק מאיפה שהיינו
+  openHello(Object.keys(G.prog).some(function(k){ return G.prog[k].some(Boolean); }) ? 'map' : 'shop');
+});
+function aJoinNote(){   // 🤝 בסדנה: במשחק של מי משחקים, וכפתור לחזור למשחק שהיה במכשיר
+  var has = false; try { has = localStorage.getItem(BAK) != null; } catch(e){}
+  $('#joinnote').hidden = !has;
+  if (!has) return;
+  $('#joinnote-p').textContent = G.link ? tf('🤝 אתם משחקים עכשיו במשחק של {n}. מה שתשחקו כאן חוזר גם אליו.', '🤝 You’re now playing {n}’s game. What you play here goes back to them too.', {n: G.link.nick}) :
+    t('💾 המשחק שהיה במכשיר הזה שמור בצד.', '💾 The game that was on this device is kept aside.');
+  backArmed = false; $('#joinback').textContent = t('↩ לחזור למשחק שלי במכשיר הזה', '↩ Go back to my own game on this device');
+}
+$('#joinback').addEventListener('click', function(){
+  if (!backArmed){ backArmed = true; $('#joinback').textContent = G.link ? tf('בטוח? לחץ שוב. המשחק של {n} נשאר שמור אצלו.', 'Sure? Tap again. {n}’s game stays saved on their side.', {n: G.link.nick}) : t('בטוח? לחץ שוב לאישור.', 'Sure? Tap again to confirm.'); return; }
+  if (aShare() && (AQ.length || aT)) aFlush();   // 📮 מה שחיכה לשליחה יוצא לפני שמחליפים
+  var raw = null, o = null; try { raw = localStorage.getItem(BAK); o = raw && JSON.parse(raw); } catch(e){}
+  if (!o || typeof o !== 'object'){ toast(t('לא מצאתי את המשחק השמור. לא שיניתי כלום.', 'I couldn’t find the saved game. Nothing was changed.')); aJoinNote(); return; }   // אולי כבר חזרו אליו בלשונית אחרת
+  try {
+    var del = [];
+    for (var i = 0; i < localStorage.length; i++){ var k = localStorage.key(i); if (k.indexOf(SAVE_KEY) === 0 && k !== SAVE_KEY + 'lang') del.push(k); }
+    del.forEach(function(k){ localStorage.removeItem(k); });
+    Object.keys(o).forEach(function(k){ if (k.indexOf(SAVE_KEY) === 0) localStorage.setItem(k, o[k]); });
+  } catch(e){}
+  setTimeout(function(){ location.reload(); }, 400);
+});
+document.addEventListener('visibilitychange', function(){ if (document.visibilityState === 'visible') aSync(); });   // 🔄 חוזרים למשחק ⇒ מושכים מה ששיחקו במכשיר השני
+window.addEventListener('hashchange', function(){ var j = adminOn() ? aJoinHash() : null; if (j){ if (!aJoin) aJoinLate = $('#hello').hidden; $('#hello').hidden = true; aJoinAsk(j); } });   // חלון ״להמשיך?״ כבר פתוח ⇐ שומרים מאיפה הגיעו אליו   // 🤝 הקישור נפתח בלשונית שבה המשחק כבר פתוח
+
 /* ▶️ הפעלה */
 init3D();
 renderWorkshop(); stars(); brand(); muteIcon();
@@ -5509,7 +5638,10 @@ document.documentElement.style.setProperty('--tabh', $('.tabs').offsetHeight + '
 document.body.classList.toggle('f-fly', FEATURES.fly);
 document.body.classList.toggle('f-move', FEATURES.move);   // גובה הפס העליון, בשביל פס הרובוט
 if (G.cur && MECHANICS[G.cur.w]){ curWorld = G.cur.w; W = fresh(G.cur.l || 0); }       // ממשיכים מהעולם והשלב האחרונים
-openHello(Object.keys(G.prog).some(function(k){ return G.prog[k].some(Boolean); }) ? 'map' : 'shop');   // 👋 קודם רובי מברך, ואז: מי שכבר שיחק מתחיל במפה
+var aJ = adminOn() ? aJoinHash() : null;
+if (aJ) aJoinAsk(aJ);   // 🤝 הגיעו מ״להמשיך מכאן״ בלוח הבקרה
+else openHello(Object.keys(G.prog).some(function(k){ return G.prog[k].some(Boolean); }) ? 'map' : 'shop');   // 👋 קודם רובי מברך, ואז: מי שכבר שיחק מתחיל במפה
+aJoinNote(); aSync();
 })();
 </script>
 </body>
